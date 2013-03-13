@@ -175,7 +175,8 @@ endif
 hi Identifier cterm=none
 " Commented numbers at the end are *old* 256 color values
 "highlight PreProc       guifg=#EDF8F9
-call s:hifg("Comment"        ,"#A943DC","DarkMagenta",34) " 92
+call s:hifg("Comment"        ,"#b148ea","DarkMagenta",34) " 92
+"call s:hifg("Comment"        ,"#A943DC","DarkMagenta",34) " 92
 " 26 instead?
 call s:hifg("Constant"       ,"#339999","DarkCyan",21) " 30
 call s:hifg("rubyNumber"     ,"#CCFF33","Yellow",60) " 190
