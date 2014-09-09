@@ -51,7 +51,7 @@ if !exists("g:ath_require_js_config_file")
     let g:require_js_config_file = ''
 endif
 
-fun! RJS_LoadRequireList() 
+fun! RJS_LoadRequireList()
     try
         let a_save = @a
         normal! ggVG"ay
@@ -62,7 +62,7 @@ fun! RJS_LoadRequireList()
 
         echo files
         echo vars
-        
+
         "let i = 0
 
         "for file in files
@@ -118,7 +118,7 @@ fun! RJS_OpenFile(file)
     let map = {}
     let file = ''
     " file conatains require or define
-    
+
     " get the urlstring under the curser
     if empty(a:file)
         let file = s:RJS_GetFileNameFromString()
@@ -158,7 +158,7 @@ fun! s:RJS_GetFileNameFromString()
             normal! "ayi"
             if !empty(@a)
                 return @a
-            else 
+            else
                 return ''
             endif
         endif
@@ -174,10 +174,10 @@ fun! s:RJS_GetFileNameFromVariable(map)
         normal! "ayiw
         if !empty(@a)
             let var = @a
-            if empty(a:map) 
+            if empty(a:map)
                 call s:RJS_LoadRequireList(a:map)
             endif
-            if has_key(a:map, var) 
+            if has_key(a:map, var)
                 return a:map[var]
             else
                 echom "No file for " . var
@@ -190,7 +190,7 @@ fun! s:RJS_GetFileNameFromVariable(map)
     endtry
 endf
 
-fun! s:RJS_LoadRequireList(map) 
+fun! s:RJS_LoadRequireList(map)
     try
         let a_save = @a
         normal! ggVG"ay
@@ -223,7 +223,7 @@ fun! s:RJS_Trim(arr)
 endf
 
 
-fun! s:RJS_GetConfig() 
+fun! s:RJS_GetConfig()
     " find the config file
     if empty(g:require_js_config_file) || empty(g:require_js_base_url) || empty(g:require_js_paths)
         let js_dir = getcwd()
@@ -254,11 +254,11 @@ endf
 
 
 
-fun! s:RJS_OpenJSFile(file) 
+fun! s:RJS_OpenJSFile(file)
     let js_file = a:file
     let path_keys = keys(g:require_js_paths)
 
-    for k in path_keys 
+    for k in path_keys
         if match(js_file, '^' . k) != -1
             let js_file = substitute(g:require_js_paths[k] . '/' . substitute(js_file, '^' . k, '', ''), '/$', '', '')
         endif
@@ -279,12 +279,12 @@ endf
 
 
 
-fun! s:RJS_OpenTextFile(file) 
+fun! s:RJS_OpenTextFile(file)
     let text_file = a:file
 
     let path_keys = keys(g:require_js_paths)
     let pattern = '^' . substitute(g:require_js_base_url, '[^/]\+', "[^/]\\\\+", 'g') . '/'
-    for k in path_keys 
+    for k in path_keys
         if match(text_file, '^' . k) != -1
             let text_file = substitute(g:require_js_paths[k] . substitute(text_file, '^' . k, '', ''), '/$', '', '')
         endif
@@ -303,7 +303,7 @@ endf
 
 
 
-nmap <silent> gt :call RJS_OpenFile('')<CR> 
+"nmap <silent> gt :call RJS_OpenFile('')<CR>
 "===============================================================================
 "===============================================================================
 "===============================================================================
