@@ -1,5 +1,6 @@
 # ignore all dotfiles by except git specific ones
 .*
+!.vimrc
 !.gitignore
 !.git*
 
