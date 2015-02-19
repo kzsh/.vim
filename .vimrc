@@ -83,6 +83,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/tpope/vim-unimpaired.git'
     Plug 'https://github.com/tpope/vim-surround.git'
     "Plug 'https://github.com/jelera/vim-javascript-syntax.git'
+    Plug 'https://github.com/moll/vim-node.git'
     Plug 'https://github.com/pangloss/vim-javascript.git'
     Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
     Plug 'https://github.com/marijnh/tern_for_vim.git'
@@ -101,6 +102,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/joker1007/vim-markdown-quote-syntax.git'
     Plug 'https://github.com/rcmdnk/vim-markdown.git'
     Plug 'https://github.com/digitaltoad/vim-jade.git'
+    Plug 'https://github.com/vim-scripts/Conque-Shell.git'
 call plug#end()
 
 "set the location of the clang lib
@@ -217,7 +219,7 @@ hi NonText term=bold cterm=bold ctermfg=16 guifg=#000
 " Emmet  (Zen Coding)
 let g:user_emmet_mode='i'    "only enable normal mode functions.
 let g:BASH_Ctrl_j = 'off'
-let g:user_emmet_expandabbr_key = '<NUL>'
+let g:user_emmet_expandabbr_key = '<c-e>'
 let g:user_emmet_next_key = '<c-k>'
 let g:user_emmet_leader_key = '\a'
 let g:use_emment_complete_tag = 1
