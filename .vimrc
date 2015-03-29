@@ -84,6 +84,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/tpope/vim-surround.git'
     "Plug 'https://github.com/jelera/vim-javascript-syntax.git'
     Plug 'https://github.com/moll/vim-node.git'
+    Plug 'https://github.com/darvelo/vim-systemd.git'
     Plug 'https://github.com/pangloss/vim-javascript.git'
     Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
     Plug 'https://github.com/marijnh/tern_for_vim.git'
@@ -339,7 +340,7 @@ command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 
 
 "YouCompleteMe Configuration
-let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_min_num_of_chars_for_completion = 1
 
 
 "Powerline configuration
