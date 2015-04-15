@@ -141,7 +141,7 @@ let g:syntastic_enable_signs=1
 "let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
-let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_checkers=['jshint', 'eslint']
 
 "Status line override (working with Syntastic)
 set statusline+=%#warningmsg#
