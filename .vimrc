@@ -1,23 +1,29 @@
+:let mapleader = ","
 " The basics
 set nocompatible
 
 set smartindent
 set autoindent
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 set expandtab
 
+" Turn off swap files
+set nobackup
+set nowritebackup
+set noswapfile
+
 "Specialized tabs <-- currently forcing uniformity.
 "                     Probably redundant with above.
-autocmd Filetype html setlocal ts=4 sts=4 sw=4
-autocmd Filetype css  setlocal ts=4 sts=4 sw=4
-autocmd Filetype tag  setlocal ts=4 sts=4 sw=4
-autocmd Filetype xml  setlocal ts=4 sts=4 sw=4
-autocmd Filetype jsp  setlocal ts=4 sts=4 sw=4
-autocmd Filetype ruby setlocal ts=4 sts=4 sw=4
-autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype css  setlocal ts=2 sts=2 sw=2
+autocmd Filetype tag  setlocal ts=2 sts=2 sw=2
+autocmd Filetype xml  setlocal ts=2 sts=2 sw=2
+autocmd Filetype jsp  setlocal ts=2 sts=2 sw=2
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 
 set list " draw whitespace
@@ -37,13 +43,13 @@ set incsearch " start searching as text is entered
 set hlsearch " highlight matches
 set number " display line numbers
 set background=dark " set background color style
-set clipboard=unnamedplus " set the clipboard to the X window clipboard
+set clipboard=unnamed " set the clipboard to the X window clipboard
 set backspace=indent,eol,start " backspace will traverse indent, eol, start
 set nofoldenable " prevent folding
 set shortmess+=I " don't show splash screen
                  " http://blog.sanctum.geek.nz/vim-annoyances/
 
-set lazyredraw " Prevent UI from drawing during macro execution.
+"set lazyredraw " Prevent UI from drawing during macro execution.
 
 set laststatus=2 " display status line always (useful with Powerline plugin)
 
@@ -71,39 +77,45 @@ colorscheme solarized
 call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/jlanzarotta/bufexplorer.git'
     Plug 'https://github.com/tpope/vim-fugitive.git'
+    Plug 'https://github.com/tpope/vim-git.git'
     Plug 'https://github.com/scrooloose/nerdtree.git'
     Plug 'https://github.com/scrooloose/syntastic.git'
     Plug 'https://github.com/scrooloose/nerdcommenter.git'
     Plug 'https://github.com/majutsushi/tagbar.git'
+    Plug 'https://github.com/rking/ag.vim.git'
     Plug 'https://github.com/airblade/vim-gitgutter.git'
     Plug 'https://github.com/tpope/vim-rails.git'
-    Plug 'https://github.com/groenewege/vim-less.git'
+    "Plug 'https://github.com/groenewege/vim-less.git'
     Plug 'https://github.com/mattn/emmet-vim.git'
-    Plug 'https://github.com/Shougo/neocomplcache.vim.git'
+    "Plug 'https://github.com/Shougo/neocomplcache.vim.git'
     Plug 'https://github.com/tpope/vim-unimpaired.git'
     Plug 'https://github.com/tpope/vim-surround.git'
+    Plug 'https://github.com/editorconfig/editorconfig-vim.git'
     "Plug 'https://github.com/jelera/vim-javascript-syntax.git'
-    Plug 'https://github.com/moll/vim-node.git'
-    Plug 'https://github.com/darvelo/vim-systemd.git'
-    Plug 'https://github.com/pangloss/vim-javascript.git'
-    Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
+    Plug 'https://github.com/othree/yajs.vim.git'
+    "Plug 'https://github.com/moll/vim-node.git'
+    "Plug 'https://github.com/darvelo/vim-systemd.git'
+    "Plug 'https://github.com/pangloss/vim-javascript.git'
+    "Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
+    Plug 'https://github.com/nono/vim-handlebars.git'
     Plug 'https://github.com/marijnh/tern_for_vim.git'
+    "Plug 'https://github.com/mustache/vim-mustache-handlebars.git'
     Plug 'https://github.com/kien/ctrlp.vim.git'
-    Plug 'https://github.com/tpope/vim-speeddating.git'
-    Plug 'https://github.com/tpope/vim-repeat.git'
-    Plug 'https://github.com/tfnico/vim-gradle'
-    Plug 'https://github.com/kchmck/vim-coffee-script.git'
-    Plug 'https://github.com/fatih/vim-go.git'
+    "Plug 'https://github.com/tpope/vim-speeddating.git'
+    "Plug 'https://github.com/tpope/vim-repeat.git'
+    "Plug 'https://github.com/tfnico/vim-gradle'
+    "Plug 'https://github.com/kchmck/vim-coffee-script.git'
+    "Plug 'https://github.com/fatih/vim-go.git'
     Plug 'https://github.com/Valloric/YouCompleteMe.git'
-    Plug 'https://github.com/vim-scripts/Conque-Shell.git'
-    Plug 'https://github.com/Lokaltog/powerline.git'
+    "Plug 'https://github.com/vim-scripts/Conque-Shell.git'
+    "Plug 'https://github.com/Lokaltog/powerline.git'
     Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
-    Plug 'https://github.com/godlygeek/tabular.git'
-    Plug 'https://github.com/plasticboy/vim-markdown.git'
-    Plug 'https://github.com/joker1007/vim-markdown-quote-syntax.git'
-    Plug 'https://github.com/rcmdnk/vim-markdown.git'
-    Plug 'https://github.com/digitaltoad/vim-jade.git'
-    Plug 'https://github.com/vim-scripts/Conque-Shell.git'
+    "Plug 'https://github.com/godlygeek/tabular.git'
+    "Plug 'https://github.com/plasticboy/vim-markdown.git'
+    "Plug 'https://github.com/joker1007/vim-markdown-quote-syntax.git'
+    "Plug 'https://github.com/rcmdnk/vim-markdown.git'
+    "Plug 'https://github.com/digitaltoad/vim-jade.git'
+    Plug  'https://github.com/gorodinskiy/vim-coloresque.git'
 call plug#end()
 
 "set the location of the clang lib
@@ -141,7 +153,8 @@ let g:syntastic_enable_signs=1
 "let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
-let g:syntastic_javascript_checkers=['jshint', 'eslint']
+let g:syntastic_javascript_checkers=['jshint'] ", 'eslint']
+let g:syntastic_ruby_checkers=['rubocop']
 
 "Status line override (working with Syntastic)
 set statusline+=%#warningmsg#
@@ -152,9 +165,10 @@ set statusline+=%*
 set wildmenu
 set wildmode=longest:full,full
 set wildignore+=*.git,*.hg,*.svn,*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|)$',
+  \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor)$',
   \ }
 
 
@@ -291,19 +305,19 @@ let g:user_emmet_settings = {
 
 " open tagbar and nerdtree
 map <F9> <Esc>:NERDTreeToggle<CR>
-map <leader>t <Esc>:TagbarToggle<CR>
+"map <leader>t <Esc>:TagbarToggle<CR>
 
 " Making it harder not to use VIM bindings
-noremap  <Up>    <Nop>
-noremap  <Down>  <Nop>
-noremap  <Left>  <Nop>
-noremap  <Right> <Nop>
-inoremap <Up>    <Nop>
-inoremap <Down>  <Nop>
-inoremap <Left>  <Nop>
-inoremap <Right> <Nop>
-inoremap <Up>    <Nop>
-inoremap <Down>  <Nop>
+"noremap  <Up>    <Nop>
+"noremap  <Down>  <Nop>
+"noremap  <Left>  <Nop>
+"noremap  <Right> <Nop>
+"inoremap <Up>    <Nop>
+"inoremap <Down>  <Nop>
+"inoremap <Left>  <Nop>
+"inoremap <Right> <Nop>
+"inoremap <Up>    <Nop>
+"inoremap <Down>  <Nop>
 
 
 "Auto generating closing braces
@@ -311,6 +325,7 @@ inoremap {<cr> {<cr>}<c-o>O
 inoremap [<cr> [<cr>]<c-o>O
 inoremap (<cr> (<cr>)<c-o>O
 
+nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
 "nmap <silent> <A-Up> :wincmd k<CR>
 "nmap <silent> <A-Down> :wincmd j<CR>
 "nmap <silent> <A-Left> :wincmd h<CR>
@@ -354,6 +369,10 @@ function TODO()
     :o ~/TODO/TODO.md
 endfunction
 
+function C()
+    :execute "vimgrep /" . expand("<cword>") . "/j **" | cw<CR>
+endfunction
+
 function STODO()
     :!cd ~/TODO/;git add TODO.md; git commit -m '`date`';
 endfunction
@@ -365,3 +384,5 @@ let g:EclimJavaHierarchyDefaultAction='edit'
 map <leader>cc <Esc>:JavaSearchContext<CR>
 map <leader>h <Esc>:JavaCallHierarchy<CR>
 map <leader>ch <Esc>:JavaHierarchy<CR>
+
+cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
