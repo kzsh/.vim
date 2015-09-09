@@ -1,4 +1,5 @@
 :let mapleader = ","
+
 " The basics
 set nocompatible
 
@@ -75,6 +76,7 @@ colorscheme solarized
 
 "load plugins using Plugged
 call plug#begin('~/.vim/plugged')
+    Plug 'https://github.com/vim-scripts/ZoomWin.git'
     Plug 'https://github.com/jlanzarotta/bufexplorer.git'
     Plug 'https://github.com/tpope/vim-fugitive.git'
     Plug 'https://github.com/tpope/vim-git.git'
@@ -91,12 +93,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/tpope/vim-unimpaired.git'
     Plug 'https://github.com/tpope/vim-surround.git'
     Plug 'https://github.com/editorconfig/editorconfig-vim.git'
-    "Plug 'https://github.com/jelera/vim-javascript-syntax.git'
     Plug 'https://github.com/othree/yajs.vim.git'
     "Plug 'https://github.com/moll/vim-node.git'
     "Plug 'https://github.com/darvelo/vim-systemd.git'
-    "Plug 'https://github.com/pangloss/vim-javascript.git'
-    "Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
+    Plug 'https://github.com/pangloss/vim-javascript.git'
+    Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
     Plug 'https://github.com/nono/vim-handlebars.git'
     Plug 'https://github.com/marijnh/tern_for_vim.git'
     "Plug 'https://github.com/mustache/vim-mustache-handlebars.git'
@@ -153,7 +154,7 @@ let g:syntastic_enable_signs=1
 "let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
-let g:syntastic_javascript_checkers=['jshint'] ", 'eslint']
+let g:syntastic_javascript_checkers=['jshint', 'jsonlint'] ", 'eslint']
 let g:syntastic_ruby_checkers=['rubocop']
 
 "Status line override (working with Syntastic)
@@ -243,7 +244,7 @@ let g:user_emmet_settings = {
   \  'lang' : 'en',
   \  'html' : {
   \    'filters' : 'html',
-  \    'indentation' : '    ',
+  \    'indentation' : '  ',
   \    'snippets' : {
   \      'ap' : "data-dojo-attach-point=\"${cursor}\"",
   \      'html' : '<html lang="en">\n<head>\n\t<title></title>\n</head>\n<body>\n</body>\n</html>'
@@ -251,13 +252,14 @@ let g:user_emmet_settings = {
   \  },
   \  'css' : {
   \    'filters' : 'fc',
-  \    'indentation' : '    ',
+  \    'indentation' : '  ',
   \    'snippets' : {
   \      'border-radius' : "-moz-border-radius: 10px; \n-o-border-radius: 10px; \nborder-radius: 10px;"
   \    },
   \  },
   \  'javascript' : {
-  \    'indentation' : '    ',
+  \    'extends' : 'javascript',
+  \    'indentation' : '  ',
   \    'snippets' : {
   \      'i' : "if (${cursor}) {\n\t${cursor}\n}",
   \      'e' : "else {\n\t${cursor}\n}",
@@ -277,8 +279,8 @@ let g:user_emmet_settings = {
   \      'dijit' : "/*global define */\ndefine([\"dojo/_base/declare\",\n\"dijit/_WidgetBase\",\n\"dijit/_TemplatedMixin\"],\nfunction(declare, _WidgetBase, _TemplatedMixin) {\n\treturn declare([_WidgetBase, _TemplatedMixin],{\n\t\ttemplateString:\n\t\t\t'<div>' +\n\t\t\t'</div>',\n\t\tpostCreate: function() {\n\t\t\tthis.inherited(arguments);\n\t\t\t${cursor}\n\t\t},\n\t\tdestroy: function() {\n\t\t\tthis.destroyRecursive();\n\t\t\tthis.inherited(arguments);\n\t\t}\n\t});\n});",
   \
 \      'foreach' : "array.forEach(${cursor},function(${child}){\n\n});",
-\      'f' : "function () {${cursor}}",
-\      'f,' : "function () {${cursor}},",
+\      'f' : "() => {${cursor}}",
+\      'f,' : "() => {${cursor}},",
 \      'on' : "on(${cursor},\"click\", function(){${child}\n\n});",
 \      'then' : "then(function() {\n\t${cursor}\n});",
 \      'c' : "console.log(${cursor});"
@@ -385,4 +387,7 @@ map <leader>cc <Esc>:JavaSearchContext<CR>
 map <leader>h <Esc>:JavaCallHierarchy<CR>
 map <leader>ch <Esc>:JavaHierarchy<CR>
 
+nnoremap <silent> <C-w>w :ZoomWin<CR>
+
+" alias :ag to :Ag
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
