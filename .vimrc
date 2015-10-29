@@ -1,23 +1,53 @@
 :let mapleader = ","
 
 " The basics
-set nocompatible
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
 
-set smartindent
-set autoindent
+  set smartindent
+  set autoindent
 
-set tabstop=2
-set shiftwidth=2
+  set tabstop=2
+  set shiftwidth=2
 
-set expandtab
+  set expandtab
 
-" Turn off swap files
-set nobackup
-set nowritebackup
-set noswapfile
+  " Turn off swap files
+  set nobackup
+  set nowritebackup
+  set noswapfile
 
-"Specialized tabs <-- currently forcing uniformity.
-"                     Probably redundant with above.
+
+  "set showmatch " Show matching
+
+  " set timeout when looking for key combinations
+  set timeoutlen=1000 ttimeoutlen=0
+
+
+  " default to the system clipboard
+  set clipboard=unnamed " set the clipboard to the X window clipboard
+
+  syntax enable
+
+endif
+
+" configure omnicomplete settings by filetype
+
+"set omnifunc=syntaxcomplete#Complete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType c set omnifunc=ccomplete#Complete
+
+"http://vim.wikia.com/wiki/Fix_syntax_highlighting
+"recalculate syntax highlighting from the start of the file on change
+autocmd BufEnter * :syntax sync fromstart
+
+" set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype css  setlocal ts=2 sts=2 sw=2
 autocmd Filetype tag  setlocal ts=2 sts=2 sw=2
@@ -25,111 +55,101 @@ autocmd Filetype xml  setlocal ts=2 sts=2 sw=2
 autocmd Filetype jsp  setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
-
+autocmd Filetype m setlocal ts=4 sts=4 sw=4
+autocmd Filetype h setlocal ts=4 sts=4 sw=4
+autocmd Filetype swift setlocal ts=4 sts=4 sw=4
 
 set list " draw whitespace
-set listchars=tab:>-,trail:~,extends:>,precedes:< " what to replace various ws
-                                                  " chars with
-                                                  "
+
+" what to replace various white space
+" chars with
+set listchars=tab:>-,trail:~,extends:>,precedes:<
 
 " set our vim path to look in the current directory of the file we are
 " editing, all sub directories, the directory from which vim was launched.
 set path=.,**,,
 
-"DO NOT SET t_Co
-"set t_Co=256
 
-
+" SEARCH
 set incsearch " start searching as text is entered
 set hlsearch " highlight matches
 set number " display line numbers
+
+"DO NOT SET t_Co
+"set t_Co=256
+" COLORS
 set background=dark " set background color style
-set clipboard=unnamed " set the clipboard to the X window clipboard
 set backspace=indent,eol,start " backspace will traverse indent, eol, start
 set nofoldenable " prevent folding
 set shortmess+=I " don't show splash screen
                  " http://blog.sanctum.geek.nz/vim-annoyances/
 
-"set lazyredraw " Prevent UI from drawing during macro execution.
+set lazyredraw " Prevent UI from drawing during macro execution.
 
 set laststatus=2 " display status line always (useful with Powerline plugin)
 
-" >> moves to the nearest multiple of
-" shiftwidth, not by shiftwidth
+" >> moves to the nearest whole tab multiple rather than just by amount == tabwidth
 " http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
 set shiftround
 
 
-syntax enable
 
 "set color scheme
-
-"if has('gui_running') " <-- if we're running MacVim or Gvim
-"    set background=light
-"else
-    set background=dark
-"endif
-let g:solarized_termcolors=16
-colorscheme solarized
-
-
+set background=dark
+"let g:solarized_termcolors=16
+"colorscheme solarized
+colorscheme monokai
 
 "load plugins using Plugged
 call plug#begin('~/.vim/plugged')
-    Plug 'https://github.com/vim-scripts/ZoomWin.git'
-    Plug 'https://github.com/jlanzarotta/bufexplorer.git'
-    Plug 'https://github.com/tpope/vim-fugitive.git'
-    Plug 'https://github.com/tpope/vim-git.git'
-    Plug 'https://github.com/scrooloose/nerdtree.git'
-    Plug 'https://github.com/scrooloose/syntastic.git'
-    Plug 'https://github.com/scrooloose/nerdcommenter.git'
-    Plug 'https://github.com/majutsushi/tagbar.git'
-    Plug 'https://github.com/rking/ag.vim.git'
-    Plug 'https://github.com/airblade/vim-gitgutter.git'
-    Plug 'https://github.com/tpope/vim-rails.git'
-    "Plug 'https://github.com/groenewege/vim-less.git'
-    Plug 'https://github.com/mattn/emmet-vim.git'
-    "Plug 'https://github.com/Shougo/neocomplcache.vim.git'
-    Plug 'https://github.com/tpope/vim-unimpaired.git'
-    Plug 'https://github.com/tpope/vim-surround.git'
-    Plug 'https://github.com/editorconfig/editorconfig-vim.git'
-    Plug 'https://github.com/othree/yajs.vim.git'
-    "Plug 'https://github.com/moll/vim-node.git'
-    "Plug 'https://github.com/darvelo/vim-systemd.git'
-    Plug 'https://github.com/pangloss/vim-javascript.git'
-    Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
-    Plug 'https://github.com/nono/vim-handlebars.git'
-    Plug 'https://github.com/marijnh/tern_for_vim.git'
-    "Plug 'https://github.com/mustache/vim-mustache-handlebars.git'
-    Plug 'https://github.com/kien/ctrlp.vim.git'
-    "Plug 'https://github.com/tpope/vim-speeddating.git'
-    "Plug 'https://github.com/tpope/vim-repeat.git'
-    "Plug 'https://github.com/tfnico/vim-gradle'
-    "Plug 'https://github.com/kchmck/vim-coffee-script.git'
-    "Plug 'https://github.com/fatih/vim-go.git'
-    Plug 'https://github.com/Valloric/YouCompleteMe.git'
-    "Plug 'https://github.com/vim-scripts/Conque-Shell.git'
-    "Plug 'https://github.com/Lokaltog/powerline.git'
-    Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
-    "Plug 'https://github.com/godlygeek/tabular.git'
-    "Plug 'https://github.com/plasticboy/vim-markdown.git'
-    "Plug 'https://github.com/joker1007/vim-markdown-quote-syntax.git'
-    "Plug 'https://github.com/rcmdnk/vim-markdown.git'
-    "Plug 'https://github.com/digitaltoad/vim-jade.git'
-    Plug  'https://github.com/gorodinskiy/vim-coloresque.git'
+  Plug 'https://github.com/jlanzarotta/bufexplorer.git'
+  Plug 'https://github.com/tpope/vim-fugitive.git'
+  Plug 'https://github.com/tpope/vim-git.git'
+  Plug 'https://github.com/scrooloose/nerdtree.git'
+  Plug 'https://github.com/scrooloose/syntastic.git'
+  Plug 'https://github.com/scrooloose/nerdcommenter.git'
+  Plug 'https://github.com/majutsushi/tagbar.git'
+  Plug 'https://github.com/rking/ag.vim.git'
+  Plug 'https://github.com/airblade/vim-gitgutter.git'
+  Plug 'https://github.com/kien/ctrlp.vim.git'
+  Plug 'https://github.com/Valloric/YouCompleteMe.git'
+  Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
+  Plug 'https://github.com/mattn/emmet-vim.git'
+  Plug 'https://github.com/tpope/vim-unimpaired.git'
+  Plug 'https://github.com/tpope/vim-surround.git'
+  Plug 'https://github.com/editorconfig/editorconfig-vim.git'
+  Plug 'https://github.com/nono/vim-handlebars.git'
+  Plug  'https://github.com/gorodinskiy/vim-coloresque.git'
+  Plug 'https://github.com/jelera/vim-javascript-syntax.git'
+  "Plug 'https://github.com/tpope/vim-rails.git'
+  "Plug 'https://github.com/groenewege/vim-less.git'
+  "Plug 'https://github.com/Shougo/neocomplcache.vim.git'
+  "Plug 'https://github.com/othree/yajs.vim.git'
+  "Plug 'https://github.com/moll/vim-node.git'
+  "Plug 'https://github.com/darvelo/vim-systemd.git'
+  "Plug 'https://github.com/marijnh/tern_for_vim.git'
+  "Plug 'https://github.com/mustache/vim-mustache-handlebars.git'
+  "Plug 'https://github.com/tpope/vim-speeddating.git'
+  "Plug 'https://github.com/tpope/vim-repeat.git'
+  "Plug 'https://github.com/tfnico/vim-gradle'
+  "Plug 'https://github.com/kchmck/vim-coffee-script.git'
+  "Plug 'https://github.com/fatih/vim-go.git'
+  "Plug 'https://github.com/vim-scripts/Conque-Shell.git'
+  "Plug 'https://github.com/Lokaltog/powerline.git'
+  "Plug 'https://github.com/godlygeek/tabular.git'
+  "Plug 'https://github.com/plasticboy/vim-markdown.git'
+  "Plug 'https://github.com/joker1007/vim-markdown-quote-syntax.git'
+  "Plug 'https://github.com/rcmdnk/vim-markdown.git'
+  "Plug 'https://github.com/digitaltoad/vim-jade.git'
 call plug#end()
 
 "set the location of the clang lib
 let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 
-set hidden " only hide buffers, to preserve undo history
+set hidden " only hide buffers, to preserve undo history when returning to other buffers
 
 filetype plugin indent on
 "autocmd FileType * if &completefunc != '' | let &omnifunc=&completefunc | endif
-
-"http://vim.wikia.com/wiki/Fix_syntax_highlighting
-"recalculate syntax highlighting from the start of the file on change
-autocmd BufEnter * :syntax sync fromstart
 
 "when saving, remove all trailing spaces from the file.
 autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
@@ -142,6 +162,7 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
+let g:rehash256 = 1
 
 " Pathogen, bundler currently disabled.
 "call pathogen#infect()
@@ -172,6 +193,7 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor)$',
   \ }
 
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " TagBar with JSCTags
 "let g:tagbar_type_javascript = {
@@ -209,16 +231,6 @@ set completeopt=longest,menuone
 " Eclim settings:
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimFileTypeValidate = 0
-
-" configure omnicomplete settings by filetype
-
-"set omnifunc=syntaxcomplete#Complete
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType c set omnifunc=ccomplete#Complete
 
 
 
@@ -323,9 +335,9 @@ map <F9> <Esc>:NERDTreeToggle<CR>
 
 
 "Auto generating closing braces
-inoremap {<cr> {<cr>}<c-o>O
-inoremap [<cr> [<cr>]<c-o>O
-inoremap (<cr> (<cr>)<c-o>O
+"inoremap {<cr> {<cr>}<c-o>O
+"inoremap [<cr> [<cr>]<c-o>O
+"inoremap (<cr> (<cr>)<c-o>O
 
 nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
 "nmap <silent> <A-Up> :wincmd k<CR>
@@ -365,27 +377,18 @@ python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
 
-
-" Functions around a specific todo list that I maintain.
-function TODO()
-    :o ~/TODO/TODO.md
+function FixQuotes()
+  %s/[“”‘’]/'/g
 endfunction
-
-function C()
-    :execute "vimgrep /" . expand("<cword>") . "/j **" | cw<CR>
-endfunction
-
-function STODO()
-    :!cd ~/TODO/;git add TODO.md; git commit -m '`date`';
-endfunction
-
+nmap t% :tabedit %<CR>
+nmap td :tabclose<CR>
 
 "ECLIM
 
-let g:EclimJavaHierarchyDefaultAction='edit'
-map <leader>cc <Esc>:JavaSearchContext<CR>
-map <leader>h <Esc>:JavaCallHierarchy<CR>
-map <leader>ch <Esc>:JavaHierarchy<CR>
+"let g:EclimJavaHierarchyDefaultAction='edit'
+"map <leader>cc <Esc>:JavaSearchContext<CR>
+"map <leader>h <Esc>:JavaCallHierarchy<CR>
+"map <leader>ch <Esc>:JavaHierarchy<CR>
 
 nnoremap <silent> <C-w>w :ZoomWin<CR>
 
