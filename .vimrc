@@ -80,7 +80,13 @@ set number " display line numbers
 " COLORS
 set background=dark " set background color style
 set backspace=indent,eol,start " backspace will traverse indent, eol, start
-set nofoldenable " prevent folding
+
+"folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+
 set shortmess+=I " don't show splash screen
                  " http://blog.sanctum.geek.nz/vim-annoyances/
 
