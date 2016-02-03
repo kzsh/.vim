@@ -8,18 +8,18 @@ if has('vim_starting')
 
   set smartindent
   set autoindent
-
   set tabstop=2
   set shiftwidth=2
 
   set expandtab
-
+  set noshowmode
   " Turn off swap files
   set nobackup
   set nowritebackup
   set noswapfile
 
-
+  set showbreak=↪\
+  set scrolloff=3
   "set showmatch " Show matching
 
   " set timeout when looking for key combinations
@@ -29,10 +29,10 @@ if has('vim_starting')
   " default to the system clipboard
   set clipboard=unnamed " set the clipboard to the X window clipboard
 
-  syntax enable
 
 endif
 
+syntax enable
 " configure omnicomplete settings by filetype
 
 "set omnifunc=syntaxcomplete#Complete
@@ -59,6 +59,9 @@ autocmd Filetype m setlocal ts=4 sts=4 sw=4
 autocmd Filetype h setlocal ts=4 sts=4 sw=4
 autocmd Filetype swift setlocal ts=4 sts=4 sw=4
 
+
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
+autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
 set list " draw whitespace
 
 " what to replace various white space
@@ -71,8 +74,8 @@ set path=.,**,,
 
 
 " SEARCH
-set incsearch " start searching as text is entered
 set hlsearch " highlight matches
+set incsearch " start searching as text is entered
 set number " display line numbers
 
 "DO NOT SET t_Co
@@ -114,19 +117,30 @@ call plug#begin('~/.vim/plugged')
   Plug 'https://github.com/scrooloose/nerdtree.git'
   Plug 'https://github.com/scrooloose/syntastic.git'
   Plug 'https://github.com/scrooloose/nerdcommenter.git'
+  Plug 'https://github.com/tpope/vim-commentary'
   Plug 'https://github.com/majutsushi/tagbar.git'
   Plug 'https://github.com/rking/ag.vim.git'
   Plug 'https://github.com/airblade/vim-gitgutter.git'
-  Plug 'https://github.com/kien/ctrlp.vim.git'
+  Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
   Plug 'https://github.com/Valloric/YouCompleteMe.git'
   Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
   Plug 'https://github.com/mattn/emmet-vim.git'
   Plug 'https://github.com/tpope/vim-unimpaired.git'
   Plug 'https://github.com/tpope/vim-surround.git'
   Plug 'https://github.com/editorconfig/editorconfig-vim.git'
-  Plug 'https://github.com/nono/vim-handlebars.git'
-  Plug  'https://github.com/gorodinskiy/vim-coloresque.git'
-  Plug 'https://github.com/jelera/vim-javascript-syntax.git'
+  Plug 'https://github.com/mustache/vim-mustache-handlebars.git', { 'for': 'handlebars' }
+  Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
+  Plug 'https://github.com/mxw/vim-jsx.git', { 'for': 'jsx' }
+  Plug 'othree/yajs.vim', { 'for': 'javascript' }
+  Plug 'https://github.com/tmhedberg/matchit.git'
+  Plug 'https://github.com/mhinz/vim-startify'
+  Plug 'https://github.com/vim-airline/vim-airline'
+  Plug 'https://github.com/JarrodCTaylor/vim-shell-executor'
+  Plug 'https://github.com/osyo-manga/vim-over'
+  " TO LOOK AT --> "Plug 'https://github.com/justinmk/vim-sneak'
+  "Plug 'https://github.com/nono/vim-handlebars.git', { 'for': 'handlebars' }
+  "Plug 'https://github.com/jelera/vim-javascript-syntax.git', { 'for': 'javascript' }
+  "Plug 'https://github.com/othree/yajs.vim.git'
   "Plug 'https://github.com/tpope/vim-rails.git'
   "Plug 'https://github.com/groenewege/vim-less.git'
   "Plug 'https://github.com/Shougo/neocomplcache.vim.git'
@@ -134,7 +148,6 @@ call plug#begin('~/.vim/plugged')
   "Plug 'https://github.com/moll/vim-node.git'
   "Plug 'https://github.com/darvelo/vim-systemd.git'
   "Plug 'https://github.com/marijnh/tern_for_vim.git'
-  "Plug 'https://github.com/mustache/vim-mustache-handlebars.git'
   "Plug 'https://github.com/tpope/vim-speeddating.git'
   "Plug 'https://github.com/tpope/vim-repeat.git'
   "Plug 'https://github.com/tfnico/vim-gradle'
@@ -175,13 +188,13 @@ let g:rehash256 = 1
 "call pathogen#helptags()
 
 " Syntastic settings
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 "let g:syntastic_auto_loclist=1
 "let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
-let g:syntastic_javascript_checkers=['jshint', 'jsonlint'] ", 'eslint']
+let g:syntastic_javascript_checkers=['jshint'] ",'jsonlint'] , 'eslint' ]
 let g:syntastic_ruby_checkers=['rubocop']
 
 "Status line override (working with Syntastic)
@@ -196,8 +209,11 @@ set wildignore+=*.git,*.hg,*.svn,*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor)$',
+  \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$',
   \ }
+map <Leader>fs :CtrlPTag<CR>
+map <Leader>fd :CtrlPCurFile<CR>
+map <Leader>fb :CtrlPBuffer<CR>
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
@@ -325,31 +341,19 @@ let g:user_emmet_settings = {
 
 " open tagbar and nerdtree
 map <F9> <Esc>:NERDTreeToggle<CR>
+map <Leader>r :w<cr>:!bundle exec rspec %<cr>
+
 "map <leader>t <Esc>:TagbarToggle<CR>
 
-" Making it harder not to use VIM bindings
-"noremap  <Up>    <Nop>
-"noremap  <Down>  <Nop>
-"noremap  <Left>  <Nop>
-"noremap  <Right> <Nop>
-"inoremap <Up>    <Nop>
-"inoremap <Down>  <Nop>
-"inoremap <Left>  <Nop>
-"inoremap <Right> <Nop>
-"inoremap <Up>    <Nop>
-"inoremap <Down>  <Nop>
-
-
-"Auto generating closing braces
-"inoremap {<cr> {<cr>}<c-o>O
-"inoremap [<cr> [<cr>]<c-o>O
-"inoremap (<cr> (<cr>)<c-o>O
+nnoremap <Left> :vertical resize +1<CR>
+nnoremap <Right> :vertical resize -1<CR>
+nnoremap <Up> :resize +1<CR>
+nnoremap <Down> :resize -1<CR>
 
 nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
-"nmap <silent> <A-Up> :wincmd k<CR>
-"nmap <silent> <A-Down> :wincmd j<CR>
-"nmap <silent> <A-Left> :wincmd h<CR>
-"nmap <silent> <A-Right> :wincmd l<CR
+
+inoremap jj <ESC>
+inoremap jk <ESC>
 
 " function to identify repeating lines
 " https://stackoverflow.com/questions/1268032/marking-duplicate-lines
@@ -378,14 +382,26 @@ command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 let g:ycm_min_num_of_chars_for_completion = 1
 
 
+"let g:airline_theme='understated'                   " Use the custom theme I wrote
+let g:airline_left_sep=''                           " No separator as they seem to look funky
+let g:airline_right_sep=''                          " No separator as they seem to look funky
+let g:airline#extensions#branch#enabled = 0         " Do not show the git branch in the status line
+let g:airline#extensions#syntastic#enabled = 1      " Do show syntastic warnings in the status line
+let g:airline#extensions#tabline#show_buffers = 0   " Do not list buffers in the status line
+let g:airline_section_x = ''                        " Do not list the filetype or virtualenv in the status line
+let g:airline_section_y = 'R[%03l/%L] C[%03v]'  " Replace file encoding and file format info with file position
+let g:airline_section_z = ''                        " Do not show the default file position info
+"
 "Powerline configuration
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
 
 function FixQuotes()
-  %s/[“”‘’]/'/g
+  %s/[“”]/"/g
+  %s/[‘’]/'/g
 endfunction
+
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
@@ -396,7 +412,28 @@ nmap td :tabclose<CR>
 "map <leader>h <Esc>:JavaCallHierarchy<CR>
 "map <leader>ch <Esc>:JavaHierarchy<CR>
 
-nnoremap <silent> <C-w>w :ZoomWin<CR>
+nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
+xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
+
+function! VisualFindAndReplace()
+    :OverCommandLine%s/
+endfunction
+function! VisualFindAndReplaceWithSelection() range
+    :'<,'>OverCommandLine s/
+endfunction
+
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+
+function! s:Repl()
+    let s:restore_reg = @"
+    return "p@=RestoreRegister()\<cr>"
+endfunction
+
+" NB: this supports "rp that replaces the selection by the contents of @r
+vnoremap <silent> <expr> p <sid>Repl()
 
 " alias :ag to :Ag
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
