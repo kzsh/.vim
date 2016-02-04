@@ -1,4 +1,5 @@
-:let mapleader = ","
+let mapleader = ","
+"let mapleader=" "
 
 " The basics
 if has('vim_starting')
@@ -101,8 +102,6 @@ set laststatus=2 " display status line always (useful with Powerline plugin)
 " http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
 set shiftround
 
-
-
 "set color scheme
 set background=dark
 "let g:solarized_termcolors=16
@@ -131,35 +130,29 @@ call plug#begin('~/.vim/plugged')
   Plug 'https://github.com/mustache/vim-mustache-handlebars.git', { 'for': 'handlebars' }
   Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
   Plug 'https://github.com/mxw/vim-jsx.git', { 'for': 'jsx' }
-  Plug 'othree/yajs.vim', { 'for': 'javascript' }
+  Plug 'https://github.com/othree/yajs.vim', { 'for': 'javascript' }
   Plug 'https://github.com/tmhedberg/matchit.git'
   Plug 'https://github.com/mhinz/vim-startify'
   Plug 'https://github.com/vim-airline/vim-airline'
   Plug 'https://github.com/JarrodCTaylor/vim-shell-executor'
   Plug 'https://github.com/osyo-manga/vim-over'
-  " TO LOOK AT --> "Plug 'https://github.com/justinmk/vim-sneak'
+  Plug 'https://github.com/justinmk/vim-sneak'
+  Plug 'https://github.com/lrvick/Conque-Shell'
+  Plug 'https://github.com/majutsushi/tagbar'
+  Plug 'https://github.com/nathanaelkane/vim-indent-guides'
+  Plug 'https://github.com/wellle/targets.vim'
   "Plug 'https://github.com/nono/vim-handlebars.git', { 'for': 'handlebars' }
-  "Plug 'https://github.com/jelera/vim-javascript-syntax.git', { 'for': 'javascript' }
-  "Plug 'https://github.com/othree/yajs.vim.git'
-  "Plug 'https://github.com/tpope/vim-rails.git'
-  "Plug 'https://github.com/groenewege/vim-less.git'
+  Plug 'https://github.com/tpope/vim-rails.git', { 'for': 'rails' }
   "Plug 'https://github.com/Shougo/neocomplcache.vim.git'
-  "Plug 'https://github.com/othree/yajs.vim.git'
   "Plug 'https://github.com/moll/vim-node.git'
   "Plug 'https://github.com/darvelo/vim-systemd.git'
   "Plug 'https://github.com/marijnh/tern_for_vim.git'
-  "Plug 'https://github.com/tpope/vim-speeddating.git'
+  Plug 'https://github.com/tpope/vim-speeddating.git'
   "Plug 'https://github.com/tpope/vim-repeat.git'
   "Plug 'https://github.com/tfnico/vim-gradle'
-  "Plug 'https://github.com/kchmck/vim-coffee-script.git'
-  "Plug 'https://github.com/fatih/vim-go.git'
-  "Plug 'https://github.com/vim-scripts/Conque-Shell.git'
-  "Plug 'https://github.com/Lokaltog/powerline.git'
-  "Plug 'https://github.com/godlygeek/tabular.git'
-  "Plug 'https://github.com/plasticboy/vim-markdown.git'
-  "Plug 'https://github.com/joker1007/vim-markdown-quote-syntax.git'
-  "Plug 'https://github.com/rcmdnk/vim-markdown.git'
-  "Plug 'https://github.com/digitaltoad/vim-jade.git'
+  Plug 'https://github.com/kchmck/vim-coffee-script.git', { 'for': 'coffee' }
+  Plug 'https://github.com/fatih/vim-go.git', { 'for': 'go' }
+  Plug 'https://github.com/digitaltoad/vim-jade.git', { 'for': 'jade'}
 call plug#end()
 
 "set the location of the clang lib
@@ -211,6 +204,8 @@ let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$',
   \ }
+let g:ctrlp_reuse_window = 'startify'
+
 map <Leader>fs :CtrlPTag<CR>
 map <Leader>fd :CtrlPCurFile<CR>
 map <Leader>fb :CtrlPBuffer<CR>
@@ -383,11 +378,13 @@ let g:ycm_min_num_of_chars_for_completion = 1
 
 
 "let g:airline_theme='understated'                   " Use the custom theme I wrote
-let g:airline_left_sep=''                           " No separator as they seem to look funky
-let g:airline_right_sep=''                          " No separator as they seem to look funky
+"let g:airline_left_sep=''                           " No separator as they seem to look funky
+"let g:airline_right_sep=''                          " No separator as they seem to look funky
 let g:airline#extensions#branch#enabled = 0         " Do not show the git branch in the status line
 let g:airline#extensions#syntastic#enabled = 1      " Do show syntastic warnings in the status line
 let g:airline#extensions#tabline#show_buffers = 0   " Do not list buffers in the status line
+let g:airline#extensions#branch#enabled = 1
+
 let g:airline_section_x = ''                        " Do not list the filetype or virtualenv in the status line
 let g:airline_section_y = 'R[%03l/%L] C[%03v]'  " Replace file encoding and file format info with file position
 let g:airline_section_z = ''                        " Do not show the default file position info
