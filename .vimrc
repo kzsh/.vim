@@ -1,5 +1,5 @@
-let mapleader = ","
-"let mapleader=" "
+"let mapleader = ","
+let mapleader=" "
 
 " The basics
 if has('vim_starting')
@@ -63,6 +63,11 @@ autocmd Filetype swift setlocal ts=4 sts=4 sw=4
 
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
 autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
+
+" vim-commentary settings
+autocmd FileType handlebars setlocal commentstring={{!%s}}
+
+
 set list " draw whitespace
 
 " what to replace various white space
@@ -115,7 +120,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'https://github.com/tpope/vim-git.git'
   Plug 'https://github.com/scrooloose/nerdtree.git'
   Plug 'https://github.com/scrooloose/syntastic.git'
-  Plug 'https://github.com/scrooloose/nerdcommenter.git'
   Plug 'https://github.com/tpope/vim-commentary'
   Plug 'https://github.com/majutsushi/tagbar.git'
   Plug 'https://github.com/rking/ag.vim.git'
@@ -336,7 +340,10 @@ let g:user_emmet_settings = {
 
 " open tagbar and nerdtree
 map <F9> <Esc>:NERDTreeToggle<CR>
-map <Leader>r :w<cr>:!bundle exec rspec %<cr>
+
+map <Leader>rs :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bundle exec rspec %;cd $CURR_DIR<cr>
+
+map <Leader>rr :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bundle exec rubocop %; cd $CURR_DIR<cr>
 
 "map <leader>t <Esc>:TagbarToggle<CR>
 
