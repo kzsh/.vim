@@ -216,36 +216,6 @@ map <Leader>fb :CtrlPBuffer<CR>
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
-" TagBar with JSCTags
-"let g:tagbar_type_javascript = {
-    "\ 'ctagsbin' : '/usr/local/bin/jsctags'
-"\ }
-
-" Ctags // DISABLED
-"let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
-let Tlist_WinWidth = 50
-"map <F8> :!/usr/local/bin/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-
-
-" neocomplcache settings
-"let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-"let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-"let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-"let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-"let g:neocomplcache_enable_underbar_completion = 1
-" Set minimum syntax keyword length.
-"let g:neocomplcache_min_syntax_length = 3
-"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-"if !exists('g:neocomplcache_force_omni_patterns')
-      "let g:neocomplcache_force_omni_patterns = {}
-  "endif
-  "let g:neocomplcache_force_omni_patterns.java = '\k\.\k*'
-
-
 "Omni Complete
 set completeopt=longest,menuone
 
