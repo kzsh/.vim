@@ -1,6 +1,10 @@
 "let mapleader = ","
 let mapleader=" "
 
+if has('nvim')
+  nmap <BS> <C-W>h
+  set mouse=""
+endif
 " The basics
 if has('vim_starting')
   if &compatible
@@ -26,6 +30,7 @@ if has('vim_starting')
   " set timeout when looking for key combinations
   set timeoutlen=1000 ttimeoutlen=0
 
+  set hidden " only hide buffers, to preserve undo history when returning to other buffers
 
   " default to the system clipboard
   set clipboard=unnamed " set the clipboard to the X window clipboard
@@ -91,13 +96,19 @@ set background=dark " set background color style
 set backspace=indent,eol,start " backspace will traverse indent, eol, start
 
 "folding settings
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10      "deepest fold is 10 levels
+" set foldmethod=indent   "fold based on indent
+" set foldnestmax=10      "deepest fold is 10 levels
+" set nofoldenable        "dont fold by default
+" set foldlevel=1         "this is just what i use
+
+set foldmethod=syntax
+set foldlevelstart=1
 set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+
+let javaScript_fold=1         " JavaScript
 
 set shortmess+=I " don't show splash screen
-                 " http://blog.sanctum.geek.nz/vim-annoyances/
+" http://blog.sanctum.geek.nz/vim-annoyances/
 
 set lazyredraw " Prevent UI from drawing during macro execution.
 
@@ -114,55 +125,99 @@ set background=dark
 colorscheme monokai
 
 "load plugins using Plugged
-call plug#begin('~/.vim/plugged')
-  Plug 'https://github.com/jlanzarotta/bufexplorer.git'
-  Plug 'https://github.com/tpope/vim-fugitive.git'
-  Plug 'https://github.com/tpope/vim-git.git'
-  Plug 'https://github.com/scrooloose/nerdtree.git'
+call plug#begin('~/.config/nvim/plugged')
+Plug 'https://github.com/jlanzarotta/bufexplorer.git'
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/tpope/vim-git.git'
+Plug 'https://github.com/scrooloose/nerdtree.git'
+
+Plug 'https://github.com/tpope/vim-commentary'
+Plug 'https://github.com/majutsushi/tagbar.git'
+Plug 'https://github.com/rking/ag.vim.git'
+Plug 'https://github.com/airblade/vim-gitgutter.git'
+Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+Plug 'https://github.com/Valloric/YouCompleteMe.git'
+Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
+Plug 'https://github.com/mattn/emmet-vim.git'
+Plug 'https://github.com/tpope/vim-unimpaired.git'
+Plug 'https://github.com/tpope/vim-surround.git'
+Plug 'https://github.com/editorconfig/editorconfig-vim.git'
+Plug 'https://github.com/mustache/vim-mustache-handlebars.git', { 'for': 'handlebars' }
+Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
+Plug 'https://github.com/othree/yajs.vim', { 'for': 'javascript' }
+Plug 'https://github.com/pangloss/vim-javascript.git', { 'for': 'javascript' }
+Plug 'https://github.com/mxw/vim-jsx.git', { 'for': 'jsx' }
+
+Plug 'https://github.com/tmhedberg/matchit.git'
+Plug 'https://github.com/mhinz/vim-startify'
+Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'https://github.com/JarrodCTaylor/vim-shell-executor'
+Plug 'https://github.com/osyo-manga/vim-over'
+Plug 'https://github.com/justinmk/vim-sneak'
+Plug 'https://github.com/lrvick/Conque-Shell'
+Plug 'https://github.com/majutsushi/tagbar'
+Plug 'https://github.com/nathanaelkane/vim-indent-guides'
+Plug 'https://github.com/wellle/targets.vim'
+Plug 'https://github.com/noprompt/vim-yardoc.git', { 'for': 'ruby' }
+Plug 'https://github.com/tpope/vim-rails.git', { 'for': 'rails' }
+Plug 'https://github.com/csscomb/vim-csscomb.git'
+"Plug 'https://github.com/moll/vim-node.git'
+"Plug 'https://github.com/darvelo/vim-systemd.git'
+"Plug 'https://github.com/marijnh/tern_for_vim.git'
+Plug 'https://github.com/tpope/vim-speeddating.git'
+Plug 'https://github.com/tpope/vim-repeat.git'
+"Plug 'https://github.com/tfnico/vim-gradle'
+Plug 'https://github.com/kchmck/vim-coffee-script.git', { 'for': 'coffee' }
+Plug 'https://github.com/fatih/vim-go.git', { 'for': 'go' }
+Plug 'https://github.com/digitaltoad/vim-jade.git', { 'for': 'jade'}
+Plug 'https://github.com/severin-lemaignan/vim-minimap.git'
+
+if !has('nvim')
   Plug 'https://github.com/scrooloose/syntastic.git'
-  Plug 'https://github.com/tpope/vim-commentary'
-  Plug 'https://github.com/majutsushi/tagbar.git'
-  Plug 'https://github.com/rking/ag.vim.git'
-  Plug 'https://github.com/airblade/vim-gitgutter.git'
-  Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
-  Plug 'https://github.com/Valloric/YouCompleteMe.git'
-  Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
-  Plug 'https://github.com/mattn/emmet-vim.git'
-  Plug 'https://github.com/tpope/vim-unimpaired.git'
-  Plug 'https://github.com/tpope/vim-surround.git'
-  Plug 'https://github.com/editorconfig/editorconfig-vim.git'
-  Plug 'https://github.com/mustache/vim-mustache-handlebars.git', { 'for': 'handlebars' }
-  Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
-  Plug 'https://github.com/mxw/vim-jsx.git', { 'for': 'jsx' }
-  Plug 'https://github.com/othree/yajs.vim', { 'for': 'javascript' }
-  Plug 'https://github.com/tmhedberg/matchit.git'
-  Plug 'https://github.com/mhinz/vim-startify'
-  Plug 'https://github.com/vim-airline/vim-airline'
-  Plug 'https://github.com/JarrodCTaylor/vim-shell-executor'
-  Plug 'https://github.com/osyo-manga/vim-over'
-  Plug 'https://github.com/justinmk/vim-sneak'
-  Plug 'https://github.com/lrvick/Conque-Shell'
-  Plug 'https://github.com/majutsushi/tagbar'
-  Plug 'https://github.com/nathanaelkane/vim-indent-guides'
-  Plug 'https://github.com/wellle/targets.vim'
-  "Plug 'https://github.com/nono/vim-handlebars.git', { 'for': 'handlebars' }
-  Plug 'https://github.com/tpope/vim-rails.git', { 'for': 'rails' }
-  "Plug 'https://github.com/Shougo/neocomplcache.vim.git'
-  "Plug 'https://github.com/moll/vim-node.git'
-  "Plug 'https://github.com/darvelo/vim-systemd.git'
-  "Plug 'https://github.com/marijnh/tern_for_vim.git'
-  Plug 'https://github.com/tpope/vim-speeddating.git'
-  "Plug 'https://github.com/tpope/vim-repeat.git'
-  "Plug 'https://github.com/tfnico/vim-gradle'
-  Plug 'https://github.com/kchmck/vim-coffee-script.git', { 'for': 'coffee' }
-  Plug 'https://github.com/fatih/vim-go.git', { 'for': 'go' }
-  Plug 'https://github.com/digitaltoad/vim-jade.git', { 'for': 'jade'}
+endif
+
+if has('nvim')
+  Plug 'https://github.com/neomake/neomake.git'
+endif
+
 call plug#end()
+
+
+let g:jsx_ext_required = 0
+
+if has('nvim')
+  autocmd! BufReadPost,BufWritePost,InsertLeave * Neomake
+
+  let g:neomake_logfile = '/tmp/neomake_error.log'
+  let g:neomake_javascript_enabled_makers = ['eslint','jshint']
+  let g:neomake_ruby_enabled_makers = ['rubocop']
+
+  function! NeomakeESlintChecker()
+    let l:npm_bin = ''
+    let l:eslint = 'eslint'
+
+    if executable('npm-which')
+      let l:eslint = split(system('npm-which eslint'))[0]
+      return 0
+    endif
+
+    if executable('npm')
+      let l:npm_bin = split(system('npm bin'), '\n')[0]
+    endif
+
+    if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
+      let l:eslint = l:npm_bin . '/eslint'
+    endif
+
+    let b:neomake_javascript_eslint_exe = l:eslint
+  endfunction
+
+  autocmd FileType javascript :call NeomakeESlintChecker()
+endif
 
 "set the location of the clang lib
 let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 
-set hidden " only hide buffers, to preserve undo history when returning to other buffers
 
 filetype plugin indent on
 "autocmd FileType * if &completefunc != '' | let &omnifunc=&completefunc | endif
@@ -172,10 +227,10 @@ autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespa
 
 " Remove trailing whitespaces
 fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
 endfun
 
 let g:rehash256 = 1
@@ -184,15 +239,22 @@ let g:rehash256 = 1
 "call pathogen#infect()
 "call pathogen#helptags()
 
-" Syntastic settings
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
-"let g:syntastic_auto_loclist=1
-"let g:syntastic_quiet_messages = {'level': 'warnings'}
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_javascript_checkers=['jshint'] ",'jsonlint'] , 'eslint' ]
-let g:syntastic_ruby_checkers=['rubocop']
+if !has('nvim')
+  " Syntastic settings
+  let g:syntastic_check_on_open=1
+  let g:syntastic_enable_signs=1
+
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loclist=1
+
+  "let g:syntastic_quiet_messages = {'level': 'warnings'}
+  let g:syntastic_error_symbol='✗'
+  let g:syntastic_warning_symbol='⚠'
+  let g:syntastic_javascript_checkers=['eslint']
+  let g:syntastic_ruby_checkers=['rubocop']
+  let g:syntastic_css_checkers=['csslint']
+
+endif
 
 "Status line override (working with Syntastic)
 set statusline+=%#warningmsg#
@@ -204,15 +266,30 @@ set wildmenu
 set wildmode=longest:full,full
 set wildignore+=*.git,*.hg,*.svn,*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$',
-  \ }
+      \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$',
+      \ }
+
 let g:ctrlp_reuse_window = 'startify'
+
+let g:startify_change_to_vcs_root = 1
+let g:startify_custom_indices = ["f", "d", "s", "a", "v", "c", "x", "z"]
 
 map <Leader>fs :CtrlPTag<CR>
 map <Leader>fd :CtrlPCurFile<CR>
 map <Leader>fb :CtrlPBuffer<CR>
+
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+
+
+if executable('ag')
+  let g:ctrlp_user_command =
+        \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+endif
+
+if !executable('ag')
+  let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
+endif
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
@@ -240,64 +317,64 @@ let g:user_emmet_mode='i'    "only enable normal mode functions.
 let g:BASH_Ctrl_j = 'off'
 let g:user_emmet_expandabbr_key = '<c-e>'
 let g:user_emmet_next_key = '<c-k>'
-let g:user_emmet_leader_key = '\a'
 let g:use_emment_complete_tag = 1
 
 let g:user_emmet_settings = {
-  \  'lang' : 'en',
-  \  'html' : {
-  \    'filters' : 'html',
-  \    'indentation' : '  ',
-  \    'snippets' : {
-  \      'ap' : "data-dojo-attach-point=\"${cursor}\"",
-  \      'html' : '<html lang="en">\n<head>\n\t<title></title>\n</head>\n<body>\n</body>\n</html>'
-  \    }
-  \  },
-  \  'css' : {
-  \    'filters' : 'fc',
-  \    'indentation' : '  ',
-  \    'snippets' : {
-  \      'border-radius' : "-moz-border-radius: 10px; \n-o-border-radius: 10px; \nborder-radius: 10px;"
-  \    },
-  \  },
-  \  'javascript' : {
-  \    'extends' : 'javascript',
-  \    'indentation' : '  ',
-  \    'snippets' : {
-  \      'i' : "if (${cursor}) {\n\t${cursor}\n}",
-  \      'e' : "else {\n\t${cursor}\n}",
-  \      'ie' : "if (${cursor}) {\n\t${cursor}\n} else {\n\t${cursor}\n}",
-  \      'sw' : "switch(${cursor}) {\n\tcase ${cursor}:\n\t\t${cursor};\n\t\tbreak;\n\tcase ${cursor}:\n\t\t${cursor};\n\t\tbreak;\n\tcase ${cursor}:\n\t\t${cursor};\n\t\tbreak;\n\tdefault:\n\t\t${cursor};\n\t\tbreak;\n}",
-  \      'gt' : "gulp.task('${cursor}', function () { ${cursor} })",
-  \      's' : "set('${cursor}',${cursor});${cursor}",
-  \      'ap' : "data-dojo-attach-point=\"${cursor}\"",
-  \      'dce' : "domConstruct.empty(${cursor});",
-  \      'dcp' : "domConstruct.place(${cursor});",
-  \      'dcc' : "domConstruct.create(${cursor});",
-  \      'dcd' : "domConstruct.destroy(${cursor});",
-  \      'dc' : "domClass.add(${cursor});",
-  \      'dcr' : "domClass.remove(${cursor});",
-  \      'require' : "/*global require */\nrequire([${cursor}],function(${child}) {\n\n});",
-  \      'define' : "/*global define */\ndefine([\"dojo/_base/declare\"],\nfunction(declare) {\n\treturn declare(\"\",[],{\n\t\t${cursor}${child}\n\t});\n});",
-  \      'dijit' : "/*global define */\ndefine([\"dojo/_base/declare\",\n\"dijit/_WidgetBase\",\n\"dijit/_TemplatedMixin\"],\nfunction(declare, _WidgetBase, _TemplatedMixin) {\n\treturn declare([_WidgetBase, _TemplatedMixin],{\n\t\ttemplateString:\n\t\t\t'<div>' +\n\t\t\t'</div>',\n\t\tpostCreate: function() {\n\t\t\tthis.inherited(arguments);\n\t\t\t${cursor}\n\t\t},\n\t\tdestroy: function() {\n\t\t\tthis.destroyRecursive();\n\t\t\tthis.inherited(arguments);\n\t\t}\n\t});\n});",
-  \
-\      'foreach' : "array.forEach(${cursor},function(${child}){\n\n});",
-\      'f' : "() => {${cursor}}",
-\      'f,' : "() => {${cursor}},",
-\      'on' : "on(${cursor},\"click\", function(){${child}\n\n});",
-\      'then' : "then(function() {\n\t${cursor}\n});",
-\      'c' : "console.log(${cursor});"
-\    },
-\  },
-\ 'java' : {
-\  'indentation' : '    ',
-\  'snippets' : {
-\   'main': "public static void main(String[] args) {\n\t|\n}",
-\   'println': "System.out.println(\"|\");",
-\   'class': "public class | {\n}\n",
-\  },
-\ },
-\}
+      \  'lang' : 'en',
+      \  'html' : {
+      \    'filters' : 'html',
+      \    'indentation' : '  ',
+      \    'snippets' : {
+      \      'ap' : "data-dojo-attach-point=\"${cursor}\"",
+      \      'html' : '<html lang="en">\n<head>\n\t<title></title>\n</head>\n<body>\n</body>\n</html>'
+      \    }
+      \  },
+      \  'css' : {
+      \    'filters' : 'fc',
+      \    'indentation' : '  ',
+      \    'snippets' : {
+      \      'border-radius' : "-moz-border-radius: 10px; \n-o-border-radius: 10px; \nborder-radius: 10px;"
+      \    },
+      \  },
+      \  'javascript' : {
+      \    'extends' : 'javascript',
+      \    'indentation' : '  ',
+      \    'snippets' : {
+      \      'i' : "if (${cursor}) {\n\t${cursor}\n}",
+      \      'e' : "else {\n\t${cursor}\n}",
+      \      'ie' : "if (${cursor}) {\n\t${cursor}\n} else {\n\t${cursor}\n}",
+      \      'sw' : "switch(${cursor}) {\n\tcase ${cursor}:\n\t\t${cursor};\n\t\tbreak;\n\tcase ${cursor}:\n\t\t${cursor};\n\t\tbreak;\n\tcase ${cursor}:\n\t\t${cursor};\n\t\tbreak;\n\tdefault:\n\t\t${cursor};\n\t\tbreak;\n}",
+      \      'gt' : "gulp.task('${cursor}', function () { ${cursor} })",
+      \      's' : "set('${cursor}',${cursor});${cursor}",
+      \      'ap' : "data-dojo-attach-point=\"${cursor}\"",
+      \      'dce' : "domConstruct.empty(${cursor});",
+      \      'dcp' : "domConstruct.place(${cursor});",
+      \      'dcc' : "domConstruct.create(${cursor});",
+      \      'dcd' : "domConstruct.destroy(${cursor});",
+      \      'dc' : "domClass.add(${cursor});",
+      \      'dcr' : "domClass.remove(${cursor});",
+      \      'require' : "/*global require */\nrequire([${cursor}],function(${child}) {\n\n});",
+      \      'define' : "/*global define */\ndefine([\"dojo/_base/declare\"],\nfunction(declare) {\n\treturn declare(\"\",[],{\n\t\t${cursor}${child}\n\t});\n});",
+      \      'dijit' : "/*global define */\ndefine([\"dojo/_base/declare\",\n\"dijit/_WidgetBase\",\n\"dijit/_TemplatedMixin\"],\nfunction(declare, _WidgetBase, _TemplatedMixin) {\n\treturn declare([_WidgetBase, _TemplatedMixin],{\n\t\ttemplateString:\n\t\t\t'<div>' +\n\t\t\t'</div>',\n\t\tpostCreate: function() {\n\t\t\tthis.inherited(arguments);\n\t\t\t${cursor}\n\t\t},\n\t\tdestroy: function() {\n\t\t\tthis.destroyRecursive();\n\t\t\tthis.inherited(arguments);\n\t\t}\n\t});\n});",
+      \      'adboardv2' : "\n/* globals AdvisoryBoard */\nAdvisoryBoard.components.register('${cursor}', function() {\n  'use strict';\n\n  var CSS = {};\n  var STATES = {};\n  var EVENTS = {};\n  var METHODS = {};\n\n  return {\n    events: EVENTS,\n    methods: METHODS,\n    rootElement: CSS.answerForm,\n    states: STATES\n  };\n\n});\n\n",
+      \
+      \      'foreach' : "array.forEach(${cursor},function(${child}){\n\n});",
+      \      'f' : "() => {${cursor}}",
+      \      'f,' : "() => {${cursor}},",
+      \      'on' : "on(${cursor},\"click\", function(){${child}\n\n});",
+      \      'then' : "then(function() {\n\t${cursor}\n});",
+      \      'c' : "console.log(${cursor});"
+      \    },
+      \  },
+      \ 'java' : {
+      \  'indentation' : '    ',
+      \  'snippets' : {
+      \   'main': "public static void main(String[] args) {\n\t|\n}",
+      \   'println': "System.out.println(\"|\");",
+      \   'class': "public class | {\n}\n",
+      \  },
+      \ },
+      \}
 
 " ==============================================================================
 " = mappings                                                                   =
@@ -317,10 +394,15 @@ map <Leader>rr :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bun
 
 "map <leader>t <Esc>:TagbarToggle<CR>
 
-nnoremap <Left> :vertical resize +1<CR>
-nnoremap <Right> :vertical resize -1<CR>
-nnoremap <Up> :resize +1<CR>
-nnoremap <Down> :resize -1<CR>
+nnoremap <Left> :vertical resize -1<CR>
+nnoremap <Right> :vertical resize +1<CR>
+nnoremap <Up> :resize -1<CR>
+nnoremap <Down> :resize +1<CR>
+
+nnoremap <S-Left> :vertical resize -10<CR>
+nnoremap <S-Right> :vertical resize +10<CR>
+nnoremap <S-Up> :resize -10<CR>
+nnoremap <S-Down> :resize +10<CR>
 
 nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
 
@@ -354,13 +436,22 @@ command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 let g:ycm_min_num_of_chars_for_completion = 1
 
 
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
 "let g:airline_theme='understated'                   " Use the custom theme I wrote
-"let g:airline_left_sep=''                           " No separator as they seem to look funky
-"let g:airline_right_sep=''                          " No separator as they seem to look funky
-let g:airline#extensions#branch#enabled = 0         " Do not show the git branch in the status line
+let g:airline#extensions#branch#enabled = 1         " Do not show the git branch in the status line
 let g:airline#extensions#syntastic#enabled = 1      " Do show syntastic warnings in the status line
 let g:airline#extensions#tabline#show_buffers = 0   " Do not list buffers in the status line
-let g:airline#extensions#branch#enabled = 1
 
 let g:airline_section_x = ''                        " Do not list the filetype or virtualenv in the status line
 let g:airline_section_y = 'R[%03l/%L] C[%03v]'  " Replace file encoding and file format info with file position
@@ -379,13 +470,8 @@ endfunction
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
-"ECLIM
-
-"let g:EclimJavaHierarchyDefaultAction='edit'
-"map <leader>cc <Esc>:JavaSearchContext<CR>
-"map <leader>h <Esc>:JavaCallHierarchy<CR>
-"map <leader>ch <Esc>:JavaHierarchy<CR>
-
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " .   expand("%:t"))
+autocmd VimLeave * call system("tmux setw automatic-rename")
 
 autocmd BufNewFile,BufRead *.js nnoremap <Leader>tt :!mocha %<CR>
 autocmd BufNewFile,BufRead *.rb nnoremap <Leader>tt :!rspec %<CR>
@@ -394,10 +480,11 @@ nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
 xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 
 function! VisualFindAndReplace()
-    :OverCommandLine%s/
+  :OverCommandLine%s/
 endfunction
+
 function! VisualFindAndReplaceWithSelection() range
-    :'<,'>OverCommandLine s/
+  :'<,'>OverCommandLine s/
 endfunction
 
 function! RestoreRegister()
@@ -405,9 +492,20 @@ function! RestoreRegister()
   return ''
 endfunction
 
+function Cdg()
+  let root = system('git rev-parse --top-level')
+  cd `=root`
+endfunction
+command! Cdg call Cdg()
+
+function SortInBraces()
+  normal vi{:sort<CR>
+endfunction
+command! SortInBraces call SortInBraces()
+
 function! s:Repl()
-    let s:restore_reg = @"
-    return "p@=RestoreRegister()\<cr>"
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
 endfunction
 
 " NB: this supports "rp that replaces the selection by the contents of @r
