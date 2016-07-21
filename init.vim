@@ -168,6 +168,8 @@ Plug 'https://github.com/digitaltoad/vim-jade.git', { 'for': 'jade'}
 
 if has('nvim')
   Plug 'https://github.com/neomake/neomake.git'
+else
+  Plug 'https://github.com/scrooloose/syntastic.git'
 endif
 
 call plug#end()
