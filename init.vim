@@ -483,7 +483,6 @@ function! VisualFindAndReplaceWithSelection() range
   :'<,'>OverCommandLine s/
 endfunction
 
-
 function Cdg()
   let root = system('git rev-parse --top-level')
   cd `=root`
@@ -499,6 +498,7 @@ function! RestoreRegister()
   let @" = s:restore_reg
   return ''
 endfunction
+
 function! s:Repl()
   let s:restore_reg = @"
   return "p@=RestoreRegister()\<cr>"
@@ -509,6 +509,11 @@ vnoremap <silent> <expr> p <sid>Repl()
 
 " alias :ag to :Ag
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
+
+function! RemoveExtraEmptyLines()
+  :%g/^$\n\n/d
+endfunction
+
 function! ToggleCommentColors()
   if g:colors_name == 'monokai_light_comments'
     :colorscheme monokai
