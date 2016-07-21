@@ -149,7 +149,6 @@ Plug 'https://github.com/mhinz/vim-startify'
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/JarrodCTaylor/vim-shell-executor'
 Plug 'https://github.com/osyo-manga/vim-over'
-Plug 'https://github.com/justinmk/vim-sneak'
 Plug 'https://github.com/lrvick/Conque-Shell'
 Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/nathanaelkane/vim-indent-guides'
@@ -166,7 +165,6 @@ Plug 'https://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/kchmck/vim-coffee-script.git', { 'for': 'coffee' }
 Plug 'https://github.com/fatih/vim-go.git', { 'for': 'go' }
 Plug 'https://github.com/digitaltoad/vim-jade.git', { 'for': 'jade'}
-Plug 'https://github.com/severin-lemaignan/vim-minimap.git'
 
 if has('nvim')
   Plug 'https://github.com/neomake/neomake.git'
