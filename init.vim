@@ -487,10 +487,6 @@ function! VisualFindAndReplaceWithSelection() range
   :'<,'>OverCommandLine s/
 endfunction
 
-function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
-endfunction
 
 function Cdg()
   let root = system('git rev-parse --top-level')
@@ -503,6 +499,10 @@ function SortInBraces()
 endfunction
 command! SortInBraces call SortInBraces()
 
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
 function! s:Repl()
   let s:restore_reg = @"
   return "p@=RestoreRegister()\<cr>"
