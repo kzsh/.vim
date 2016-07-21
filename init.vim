@@ -513,3 +513,11 @@ vnoremap <silent> <expr> p <sid>Repl()
 
 " alias :ag to :Ag
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
+function! ToggleCommentColors()
+  if g:colors_name == 'monokai_light_comments'
+    :colorscheme monokai
+  else
+    :colorscheme monokai_light_comments
+  endif
+endfunction
+nmap <Leader>ll :call ToggleCommentColors()<CR>

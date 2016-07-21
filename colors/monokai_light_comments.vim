@@ -1,0 +1,1 @@
+/Users/andrew/.config/nvim/themes/vim-monokai/colors/monokai-light-comments.vim
