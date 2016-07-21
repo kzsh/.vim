@@ -418,7 +418,6 @@ command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 "YouCompleteMe Configuration
 let g:ycm_min_num_of_chars_for_completion = 1
 
-
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
