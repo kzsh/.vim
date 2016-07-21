@@ -172,10 +172,6 @@ Plug 'https://github.com/fatih/vim-go.git', { 'for': 'go' }
 Plug 'https://github.com/digitaltoad/vim-jade.git', { 'for': 'jade'}
 Plug 'https://github.com/severin-lemaignan/vim-minimap.git'
 
-if !has('nvim')
-  Plug 'https://github.com/scrooloose/syntastic.git'
-endif
-
 if has('nvim')
   Plug 'https://github.com/neomake/neomake.git'
 endif
@@ -275,7 +271,7 @@ let g:ctrlp_reuse_window = 'startify'
 let g:startify_change_to_vcs_root = 1
 let g:startify_custom_indices = ["f", "d", "s", "a", "v", "c", "x", "z"]
 
-map <Leader>fs :CtrlPTag<CR>
+"map <Leader>fs :CtrlPTag<CR>
 map <Leader>fd :CtrlPCurFile<CR>
 map <Leader>fb :CtrlPBuffer<CR>
 
@@ -520,4 +516,31 @@ function! ToggleCommentColors()
     :colorscheme monokai_light_comments
   endif
 endfunction
+
 nmap <Leader>ll :call ToggleCommentColors()<CR>
+
+" Using AG to find things in a project
+function! Ag()
+  let search = input('Search: ')
+  execute 'Ag' '"' . search . '" --ignore=*.css'
+endfunction
+
+function! Agi()
+  let search = input('Search: ')
+  execute 'Ag' '-i "' . search . '" --ignore=*.css'
+endfunction
+
+function! Wag()
+  let wordUnderCursor = expand("<cword>")
+  execute 'Ag' '"' . wordUnderCursor . '" --ignore=*.css'
+endfunction
+
+function! Wagi()
+  let wordUnderCursor = expand("<cword>")
+  execute 'Ag' '-i "' . wordUnderCursor . '" --ignore=*.css'
+endfunction
+
+nmap <Leader>ff :call Agi()<CR>
+nmap <Leader>fc :call Ag()<CR>
+nmap <Leader>fw :call Wag()<CR>
+nmap <Leader>fwi :call Wagi()<CR>
