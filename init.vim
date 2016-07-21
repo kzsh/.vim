@@ -120,6 +120,8 @@ set background=dark
 "colorscheme solarized
 colorscheme monokai
 
+let g:ag_highlight=1
+
 "load plugins using Plugged
 call plug#begin('~/.config/nvim/plugged')
 Plug 'https://github.com/jlanzarotta/bufexplorer.git'
