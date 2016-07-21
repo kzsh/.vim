@@ -35,7 +35,6 @@ if has('vim_starting')
   " default to the system clipboard
   set clipboard=unnamed " set the clipboard to the X window clipboard
 
-
 endif
 
 syntax enable
@@ -65,13 +64,11 @@ autocmd Filetype m setlocal ts=4 sts=4 sw=4
 autocmd Filetype h setlocal ts=4 sts=4 sw=4
 autocmd Filetype swift setlocal ts=4 sts=4 sw=4
 
-
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
 autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
 
 " vim-commentary settings
 autocmd FileType handlebars setlocal commentstring={{!%s}}
-
 
 set list " draw whitespace
 
@@ -82,7 +79,6 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<
 " set our vim path to look in the current directory of the file we are
 " editing, all sub directories, the directory from which vim was launched.
 set path=.,**,,
-
 
 " SEARCH
 set hlsearch " highlight matches
@@ -178,7 +174,6 @@ endif
 
 call plug#end()
 
-
 let g:jsx_ext_required = 0
 
 if has('nvim')
@@ -213,7 +208,6 @@ endif
 
 "set the location of the clang lib
 let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-
 
 filetype plugin indent on
 "autocmd FileType * if &completefunc != '' | let &omnifunc=&completefunc | endif
@@ -277,7 +271,6 @@ map <Leader>fb :CtrlPBuffer<CR>
 
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
-
 if executable('ag')
   let g:ctrlp_user_command =
         \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
@@ -296,17 +289,11 @@ set completeopt=longest,menuone
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimFileTypeValidate = 0
 
-
-
-
 au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mkd set filetype=markdown
 
-
 hi SpecialKey term=bold cterm=bold ctermfg=16 guifg=#000
 hi NonText term=bold cterm=bold ctermfg=16 guifg=#000
-
-
 
 " Emmet  (Zen Coding)
 let g:user_emmet_mode='i'    "only enable normal mode functions.
@@ -380,7 +367,6 @@ let g:user_emmet_settings = {
 " - general_(mappings)                                                         -
 " ------------------------------------------------------------------------------
 
-
 " open tagbar and nerdtree
 map <F9> <Esc>:NERDTreeToggle<CR>
 
@@ -426,7 +412,6 @@ function! HighlightRepeats() range
 endfunction
 
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
-
 
 "YouCompleteMe Configuration
 let g:ycm_min_num_of_chars_for_completion = 1
