@@ -368,7 +368,7 @@ let g:user_emmet_settings = {
 " ------------------------------------------------------------------------------
 
 " open tagbar and nerdtree
-map <F9> <Esc>:NERDTreeToggle<CR>
+map <Leader>o <Esc>:NERDTreeToggle<CR>
 
 map <Leader>rs :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bundle exec rspec %;cd $CURR_DIR<cr>
 
