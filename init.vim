@@ -361,21 +361,20 @@ let g:user_emmet_settings = {
       \ },
       \}
 
-" ==============================================================================
-" = mappings                                                                   =
-" ==============================================================================
-
-" ------------------------------------------------------------------------------
-" - general_(mappings)                                                         -
-" ------------------------------------------------------------------------------
-
+"==============================================================================
 " open tagbar and nerdtree
+"==============================================================================
 map <Leader>o <Esc>:NERDTreeToggle<CR>
 
+"==============================================================================
+" Run rspec and rubocop on the current file
+"==============================================================================
 map <Leader>rs :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bundle exec rspec %;cd $CURR_DIR<cr>
-
 map <Leader>rr :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bundle exec rubocop %; cd $CURR_DIR<cr>
 
+"==============================================================================
+" Resize panes with arrow keys and shift
+"==============================================================================
 nnoremap <Left> :vertical resize -1<CR>
 nnoremap <Right> :vertical resize +1<CR>
 nnoremap <Up> :resize -1<CR>
@@ -386,13 +385,21 @@ nnoremap <S-Right> :vertical resize +10<CR>
 nnoremap <S-Up> :resize -10<CR>
 nnoremap <S-Down> :resize +10<CR>
 
+"==============================================================================
+" Use Enter to follow tags
+"==============================================================================
 nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
 
+"==============================================================================
+" map alternative escapes to normal mode
+"==============================================================================
 inoremap jj <ESC>
 inoremap jk <ESC>
 
+"==============================================================================
 " function to identify repeating lines
 " https://stackoverflow.com/questions/1268032/marking-duplicate-lines
+"==============================================================================
 function! HighlightRepeats() range
   let lineCounts = {}
   let lineNum = a:firstline
@@ -413,9 +420,13 @@ endfunction
 
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 
+"==============================================================================
+"==============================================================================
 "YouCompleteMe Configuration
 let g:ycm_min_num_of_chars_for_completion = 1
 
+"==============================================================================
+"==============================================================================
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -442,14 +453,20 @@ let g:airline_section_z = ''                        " Do not show the default fi
 "python powerline_setup()
 "python del powerline_setup
 
+"==============================================================================
+"==============================================================================
 function FixQuotes()
   %s/[“”]/"/g
   %s/[‘’]/'/g
 endfunction
 
+"==============================================================================
+"==============================================================================
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
+"==============================================================================
+"==============================================================================
 autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " .   expand("%:t"))
 autocmd VimLeave * call system("tmux setw automatic-rename")
 
@@ -459,6 +476,9 @@ autocmd BufNewFile,BufRead *.rb nnoremap <Leader>tt :!rspec %<CR>
 nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
 xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 
+"==============================================================================
+" Visual find and replace
+"==============================================================================
 function! VisualFindAndReplace()
   :OverCommandLine%s/
 endfunction
@@ -467,6 +487,9 @@ function! VisualFindAndReplaceWithSelection() range
   :'<,'>OverCommandLine s/
 endfunction
 
+"==============================================================================
+" vim-cd to top-level of git repo
+"==============================================================================
 function Cdg()
   let root = system('git rev-parse --top-level')
   cd `=root`
@@ -478,6 +501,9 @@ function SortInBraces()
 endfunction
 command! SortInBraces call SortInBraces()
 
+"==============================================================================
+" Use @r as storage
+"==============================================================================
 function! RestoreRegister()
   let @" = s:restore_reg
   return ''
@@ -494,10 +520,16 @@ vnoremap <silent> <expr> p <sid>Repl()
 " alias :ag to :Ag
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
 
+"==============================================================================
+" Remove consecutive empty lines
+"==============================================================================
 function! RemoveExtraEmptyLines()
   :%g/^$\n\n/d
 endfunction
 
+"==============================================================================
+" Switch between color scheme that highlights/hides comments
+"==============================================================================
 function! ToggleCommentColors()
   if g:colors_name == 'monokai_light_comments'
     :colorscheme monokai
@@ -508,7 +540,16 @@ endfunction
 
 nmap <Leader>ll :call ToggleCommentColors()<CR>
 
+"==============================================================================
 " Using AG to find things in a project
+"==============================================================================
+
+" Highlight match in results in quickfix
+let g:ag_highlight=1
+
+" alias :ag to :Ag
+cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
+
 function! Ag()
   let search = input('Search: ')
   execute 'Ag' '"' . search . '" --ignore=*.css'
