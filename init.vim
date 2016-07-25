@@ -467,9 +467,6 @@ autocmd VimLeave * call system("tmux setw automatic-rename")
 autocmd BufNewFile,BufRead *.js nnoremap <Leader>tt :!mocha %<CR>
 autocmd BufNewFile,BufRead *.rb nnoremap <Leader>tt :!rspec %<CR>
 
-nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
-xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
-
 "==============================================================================
 " Visual find and replace
 "==============================================================================
@@ -480,6 +477,9 @@ endfunction
 function! VisualFindAndReplaceWithSelection() range
   :'<,'>OverCommandLine s/
 endfunction
+
+nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
+xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 
 "==============================================================================
 " vim-cd to top-level of git repo
