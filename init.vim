@@ -25,6 +25,11 @@ if has('vim_starting')
 
   set showbreak=↪\
   set scrolloff=3
+
+  set wildmenu
+  set wildmode=longest:full,full
+  set wildignore+=*.git,*.hg,*.svn,*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
   "set showmatch " Show matching
 
   " set timeout when looking for key combinations
@@ -43,10 +48,14 @@ syntax enable
 "set omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType c set omnifunc=ccomplete#Complete
+
+
+au BufNewFile,BufRead *.md set filetype=markdown
+au BufNewFile,BufRead *.mkd set filetype=markdown
 
 "http://vim.wikia.com/wiki/Fix_syntax_highlighting
 "recalculate syntax highlighting from the start of the file on change
@@ -90,24 +99,11 @@ set number " display line numbers
 " COLORS
 set background=dark " set background color style
 set backspace=indent,eol,start " backspace will traverse indent, eol, start
-
-"folding settings
-" set foldmethod=indent   "fold based on indent
-" set foldnestmax=10      "deepest fold is 10 levels
-" set nofoldenable        "dont fold by default
-" set foldlevel=1         "this is just what i use
-
 set foldmethod=syntax
 set foldlevelstart=1
 set nofoldenable        "dont fold by default
-
-let javaScript_fold=1         " JavaScript
-
 set shortmess+=I " don't show splash screen
-" http://blog.sanctum.geek.nz/vim-annoyances/
-
 set lazyredraw " Prevent UI from drawing during macro execution.
-
 set laststatus=2 " display status line always (useful with Powerline plugin)
 
 " >> moves to the nearest whole tab multiple rather than just by amount == tabwidth
@@ -119,8 +115,6 @@ set background=dark
 "let g:solarized_termcolors=16
 "colorscheme solarized
 colorscheme monokai
-
-let g:ag_highlight=1
 
 "load plugins using Plugged
 call plug#begin('~/.config/nvim/plugged')
@@ -254,10 +248,6 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 "Ctrl P
-set wildmenu
-set wildmode=longest:full,full
-set wildignore+=*.git,*.hg,*.svn,*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$',
       \ }
@@ -291,13 +281,15 @@ set completeopt=longest,menuone
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimFileTypeValidate = 0
 
-au BufNewFile,BufRead *.md set filetype=markdown
-au BufNewFile,BufRead *.mkd set filetype=markdown
+"==============================================================================
+" Set special char highlighting parames
+"==============================================================================
+hi SpecialKey term=bold cterm=bold ctermfg=black guifg=#000
+hi NonText term=bold cterm=bold ctermfg=black  guifg=#000
 
-hi SpecialKey term=bold cterm=bold ctermfg=16 guifg=#000
-hi NonText term=bold cterm=bold ctermfg=16 guifg=#000
-
-" Emmet  (Zen Coding)
+"==============================================================================
+" Emmet  (Zen Coding) configuration
+"==============================================================================
 let g:user_emmet_mode='i'    "only enable normal mode functions.
 let g:BASH_Ctrl_j = 'off'
 let g:user_emmet_expandabbr_key = '<c-e>'
@@ -507,8 +499,6 @@ endfunction
 " NB: this supports "rp that replaces the selection by the contents of @r
 vnoremap <silent> <expr> p <sid>Repl()
 
-" alias :ag to :Ag
-cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
 
 "==============================================================================
 " Remove consecutive empty lines
@@ -539,6 +529,7 @@ let g:ag_highlight=1
 
 " alias :ag to :Ag
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
+
 
 function! Ag()
   let search = input('Search: ')
