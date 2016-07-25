@@ -303,7 +303,6 @@ let g:BASH_Ctrl_j = 'off'
 let g:user_emmet_expandabbr_key = '<c-e>'
 let g:user_emmet_next_key = '<c-k>'
 let g:use_emment_complete_tag = 1
-
 let g:user_emmet_settings = {
       \  'lang' : 'en',
       \  'html' : {
@@ -447,11 +446,6 @@ let g:airline#extensions#tabline#show_buffers = 0   " Do not list buffers in the
 let g:airline_section_x = ''                        " Do not list the filetype or virtualenv in the status line
 let g:airline_section_y = 'R[%03l/%L] C[%03v]'  " Replace file encoding and file format info with file position
 let g:airline_section_z = ''                        " Do not show the default file position info
-"
-"Powerline configuration
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
 
 "==============================================================================
 "==============================================================================
