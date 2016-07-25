@@ -485,15 +485,11 @@ xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 " vim-cd to top-level of git repo
 "==============================================================================
 function Cdg()
-  let root = system('git rev-parse --top-level')
+  let root = system('git rev-parse --show-toplevel')
   cd `=root`
 endfunction
-command! Cdg call Cdg()
 
-function SortInBraces()
-  normal vi{:sort<CR>
-endfunction
-command! SortInBraces call SortInBraces()
+command! Cdg :call Cdg()
 
 "==============================================================================
 " Use @r as storage
