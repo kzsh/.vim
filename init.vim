@@ -235,6 +235,15 @@ if has('nvim')
 
   autocmd FileType javascript :call NeomakeESlintChecker()
 
+  let g:neomake_javascript_checknewline_maker = {
+      \ 'errorformat': '%f:%l: %m',
+      \ }
+  let g:neomake_scss_checknewline_maker = {
+      \ 'errorformat': '%f:%l: %m',
+      \ }
+  let g:neomake_sass_checknewline_maker = {
+      \ 'errorformat': '%f:%l: %m',
+      \ }
   "let g:neomake_scss_sasslint_maker = ['sass-lint']
 
   let g:neomake_javascript_enabled_makers = ['eslint', 'jshint', 'checknewline']
