@@ -576,3 +576,9 @@ nmap <Leader>ff :call Agi()<CR>
 nmap <Leader>fc :call Ag()<CR>
 nmap <Leader>fw :call Wag()<CR>
 nmap <Leader>fwi :call Wagi()<CR>
+
+"==============================================================================
+" Go to next/prev error
+"==============================================================================
+map <Leader>n :lnext<CR>
+map <Leader>p :lprev<CR>
