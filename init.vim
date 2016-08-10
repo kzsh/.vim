@@ -246,7 +246,7 @@ if has('nvim')
       \ }
   "let g:neomake_scss_sasslint_maker = ['sass-lint']
 
-  let g:neomake_javascript_enabled_makers = ['eslint', 'jshint', 'checknewline']
+  let g:neomake_javascript_enabled_makers = ['eslint', 'checknewline']
   let g:neomake_ruby_enabled_makers = ['rubocop']
   "let g:neomake_scss_enabled_makers = ['sasslint']
   let g:neomake_scss_enabled_makers = ['checknewline']
