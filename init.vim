@@ -303,8 +303,8 @@ let g:ctrlp_custom_ignore = {
 
 "map <Leader>fs :CtrlPTag<CR>
 
-map <Leader>fd :CtrlPCurFile<CR>
-map <Leader>fb :CtrlPBuffer<CR>
+map <Leader>bd :CtrlPCurFile<CR>
+map <Leader>bb :CtrlPBuffer<CR>
 
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
