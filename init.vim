@@ -548,18 +548,50 @@ nmap <Leader>ll :call ToggleCommentColors()<CR>
 " Highlight match in results in quickfix
 let g:ag_highlight=1
 
+let g:CASE_SENSITIVE=1
+let g:CASE_INSENSITIVE=0
+let g:AG_IGNORE_EXTENSION_LIST=['css']
+
 " alias :ag to :Ag
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
 
 
-function! Ag()
-  let search = input('Search: ')
-  execute 'Ag' '"' . search . '" --ignore=*.css'
+function GetAgInput()
+  return = input('Search: ')
 endfunction
 
-function! Agi()
+function! GenerateIgnoreString(string)
+  return '--ignore=*.' . a:string
+endfunction
+
+function! Ag(search, target, isSensitive, ignoreTypes)
+
+  if a:target == 'buffer'
+    let executable = 'AgBuffer'
+  else
+    let executable = 'Ag'
+  endif
+
+  if a:isSensitive
+    let l:execution = l:executable . '-i'
+  else
+    let l:execution = l:executable
+  endif
+
+  let ignoreList = Mapped(function("GenerateIgnoreString"), a:ignoreTypes)
+  let ignoreString = join(ignoreList, ' ')
+
+  execute l:execution . ' "' . a:search . '" ' . ignoreString
+endfunction
+
+function! SearchAg(target, isSensitive)
   let search = input('Search: ')
-  execute 'Ag' '-i "' . search . '" --ignore=*.css'
+  call Ag(l:search, a:target, a:isSensitive, g:AG_IGNORE_EXTENSION_LIST)
+endfunction
+
+function! SearchWordAg(target, isSensitive)
+  let search = expand("<cword>")
+  call Ag(l:search, a:target, a:isSensitive, g:AG_IGNORE_EXTENSION_LIST)
 endfunction
 
 function! Wag()
@@ -572,10 +604,12 @@ function! Wagi()
   execute 'Ag' '-i "' . wordUnderCursor . '" --ignore=*.css'
 endfunction
 
-nmap <Leader>ff :call Agi()<CR>
-nmap <Leader>fc :call Ag()<CR>
-nmap <Leader>fw :call Wag()<CR>
-nmap <Leader>fwi :call Wagi()<CR>
+nmap <Leader>ff :call SearchAg('filesystem', g:CASE_INSENSITIVE)<CR>
+nmap <Leader>fc :call SearchAg('filesystem', g:CASE_SENSITIVE)<CR>
+nmap <Leader>fw :call SearchWordAg('filesystem', g:CASE_SENSITIVE)<CR>
+nmap <Leader>fwi :call SearchWordAg('filesystem', g:CASE_INSENSITIVE)<CR>
+nmap <Leader>fb :call SearchWordAg('buffer', g:CASE_SENSITIVE)<CR>
+nmap <Leader>fbi :call SearchWordAg('buffer', g:CASE_INSENSITIVE)<CR>
 
 "==============================================================================
 " Go to next/prev error
