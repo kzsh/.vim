@@ -571,7 +571,7 @@ function! Ag(search, target, isSensitive, ignoreTypes)
   endif
 
   if a:isSensitive
-    let l:execution = l:executable . '-i'
+    let l:execution = l:executable . ' -i'
   else
     let l:execution = l:executable
   endif
