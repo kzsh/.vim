@@ -84,50 +84,48 @@ colorscheme monokai
 " Load Plugins
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
-Plug 'https://github.com/jlanzarotta/bufexplorer.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/tpope/vim-git.git'
-Plug 'https://github.com/scrooloose/nerdtree.git'
-
-Plug 'https://github.com/tpope/vim-commentary'
-Plug 'https://github.com/majutsushi/tagbar.git'
-Plug 'https://github.com/rking/ag.vim.git'
-Plug 'https://github.com/airblade/vim-gitgutter.git'
-Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
-Plug 'https://github.com/Valloric/YouCompleteMe.git'
-Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
-Plug 'https://github.com/mattn/emmet-vim.git', {'for': ['html','html5','jsx', 'javascript']}
-Plug 'https://github.com/tpope/vim-unimpaired.git'
-Plug 'https://github.com/tpope/vim-surround.git'
-Plug 'https://github.com/editorconfig/editorconfig-vim.git'
-Plug 'https://github.com/mustache/vim-mustache-handlebars.git', { 'for': 'handlebars' }
-Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
-Plug 'https://github.com/othree/yajs.vim', { 'for': 'javascript' }
-Plug 'https://github.com/pangloss/vim-javascript.git', { 'for': 'javascript' }
-Plug 'https://github.com/mxw/vim-jsx.git', { 'for': 'jsx' }
-Plug 'https://github.com/rust-lang/rust.vim.git', { 'for': 'rust' }
-
-Plug 'https://github.com/tmhedberg/matchit.git'
-Plug 'https://github.com/mhinz/vim-startify'
-Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/JarrodCTaylor/vim-shell-executor'
-Plug 'https://github.com/osyo-manga/vim-over'
+Plug 'https://github.com/Valloric/YouCompleteMe.git'
+Plug 'https://github.com/airblade/vim-gitgutter.git'
+Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
+Plug 'https://github.com/csscomb/vim-csscomb.git'
+Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+Plug 'https://github.com/digitaltoad/vim-jade.git', { 'for': 'jade'}
+Plug 'https://github.com/editorconfig/editorconfig-vim.git'
+Plug 'https://github.com/fatih/vim-go.git', { 'for': 'go' }
+Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
+Plug 'https://github.com/jlanzarotta/bufexplorer.git'
+Plug 'https://github.com/kchmck/vim-coffee-script.git', { 'for': 'coffee' }
 Plug 'https://github.com/lrvick/Conque-Shell'
 Plug 'https://github.com/majutsushi/tagbar'
+Plug 'https://github.com/majutsushi/tagbar.git'
+Plug 'https://github.com/mattn/emmet-vim.git', {'for': ['html','html5','jsx', 'javascript']}
+Plug 'https://github.com/mhinz/vim-startify'
+Plug 'https://github.com/mustache/vim-mustache-handlebars.git', { 'for': 'handlebars' }
+Plug 'https://github.com/mxw/vim-jsx.git', { 'for': 'jsx' }
 Plug 'https://github.com/nathanaelkane/vim-indent-guides'
-Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/noprompt/vim-yardoc.git', { 'for': 'ruby' }
+Plug 'https://github.com/osyo-manga/vim-over'
+Plug 'https://github.com/othree/yajs.vim', { 'for': 'javascript' }
+Plug 'https://github.com/pangloss/vim-javascript.git', { 'for': 'javascript' }
+Plug 'https://github.com/rking/ag.vim.git'
+Plug 'https://github.com/rust-lang/rust.vim.git', { 'for': 'rust' }
+Plug 'https://github.com/tmhedberg/matchit.git'
+Plug 'https://github.com/tpope/vim-commentary'
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/tpope/vim-git.git'
 Plug 'https://github.com/tpope/vim-rails.git', { 'for': 'rails' }
-Plug 'https://github.com/csscomb/vim-csscomb.git'
+Plug 'https://github.com/tpope/vim-repeat.git'
+Plug 'https://github.com/tpope/vim-speeddating.git'
+Plug 'https://github.com/tpope/vim-surround.git'
+Plug 'https://github.com/tpope/vim-unimpaired.git'
+Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'https://github.com/wellle/targets.vim'
+"Plug 'https://github.com/scrooloose/nerdtree.git'
 "Plug 'https://github.com/moll/vim-node.git'
 "Plug 'https://github.com/darvelo/vim-systemd.git'
 "Plug 'https://github.com/marijnh/tern_for_vim.git'
-Plug 'https://github.com/tpope/vim-speeddating.git'
-Plug 'https://github.com/tpope/vim-repeat.git'
 "Plug 'https://github.com/tfnico/vim-gradle'
-Plug 'https://github.com/kchmck/vim-coffee-script.git', { 'for': 'coffee' }
-Plug 'https://github.com/fatih/vim-go.git', { 'for': 'go' }
-Plug 'https://github.com/digitaltoad/vim-jade.git', { 'for': 'jade'}
 
 if has('nvim')
   Plug 'https://github.com/neomake/neomake.git'
