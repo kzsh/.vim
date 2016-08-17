@@ -135,7 +135,6 @@ endif
 
 call plug#end()
 
-
 "==============================================================================
 " configure omnicomplete settings
 "==============================================================================
@@ -177,7 +176,6 @@ autocmd FileType handlebars setlocal commentstring={{!%s}}
 
 au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mkd set filetype=markdown
-
 
 let g:jsx_ext_required = 0
 
@@ -518,7 +516,6 @@ endfunction
 " NB: this supports "rp that replaces the selection by the contents of @r
 vnoremap <silent> <expr> p <sid>Repl()
 
-
 "==============================================================================
 " Remove consecutive empty lines
 "==============================================================================
@@ -552,7 +549,6 @@ let g:AG_IGNORE_EXTENSION_LIST=['css']
 
 " alias :ag to :Ag
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
-
 
 function GetAgInput()
   return = input('Search: ')
