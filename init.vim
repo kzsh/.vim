@@ -469,10 +469,14 @@ nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
 "==============================================================================
+" Rename tmux window when vim changes buffers
 "==============================================================================
 autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " .   expand("%:t"))
 autocmd VimLeave * call system("tmux setw automatic-rename")
 
+"==============================================================================
+" Map keys to running tests on the current buffer
+"==============================================================================
 autocmd BufNewFile,BufRead *.js nnoremap <Leader>tt :!mocha %<CR>
 autocmd BufNewFile,BufRead *.rb nnoremap <Leader>tt :!rspec %<CR>
 
@@ -559,7 +563,6 @@ function! GenerateIgnoreString(string)
 endfunction
 
 function! Ag(search, target, isSensitive, ignoreTypes)
-
   if a:target == 'buffer'
     let executable = 'AgBuffer'
   else
