@@ -85,40 +85,40 @@ colorscheme monokai
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
 Plug 'JarrodCTaylor/vim-shell-executor'
-Plug 'Valloric/YouCompleteMe.git'
-Plug 'airblade/vim-gitgutter.git'
-Plug 'christoomey/vim-tmux-navigator.git'
-Plug 'csscomb/vim-csscomb.git'
-Plug 'ctrlpvim/ctrlp.vim.git'
-Plug 'digitaltoad/vim-jade.git', { 'for': 'jade'}
-Plug 'editorconfig/editorconfig-vim.git'
-Plug 'fatih/vim-go.git', { 'for': 'go' }
-Plug 'gorodinskiy/vim-coloresque.git'
-Plug 'jlanzarotta/bufexplorer.git'
-Plug 'kchmck/vim-coffee-script.git', { 'for': 'coffee' }
+Plug 'Valloric/YouCompleteMe'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'csscomb/vim-csscomb'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
+Plug 'editorconfig/editorconfig-vim'
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'lrvick/Conque-Shell'
 Plug 'majutsushi/tagbar'
-Plug 'majutsushi/tagbar.git'
-Plug 'mattn/emmet-vim.git', {'for': ['html','html5','jsx', 'javascript']}
+Plug 'majutsushi/tagbar'
+Plug 'mattn/emmet-vim', {'for': ['html','html5','jsx', 'javascript']}
 Plug 'mhinz/vim-startify'
-Plug 'mustache/vim-mustache-handlebars.git', { 'for': 'handlebars' }
-Plug 'mxw/vim-jsx.git', { 'for': 'jsx' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'handlebars' }
+Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'noprompt/vim-yardoc.git', { 'for': 'ruby' }
+Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'osyo-manga/vim-over'
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript.git', { 'for': 'javascript' }
-Plug 'rking/ag.vim.git'
-Plug 'rust-lang/rust.vim.git', { 'for': 'rust' }
-Plug 'tmhedberg/matchit.git'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'rking/ag.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive.git'
-Plug 'tpope/vim-git.git'
-Plug 'tpope/vim-rails.git', { 'for': 'rails' }
-Plug 'tpope/vim-repeat.git'
-Plug 'tpope/vim-speeddating.git'
-Plug 'tpope/vim-surround.git'
-Plug 'tpope/vim-unimpaired.git'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-rails', { 'for': 'rails' }
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'wellle/targets.vim'
 "Plug 'scrooloose/nerdtree.git'
@@ -128,9 +128,9 @@ Plug 'wellle/targets.vim'
 "Plug 'tfnico/vim-gradle'
 
 if has('nvim')
-  Plug 'neomake/neomake.git'
+  Plug 'neomake/neomake'
 else
-  Plug 'scrooloose/syntastic.git'
+  Plug 'scrooloose/syntastic'
 endif
 
 call plug#end()
