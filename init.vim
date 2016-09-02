@@ -204,6 +204,10 @@ if has('nvim')
     endif
 
     let b:neomake_javascript_eslint_exe = l:eslint
+
+    " Work-around for bug:
+    " https://github.com/neomake/neomake/issues/492
+    let b:neomake_jsx_eslint_exe = l:eslint
   endfunction
 
   function! NeomakeSasslintChecker()
@@ -228,9 +232,12 @@ if has('nvim')
 
   autocmd FileType scss :call NeomakeSasslintChecker()
 
-  autocmd FileType javascript :call NeomakeESlintChecker()
+  autocmd FileType javascript.jsx :call NeomakeESlintChecker()
 
   let g:neomake_javascript_checknewline_maker = {
+      \ 'errorformat': '%f:%l: %m',
+      \ }
+  let g:neomake_jsx_checknewline_maker = {
       \ 'errorformat': '%f:%l: %m',
       \ }
   let g:neomake_scss_checknewline_maker = {
@@ -242,6 +249,7 @@ if has('nvim')
   "let g:neomake_scss_sasslint_maker = ['sass-lint']
 
   let g:neomake_javascript_enabled_makers = ['eslint', 'checknewline']
+  let g:neomake_jsx_enabled_makers = ['checknewline']
   let g:neomake_ruby_enabled_makers = ['rubocop']
   "let g:neomake_scss_enabled_makers = ['sasslint']
   let g:neomake_scss_enabled_makers = ['checknewline']
