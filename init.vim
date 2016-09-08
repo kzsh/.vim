@@ -175,8 +175,6 @@ autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
 " vim-commentary settings
 autocmd FileType handlebars setlocal commentstring={{!%s}}
 
-au BufNewFile,BufRead *.md set filetype=markdown
-au BufNewFile,BufRead *.mkd set filetype=markdown
 
 let g:jsx_ext_required = 0
 
@@ -328,8 +326,14 @@ let g:EclimFileTypeValidate = 0
 "==============================================================================
 " Set special char highlighting parames
 "==============================================================================
-hi SpecialKey term=bold cterm=bold ctermfg=black guifg=#000
-hi NonText term=bold cterm=bold ctermfg=black  guifg=#000
+hi SpecialKey term=bold cterm=bold ctermfg=16 guifg=#000
+hi NonText term=bold cterm=bold ctermfg=16 guifg=#000
+
+au BufNewFile,BufRead *.md set filetype=markdown
+au BufNewFile,BufRead *.mkd set filetype=markdown
+
+au BufRead,BufNewFile Podfile* set filetype=ruby
+au BufRead,BufNewFile *.jbuilder set filetype=ruby
 
 "==============================================================================
 " Emmet  (Zen Coding) configuration
