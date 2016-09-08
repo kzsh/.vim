@@ -78,7 +78,8 @@ set shiftround
 
 "set color scheme
 set background=dark
-colorscheme monokai
+let g:solarized_termcolors=16
+colorscheme solarized
 
 "==============================================================================
 " Load Plugins
