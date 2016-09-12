@@ -249,7 +249,7 @@ if has('nvim')
   "let g:neomake_scss_sasslint_maker = ['sass-lint']
 
   let g:neomake_javascript_enabled_makers = ['eslint', 'checknewline']
-  let g:neomake_jsx_enabled_makers = ['checknewline']
+  let g:neomake_jsx_enabled_makers = ['eslint', 'checknewline']
   let g:neomake_ruby_enabled_makers = ['rubocop']
   "let g:neomake_scss_enabled_makers = ['sasslint']
   let g:neomake_scss_enabled_makers = ['checknewline']
@@ -279,7 +279,7 @@ if !has('nvim')
   "let g:syntastic_quiet_messages = {'level': 'warnings'}
   let g:syntastic_error_symbol='✗'
   let g:syntastic_warning_symbol='⚠'
-  let g:syntastic_javascript_checkers=['eslint']
+  let g:syntastic_javascript_checkers=['eslint', 'checknewline']
   let g:syntastic_ruby_checkers=['rubocop']
   let g:syntastic_css_checkers=['csslint']
 
