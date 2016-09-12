@@ -480,6 +480,7 @@ endfunction
 "==============================================================================
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
+nmap te :tabe<CR>
 
 "==============================================================================
 " Rename tmux window when vim changes buffers
