@@ -578,9 +578,9 @@ endfunction
 
 function! Ag(search, target, isSensitive, ignoreTypes)
   if a:target == 'buffer'
-    let executable = 'AgBuffer'
+    let executable = 'AgBuffer!'
   else
-    let executable = 'Ag'
+    let executable = 'Ag!'
   endif
 
   if a:isSensitive
