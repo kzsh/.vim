@@ -597,6 +597,7 @@ endfunction
 
 function! SearchAg(target, isSensitive)
   let search = input('Search: ')
+  if empty(l:search) | return | endif
   call Ag(l:search, a:target, a:isSensitive, g:AG_IGNORE_EXTENSION_LIST)
 endfunction
 
