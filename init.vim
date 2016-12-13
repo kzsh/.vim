@@ -617,11 +617,11 @@ function! Wagi()
   execute 'Ag' '-i "' . wordUnderCursor . '" --ignore=*.css'
 endfunction
 
-nmap <Leader>ff :call SearchAg('filesystem', g:CASE_INSENSITIVE)<CR>
-nmap <Leader>fc :call SearchAg('filesystem', g:CASE_SENSITIVE)<CR>
+nmap <Leader>ff :call SearchAg('filesystem')<CR>
+nmap <Leader>fc :call SearchAg('filesystem')<CR>
 nmap <Leader>fw :call SearchWordAg('filesystem', g:CASE_SENSITIVE)<CR>
 nmap <Leader>fwi :call SearchWordAg('filesystem', g:CASE_INSENSITIVE)<CR>
-nmap <Leader>fb :call SearchAg('buffer', g:CASE_SENSITIVE)<CR>
+nmap <Leader>fb :call SearchAg('buffer')<CR>
 nmap <Leader>fbi :call SearchWordAg('buffer', g:CASE_INSENSITIVE)<CR>
 
 "==============================================================================
