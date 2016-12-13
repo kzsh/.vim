@@ -595,10 +595,16 @@ function! Ag(search, target, isSensitive, ignoreTypes)
   execute l:execution . ' "' . a:search . '" ' . ignoreString
 endfunction
 
-function! SearchAg(target, isSensitive)
+function! SearchAg(target)
   let search = input('Search: ')
   if empty(l:search) | return | endif
-  call Ag(l:search, a:target, a:isSensitive, g:AG_IGNORE_EXTENSION_LIST)
+
+  let l:has_caps = matchstr(search, '[A-Z]\+')
+  if strlen(l:has_caps) > 0
+    call Ag(l:search, a:target, g:CASE_SENSITIVE, g:AG_IGNORE_EXTENSION_LIST)
+  else
+    call Ag(l:search, a:target, g:CASE_INSENSITIVE, g:AG_IGNORE_EXTENSION_LIST)
+  endif
 endfunction
 
 function! SearchWordAg(target, isSensitive)
