@@ -99,20 +99,21 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'lrvick/Conque-Shell'
 Plug 'majutsushi/tagbar'
-Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html','html5','jsx', 'javascript']}
 Plug 'mhinz/vim-startify'
-Plug 'mustache/vim-mustache-handlebars', { 'for': 'handlebars' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'osyo-manga/vim-over'
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'rhysd/committia.vim'
 Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-repeat'
@@ -121,11 +122,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'wellle/targets.vim'
-"Plug 'scrooloose/nerdtree'
-"Plug 'moll/vim-node'
-"Plug 'darvelo/vim-systemd'
-"Plug 'marijnh/tern_for_vim'
-"Plug 'tfnico/vim-gradle'
 
 if has('nvim')
   Plug 'neomake/neomake'
