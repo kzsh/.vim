@@ -296,7 +296,7 @@ let g:startify_custom_indices = ["f", "d", "s", "a", "v", "c", "x", "z"]
 let g:ctrlp_reuse_window = 'startify'
 
 " don't re-perform the search after every keystroke
-let g:ctrlp_lazy_update = 1
+let g:ctrlp_lazy_update = 80
 
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$',
