@@ -367,6 +367,11 @@ map <Leader>rs :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bun
 map <Leader>rr :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bundle exec rubocop %; cd $CURR_DIR<cr>
 
 "==============================================================================
+" Return to previous buffer with Tab
+"==============================================================================
+:nnoremap  <special>   <Tab>  <C-^>
+
+"==============================================================================
 " Resize panes with arrow keys and shift
 "==============================================================================
 nnoremap <Left> :vertical resize -1<CR>
