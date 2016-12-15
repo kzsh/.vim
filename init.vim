@@ -481,9 +481,9 @@ endfunction
 "==============================================================================
 " Shortcuts for manipulating tabs
 "==============================================================================
-nmap t% :tabedit %<CR>
-nmap td :tabclose<CR>
-nmap te :tabe<CR>
+nmap <Leader>t% :tabedit %<CR>
+nmap <Leader>td :tabclose<CR>
+nmap <Leader>te :tabe<CR>
 
 "==============================================================================
 " Rename tmux window when vim changes buffers
