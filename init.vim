@@ -120,6 +120,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'csscomb/vim-csscomb'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
+Plug 'duggiefresh/vim-easydir'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'gorodinskiy/vim-coloresque'
