@@ -632,10 +632,10 @@ function! SearchAg(target)
   if empty(l:search) | return | endif
 
   let l:has_caps = matchstr(search, '[A-Z]\+')
-  if strlen(l:has_caps) > 0
-    call Ag(l:search, a:target, g:CASE_SENSITIVE, g:AG_IGNORE_EXTENSION_LIST)
-  else
+  if strlen(l:has_caps) > -1
     call Ag(l:search, a:target, g:CASE_INSENSITIVE, g:AG_IGNORE_EXTENSION_LIST)
+  else
+    call Ag(l:search, a:target, g:CASE_SENSITIVE, g:AG_IGNORE_EXTENSION_LIST)
   endif
 endfunction
 
