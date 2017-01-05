@@ -67,7 +67,10 @@ if has('vim_starting')
   let mapleader=" "
 
   if has('nvim')
-    nmap <BS> <C-W>h
+    " Get around Ctrl-h sending backspace
+    " No longer necessary after fixing terminfo: infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti && tic && tic $TERM.ti
+    "nmap <BS> <C-W>h
+
     set mouse=""
   endif
 
