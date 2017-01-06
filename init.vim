@@ -150,6 +150,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'wellle/targets.vim'
 
