@@ -47,7 +47,7 @@ if has('vim_starting')
   set noswapfile
 
   set showbreak=↪\
-  set scrolloff=16
+  set scrolloff=8
   set sidescrolloff=5
 
   set wildmenu
