@@ -144,7 +144,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive', { 'on': ['Glog', 'GBlame', 'Gblame', 'Gbrowse', 'Gcommit', 'Gdiff', 'Gedit', 'Gfetch', 'Ggrep'] }
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
