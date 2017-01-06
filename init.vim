@@ -94,7 +94,6 @@ set number " display line numbers
 "DO NOT SET t_Co
 "set t_Co=256
 " COLORS
-set background=dark " set background color style
 set backspace=indent,eol,start " backspace will traverse indent, eol, start
 set foldmethod=syntax
 set foldlevelstart=1
@@ -107,8 +106,7 @@ set laststatus=2 " display status line always (useful with Powerline plugin)
 " http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
 set shiftround
 
-"set color scheme
-set background=dark
+set background=dark " set background color style
 let g:solarized_termcolors=16
 colorscheme solarized
 
