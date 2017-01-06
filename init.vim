@@ -116,28 +116,28 @@ colorscheme solarized
 " Load Plugins
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
-Plug 'JarrodCTaylor/vim-shell-executor'
-Plug 'Valloric/YouCompleteMe'
+Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelection' ] }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'csscomb/vim-csscomb'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
+Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlPBookmarkDir', 'CtrlPBookmarkDirAdd', 'CtrlPBufTag', 'CtrlPBufTagAll', 'CtrlPBuffer', 'CtrlPChange', 'CtrlPChangeAll', 'CtrlPClearAllCaches', 'CtrlPClearCache', 'CtrlPCurFile', 'CtrlPCurWD', 'CtrlPDir', 'CtrlPLastMode', 'CtrlPLine', 'CtrlPMRUFiles', 'CtrlPMixed', 'CtrlPQuickfix', 'CtrlPRTS', 'CtrlPLine', 'CtrlPMRUFiles', 'CtrlPMixed', 'CtrlPQuickfix', 'CtrlPRTS', 'CtrlPRoot', 'CtrlPTag', 'CtrlPUndo'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
 Plug 'duggiefresh/vim-easydir'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'gorodinskiy/vim-coloresque'
-Plug 'jlanzarotta/bufexplorer'
+Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
+Plug 'jlanzarotta/bufexplorer', { 'on': ['BufExplorer', 'BufExplorerHorizontalSplit', 'BufExplorerVerticalSplit'] }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'lrvick/Conque-Shell'
-Plug 'majutsushi/tagbar'
-Plug 'mattn/emmet-vim', {'for': ['html','html5','jsx', 'javascript']}
+Plug 'lrvick/Conque-Shell', { 'on': ['ConqueTerm', 'ConqueTermSplit', 'ConqueTermTab', 'ConqueTermVSplit'] }
+Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
+Plug 'mattn/emmet-vim', { 'for': ['html','html5','jsx', 'javascript'] }
 Plug 'mhinz/vim-startify'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
-Plug 'osyo-manga/vim-over'
+Plug 'osyo-manga/vim-over', { 'on': ['OverCommandLine', 'OverCommandLineMap', 'OverCommandLineNoremap', 'OverCommandLineUnmap'] }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'rhysd/committia.vim'
@@ -146,7 +146,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive', { 'on': ['Glog', 'GBlame', 'Gblame', 'Gbrowse', 'Gcommit', 'Gdiff', 'Gedit', 'Gfetch', 'Ggrep'] }
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
