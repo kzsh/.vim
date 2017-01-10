@@ -66,7 +66,7 @@ if has('vim_starting')
   " default to the system clipboard
   set clipboard=unnamed " set the clipboard to the X window clipboard
 
-  let mapleader=" "
+  let g:mapleader = "\<Space>"
 
   if has('nvim')
     " Get around Ctrl-h sending backspace
