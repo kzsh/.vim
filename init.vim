@@ -1,3 +1,5 @@
+"Vars
+let g:kzsh#vim_dir = '~/.config/nvim'
 " ============================================================================
 " Python setup
 " Skips if python is not installed in a pyenv virtualenv
@@ -67,6 +69,13 @@ if has('vim_starting')
   set clipboard=unnamed " set the clipboard to the X window clipboard
 
   let g:mapleader = "\<Space>"
+
+  " undo files
+  " double slash means create dir structure to mirror file's path
+  set undofile
+  set undolevels=1000
+  set undoreload=10000
+  execute 'set undodir=' . g:kzsh#vim_dir . '/.tmp/undo//'
 
   if has('nvim')
     " Get around Ctrl-h sending backspace
