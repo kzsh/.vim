@@ -33,6 +33,8 @@ if has('vim_starting')
     set nocompatible
   endif
 
+  set visualbell t_vb=
+
   set smartindent
   set autoindent
   set tabstop=2
