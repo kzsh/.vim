@@ -179,6 +179,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 " Syntax highlighting configuration
 "==============================================================================
 syntax enable
+set synmaxcol=512 " syntax highlight long lines
+
 "http://vim.wikia.com/wiki/Fix_syntax_highlighting
 "recalculate syntax highlighting from the start of the file on change
 autocmd BufEnter * :syntax sync fromstart
