@@ -360,7 +360,7 @@ if !executable('ag')
 endif
 
 "==============================================================================
-" EdutorConfig configuration
+" EditorConfig configuration
 "==============================================================================
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 "
