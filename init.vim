@@ -415,6 +415,11 @@ map <Leader>rr :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bun
 "==============================================================================
 :nnoremap  <special>   <Tab>  <C-^>
 
+"==============================================================================
+" remap to-top and to-bottom to be to-left and to-right
+"==============================================================================
+nnoremap H ^
+nnoremap L $
 
 "==============================================================================
 " Explicitly bind bufexplorer to command, so that plug can lazy load it
