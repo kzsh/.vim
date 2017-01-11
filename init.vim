@@ -694,3 +694,8 @@ function! Mapped(fn, l)
   call map(new_list, string(a:fn) . '(v:val)')
   return new_list
 endfunction
+
+"==============================================================================
+" VimWiki
+"==============================================================================
+let g:vimwiki_list = [{'path': '~/KB/', 'path_html': '~/KB_html/'}]
