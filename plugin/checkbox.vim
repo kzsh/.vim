@@ -23,8 +23,8 @@ fu! checkbox#ToggleCB()
 		let line = substitute(line, "\\[ \\]", "[X]", "")
 	elseif(match(line, "\\[X\\]") != -1)
 		let line = substitute(line, "\\[X\\]", "[ ]", "")
-	elseif(match(line, "\\[SKIP\\]") != -1)
-		let line = substitute(line, "\\[SKIP\\]", "[X]", "")
+	elseif(match(line, "\\[S\\]") != -1)
+		let line = substitute(line, "\\[S\\]", "[X]", "")
 	endif
 
 	call setline('.', line)
@@ -34,11 +34,11 @@ fu! checkbox#ToggleCBSkip()
 	let line = getline('.')
 
 	if(match(line, "\\[ \\]") != -1)
-		let line = substitute(line, "\\[ \\]", "[SKIP]", "")
-	elseif(match(line, "\\[SKIP\\]") != -1)
-		let line = substitute(line, "\\[SKIP\\]", "[ ]", "")
+		let line = substitute(line, "\\[ \\]", "[S]", "")
+	elseif(match(line, "\\[S\\]") != -1)
+		let line = substitute(line, "\\[S\\]", "[ ]", "")
 	elseif(match(line, "\\[X\\]") != -1)
-		let line = substitute(line, "\\[X\\]", "[SKIP]", "")
+		let line = substitute(line, "\\[X\\]", "[S]", "")
 	endif
 
 	call setline('.', line)
