@@ -446,7 +446,7 @@ nnoremap <S-Up> :resize -10<CR>
 nnoremap <S-Down> :resize +10<CR>
 
 "==============================================================================
-" Double escape in term leaves insert mode
+" Alternate escape sequences terminal emulator (terminal-emulator-input)
 "==============================================================================
 tnoremap <Leader><Esc> <C-\><C-n>
 
