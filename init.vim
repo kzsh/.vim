@@ -412,7 +412,7 @@ map <Leader>rr :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bun
 "==============================================================================
 " Return to previous buffer with Tab
 "==============================================================================
-:nnoremap  <special>   <Tab>  <C-^>
+nnoremap  <special>   <Tab>  <C-^>
 
 "==============================================================================
 " Swap backtic and single quote
