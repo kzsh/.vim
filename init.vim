@@ -149,7 +149,6 @@ Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'osyo-manga/vim-over', { 'on': ['OverCommandLine', 'OverCommandLineMap', 'OverCommandLineNoremap', 'OverCommandLineUnmap'] }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'rhysd/committia.vim'
 Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tpope/vim-abolish'
