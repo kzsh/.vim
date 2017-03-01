@@ -158,8 +158,8 @@ Plug 'tpope/vim-git', { 'for': 'gitconfig' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
+Plug 'vimwiki/vimwiki'
 
 if has('nvim')
   Plug 'neomake/neomake'
