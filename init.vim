@@ -490,7 +490,7 @@ command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 " Configure YouCompleteMe syntax completion engine
 "==============================================================================
 "YouCompleteMe Configuration
-let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_min_num_of_chars_for_completion = 3
 
 "==============================================================================
 " Configure vim-airline
