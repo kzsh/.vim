@@ -126,6 +126,7 @@ colorscheme solarized
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
 Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelection'] }
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
