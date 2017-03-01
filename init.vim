@@ -218,7 +218,7 @@ let g:jsx_ext_required = 0
 " NeoMake Configuration
 "==============================================================================
 if has('nvim')
-  autocmd! BufReadPost,BufWritePost,InsertLeave * Neomake
+  autocmd! BufReadPost,BufWritePost * Neomake
 
   let g:neomake_logfile = '/tmp/neomake_error.log'
 
