@@ -129,6 +129,7 @@ Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelect
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'codeindulgence/vim-tig'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBookmarkDir', 'CtrlPBookmarkDirAdd', 'CtrlPBufTag', 'CtrlPBufTagAll', 'CtrlPBuffer', 'CtrlPChange', 'CtrlPChangeAll', 'CtrlPClearAllCaches', 'CtrlPClearCache', 'CtrlPCurFile', 'CtrlPCurWD', 'CtrlPDir', 'CtrlPLastMode', 'CtrlPLine', 'CtrlPMRUFiles', 'CtrlPMixed', 'CtrlPQuickfix', 'CtrlPRTS', 'CtrlPRoot', 'CtrlPTag', 'CtrlPUndo'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
@@ -709,3 +710,8 @@ endfunction
 " VimWiki
 "==============================================================================
 let g:vimwiki_list = [{'path': '~/kb/', 'path_html': '~/kb_html/'}]
+"==============================================================================
+" Vim Tig
+"==============================================================================
+map <Leader>vt :Tig<Cr>
+map <Leader>vT :Tig!<Cr>
