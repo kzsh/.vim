@@ -138,7 +138,6 @@ Plug 'duggiefresh/vim-easydir'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
-Plug 'jlanzarotta/bufexplorer', { 'on': ['BufExplorer', 'BufExplorerHorizontalSplit', 'BufExplorerVerticalSplit'] }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'lrvick/Conque-Shell', { 'on': ['ConqueTerm', 'ConqueTermSplit', 'ConqueTermTab', 'ConqueTermVSplit'] }
 Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
@@ -335,28 +334,23 @@ let g:startify_custom_indices = ["f", "d", "s", "a", "v", "c", "x", "z"]
 "==============================================================================
 " CtrlP
 "==============================================================================
+nnoremap <silent> <C-p> :CtrlP<CR>
+"map <Leader>fs :CtrlPTag<CR>
+nnoremap <Leader>bd :CtrlPCurFile<CR>
+nnoremap <Leader>be :CtrlPBuffer<CR>
+
+
+let g:ctrlp_lazy_update = 60 " don't re-perform the search after every keystroke
 let g:ctrlp_reuse_window = 'startify'
 
-" don't re-perform the search after every keystroke
-let g:ctrlp_lazy_update = 80
+let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$' }
 
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$',
-      \ }
-
-"map <Leader>fs :CtrlPTag<CR>
-
-map <Leader>bd :CtrlPCurFile<CR>
-map <Leader>bb :CtrlPBuffer<CR>
 
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
 if executable('ag')
-  let g:ctrlp_user_command =
-        \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
-endif
-
-if !executable('ag')
+  let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+else
   let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
 endif
 
@@ -427,12 +421,6 @@ nnoremap ` '
 "==============================================================================
 nnoremap H ^
 nnoremap L $
-
-"==============================================================================
-" Explicitly bind bufexplorer to command, so that plug can lazy load it
-"==============================================================================
-nnoremap <silent> <Leader>be :BufExplorer<CR>
-nnoremap <silent> <C-p> :CtrlP<CR>
 
 "==============================================================================
 " Resize panes with arrow keys and shift
