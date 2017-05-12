@@ -708,5 +708,5 @@ map <Leader>vT :Tig!<CR>
 "==============================================================================
 " Vim Fugitive
 "==============================================================================
-map <Leader>vb :Gblame<Cr>
-map <Leader>vl :Glog<Cr>
+map <Leader>vb :Gblame<CR>
+map <Leader>vl :Glog<CR>
