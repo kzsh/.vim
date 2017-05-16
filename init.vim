@@ -158,7 +158,7 @@ Plug 'lrvick/Conque-Shell', { 'on': ['ConqueTerm', 'ConqueTermSplit', 'ConqueTer
 Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
 Plug 'mattn/emmet-vim', { 'for': ['html','html5','jsx', 'javascript'] }
 Plug 'mhinz/vim-startify'
-Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
