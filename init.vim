@@ -117,10 +117,6 @@ set laststatus=2 " display status line always (useful with Powerline plugin)
 " http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
 set shiftround
 
-set background=dark " set background color style
-let g:solarized_termcolors=16
-colorscheme solarized
-
 "==============================================================================
 " Load Plugins
 "==============================================================================
@@ -722,3 +718,7 @@ map <Leader>vl :Glog<CR>
 "==============================================================================
 noremap <Leader>gg :diffget<CR>
 noremap <Leader>gp :diffput<CR>
+
+let g:solarized_termcolors=256
+set background=dark " set background color style
+colorscheme solarized
