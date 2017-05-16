@@ -737,8 +737,19 @@ map <Leader>vl :Glog<CR>
 "==============================================================================
 " Diff shortcuts
 "==============================================================================
+
+" Toggle Vim diff on/off
+function ToggleVimDiff()
+  if &diff
+    diffoff
+  else
+    diffthis
+  endif
+endfunction
+
 noremap <Leader>gg :diffget<CR>
 noremap <Leader>gp :diffput<CR>
+nmap <Leader>gdo :exe ToggleVimDiff()<CR>
 
 let g:solarized_termcolors=256
 set background=dark " set background color style
