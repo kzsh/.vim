@@ -751,7 +751,7 @@ endfunction
 
 noremap <Leader>gg :diffget<CR>
 noremap <Leader>gp :diffput<CR>
-nmap <Leader>gdo :exe ToggleVimDiff()<CR>
+nmap <Leader>od :exe ToggleVimDiff()<CR>
 
 "==============================================================================
 " Transparent editing of gpg encrypted files.
