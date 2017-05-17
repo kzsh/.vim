@@ -70,7 +70,7 @@ if has('vim_starting')
   set hidden " only hide buffers, to preserve undo history when returning to other buffers
 
   " default to the system clipboard
-  set clipboard=unnamed " set the clipboard to the X window clipboard
+  set clipboard+=unnamedplus
 
   let g:mapleader = "\<Space>"
 
