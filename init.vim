@@ -36,6 +36,8 @@ if has('vim_starting')
   endif
 
   set visualbell t_vb=
+  filetype off
+  filetype plugin indent on
 
   set smartindent
   set autoindent
@@ -294,7 +296,6 @@ endif
 
 "==============================================================================
 "==============================================================================
-filetype plugin indent on
 
 "set the location of the clang lib
 let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
