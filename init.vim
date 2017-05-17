@@ -39,6 +39,8 @@ if has('vim_starting')
   filetype off
   filetype plugin indent on
 
+  set number " display line numbers
+  set backspace=indent,eol,start " backspace will traverse indent, eol, start
   set smartindent
   set autoindent
   set tabstop=2
@@ -48,9 +50,9 @@ if has('vim_starting')
   set noshowmode
 
   " Turn off swap files
+  set noswapfile
   set nobackup
   set nowritebackup
-  set noswapfile
 
   set showbreak=↪\
   set scrolloff=8
@@ -102,12 +104,10 @@ set path=.,**,,
 " SEARCH
 set hlsearch " highlight matches
 set incsearch " start searching as text is entered
-set number " display line numbers
 
 "DO NOT SET t_Co
 "set t_Co=256
 " COLORS
-set backspace=indent,eol,start " backspace will traverse indent, eol, start
 set foldmethod=syntax
 set foldlevelstart=1
 set nofoldenable        "dont fold by default
