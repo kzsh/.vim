@@ -121,6 +121,8 @@ set shortmess+=I " don't show splash screen
 set lazyredraw " Prevent UI from drawing during macro execution.
 set laststatus=2 " display status line always (useful with Powerline plugin)
 
+set formatoptions=qrn1
+
 " >> moves to the nearest whole tab multiple rather than just by amount == tabwidth
 " http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
 set shiftround
