@@ -35,10 +35,10 @@ if has('vim_starting')
     set nocompatible
   endif
 
-  set visualbell t_vb=
   filetype off
   filetype plugin indent on
 
+  set noerrorbells
   set number " display line numbers
   set backspace=indent,eol,start " backspace will traverse indent, eol, start
   set smartindent
