@@ -59,6 +59,8 @@ if has('vim_starting')
   set autowrite
   set autoread
 
+  set hidden " only hide buffers, to preserve undo history when returning to other buffers
+
   set showbreak=↪\
   set scrolloff=8
   set sidescrolloff=5
@@ -72,7 +74,6 @@ if has('vim_starting')
   " set timeout when looking for key combinations
   set timeoutlen=1000 ttimeoutlen=0
 
-  set hidden " only hide buffers, to preserve undo history when returning to other buffers
 
   " default to the system clipboard
   set clipboard+=unnamedplus
