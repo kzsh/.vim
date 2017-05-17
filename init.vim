@@ -41,11 +41,13 @@ if has('vim_starting')
   set noerrorbells
   set number " display line numbers
   set backspace=indent,eol,start " backspace will traverse indent, eol, start
+  set showcmd
+
   set smartindent
   set autoindent
+
   set tabstop=2
   set shiftwidth=2
-
   set expandtab
   set noshowmode
 
