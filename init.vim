@@ -56,6 +56,9 @@ if has('vim_starting')
   set nobackup
   set nowritebackup
 
+  set autowrite
+  set autoread
+
   set showbreak=↪\
   set scrolloff=8
   set sidescrolloff=5
