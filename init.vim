@@ -72,7 +72,9 @@ if has('vim_starting')
   "set showmatch " Show matching
 
   " set timeout when looking for key combinations
-  set timeoutlen=1000 ttimeoutlen=0
+  set notimeout
+  set ttimeout
+  set ttimeoutlen=10
 
 
   " default to the system clipboard
