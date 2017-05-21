@@ -80,6 +80,7 @@ if has('vim_starting')
   set completeopt=longest,menuone
 
   " default to the system clipboard
+  set clipboard=unnamed
   set clipboard+=unnamedplus
 
   let g:mapleader = "\<Space>"
