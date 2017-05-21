@@ -312,8 +312,14 @@ endif
 "==============================================================================
 "==============================================================================
 
+let s:uname = system("echo -n \"$(uname)\"")
+
 "set the location of the clang lib
-let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+if !v:shell_error && s:uname == "Linux" && !has('nvim')
+  let g:clang_library_path = '/usr/lib'
+else
+  let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+endif
 
 "Omni Complete
 
