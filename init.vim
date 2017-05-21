@@ -127,6 +127,8 @@ set laststatus=2 " display status line always (useful with Powerline plugin)
 
 set formatoptions=qrn1
 
+set re=1 " Force use newer regex engine
+
 " >> moves to the nearest whole tab multiple rather than just by amount == tabwidth
 " http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
 set shiftround
