@@ -76,6 +76,8 @@ if has('vim_starting')
   set ttimeout
   set ttimeoutlen=10
 
+  set complete=.,w,b,u,t,i
+  set completeopt=longest,menuone
 
   " default to the system clipboard
   set clipboard+=unnamedplus
@@ -311,7 +313,6 @@ endif
 let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 
 "Omni Complete
-set completeopt=longest,menuone
 
 "==============================================================================
 " Syntastic configuration
