@@ -153,6 +153,7 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'lrvick/Conque-Shell', { 'on': ['ConqueTerm', 'ConqueTermSplit', 'ConqueTermTab', 'ConqueTermVSplit'] }
 Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
@@ -422,7 +423,7 @@ let g:user_emmet_settings = {
 "==============================================================================
 " open tagbar and nerdtree
 "==============================================================================
-map <Leader>o <Esc>:NERDTreeToggle<CR>
+map <Leader>ot <Esc>:NERDTreeToggle<CR>
 
 "==============================================================================
 " Run rspec and rubocop on the current file
