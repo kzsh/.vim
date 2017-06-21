@@ -140,7 +140,7 @@ set shiftround
 call plug#begin('~/.config/nvim/plugged')
 Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelection'] }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'codeindulgence/vim-tig'
@@ -168,6 +168,8 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-syntax'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 Plug 'tpope/vim-commentary'
@@ -506,6 +508,11 @@ command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 "==============================================================================
 "YouCompleteMe Configuration
 let g:ycm_min_num_of_chars_for_completion = 3
+
+"==============================================================================
+" Configure Deoplete syntax completion engine
+"==============================================================================
+let g:deoplete#enable_at_startup = 1
 
 "==============================================================================
 " Configure vim-airline
