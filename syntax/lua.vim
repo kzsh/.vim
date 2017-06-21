@@ -2,18 +2,18 @@
 " Language:	Lua 4.0, Lua 5.0, Lua 5.1 and Lua 5.2
 " Maintainer:	Marcus Aurelius Farias <masserahguard-lua 'at' yahoo com>
 " First Author:	Carlos Augusto Teixeira Mendes <cmendes 'at' inf puc-rio br>
-" Last Change:	2011 Dec 20
+" Last Change:	2012 Aug 12
 " Options:	lua_version = 4 or 5
 "		lua_subversion = 0 (4.0, 5.0) or 1 (5.1) or 2 (5.2)
 "		default 5.2
 
-" For version 5.x: Clear all syntax items
-" For version 6.x: Quit when a syntax file was already loaded
-if version < 600
-  syntax clear
-elseif exists("b:current_syntax")
+" quit when a syntax file was already loaded
+if exists("b:current_syntax")
   finish
 endif
+
+let s:cpo_save = &cpo
+set cpo&vim
 
 if !exists("lua_version")
   " Default is lua 5.2
@@ -45,39 +45,41 @@ syn match luaComment "\%^#!.*"
 
 " catch errors caused by wrong parenthesis and wrong curly brackets or
 " keywords placed outside their respective blocks
+syn region luaParen      transparent                     start='(' end=')' contains=ALLBUT,luaParenError,luaTodo,luaSpecial,luaIfThen,luaElseifThen,luaElse,luaThenEnd,luaBlock,luaLoopBlock,luaIn,luaStatement
+syn region luaTableBlock transparent matchgroup=luaTable start="{" end="}" contains=ALLBUT,luaBraceError,luaTodo,luaSpecial,luaIfThen,luaElseifThen,luaElse,luaThenEnd,luaBlock,luaLoopBlock,luaIn,luaStatement
 
-syn region luaParen transparent start='(' end=')' contains=TOP,luaParenError
 syn match  luaParenError ")"
-syn match  luaError "}"
+syn match  luaBraceError "}"
 syn match  luaError "\<\%(end\|else\|elseif\|then\|until\|in\)\>"
 
-" Function declaration
-syn region luaFunctionBlock transparent matchgroup=luaFunction start="\<function\>" end="\<end\>" contains=TOP
-
-" else
-syn keyword luaCondElse matchgroup=luaCond contained containedin=luaCondEnd else
-
-" then ... end
-syn region luaCondEnd contained transparent matchgroup=luaCond start="\<then\>" end="\<end\>" contains=TOP
-
-" elseif ... then
-syn region luaCondElseif contained containedin=luaCondEnd transparent matchgroup=luaCond start="\<elseif\>" end="\<then\>" contains=TOP
+" function ... end
+syn region luaFunctionBlock transparent matchgroup=luaFunction start="\<function\>" end="\<end\>" contains=ALLBUT,luaTodo,luaSpecial,luaElseifThen,luaElse,luaThenEnd,luaIn
 
 " if ... then
-syn region luaCondStart transparent matchgroup=luaCond start="\<if\>" end="\<then\>"me=e-4 contains=TOP nextgroup=luaCondEnd skipwhite skipempty
+syn region luaIfThen transparent matchgroup=luaCond start="\<if\>" end="\<then\>"me=e-4           contains=ALLBUT,luaTodo,luaSpecial,luaElseifThen,luaElse,luaIn nextgroup=luaThenEnd skipwhite skipempty
+
+" then ... end
+syn region luaThenEnd contained transparent matchgroup=luaCond start="\<then\>" end="\<end\>" contains=ALLBUT,luaTodo,luaSpecial,luaThenEnd,luaIn
+
+" elseif ... then
+syn region luaElseifThen contained transparent matchgroup=luaCond start="\<elseif\>" end="\<then\>" contains=ALLBUT,luaTodo,luaSpecial,luaElseifThen,luaElse,luaThenEnd,luaIn
+
+" else
+syn keyword luaElse contained else
 
 " do ... end
-syn region luaBlock transparent matchgroup=luaStatement start="\<do\>" end="\<end\>" contains=TOP
+syn region luaBlock transparent matchgroup=luaStatement start="\<do\>" end="\<end\>"          contains=ALLBUT,luaTodo,luaSpecial,luaElseifThen,luaElse,luaThenEnd,luaIn
+
 " repeat ... until
-syn region luaRepeatBlock transparent matchgroup=luaRepeat start="\<repeat\>" end="\<until\>" contains=TOP
+syn region luaLoopBlock transparent matchgroup=luaRepeat start="\<repeat\>" end="\<until\>"   contains=ALLBUT,luaTodo,luaSpecial,luaElseifThen,luaElse,luaThenEnd,luaIn
 
 " while ... do
-syn region luaWhile transparent matchgroup=luaRepeat start="\<while\>" end="\<do\>"me=e-2 contains=TOP nextgroup=luaBlock skipwhite skipempty
+syn region luaLoopBlock transparent matchgroup=luaRepeat start="\<while\>" end="\<do\>"me=e-2 contains=ALLBUT,luaTodo,luaSpecial,luaIfThen,luaElseifThen,luaElse,luaThenEnd,luaIn nextgroup=luaBlock skipwhite skipempty
 
 " for ... do and for ... in ... do
-syn region luaFor transparent matchgroup=luaRepeat start="\<for\>" end="\<do\>"me=e-2 contains=TOP nextgroup=luaBlock skipwhite skipempty
+syn region luaLoopBlock transparent matchgroup=luaRepeat start="\<for\>" end="\<do\>"me=e-2   contains=ALLBUT,luaTodo,luaSpecial,luaIfThen,luaElseifThen,luaElse,luaThenEnd nextgroup=luaBlock skipwhite skipempty
 
-syn keyword luaFor contained containedin=luaFor in
+syn keyword luaIn contained in
 
 " other keywords
 syn keyword luaStatement return local break
@@ -127,9 +129,6 @@ if lua_version >= 5
     syn match luaNumber "\<0[xX][[:xdigit:].]\+\%([pP][-+]\=\d\+\)\=\>"
   endif
 endif
-
-" tables
-syn region luaTableBlock transparent matchgroup=luaTable start="{" end="}" contains=TOP,luaStatement
 
 syn keyword luaFunc assert collectgarbage dofile error next
 syn keyword luaFunc print rawget rawset tonumber tostring type _VERSION
@@ -323,39 +322,33 @@ elseif lua_version == 5
 endif
 
 " Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
-if version >= 508 || !exists("did_lua_syntax_inits")
-  if version < 508
-    let did_lua_syntax_inits = 1
-    command -nargs=+ HiLink hi link <args>
-  else
-    command -nargs=+ HiLink hi def link <args>
-  endif
+" Only when an item doesn't have highlighting yet
 
-  HiLink luaStatement		Statement
-  HiLink luaRepeat		Repeat
-  HiLink luaFor			Repeat
-  HiLink luaString		String
-  HiLink luaString2		String
-  HiLink luaNumber		Number
-  HiLink luaOperator		Operator
-  HiLink luaConstant		Constant
-  HiLink luaCond		Conditional
-  HiLink luaCondElse		Conditional
-  HiLink luaFunction		Function
-  HiLink luaComment		Comment
-  HiLink luaTodo		Todo
-  HiLink luaTable		Structure
-  HiLink luaError		Error
-  HiLink luaParenError		Error
-  HiLink luaSpecial		SpecialChar
-  HiLink luaFunc		Identifier
-  HiLink luaLabel		Label
+hi def link luaStatement		Statement
+hi def link luaRepeat		Repeat
+hi def link luaFor			Repeat
+hi def link luaString		String
+hi def link luaString2		String
+hi def link luaNumber		Number
+hi def link luaOperator		Operator
+hi def link luaIn			Operator
+hi def link luaConstant		Constant
+hi def link luaCond		Conditional
+hi def link luaElse		Conditional
+hi def link luaFunction		Function
+hi def link luaComment		Comment
+hi def link luaTodo		Todo
+hi def link luaTable		Structure
+hi def link luaError		Error
+hi def link luaParenError		Error
+hi def link luaBraceError		Error
+hi def link luaSpecial		SpecialChar
+hi def link luaFunc		Identifier
+hi def link luaLabel		Label
 
-  delcommand HiLink
-endif
 
 let b:current_syntax = "lua"
 
+let &cpo = s:cpo_save
+unlet s:cpo_save
 " vim: et ts=8 sw=2

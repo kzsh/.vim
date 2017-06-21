@@ -2,15 +2,15 @@
 " Language:	GDB command files
 " Maintainer:	Claudio Fleiner <claudio@fleiner.com>
 " URL:		http://www.fleiner.com/vim/syntax/gdb.vim
-" Last Change:	2009 May 25
+" Last Change:	2012 Oct 05
 
-" For version 5.x: Clear all syntax items
-" For version 6.x: Quit when a syntax file was already loaded
-if version < 600
-  syntax clear
-elseif exists("b:current_syntax")
+" quit when a syntax file was already loaded
+if exists("b:current_syntax")
   finish
 endif
+
+let s:cpo_save = &cpo
+set cpo&vim
 
 syn keyword gdbInfo contained address architecture args breakpoints catch common copying dcache
 syn keyword gdbInfo contained display files float frame functions handle line
@@ -32,7 +32,7 @@ syn match gdbFuncDef "\<define\>.*"
 syn match gdbStatmentContainer "^\s*\S\+" contains=gdbStatement,gdbFuncDef
 syn match gdbStatement "^\s*info" nextgroup=gdbInfo skipwhite skipempty
 
-" some commonly used abreviations
+" some commonly used abbreviations
 syn keyword gdbStatement c disp undisp disas p
 
 syn region gdbDocument matchgroup=gdbFuncDef start="\<document\>.*$" matchgroup=gdbFuncDef end="^end\s*$"
@@ -65,12 +65,12 @@ syn match gdbSet "\<input-radix\>"
 syn match gdbSet "\<demangle-style\>"
 syn match gdbSet "\<output-radix\>"
 
-syn match gdbComment "^\s*#.*"
+syn match gdbComment "^\s*#.*" contains=@Spell
 
 syn match gdbVariable "\$\K\k*"
 
 " Strings and constants
-syn region  gdbString		start=+"+  skip=+\\\\\|\\"+  end=+"+
+syn region  gdbString		start=+"+  skip=+\\\\\|\\"+  end=+"+ contains=@Spell
 syn match   gdbCharacter	"'[^']*'" contains=gdbSpecialChar,gdbSpecialCharError
 syn match   gdbCharacter	"'\\''" contains=gdbSpecialChar
 syn match   gdbCharacter	"'[^\\]'"
@@ -84,28 +84,20 @@ endif
 exec "syn sync ccomment gdbComment minlines=" . gdb_minlines
 
 " Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
-if version >= 508 || !exists("did_gdb_syn_inits")
-  if version < 508
-    let did_gdb_syn_inits = 1
-    command -nargs=+ HiLink hi link <args>
-  else
-    command -nargs=+ HiLink hi def link <args>
-  endif
-  HiLink gdbFuncDef	Function
-  HiLink gdbComment	Comment
-  HiLink gdbStatement	Statement
-  HiLink gdbString	String
-  HiLink gdbCharacter	Character
-  HiLink gdbVariable	Identifier
-  HiLink gdbSet		Constant
-  HiLink gdbInfo	Type
-  HiLink gdbDocument	Special
-  HiLink gdbNumber	Number
-  delcommand HiLink
-endif
+" Only when an item doesn't have highlighting yet
+hi def link gdbFuncDef	Function
+hi def link gdbComment	Comment
+hi def link gdbStatement	Statement
+hi def link gdbString	String
+hi def link gdbCharacter	Character
+hi def link gdbVariable	Identifier
+hi def link gdbSet		Constant
+hi def link gdbInfo	Type
+hi def link gdbDocument	Special
+hi def link gdbNumber	Number
 
 let b:current_syntax = "gdb"
 
+let &cpo = s:cpo_save
+unlet s:cpo_save
 " vim: ts=8

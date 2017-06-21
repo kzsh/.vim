@@ -1,13 +1,13 @@
 " Vim syntax file
 " Language:    FORTH
 " Maintainer:  Christian V. J. Brüssow <cvjb@cvjb.de>
-" Last Change: Di 07 Jul 2009 21:38:45 CEST
+" Last Change: So 27 Mai 2012 15:56:28 CEST
 " Filenames:   *.fs,*.ft
 " URL:	       http://www.cvjb.de/comp/vim/forth.vim
 
-" $Id: forth.vim,v 1.12 2008/07/07 21:39:12 bruessow Exp $
+" $Id: forth.vim,v 1.14 2012/05/27 15:57:22 bruessow Exp $
 
-" The list of keywords is incomplete, compared with the offical ANS
+" The list of keywords is incomplete, compared with the official ANS
 " wordlist. If you use this language, please improve it, and send me
 " the patches.
 "
@@ -16,6 +16,14 @@
 " for forth.vim).
 
 " Many Thanks to...
+"
+" 2012-05-13:
+" Dominique Pellé <dominique dot pelle at gmail dot com> for sending the
+" patch to allow spellchecking of strings, comments, ...
+" 
+" 2012-01-07:
+" Thilo Six <T.Six at gmx dot de> send a patch for cpoptions.
+" See the discussion at http://thread.gmane.org/gmane.editors.vim.devel/32151
 "
 " 2009-06-28:
 " Josh Grams send a patch to allow the parenthesis comments at the
@@ -40,14 +48,14 @@
 " Bill McCarthy <WJMc@...> and Ilya Sher <ilya-vim@...>
 " Who found a bug in the ccomment line in 2004!!!
 " I'm really very sorry, that it has taken two years to fix that
-" in the offical version of this file. Shame on me.
+" in the official version of this file. Shame on me.
 " I think my face will be red the next ten years...
 "
 " 2006-05-21:
 " Thomas E. Vaughan <tevaugha at ball dot com> send me a patch
 " for the parenthesis comment word, so words with a trailing
 " parenthesis will not start the highlighting for such comments.
-" 
+"
 " 2003-05-10:
 " Andrew Gaul <andrew at gaul.org> send me a patch for
 " forthOperators.
@@ -72,13 +80,13 @@
 "
 
 
-" For version 5.x: Clear all syntax items
-" For version 6.x: Quit when a syntax file was already loaded
-if version < 600
-    syntax clear
-elseif exists("b:current_syntax")
+" quit when a syntax file was already loaded
+if exists("b:current_syntax")
     finish
 endif
+
+let s:cpo_save = &cpo
+set cpo&vim
 
 " Synchronization method
 syn sync ccomment
@@ -93,11 +101,7 @@ syn match forthTodo contained 'Copyright\(\s([Cc])\)\=\(\s[0-9]\{2,4}\)\='
 
 " Characters allowed in keywords
 " I don't know if 128-255 are allowed in ANS-FORTH
-if version >= 600
-    setlocal iskeyword=!,@,33-35,%,$,38-64,A-Z,91-96,a-z,123-126,128-255
-else
-    set iskeyword=!,@,33-35,%,$,38-64,A-Z,91-96,a-z,123-126,128-255
-endif
+setlocal iskeyword=!,@,33-35,%,$,38-64,A-Z,91-96,a-z,123-126,128-255
 
 " when wanted, highlight trailing white space
 if exists("forth_space_errors")
@@ -125,7 +129,7 @@ syn keyword forthOperators F~REL F~ABS F~
 syn keyword forthOperators 0< 0<= 0<> 0= 0> 0>= < <= <> = > >= U< U<=
 syn keyword forthOperators U> U>= D0< D0<= D0<> D0= D0> D0>= D< D<= D<>
 syn keyword forthOperators D= D> D>= DU< DU<= DU> DU>= WITHIN ?NEGATE
-syn keyword forthOperators ?DNEGATE 
+syn keyword forthOperators ?DNEGATE
 
 " stack manipulations
 syn keyword forthStack DROP NIP DUP OVER TUCK SWAP ROT -ROT ?DUP PICK ROLL
@@ -171,7 +175,7 @@ syn keyword forthDefine LITERAL CREATE-INTERPRET/COMPILE INTERPRETATION>
 syn keyword forthDefine <INTERPRETATION COMPILATION> <COMPILATION ] LASTXT
 syn keyword forthDefine COMP' POSTPONE, FIND-NAME NAME>INT NAME?INT NAME>COMP
 syn keyword forthDefine NAME>STRING STATE C; CVARIABLE
-syn keyword forthDefine , 2, F, C, 
+syn keyword forthDefine , 2, F, C,
 syn match forthDefine "\[IFDEF]"
 syn match forthDefine "\[IFUNDEF]"
 syn match forthDefine "\[THEN]"
@@ -210,7 +214,7 @@ syn match forthCharOps '\<\[char\]\s\S\s'
 syn region forthCharOps start=+."\s+ skip=+\\"+ end=+"+
 
 " char-number conversion
-syn keyword forthConversion <<# <# # #> #>> #S (NUMBER) (NUMBER?) CONVERT D>F 
+syn keyword forthConversion <<# <# # #> #>> #S (NUMBER) (NUMBER?) CONVERT D>F
 syn keyword forthConversion D>S DIGIT DPL F>D HLD HOLD NUMBER S>D SIGN >NUMBER
 syn keyword forthConversion F>S S>F
 
@@ -225,7 +229,7 @@ syn keyword forthVocs ONLY FORTH ALSO ROOT SEAL VOCS ORDER CONTEXT #VOCS
 syn keyword forthVocs VOCABULARY DEFINITIONS
 
 " File keywords
-syn keyword forthFileMode R/O R/W W/O BIN 
+syn keyword forthFileMode R/O R/W W/O BIN
 syn keyword forthFileWords OPEN-FILE CREATE-FILE CLOSE-FILE DELETE-FILE
 syn keyword forthFileWords RENAME-FILE READ-FILE READ-LINE KEY-FILE
 syn keyword forthFileWords KEY?-FILE WRITE-FILE WRITE-LINE EMIT-FILE
@@ -249,22 +253,22 @@ syn match forthInteger '\<%[0-1]*[0-1]\+\>'
 syn match forthFloat '\<-\=\d*[.]\=\d\+[DdEe]\d\+\>'
 syn match forthFloat '\<-\=\d*[.]\=\d\+[DdEe][-+]\d\+\>'
 
-" XXX If you find this overkill you can remove it. this has to come after the
+" XXX If you find this overkill you can remove it. This has to come after the
 " highlighting for numbers otherwise it has no effect.
 syn region forthComment start='0 \[if\]' end='\[endif\]' end='\[then\]' contains=forthTodo
 
 " Strings
-syn region forthString start=+\.*\"+ end=+"+ end=+$+
+syn region forthString start=+\.*\"+ end=+"+ end=+$+ contains=@Spell
 " XXX
-syn region forthString start=+s\"+ end=+"+ end=+$+
-syn region forthString start=+c\"+ end=+"+ end=+$+
+syn region forthString start=+s\"+ end=+"+ end=+$+ contains=@Spell
+syn region forthString start=+c\"+ end=+"+ end=+$+ contains=@Spell
 
 " Comments
-syn match forthComment '\\\s.*$' contains=forthTodo,forthSpaceError
-syn region forthComment start='\\S\s' end='.*' contains=forthTodo,forthSpaceError
-syn match forthComment '\.(\s[^)]*)' contains=forthTodo,forthSpaceError
-syn region forthComment start='\(^\|\s\)\zs(\s' skip='\\)' end=')' contains=forthTodo,forthSpaceError
-syn region forthComment start='/\*' end='\*/' contains=forthTodo,forthSpaceError
+syn match forthComment '\\\s.*$' contains=@Spell,forthTodo,forthSpaceError
+syn region forthComment start='\\S\s' end='.*' contains=@Spell,forthTodo,forthSpaceError
+syn match forthComment '\.(\s[^)]*)' contains=@Spell,forthTodo,forthSpaceError
+syn region forthComment start='\(^\|\s\)\zs(\s' skip='\\)' end=')' contains=@Spell,forthTodo,forthSpaceError
+syn region forthComment start='/\*' end='\*/' contains=@Spell,forthTodo,forthSpaceError
 
 " Include files
 syn match forthInclude '^INCLUDE\s\+\k\+'
@@ -278,57 +282,49 @@ syn match forthLocals '{ }' " otherwise, at least two spaces between
 syn region forthDeprecated start='locals|' end='|'
 
 " Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
-if version >= 508 || !exists("did_forth_syn_inits")
-    if version < 508
-	let did_forth_syn_inits = 1
-	command -nargs=+ HiLink hi link <args>
-    else
-	command -nargs=+ HiLink hi def link <args>
-    endif
+" Only when an item doesn't have highlighting yet
 
-    " The default methods for highlighting. Can be overriden later.
-    HiLink forthTodo Todo
-    HiLink forthOperators Operator
-    HiLink forthMath Number
-    HiLink forthInteger Number
-    HiLink forthFloat Float
-    HiLink forthStack Special
-    HiLink forthRstack Special
-    HiLink forthFStack Special
-    HiLink forthSP Special
-    HiLink forthMemory Function
-    HiLink forthAdrArith Function
-    HiLink forthMemBlks Function
-    HiLink forthCond Conditional
-    HiLink forthLoop Repeat
-    HiLink forthColonDef Define
-    HiLink forthEndOfColonDef Define
-    HiLink forthDefine Define
-    HiLink forthDebug Debug
-    HiLink forthAssembler Include
-    HiLink forthCharOps Character
-    HiLink forthConversion String
-    HiLink forthForth Statement
-    HiLink forthVocs Statement
-    HiLink forthString String
-    HiLink forthComment Comment
-    HiLink forthClassDef Define
-    HiLink forthEndOfClassDef Define
-    HiLink forthObjectDef Define
-    HiLink forthEndOfObjectDef Define
-    HiLink forthInclude Include
-    HiLink forthLocals Type " nothing else uses type and locals must stand out
-    HiLink forthDeprecated Error " if you must, change to Type
-    HiLink forthFileMode Function
-    HiLink forthFileWords Statement
-    HiLink forthBlocks Statement
-    HiLink forthSpaceError Error
+" The default methods for highlighting. Can be overridden later.
+hi def link forthTodo Todo
+hi def link forthOperators Operator
+hi def link forthMath Number
+hi def link forthInteger Number
+hi def link forthFloat Float
+hi def link forthStack Special
+hi def link forthRstack Special
+hi def link forthFStack Special
+hi def link forthSP Special
+hi def link forthMemory Function
+hi def link forthAdrArith Function
+hi def link forthMemBlks Function
+hi def link forthCond Conditional
+hi def link forthLoop Repeat
+hi def link forthColonDef Define
+hi def link forthEndOfColonDef Define
+hi def link forthDefine Define
+hi def link forthDebug Debug
+hi def link forthAssembler Include
+hi def link forthCharOps Character
+hi def link forthConversion String
+hi def link forthForth Statement
+hi def link forthVocs Statement
+hi def link forthString String
+hi def link forthComment Comment
+hi def link forthClassDef Define
+hi def link forthEndOfClassDef Define
+hi def link forthObjectDef Define
+hi def link forthEndOfObjectDef Define
+hi def link forthInclude Include
+hi def link forthLocals Type " nothing else uses type and locals must stand out
+hi def link forthDeprecated Error " if you must, change to Type
+hi def link forthFileMode Function
+hi def link forthFileWords Statement
+hi def link forthBlocks Statement
+hi def link forthSpaceError Error
 
-    delcommand HiLink
-endif
 
 let b:current_syntax = "forth"
 
+let &cpo = s:cpo_save
+unlet s:cpo_save
 " vim:ts=8:sw=4:nocindent:smartindent:

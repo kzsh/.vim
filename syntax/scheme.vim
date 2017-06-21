@@ -1,26 +1,26 @@
 " Vim syntax file
 " Language:	Scheme (R5RS + some R6RS extras)
-" Last Change:	2009 Nov 27
+" Last Change:	2016 May 23
 " Maintainer:	Sergey Khorev <sergey.khorev@gmail.com>
 " Original author:	Dirk van Deun <dirk@igwe.vub.ac.be>
 
 " This script incorrectly recognizes some junk input as numerals:
 " parsing the complete system of Scheme numerals using the pattern
 " language is practically impossible: I did a lax approximation.
- 
+
 " MzScheme extensions can be activated with setting is_mzscheme variable
 
 " Suggestions and bug reports are solicited by the author.
 
 " Initializing:
 
-" For version 5.x: Clear all syntax items
-" For version 6.x: Quit when a syntax file was already loaded
-if version < 600
-  syntax clear
-elseif exists("b:current_syntax")
+" quit when a syntax file was already loaded
+if exists("b:current_syntax")
   finish
 endif
+
+let s:cpo_save = &cpo
+set cpo&vim
 
 syn case ignore
 
@@ -61,11 +61,7 @@ syn region schemeUnquote matchgroup=Delimiter start=",@#\[" end="\]" contains=AL
 
 " R5RS Scheme Functions and Syntax:
 
-if version < 600
-  set iskeyword=33,35-39,42-58,60-90,94,95,97-122,126,_
-else
-  setlocal iskeyword=33,35-39,42-58,60-90,94,95,97-122,126,_
-endif
+setlocal iskeyword=33,35-39,42-58,60-90,94,95,97-122,126,_
 
 syn keyword schemeSyntax lambda and or if cond case define let let* letrec
 syn keyword schemeSyntax begin do delay set! else =>
@@ -117,7 +113,7 @@ syn keyword schemeFunc hashtable? hashtable-size hashtable-ref hashtable-set!
 syn keyword schemeFunc hashtable-delete! hashtable-contains? hashtable-update!
 syn keyword schemeFunc hashtable-copy hashtable-clear! hashtable-keys
 syn keyword schemeFunc hashtable-entries hashtable-equivalence-function hashtable-hash-function
-syn keyword schemeFunc hashtable-mutable? equal-hash string-hash string-ci-hash symbol-hash 
+syn keyword schemeFunc hashtable-mutable? equal-hash string-hash string-ci-hash symbol-hash
 syn keyword schemeFunc find for-all exists filter partition fold-left fold-right
 syn keyword schemeFunc remp remove remv remq memp assp cons*
 
@@ -154,11 +150,11 @@ syn region schemeStruc matchgroup=Delimiter start="\[" matchgroup=Delimiter end=
 syn region schemeStruc matchgroup=Delimiter start="#\[" matchgroup=Delimiter end="\]" contains=ALL
 
 " Simple literals:
-syn region schemeString start=+\%(\\\)\@<!"+ skip=+\\[\\"]+ end=+"+
+syn region schemeString start=+\%(\\\)\@<!"+ skip=+\\[\\"]+ end=+"+ contains=@Spell
 
 " Comments:
 
-syn match	schemeComment	";.*$"
+syn match	schemeComment	";.*$" contains=@Spell
 
 
 " Writing out the complete description of Scheme numerals without
@@ -189,7 +185,7 @@ syn match schemeCharacter "#\\x[0-9a-fA-F]\+"
 if exists("b:is_mzscheme") || exists("is_mzscheme")
     " MzScheme extensions
     " multiline comment
-    syn region	schemeComment start="#|" end="|#"
+    syn region	schemeComment start="#|" end="|#" contains=@Spell
 
     " #%xxx are the special MzScheme identifiers
     syn match schemeOther "#%[-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
@@ -207,7 +203,7 @@ if exists("b:is_mzscheme") || exists("is_mzscheme")
     syn keyword schemeExtSyntax free-identifier=? bound-identifier=? module-identifier=? syntax-object->datum
     syn keyword schemeExtSyntax datum->syntax-object
     syn keyword schemeExtSyntax let-values let*-values letrec-values set!-values fluid-let parameterize begin0
-    syn keyword schemeExtSyntax error raise opt-lambda define-values unit unit/sig define-signature 
+    syn keyword schemeExtSyntax error raise opt-lambda define-values unit unit/sig define-signature
     syn keyword schemeExtSyntax invoke-unit/sig define-values/invoke-unit/sig compound-unit/sig import export
     syn keyword schemeExtSyntax link syntax quasisyntax unsyntax with-syntax
 
@@ -231,7 +227,7 @@ if exists("b:is_mzscheme") || exists("is_mzscheme")
     syn keyword schemeExtFunc exn:i/o:tcp? exn:i/o:udp? exn:misc? exn:misc:application? exn:misc:unsupported? exn:module? exn:read? exn:read:non-char?
     syn keyword schemeExtFunc exn:special-comment? exn:syntax? exn:thread? exn:user? exn:variable? exn:application:mismatch?
     " Command-line parsing
-    syn keyword schemeExtFunc command-line current-command-line-arguments once-any help-labels multi once-each 
+    syn keyword schemeExtFunc command-line current-command-line-arguments once-any help-labels multi once-each
 
     " syntax quoting, unquoting and quasiquotation
     syn region schemeUnquote matchgroup=Delimiter start="#," end=![ \t\[\]()";]!me=e-1 contains=ALL
@@ -242,12 +238,24 @@ if exists("b:is_mzscheme") || exists("is_mzscheme")
     syn region schemeUnquote matchgroup=Delimiter start="#,@\[" end="\]" contains=ALL
     syn region schemeQuoted matchgroup=Delimiter start="#['`]" end=![ \t()\[\]";]!me=e-1 contains=ALL
     syn region schemeQuoted matchgroup=Delimiter start="#['`](" matchgroup=Delimiter end=")" contains=ALL
+
+    " Identifiers are very liberal in MzScheme/Racket
+    syn match schemeOther ![^()[\]{}",'`;#|\\ ]\+!
+
+    " Language setting
+    syn match schemeLang "#lang [-+_/A-Za-z0-9]\+\>"
+
+    " Various number forms
+    syn match schemeNumber "[-+]\=[0-9]\+\(\.[0-9]*\)\=\(e[-+]\=[0-9]\+\)\=\>"
+    syn match schemeNumber "[-+]\=\.[0-9]\+\(e[-+]\=[0-9]\+\)\=\>"
+    syn match schemeNumber "[-+]\=[0-9]\+/[0-9]\+\>"
+    syn match schemeNumber "\([-+]\=\([0-9]\+\(\.[0-9]*\)\=\(e[-+]\=[0-9]\+\)\=\|\.[0-9]\+\(e[-+]\=[0-9]\+\)\=\|[0-9]\+/[0-9]\+\)\)\=[-+]\([0-9]\+\(\.[0-9]*\)\=\(e[-+]\=[0-9]\+\)\=\|\.[0-9]\+\(e[-+]\=[0-9]\+\)\=\|[0-9]\+/[0-9]\+\)\=i\>"
 endif
 
 
 if exists("b:is_chicken") || exists("is_chicken")
     " multiline comment
-    syntax region schemeMultilineComment start=/#|/ end=/|#/ contains=schemeMultilineComment
+    syntax region schemeMultilineComment start=/#|/ end=/|#/ contains=@Spell,schemeMultilineComment
 
     syn match schemeOther "##[-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
     syn match schemeExtSyntax "#:[-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
@@ -262,8 +270,8 @@ if exists("b:is_chicken") || exists("is_chicken")
     syn keyword schemeExtFunc ##core#inline ##sys#error ##sys#update-errno
 
     " here-string
-    syn region schemeString start=+#<<\s*\z(.*\)+ end=+^\z1$+
- 
+    syn region schemeString start=+#<<\s*\z(.*\)+ end=+^\z1$+ contains=@Spell
+
     if filereadable(expand("<sfile>:p:h")."/cpp.vim")
 	unlet! b:current_syntax
 	syn include @ChickenC <sfile>:p:h/cpp.vim
@@ -282,7 +290,7 @@ if exists("b:is_chicken") || exists("is_chicken")
 
     " suggested by Alex Queiroz
     syn match schemeExtSyntax "#![-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
-    syn region schemeString start=+#<#\s*\z(.*\)+ end=+^\z1$+ 
+    syn region schemeString start=+#<#\s*\z(.*\)+ end=+^\z1$+ contains=@Spell
 endif
 
 " Synchronization and the wrapping up...
@@ -291,34 +299,30 @@ syn sync match matchPlace grouphere NONE "^[^ \t]"
 " ... i.e. synchronize on a line that starts at the left margin
 
 " Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
-if version >= 508 || !exists("did_scheme_syntax_inits")
-  if version < 508
-    let did_scheme_syntax_inits = 1
-    command -nargs=+ HiLink hi link <args>
-  else
-    command -nargs=+ HiLink hi def link <args>
-  endif
+" Only when an item doesn't have highlighting yet
 
-  HiLink schemeSyntax		Statement
-  HiLink schemeFunc		Function
+hi def link schemeSyntax		Statement
+hi def link schemeFunc		Function
 
-  HiLink schemeString		String
-  HiLink schemeCharacter	Character
-  HiLink schemeNumber		Number
-  HiLink schemeBoolean		Boolean
+hi def link schemeString		String
+hi def link schemeCharacter	Character
+hi def link schemeNumber		Number
+hi def link schemeBoolean		Boolean
 
-  HiLink schemeDelimiter	Delimiter
-  HiLink schemeConstant		Constant
+hi def link schemeDelimiter	Delimiter
+hi def link schemeConstant		Constant
 
-  HiLink schemeComment		Comment
-  HiLink schemeMultilineComment	Comment
-  HiLink schemeError		Error
+hi def link schemeComment		Comment
+hi def link schemeMultilineComment	Comment
+hi def link schemeError		Error
 
-  HiLink schemeExtSyntax	Type
-  HiLink schemeExtFunc		PreProc
-  delcommand HiLink
-endif
+hi def link schemeExtSyntax	Type
+hi def link schemeExtFunc		PreProc
+
+hi def link schemeLang		PreProc
+
 
 let b:current_syntax = "scheme"
+
+let &cpo = s:cpo_save
+unlet s:cpo_save
