@@ -382,6 +382,11 @@ else
   let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
 endif
 
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("h")': ['<c-cr>', '<c-s>'],
+    \ 'PrtClearCache()':      ['<c-x>']
+  \ }
+
 "==============================================================================
 " EditorConfig configuration
 "==============================================================================
