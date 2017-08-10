@@ -139,7 +139,11 @@ set shiftround
 " Load Plugins
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+"Plug 'vim-airline/vim-airline'
 Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelection'] }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
@@ -154,7 +158,6 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
 Plug 'mattn/emmet-vim', { 'for': ['html','html5','jsx', 'javascript'] }
@@ -168,8 +171,7 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-syntax'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 Plug 'tpope/vim-commentary'
@@ -178,7 +180,6 @@ Plug 'tpope/vim-git', { 'for': 'gitconfig' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-"Plug 'vim-airline/vim-airline'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
