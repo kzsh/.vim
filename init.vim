@@ -181,7 +181,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 "Plug 'vim-airline/vim-airline'
 Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 if has('nvim')
   Plug 'neomake/neomake'
