@@ -75,6 +75,7 @@ if has('vim_starting')
   set notimeout
   set ttimeout
   set ttimeoutlen=10
+  set title
 
   set complete=.,w,b,u,t,i
   set completeopt=longest,menuone
@@ -233,6 +234,11 @@ autocmd FileType handlebars setlocal commentstring={{!%s}}
 
 
 let g:jsx_ext_required = 0
+
+"==============================================================================
+" Set terminal title (for use with chunkwm -- detecting a vim session
+"==============================================================================
+autocmd BufEnter * let &titlestring = "vim_hook(" . expand("%:t") . ")"
 
 "==============================================================================
 " NeoMake Configuration
