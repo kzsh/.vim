@@ -143,6 +143,7 @@ Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelect
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'codeindulgence/vim-tig'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBookmarkDir', 'CtrlPBookmarkDirAdd', 'CtrlPBufTag', 'CtrlPBufTagAll', 'CtrlPBuffer', 'CtrlPChange', 'CtrlPChangeAll', 'CtrlPClearAllCaches', 'CtrlPClearCache', 'CtrlPCurFile', 'CtrlPCurWD', 'CtrlPDir', 'CtrlPLastMode', 'CtrlPLine', 'CtrlPMRUFiles', 'CtrlPMixed', 'CtrlPQuickfix', 'CtrlPRTS', 'CtrlPRoot', 'CtrlPTag', 'CtrlPUndo'] }
