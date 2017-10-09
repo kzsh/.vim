@@ -320,6 +320,7 @@ if has('nvim')
 endif
 
 "==============================================================================
+" Xcode compiler config
 "==============================================================================
 
 let s:uname = system("echo -n \"$(uname)\"")
@@ -438,6 +439,8 @@ let g:user_emmet_settings = {
 " open tagbar and nerdtree
 "==============================================================================
 map <Leader>ot <Esc>:NERDTreeToggle<CR>
+
+map <Leader>os <Esc>:Tagbar<CR>
 
 "==============================================================================
 " Run rspec and rubocop on the current file
