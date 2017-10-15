@@ -296,18 +296,14 @@ if has('nvim')
 
   autocmd FileType javascript.jsx :call NeomakeESlintChecker()
 
-  let g:neomake_javascript_checknewline_maker = {
+  let g:neomake_checknewline_error_format = {
       \ 'errorformat': '%f:%l: %m',
       \ }
-  let g:neomake_jsx_checknewline_maker = {
-      \ 'errorformat': '%f:%l: %m',
-      \ }
-  let g:neomake_scss_checknewline_maker = {
-      \ 'errorformat': '%f:%l: %m',
-      \ }
-  let g:neomake_sass_checknewline_maker = {
-      \ 'errorformat': '%f:%l: %m',
-      \ }
+
+  let g:neomake_javascript_checknewline_maker = g:neomake_checknewline_error_format
+  let g:neomake_jsx_checknewline_maker = g:neomake_checknewline_error_format
+  let g:neomake_scss_checknewline_maker = g:neomake_checknewline_error_format
+  let g:neomake_sass_checknewline_maker = g:neomake_checknewline_error_format
   "let g:neomake_scss_sasslint_maker = ['sass-lint']
 
   let g:neomake_javascript_enabled_makers = ['eslint', 'checknewline']
