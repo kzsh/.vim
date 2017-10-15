@@ -365,7 +365,8 @@ let g:startify_custom_header = []
 "==============================================================================
 "nnoremap <silent> <C-p> :CtrlP<CR>
 "map <Leader>fs :CtrlPTag<CR>
-nnoremap <Leader>of :CtrlP<CR>
+nnoremap <Leader>of :FZF<CR>
+nnoremap <Leader>or :CtrlP<CR>
 nnoremap <Leader>oo :CtrlPBuffer<CR>
 nnoremap <Leader>oc :CtrlPCurFile<CR>
 nnoremap <Leader>os :Startify<CR>
@@ -390,6 +391,7 @@ endif
     \ 'PrtClearCache()':      ['<c-x>']
   \ }
 
+let g:ctrlp_regexp = 1
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20'
 
 "==============================================================================
