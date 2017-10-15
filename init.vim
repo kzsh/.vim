@@ -363,7 +363,7 @@ let g:startify_custom_header = []
 "==============================================================================
 " CtrlP
 "==============================================================================
-nnoremap <silent> <C-p> :CtrlP<CR>
+"nnoremap <silent> <C-p> :CtrlP<CR>
 "map <Leader>fs :CtrlPTag<CR>
 nnoremap <Leader>of :CtrlP<CR>
 nnoremap <Leader>oo :CtrlPBuffer<CR>
