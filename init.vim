@@ -181,7 +181,6 @@ Plug 'tpope/vim-git', { 'for': 'gitconfig' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 if has('nvim')
