@@ -365,12 +365,9 @@ let g:startify_custom_header = []
 "==============================================================================
 "nnoremap <silent> <C-p> :CtrlP<CR>
 "map <Leader>fs :CtrlPTag<CR>
-nnoremap <Leader>of :FZF<CR>
-nnoremap <Leader>or :CtrlP<CR>
-nnoremap <Leader>oo :CtrlPBuffer<CR>
-nnoremap <Leader>oc :CtrlPCurFile<CR>
-nnoremap <Leader>os :Startify<CR>
-
+nnoremap <Leader>orf :CtrlP<CR>
+nnoremap <Leader>oro :CtrlPBuffer<CR>
+nnoremap <Leader>orc :CtrlPCurFile<CR>
 
 let g:ctrlp_lazy_update = 60 " don't re-perform the search after every keystroke
 let g:ctrlp_reuse_window = 'startify'
