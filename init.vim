@@ -488,12 +488,6 @@ tnoremap <Leader><Esc> <C-\><C-n>
 nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
 
 "==============================================================================
-" map alternative escapes to normal mode
-"==============================================================================
-inoremap jj <ESC>
-inoremap jk <ESC>
-
-"==============================================================================
 " function to identify repeating lines
 " https://stackoverflow.com/questions/1268032/marking-duplicate-lines
 "==============================================================================
