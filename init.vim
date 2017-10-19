@@ -361,6 +361,17 @@ let g:startify_custom_indices = ["a", "s", "d", "f", "g", "z", "x", "c", "v", "b
 let g:startify_custom_header = []
 
 "==============================================================================
+" FZF
+"==============================================================================
+nnoremap <Leader>oo :Buffers<CR>
+nnoremap <Leader>of :FZF ./<CR>
+nnoremap <Leader>oaf :execute 'Files' FindGitRoot()<CR>
+nnoremap <Leader>occ :BCommits<CR>
+nnoremap <Leader>oca :Commits<CR>
+
+let g:fzf_commits_log_options = "--color=always --pretty=format:'%C(green)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit"
+
+"==============================================================================
 " CtrlP
 "==============================================================================
 "nnoremap <silent> <C-p> :CtrlP<CR>
