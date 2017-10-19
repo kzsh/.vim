@@ -356,7 +356,7 @@ endif
 " Startify
 "==============================================================================
 let g:startify_change_to_vcs_root = 1
-let g:startify_custom_indices = ["f", "d", "s", "a", "v", "c", "x", "z"]
+let g:startify_custom_indices = ["a", "s", "d", "f", "g", "z", "x", "c", "v", "b", "q", "w", "e", "r", "t"]
 
 let g:startify_custom_header = []
 
