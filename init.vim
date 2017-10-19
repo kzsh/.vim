@@ -775,6 +775,14 @@ noremap <Leader>gp :diffput<CR>
 nmap <Leader>od :exe ToggleVimDiff()<CR>
 
 "==============================================================================
+" Git
+"==============================================================================
+
+function! FindGitRoot()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+"==============================================================================
 " Transparent editing of gpg encrypted files.
 " By Wouter Hanegraaff
 "==============================================================================
