@@ -604,7 +604,7 @@ xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 " vim-cd to top-level of git repo
 "==============================================================================
 function Cdg()
-  let root = system('git rev-parse --show-toplevel')
+  let root = FindGitRoot()
   cd `=root`
 endfunction
 
