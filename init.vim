@@ -111,7 +111,7 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<
 
 " set our vim path to look in the current directory of the file we are
 " editing, all sub directories, the directory from which vim was launched.
-set path=.,**,,
+set path=.,**,,FindGitRoot(),
 
 " SEARCH
 set hlsearch " highlight matches
