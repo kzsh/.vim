@@ -139,14 +139,11 @@ set shiftround
 " Load Plugins
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-"Plug 'vim-airline/vim-airline'
 Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelection'] }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'codeindulgence/vim-tig'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
