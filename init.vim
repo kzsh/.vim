@@ -822,3 +822,7 @@ augroup END
 let g:solarized_termcolors=256
 set background=dark " set background color style
 colorscheme solarized
+"override statusline
+" hi StatusLine ctermbg=white ctermfg=234
+" hi StatusLineNC ctermbg=white ctermfg=234
+" hi VertSplit ctermbg=234 ctermfg=234
