@@ -150,8 +150,8 @@ Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBookmarkDir', 'CtrlPBookmarkDirAdd', 'CtrlPBufTag', 'CtrlPBufTagAll', 'CtrlPBuffer', 'CtrlPChange', 'CtrlPChangeAll', 'CtrlPClearAllCaches', 'CtrlPClearCache', 'CtrlPCurFile', 'CtrlPCurWD', 'CtrlPDir', 'CtrlPLastMode', 'CtrlPLine', 'CtrlPMRUFiles', 'CtrlPMixed', 'CtrlPQuickfix', 'CtrlPRTS', 'CtrlPRoot', 'CtrlPTag', 'CtrlPUndo'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
 Plug 'duggiefresh/vim-easydir'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'fatih/vim-go', { 'for': 'go' }
+"Plug 'editorconfig/editorconfig-vim'
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
