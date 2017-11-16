@@ -819,7 +819,6 @@ augroup encrypted
   autocmd BufWritePost,FileWritePost *.gpg u
 augroup END
 
-let g:solarized_termcolors=256
 set background=dark " set background color style
 colorscheme solarized
 "override statusline
