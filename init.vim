@@ -666,7 +666,7 @@ function! ToggleCommentColors()
   endif
 endfunction
 
-nmap <Leader>ll :call ToggleCommentColors()<CR>
+" nmap <Leader>ll :call ToggleCommentColors()<CR>
 
 "==============================================================================
 " Using AG to find things in a project
