@@ -421,6 +421,7 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20'
 "==============================================================================
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
+
 "==============================================================================
 " Eclim settings:
 "==============================================================================
