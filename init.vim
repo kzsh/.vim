@@ -22,6 +22,7 @@ endif
 
 let s:pyenv_python3 = glob(expand('$PYENV_ROOT/versions/neovim3/bin/python'))
 if !empty(s:pyenv_python3)
+  let g:python_host_prog  = s:pyenv_python3
   let g:python3_host_prog = s:pyenv_python3
 else
   let g:loaded_python3_provider = 1
@@ -244,6 +245,12 @@ if has('nvim')
   autocmd! BufReadPost,BufWritePost * Neomake
 
   let g:neomake_logfile = '/tmp/neomake_error.log'
+
+  " if ! empty(g:python3_host_prog)
+  "   let g:neomake_vim_vint_exe = g:python3_host_prog
+  " elseif ! empty(g:python2_host_prog)
+  "   let g:neomake_vim_vint_exe = g:python2_host_prog
+  " endif
 
   function! NeomakeESlintChecker()
     let l:npm_bin = ''
