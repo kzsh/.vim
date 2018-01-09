@@ -160,6 +160,7 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
 Plug 'mattn/emmet-vim', { 'for': ['html','html5','eruby', 'jsx', 'javascript'] }
+Plug 'mattn/vim-xxdcursor'
 Plug 'mhinz/vim-startify'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
