@@ -854,6 +854,7 @@ augroup END
 set background=dark " set background color style
 colorscheme solarized
 "override statusline
-" hi StatusLine ctermbg=white ctermfg=234
-" hi StatusLineNC ctermbg=white ctermfg=234
-" hi VertSplit ctermbg=234 ctermfg=234
+
+hi StatusLine ctermbg=white ctermfg=8
+hi StatusLineNC ctermbg=white ctermfg=8
+hi VertSplit ctermbg=8 ctermfg=8
