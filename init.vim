@@ -782,8 +782,9 @@ map <Leader>vT :Tig!<CR>
 "==============================================================================
 " Vim Fugitive
 "==============================================================================
-map <Leader>vb :Gblame<CR>
-map <Leader>vl :Glog<CR>
+map <Leader><Leader>b :Gblame<CR>
+map <Leader><Leader>l :Glog<CR><CR>
+map <Leader><Leader>e :Gedit<CR>
 
 "==============================================================================
 " Session shortcuts
