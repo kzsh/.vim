@@ -380,6 +380,7 @@ nnoremap <Leader>of :FZF ./<CR>
 nnoremap <Leader>oaf :execute 'Files' FindGitRoot()<CR>
 nnoremap <Leader>occ :BCommits<CR>
 nnoremap <Leader>oca :Commits<CR>
+nnoremap <Leader>ol :Lines<CR>
 
 let g:fzf_commits_log_options = "--color=always --pretty=format:'%C(green)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit"
 
