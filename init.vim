@@ -789,7 +789,10 @@ map <Leader><Leader>e :Gedit<CR>
 "==============================================================================
 " Session shortcuts
 "==============================================================================
-map <Leader><Leader>s :mksession! ~/vimsession<CR>
+augroup auto_save_session
+  au!
+  autocmd BufReadPost,FileReadPost,BufNewFile * mksession! $VIM_DIR . "/.vimsession.vim"
+augroup END
 
 "==============================================================================
 " Diff shortcuts
