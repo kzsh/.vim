@@ -383,6 +383,7 @@ nnoremap <Leader>oca :Commits<CR>
 nnoremap <Leader>ol :Lines<CR>
 
 let g:fzf_commits_log_options = "--color=always --pretty=format:'%C(green)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit"
+let g:fzf_history_dir = g:kzsh#vim_dir . '/.tmp/fzf-history//'
 
 "==============================================================================
 " CtrlP
