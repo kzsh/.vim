@@ -141,6 +141,7 @@ set shiftround
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
 "Plug 'editorconfig/editorconfig-vim'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelection'] }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
@@ -155,11 +156,10 @@ Plug 'duggiefresh/vim-easydir'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
-Plug 'mattn/emmet-vim', { 'for': ['html','html5','jsx', 'javascript'] }
+Plug 'mattn/emmet-vim', { 'for': ['html','html5','eruby', 'jsx', 'javascript'] }
 Plug 'mhinz/vim-startify'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
