@@ -15,24 +15,24 @@ let g:colors_name = "yin"
 
 let s:palette = {}
 
-let s:palette.blackest = [232, '#080808']
-let s:palette.black = [234, '#1c1c1c']
-let s:palette.gray01 = [235, '#262626']
-let s:palette.gray02 = [238, '#444444']
-let s:palette.gray03 = [239, '#4e4e4e']
-let s:palette.gray04 = [240, '#585858']
-let s:palette.gray05 = [242, '#666666']
-let s:palette.gray06 = [243, '#767676']
-let s:palette.gray07 = [244, '#808080']
-let s:palette.gray08 = [245, '#8a8a8a']
-let s:palette.gray09 = [246, '#949494']
-let s:palette.gray10 = [247, '#9e9e9e']
-let s:palette.gray11 = [248, '#a8a8a8']
-let s:palette.gray12 = [249, '#b2b2b2']
-let s:palette.gray13 = [250, '#bcbcbc']
-let s:palette.gray14 = [251, '#c6c6c6']
-let s:palette.gray15 = [254, '#e4e4e4']
-let s:palette.white = [255, '#eeeeee']
+let s:palette.blackest = [237, '#080808']
+let s:palette.black = [239, '#1c1c1c']
+let s:palette.gray01 = [236, '#333333']
+let s:palette.gray02 = [243, '#444444']
+let s:palette.gray03 = [244, '#4e4e4e']
+let s:palette.gray04 = [245, '#585858']
+let s:palette.gray05 = [247, '#666666']
+let s:palette.gray06 = [248, '#767676']
+let s:palette.gray07 = [249, '#808080']
+let s:palette.gray08 = [250, '#8a8a8a']
+let s:palette.gray09 = [251, '#949494']
+let s:palette.gray10 = [252, '#9e9e9e']
+let s:palette.gray11 = [253, '#a8a8a8']
+let s:palette.gray12 = [254, '#b2b2b2']
+let s:palette.gray13 = [255, '#c9c9c9']
+let s:palette.gray14 = [256, '#c6c6c6']
+let s:palette.gray15 = [259, '#e4e4e4']
+let s:palette.white = [260, '#eeeeee']
 
 let s:palette.comments = copy(s:palette.gray03)
 
@@ -80,7 +80,7 @@ function! s:hi(group, fg_color, bg_color, style)
 endfunction
 
 
-call s:hi('Normal', s:palette.gray13, s:palette.black, '')
+call s:hi('Normal', s:palette.gray13, s:palette.gray01, '')
 set background=dark
 
 call s:hi('Constant', s:palette.gray05, [], 'bold')
