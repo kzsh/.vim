@@ -853,9 +853,9 @@ augroup encrypted
 augroup END
 
 set background=dark " set background color style
-colorscheme solarized
+colorscheme yin
 "override statusline
 
-hi StatusLine ctermbg=white ctermfg=8
-hi StatusLineNC ctermbg=white ctermfg=8
-hi VertSplit ctermbg=8 ctermfg=8
+hi StatusLine ctermbg=239 ctermfg=255
+hi StatusLineNC ctermbg=239 ctermfg=255
+hi VertSplit ctermbg=239 ctermfg=236
