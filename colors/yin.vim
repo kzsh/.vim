@@ -41,7 +41,7 @@ let s:palette.brown = [94, '#875f00']
 let s:palette.blue = [24, '#005f87']
 let s:palette.lightblue = [31, '#00afff']
 let s:palette.green = [29, '#00875f']
-let s:palette.red = [88, '#870000']
+let s:palette.red = [1, '#c99f9f']
 let s:palette.magenta = [89, '#87005f']
 
 if has("nvim") && (has("gui_running") || &termguicolors)
