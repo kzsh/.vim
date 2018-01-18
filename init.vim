@@ -853,8 +853,18 @@ augroup encrypted
   autocmd BufWritePost,FileWritePost *.gpg u
 augroup END
 
-set background=dark " set background color style
+let g:current_inversion_path = "~/.config/chunkwm/inversion_enabled"
+let g:current_inversion_state = readfile(glob(fnameescape(g:current_inversion_path)), '', 1)[0]
+
 colorscheme yin
+
+if g:current_inversion_state == 0
+  set background=dark " set background color style
+elseif g:current_inversion_state == 1
+  set background=light " set background color style
+end
+
+
 "override statusline
 
 hi StatusLine ctermbg=239 ctermfg=255
