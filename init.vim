@@ -467,11 +467,10 @@ map <Leader>ot <Esc>:NERDTreeToggle<CR>
 map <Leader>os <Esc>:Tagbar<CR>
 
 "==============================================================================
-" Run rspec and rubocop on the current file
+" Execute highlighted code
 "==============================================================================
-map <Leader>rs :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bundle exec rspec %;cd $CURR_DIR<cr>
-map <Leader>rr :w<cr>:!CURR_DIR=$(pwd); cd $(git rev-parse --show-toplevel); bundle exec rubocop %; cd $CURR_DIR<cr>
-
+noremap <Leader>rr :'<,'>!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
+noremap <Leader>rn :'<,'>!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
 "==============================================================================
 " Return to previous buffer with Tab
 "==============================================================================
