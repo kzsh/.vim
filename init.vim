@@ -183,7 +183,10 @@ Plug 'tpope/vim-git', { 'for': 'gitconfig' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'yuratomo/w3m.vim'
+
+if executable("w3m")
+  Plug 'yuratomo/w3m.vim'
+endif
 
 if has('nvim')
   Plug 'neomake/neomake'
