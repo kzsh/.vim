@@ -242,7 +242,6 @@ autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
 " vim-commentary settings
 autocmd FileType handlebars setlocal commentstring={{!%s}}
 
-
 let g:jsx_ext_required = 0
 
 "==============================================================================
@@ -402,7 +401,6 @@ let g:ctrlp_lazy_update = 60 " don't re-perform the search after every keystroke
 let g:ctrlp_reuse_window = 'startify'
 
 let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$' }
-
 
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
@@ -866,7 +864,6 @@ if g:current_inversion_state == 0
 elseif g:current_inversion_state == 1
   set background=light " set background color style
 end
-
 
 "override statusline
 
