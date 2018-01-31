@@ -161,7 +161,6 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
-Plug 'mattn/emmet-vim', { 'for': ['html','html5','eruby', 'jsx', 'javascript'] }
 Plug 'mattn/vim-xxdcursor'
 Plug 'mhinz/vim-startify'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
@@ -446,22 +445,28 @@ au BufRead,BufNewFile Podfile* set filetype=ruby
 au BufRead,BufNewFile *.jbuilder set filetype=ruby
 
 "==============================================================================
-" Emmet  (Zen Coding) configuration
+" Custom Completion using macros.  Similar to Emmet.
 "==============================================================================
-let g:user_emmet_mode='i'    "only enable normal mode functions.
-let g:user_emmet_expandabbr_key = '<c-e>'
-let g:user_emmet_next_key = '<c-k>'
-let g:use_emmet_complete_tag = 1
-let g:user_emmet_settings = {
-\  'lang' : 'en',
-\  'javascript' : {
-\    'extends' : 'javascript',
-\    'indentation' : '  ',
-\    'snippets' : {
-\      'f' : 'ftest',
-\    }
-\  }
+let g:macro_completions = {
+  \ 'f' : "ifunction() {\<cr>\<cr>}\<ESC>k^i\<space>\<space>"
 \}
+
+function! CompleteFromMacro()
+    let l:macro_name = expand("<cword>")
+    let l:macro = get(g:macro_completions, l:macro_name, "")
+    if !empty(l:macro)
+      silent! normal ciw
+      execute("normal! " . l:macro) | startinsert!
+    else
+      echo "No macro found for key: " . l:macro_name
+    endif
+endfunction
+
+command! -register CompleteFromMacro call CompleteFromMacro()
+
+inoremap <C-e> <Esc>:CompleteFromMacro<CR>
+nnoremap <Leader>cc :CompleteFromMacro<CR>
+
 "==============================================================================
 " open tagbar and nerdtree
 "==============================================================================
