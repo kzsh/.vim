@@ -594,7 +594,7 @@ autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespa
 "==============================================================================
 " Function to replace right and left quotes with un-justified quotes
 "==============================================================================
-function FixQuotes()
+function! FixQuotes()
   %s/[“”]/"/g
   %s/[‘’]/'/g
 endfunction
@@ -635,7 +635,7 @@ xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 "==============================================================================
 " vim-cd to top-level of git repo
 "==============================================================================
-function Cdg()
+function! Cdg()
   let root = FindGitRoot()
   cd `=root`
 endfunction
@@ -793,7 +793,7 @@ augroup END
 "==============================================================================
 
 " Toggle Vim diff on/off
-function ToggleVimDiff()
+function! ToggleVimDiff()
   if &diff
     diffoff
   else
