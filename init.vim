@@ -263,6 +263,9 @@ if has('nvim')
   "   let g:neomake_vim_vint_exe = g:python2_host_prog
   " endif
 
+let g:neomake_error_sign={'text': '!', 'texthl': 'NeomakeErrorMsg'}
+let g:neomake_warning_sign={'text': '?', 'texthl': 'NeomakeWarningMsg'}
+let g:neomake_info_sign={'text': 'i'}
   function! NeomakeESlintChecker()
     let l:npm_bin = ''
     let l:eslint = 'eslint'
@@ -853,3 +856,5 @@ end
 hi StatusLine ctermbg=239 ctermfg=255
 hi StatusLineNC ctermbg=239 ctermfg=255
 hi VertSplit ctermbg=239 ctermfg=236
+hi NeomakeErrorMsg ctermfg=161 ctermbg=236
+hi NeomakeWarningMsg ctermfg=230 ctermbg=236
