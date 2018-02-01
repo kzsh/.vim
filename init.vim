@@ -451,6 +451,34 @@ let g:macro_completions = {
   \ 'f' : "ifunction() {\<cr>\<cr>}\<ESC>k^i\<space>\<space>"
 \}
 
+sign define DetectedMacroCompletion text=M
+let g:detected_macro_completion_id = 999999
+execute "sign unplace" g:detected_macro_completion_id
+
+function! DetectMacroCompletion()
+    let l:macro_name = expand("<cword>")
+    let l:macro = get(g:macro_completions, l:macro_name, "")
+
+
+    execute "sign unplace" g:detected_macro_completion_id
+
+    if !empty(l:macro)
+      let bufnr = bufnr('%')
+      let line_number = line(".")
+      let name = "DetectedMacroCompletion"
+      execute "sign place" g:detected_macro_completion_id "line=" . line_number "name=" . name "buffer=" . bufnr
+    else
+      execute "sign unplace" g:detected_macro_completion_id
+    endif
+endfunction
+
+" augroup cursor_highlight
+"   au!
+"   autocmd CursorMoved * call DetectMacroCompletion()
+" augroup END
+
+" command! -register DetectMacroCompletion call DetectMacroCompletion()
+
 function! CompleteFromMacro()
     let l:macro_name = expand("<cword>")
     let l:macro = get(g:macro_completions, l:macro_name, "")
