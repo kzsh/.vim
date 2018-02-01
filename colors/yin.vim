@@ -142,7 +142,7 @@ call s:hi('PmenuSbar', s:palette.black, s:palette.gray15, 'none')
 call s:hi('PmenuSel', s:palette.gray03, s:palette.gray10, '')
 call s:hi('PmenuThumb', s:palette.gray03, s:palette.gray09, 'none')
 
-call s:hi('StatusLine', s:palette.gray11, s:palette.gray03, 'none')
+"call s:hi('StatusLine', s:palette.gray11, s:palette.gray03, 'none')
 call s:hi('StatusLineNC', s:palette.gray04, s:palette.gray01, 'none')
 call s:hi('WildMenu', s:palette.gray08, [], '')
 call s:hi('VertSplit', s:palette.gray03, s:palette.gray03, 'none')
