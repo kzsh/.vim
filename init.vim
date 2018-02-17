@@ -121,6 +121,8 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'mantiz/vim-plugin-dirsettings'
@@ -139,6 +141,7 @@ Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
 Plug 'mattn/vim-xxdcursor'
+Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
@@ -170,6 +173,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd BufNewFile,BufRead *.swift set filetype=swift
 
 "==============================================================================
 " Auto-save on mode change
@@ -208,7 +212,7 @@ autocmd Filetype m setlocal ts=4 sts=4 sw=4
 autocmd Filetype h setlocal ts=4 sts=4 sw=4
 autocmd Filetype wflow setlocal ts=4 sts=4 sw=4
 autocmd Filetype plist setlocal ts=4 sts=4 sw=4
-autocmd Filetype swift setlocal ts=4 sts=4 sw=4
+autocmd Filetype swift setlocal ts=2 sts=2 sw=2
 
 augroup WrapLineInFile
     autocmd!
