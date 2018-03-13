@@ -50,8 +50,6 @@ if has('vim_starting')
   set expandtab
   set noshowmode
 
-  set nowrap
-
   " Turn off swap files
   set noswapfile
   set nobackup
@@ -101,7 +99,6 @@ if has('vim_starting')
 
     set mouse=""
   endif
-
 endif
 
 set list " draw whitespace
