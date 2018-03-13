@@ -579,30 +579,6 @@ let g:ycm_min_num_of_chars_for_completion = 3
 let g:deoplete#enable_at_startup = 1
 
 "==============================================================================
-" Configure vim-airline
-"==============================================================================
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-"let g:airline_theme='understated'                   " Use the custom theme I wrote
-let g:airline#extensions#branch#enabled = 1         " Do not show the git branch in the status line
-let g:airline#extensions#syntastic#enabled = 1      " Do show syntastic warnings in the status line
-let g:airline#extensions#tabline#show_buffers = 0   " Do not list buffers in the status line
-
-let g:airline_section_x = ''                        " Do not list the filetype or virtualenv in the status line
-let g:airline_section_y = 'R[%03l/%L] C[%03v]'  " Replace file encoding and file format info with file position
-let g:airline_section_z = ''                        " Do not show the default file position info
-
-"==============================================================================
 " Remove trailing whitespaces
 "==============================================================================
 fun! <SID>StripTrailingWhitespaces()
