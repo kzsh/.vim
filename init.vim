@@ -809,7 +809,7 @@ map <Leader><Leader>e :Gedit<CR>
 "==============================================================================
 augroup auto_save_session
   au!
-  autocmd BufReadPost,FileReadPost,BufNewFile * mksession! $VIM_DIR . "/.vimsession.vim"
+  autocmd BufReadPost,FileReadPost,BufNewFile * execute("mksession! " . $VIM_DIR . "/.vimsession.vim")
 augroup END
 
 "==============================================================================
