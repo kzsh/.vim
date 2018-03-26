@@ -1,6 +1,6 @@
 "Vars
 let g:kzsh#vim_dir = '~/.config/nvim'
-" ============================================================================
+" ===========================================================================
 " Python setup
 " Skips if python is not installed in a pyenv virtualenv
 " ============================================================================
@@ -77,7 +77,7 @@ if has('vim_starting')
   set title
 
   set complete=.,w,b,u,t,i
-  set completeopt=longest,menuone
+  set completeopt=longest,menuone,preview
 
   " default to the system clipboard
   set clipboard=unnamed
