@@ -263,6 +263,7 @@ if has('nvim')
 let g:neomake_error_sign={'text': '!', 'texthl': 'NeomakeErrorMsg'}
 let g:neomake_warning_sign={'text': '?', 'texthl': 'NeomakeWarningMsg'}
 let g:neomake_info_sign={'text': 'i'}
+
   function! NeomakeESlintChecker()
     let l:npm_bin = ''
     let l:eslint = 'eslint'
@@ -503,6 +504,7 @@ map <Leader>os <Esc>:Tagbar<CR>
 "==============================================================================
 noremap <Leader>rr :'<,'>!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
 noremap <Leader>rn :'<,'>!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
+
 "==============================================================================
 " Return to previous buffer with Tab
 "==============================================================================
