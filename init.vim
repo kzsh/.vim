@@ -229,6 +229,8 @@ autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype m setlocal ts=4 sts=4 sw=4
 autocmd Filetype h setlocal ts=4 sts=4 sw=4
+autocmd Filetype wflow setlocal ts=4 sts=4 sw=4
+autocmd Filetype plist setlocal ts=4 sts=4 sw=4
 autocmd Filetype swift setlocal ts=4 sts=4 sw=4
 
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
