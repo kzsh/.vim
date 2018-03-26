@@ -429,12 +429,6 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
 
 "==============================================================================
-" Eclim settings:
-"==============================================================================
-let g:EclimCompletionMethod = 'omnifunc'
-let g:EclimFileTypeValidate = 0
-
-"==============================================================================
 " Set special char highlighting parames
 "==============================================================================
 hi SpecialKey term=bold cterm=bold ctermfg=16 guifg=#000
