@@ -681,7 +681,6 @@ let g:CASE_SENSITIVE=1
 let g:CASE_INSENSITIVE=0
 let g:AG_IGNORE_EXTENSION_LIST=['css']
 
-" alias :ag to :Ag
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
 
 function! GetAgInput()
