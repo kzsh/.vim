@@ -138,12 +138,16 @@ set shiftround
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
 "Plug 'editorconfig/editorconfig-vim'
+Plug 'powerman/vim-plugin-AnsiEsc'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelection'] }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
+Plug 'carlitux/deoplete-ternjs'
 Plug 'codeindulgence/vim-tig'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBookmarkDir', 'CtrlPBookmarkDirAdd', 'CtrlPBufTag', 'CtrlPBufTagAll', 'CtrlPBuffer', 'CtrlPChange', 'CtrlPChangeAll', 'CtrlPClearAllCaches', 'CtrlPClearCache', 'CtrlPCurFile', 'CtrlPCurWD', 'CtrlPDir', 'CtrlPLastMode', 'CtrlPLine', 'CtrlPMRUFiles', 'CtrlPMixed', 'CtrlPQuickfix', 'CtrlPRTS', 'CtrlPRoot', 'CtrlPTag', 'CtrlPUndo'] }
@@ -574,6 +578,27 @@ let g:ycm_min_num_of_chars_for_completion = 3
 " Configure Deoplete syntax completion engine
 "==============================================================================
 let g:deoplete#enable_at_startup = 1
+
+"call deoplete#enable_logging('DEBUG', 'deoplete.log')
+
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx'
+                \ ]
+
+function! DeopleteTernBin()
+  if executable('npm')
+    let l:npm_bin = split(system('npm bin'), '\n')[0]
+  endif
+
+  if strlen(l:npm_bin) && executable(l:npm_bin . '/tern')
+    let l:tern = l:npm_bin . '/tern'
+    let g:deoplete#sources#ternjs#tern_bin = l:tern
+  endif
+
+endfunction
+
+autocmd FileType javascript.jsx :call DeopleteTernBin()
 
 "==============================================================================
 " Remove trailing whitespaces
