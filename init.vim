@@ -150,7 +150,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'codeindulgence/vim-tig'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
-Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBookmarkDir', 'CtrlPBookmarkDirAdd', 'CtrlPBufTag', 'CtrlPBufTagAll', 'CtrlPBuffer', 'CtrlPChange', 'CtrlPChangeAll', 'CtrlPClearAllCaches', 'CtrlPClearCache', 'CtrlPCurFile', 'CtrlPCurWD', 'CtrlPDir', 'CtrlPLastMode', 'CtrlPLine', 'CtrlPMRUFiles', 'CtrlPMixed', 'CtrlPQuickfix', 'CtrlPRTS', 'CtrlPRoot', 'CtrlPTag', 'CtrlPUndo'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'duggiefresh/vim-easydir'
@@ -391,36 +390,6 @@ let g:fzf_history_dir = g:kzsh#vim_dir . '/.tmp/fzf-history//'
 " let g:fzf_action = {
 "   \ 'ctrl-alt-j': 'down',
 "   \ 'ctrl-alt-k': 'up' }
-
-"==============================================================================
-" CtrlP
-"==============================================================================
-"nnoremap <silent> <C-p> :CtrlP<CR>
-"map <Leader>fs :CtrlPTag<CR>
-nnoremap <Leader>orf :CtrlP<CR>
-nnoremap <Leader>oro :CtrlPBuffer<CR>
-nnoremap <Leader>orc :CtrlPCurFile<CR>
-
-let g:ctrlp_lazy_update = 60 " don't re-perform the search after every keystroke
-let g:ctrlp_reuse_window = 'startify'
-
-let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](bin|build|dist|lib|eclipse|tmp|vendor|node_modules|bower_components)$' }
-
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
-else
-  let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
-endif
-
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("h")': ['<c-cr>', '<c-s>'],
-    \ 'PrtClearCache()':      ['<c-x>']
-  \ }
-
-let g:ctrlp_regexp = 1
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20'
 
 "==============================================================================
 " EditorConfig configuration
