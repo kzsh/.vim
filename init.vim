@@ -361,11 +361,6 @@ if !has('nvim')
   let g:syntastic_javascript_checkers=['eslint', 'checknewline']
   let g:syntastic_ruby_checkers=['rubocop']
   let g:syntastic_css_checkers=['csslint']
-
-  "Status line override (working with Syntastic)
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
 endif
 
 "==============================================================================
