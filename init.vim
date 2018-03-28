@@ -236,6 +236,12 @@ autocmd Filetype wflow setlocal ts=4 sts=4 sw=4
 autocmd Filetype plist setlocal ts=4 sts=4 sw=4
 autocmd Filetype swift setlocal ts=4 sts=4 sw=4
 
+augroup WrapLineInFile
+    autocmd!
+    autocmd FileType markdown setlocal linebreak
+    autocmd FileType markdown setlocal textwidth=80
+augroup END
+
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
 autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
 
