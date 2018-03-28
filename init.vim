@@ -123,7 +123,7 @@ set foldlevelstart=1
 set nofoldenable        "dont fold by default
 set shortmess+=I " don't show splash screen
 set lazyredraw " Prevent UI from drawing during macro execution.
-set laststatus=2 " display status line always (useful with Powerline plugin)
+set laststatus=1
 
 set formatoptions=qrn1
 
@@ -855,8 +855,8 @@ end
 
 "override statusline
 
-hi StatusLine ctermbg=239 ctermfg=255
-hi StatusLineNC ctermbg=239 ctermfg=255
-hi VertSplit ctermbg=239 ctermfg=236
+hi StatusLine ctermbg=236 ctermfg=254
+hi StatusLineNC ctermbg=236 ctermfg=254
+hi VertSplit ctermbg=236 ctermfg=254
 hi NeomakeErrorMsg ctermfg=161 ctermbg=236
 hi NeomakeWarningMsg ctermfg=230 ctermbg=236
