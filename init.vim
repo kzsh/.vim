@@ -137,13 +137,9 @@ set shiftround
 " Load Plugins
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
-"Plug 'editorconfig/editorconfig-vim'
-Plug 'powerman/vim-plugin-AnsiEsc'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
 Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelection'] }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
@@ -156,6 +152,7 @@ Plug 'duggiefresh/vim-easydir'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'junegunn/goyo.vim'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
@@ -169,6 +166,7 @@ Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'osyo-manga/vim-over', { 'on': ['OverCommandLine', 'OverCommandLineMap', 'OverCommandLineNoremap', 'OverCommandLineUnmap'] }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -181,6 +179,7 @@ Plug 'tpope/vim-git', { 'for': 'gitconfig' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'zchee/deoplete-jedi'
 
 if executable("w3m")
   Plug 'yuratomo/w3m.vim'
