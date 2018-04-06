@@ -1,89 +1,111 @@
-"Vars
-let g:kzsh#vim_dir = '~/.config/nvim'
-" ===========================================================================
-" Python setup
-" Skips if python is not installed in a pyenv virtualenv
-" ============================================================================
-
-" Python 3
-" ----------------------------------------------------------------------------
-
-let s:pyenv_python3 = glob(expand('$PYENV_ROOT/versions/neovim3/bin/python'))
-if !empty(s:pyenv_python3)
-  let g:python_host_prog  = s:pyenv_python3
-  let g:python3_host_prog = s:pyenv_python3
-else
-  let g:loaded_python3_provider = 1
-endif
-
-" Python 2
-" ----------------------------------------------------------------------------
-
-let s:pyenv_python2 = glob(expand('$PYENV_ROOT/versions/neovim2/bin/python'))
-if !empty(s:pyenv_python2)
-  let g:python_host_prog  = s:pyenv_python2
-else
-  let g:loaded_python_provider = 1
-endif
-
 "==============================================================================
 " Startup-only commands
 "==============================================================================
 if has('vim_starting')
+  let g:kzsh#vim_dir = '~/.config/nvim'
+
+  " ----------------------------------------------------------------------------
+  " Python Venv
+  " ----------------------------------------------------------------------------
+  " Python 3
+  let s:pyenv_python3 = glob(expand('$PYENV_ROOT/versions/neovim3/bin/python'))
+  if !empty(s:pyenv_python3)
+    let g:python_host_prog  = s:pyenv_python3
+    let g:python3_host_prog = s:pyenv_python3
+  else
+    let g:loaded_python3_provider = 1
+  endif
+
+  " Python 2
+  let s:pyenv_python2 = glob(expand('$PYENV_ROOT/versions/neovim2/bin/python'))
+  if !empty(s:pyenv_python2)
+    let g:python_host_prog  = s:pyenv_python2
+  else
+    let g:loaded_python_provider = 1
+  endif
+
+  " ----------------------------------------------------------------------------
+  " Core Configuration
+  " ----------------------------------------------------------------------------
+  let g:mapleader = "\<Space>"
+
+  " Runtime Behavior
+  " ----------------------------------------------------------------------------
   if &compatible
     set nocompatible
   endif
+  set path=.,**,,FindGitRoot(),
 
-  filetype off
-  filetype plugin indent on
-
-  set noerrorbells
-  set number " display line numbers
-  set backspace=indent,eol,start " backspace will traverse indent, eol, start
+  set lazyredraw " Prevent UI from drawing during macro execution.
+  set laststatus=1
   set showcmd
-
-  set smartindent
-  set autoindent
-
-  set tabstop=2
-  set shiftwidth=2
-  set expandtab
   set noshowmode
+  set noerrorbells
+  set shortmess+=rsI
+  set re=1 " set regex engine
+  set autoread
+  set hidden " only hide buffers, to preserve undo history when returning to other buffers
+  set scrolloff=8
+  set sidescrolloff=5
+  set list " draw whitespace
+  set listchars=tab:>-,trail:~,extends:>,precedes:<
+  set hlsearch " highlight matches
+  set incsearch " start searching as text is entered
+
+  " set timeout when looking for key combinations
+  set notimeout
+  set ttimeout
+  set ttimeoutlen=10
 
   " Turn off swap files
   set noswapfile
   set nobackup
   set nowritebackup
 
-  set autowrite
-  set autoread
-
-  set hidden " only hide buffers, to preserve undo history when returning to other buffers
-
-  set showbreak=↪\
-  set scrolloff=8
-  set sidescrolloff=5
-
-  set wildmenu
-  set wildmode=longest:full,full
-  set wildignore+=*.git,*.hg,*.svn,*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
-  "set showmatch " Show matching
-
-  " set timeout when looking for key combinations
-  set notimeout
-  set ttimeout
-  set ttimeoutlen=10
-  set title
-
-  set complete=.,w,b,u,t,i
-  set completeopt=longest,menuone,preview
-
-  " default to the system clipboard
+  " Use system clipboard
   set clipboard=unnamed
   set clipboard+=unnamedplus
 
-  let g:mapleader = "\<Space>"
+  if has('nvim')
+    set mouse=""
+  endif
+
+  " Syntax
+  " ----------------------------------------------------------------------------
+  filetype plugin indent on
+
+  " Display
+  " ----------------------------------------------------------------------------
+  set number " display line numbers
+  set showbreak=↪\
+  syntax enable
+  set synmaxcol=512 " syntax highlight long lines
+  autocmd BufEnter * :syntax sync fromstart
+
+  " Navigation
+  " ----------------------------------------------------------------------------
+  set backspace=indent,eol,start " backspace will traverse indent, eol, start
+
+  " Formatting
+  " ----------------------------------------------------------------------------
+  set smartindent
+  set autoindent
+  set tabstop=2
+  set shiftwidth=2
+  set expandtab
+  set foldmethod=syntax
+  set foldlevelstart=1
+  set nofoldenable
+  set formatoptions=qrn1j
+  set shiftround
+
+  " Autocomplete
+  " ----------------------------------------------------------------------------
+  set wildmenu
+  set wildmode=longest:full,full
+  set wildignore+=*.git,*.hg,*.svn,*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+  set complete=.,w,b,u,t,i
+  set completeopt=longest,menuone,preview
 
   " undo files
   " double slash means create dir structure to mirror file's path
@@ -91,60 +113,18 @@ if has('vim_starting')
   set undolevels=1000
   set undoreload=10000
   execute 'set undodir=' . g:kzsh#vim_dir . '/.tmp/undo//'
-
-  if has('nvim')
-    " Get around Ctrl-h sending backspace
-    " No longer necessary after fixing terminfo: infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti && tic && tic $TERM.ti
-    "nmap <BS> <C-W>h
-
-    set mouse=""
-  endif
 endif
-
-set list " draw whitespace
-
-" what to replace various white space
-" chars with
-set listchars=tab:>-,trail:~,extends:>,precedes:<
-
-" set our vim path to look in the current directory of the file we are
-" editing, all sub directories, the directory from which vim was launched.
-set path=.,**,,FindGitRoot(),
-
-" SEARCH
-set hlsearch " highlight matches
-set incsearch " start searching as text is entered
-
-"DO NOT SET t_Co
-"set t_Co=256
-" COLORS
-set foldmethod=syntax
-set foldlevelstart=1
-set nofoldenable        "dont fold by default
-set shortmess+=I " don't show splash screen
-set lazyredraw " Prevent UI from drawing during macro execution.
-set laststatus=1
-
-set formatoptions=qrn1
-
-set re=1
-
-" >> moves to the nearest whole tab multiple rather than just by amount == tabwidth
-" http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
-set shiftround
 
 "==============================================================================
 " Load Plugins
 "==============================================================================
 call plug#begin('~/.config/nvim/plugged')
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'JarrodCTaylor/vim-shell-executor', { 'on': ['ExecuteBuffer','ExecuteSelection'] }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
 Plug 'carlitux/deoplete-ternjs'
-Plug 'codeindulgence/vim-tig'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
@@ -158,12 +138,9 @@ Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarClose', 'TagbarCurrentTag', 'TagbarDebug', 'TagbarDebugEnd', 'TagbarGetTypeConfig'] }
 Plug 'mattn/vim-xxdcursor'
-Plug 'mhinz/vim-startify'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
-Plug 'osyo-manga/vim-over', { 'on': ['OverCommandLine', 'OverCommandLineMap', 'OverCommandLineNoremap', 'OverCommandLineUnmap'] }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'powerman/vim-plugin-AnsiEsc'
@@ -180,23 +157,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'zchee/deoplete-jedi'
-
-if executable("w3m")
-  Plug 'yuratomo/w3m.vim'
-endif
-
-if has('nvim')
-  Plug 'neomake/neomake'
-else
-  Plug 'scrooloose/syntastic'
-endif
-
+Plug 'neomake/neomake'
 call plug#end()
-
-"==============================================================================
-" Auto-save
-"==============================================================================
-" autocmd InsertLeave * :w<CR>
 
 "==============================================================================
 " configure omnicomplete settings
@@ -209,17 +171,29 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType c set omnifunc=ccomplete#Complete
 
 "==============================================================================
-" Syntax highlighting configuration
+" Auto-save on mode change
+"
+" This works best with undos stored between sessions
 "==============================================================================
-syntax enable
-set synmaxcol=512 " syntax highlight long lines
 
-"http://vim.wikia.com/wiki/Fix_syntax_highlighting
-"recalculate syntax highlighting from the start of the file on change
-autocmd BufEnter * :syntax sync fromstart
+function! AutoSaveIfFile()
+  if len(@%)
+    execute(":w")
+  endif
+endfunction
+
+augroup Autosave
+  autocmd InsertLeave * call AutoSaveIfFile()
+augroup END
 
 "==============================================================================
-" Indentation, spaces
+" Set terminal title (for use with chunkwm -- detecting a vim session
+"==============================================================================
+set title
+autocmd BufEnter * let &titlestring = "vim_hook(" . expand("%:t") . ")"
+
+"==============================================================================
+" FileType-specific formatting
 "==============================================================================
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
@@ -238,21 +212,39 @@ autocmd Filetype swift setlocal ts=4 sts=4 sw=4
 augroup WrapLineInFile
     autocmd!
     autocmd FileType markdown setlocal linebreak
+    autocmd FileType markdown setlocal formatoptions+=t
     autocmd FileType markdown setlocal textwidth=80
 augroup END
 
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
 autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
 
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.mkd set filetype=markdown
+autocmd BufRead,BufNewFile Podfile* set filetype=ruby
+autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
+
+"==============================================================================
+" Set special char highlighting parames
+"==============================================================================
+hi SpecialKey term=bold cterm=bold ctermfg=16 guifg=#000
+hi NonText term=bold cterm=bold ctermfg=16 guifg=#000
+
+"==============================================================================
+" Return to previous buffer with Tab
+"==============================================================================
+nnoremap <special> <Tab> <C-^>
+
+"==============================================================================
+" Swap backtic and single quote
+"==============================================================================
+nnoremap ' `
+nnoremap ` '
+
+"==============================================================================
 " vim-commentary settings
+"==============================================================================
 autocmd FileType handlebars setlocal commentstring={{!%s}}
-
-let g:jsx_ext_required = 0
-
-"==============================================================================
-" Set terminal title (for use with chunkwm -- detecting a vim session
-"==============================================================================
-autocmd BufEnter * let &titlestring = "vim_hook(" . expand("%:t") . ")"
 
 "==============================================================================
 " NeoMake Configuration
@@ -262,15 +254,9 @@ if has('nvim')
 
   let g:neomake_logfile = '/tmp/neomake_error.log'
 
-  " if ! empty(g:python3_host_prog)
-  "   let g:neomake_vim_vint_exe = g:python3_host_prog
-  " elseif ! empty(g:python2_host_prog)
-  "   let g:neomake_vim_vint_exe = g:python2_host_prog
-  " endif
-
-let g:neomake_error_sign={'text': '!', 'texthl': 'NeomakeErrorMsg'}
-let g:neomake_warning_sign={'text': '?', 'texthl': 'NeomakeWarningMsg'}
-let g:neomake_info_sign={'text': 'i'}
+  let g:neomake_error_sign={'text': '!', 'texthl': 'NeomakeErrorMsg'}
+  let g:neomake_warning_sign={'text': '?', 'texthl': 'NeomakeWarningMsg'}
+  let g:neomake_info_sign={'text': 'i'}
 
   function! NeomakeESlintChecker()
     let l:npm_bin = ''
@@ -351,34 +337,6 @@ else
   let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 endif
 
-"Omni Complete
-
-"==============================================================================
-" Syntastic configuration
-"==============================================================================
-if !has('nvim')
-  let g:syntastic_check_on_open=1
-  let g:syntastic_enable_signs=1
-
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loclist=1
-
-  "let g:syntastic_quiet_messages = {'level': 'warnings'}
-  let g:syntastic_error_symbol='✗'
-  let g:syntastic_warning_symbol='⚠'
-  let g:syntastic_javascript_checkers=['eslint', 'checknewline']
-  let g:syntastic_ruby_checkers=['rubocop']
-  let g:syntastic_css_checkers=['csslint']
-endif
-
-"==============================================================================
-" Startify
-"==============================================================================
-let g:startify_change_to_vcs_root = 1
-let g:startify_custom_indices = ["a", "s", "d", "f", "g", "z", "x", "c", "v", "b", "q", "w", "e", "r", "t"]
-
-let g:startify_custom_header = []
-
 "==============================================================================
 " FZF
 "==============================================================================
@@ -395,24 +353,6 @@ let g:fzf_history_dir = g:kzsh#vim_dir . '/.tmp/fzf-history//'
 " let g:fzf_action = {
 "   \ 'ctrl-alt-j': 'down',
 "   \ 'ctrl-alt-k': 'up' }
-
-"==============================================================================
-" EditorConfig configuration
-"==============================================================================
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
-
-"==============================================================================
-" Set special char highlighting parames
-"==============================================================================
-hi SpecialKey term=bold cterm=bold ctermfg=16 guifg=#000
-hi NonText term=bold cterm=bold ctermfg=16 guifg=#000
-
-au BufNewFile,BufRead *.md set filetype=markdown
-au BufNewFile,BufRead *.mkd set filetype=markdown
-
-au BufRead,BufNewFile Podfile* set filetype=ruby
-au BufRead,BufNewFile *.jbuilder set filetype=ruby
 
 "==============================================================================
 " Custom Completion using macros.  Similar to Emmet.
@@ -466,34 +406,20 @@ inoremap <C-e> <Esc>:CompleteFromMacro<CR>
 nnoremap <Leader>cc :CompleteFromMacro<CR>
 
 "==============================================================================
-" open tagbar and nerdtree
+" NerdTree
 "==============================================================================
 map <Leader>ot <Esc>:NERDTreeToggle<CR>
 
+"==============================================================================
+" TagBar and nerdtree
+"==============================================================================
 map <Leader>os <Esc>:Tagbar<CR>
 
 "==============================================================================
-" Execute highlighted code
+" Execute visual-selection
 "==============================================================================
 noremap <Leader>rr :'<,'>!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
 noremap <Leader>rn :'<,'>!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
-
-"==============================================================================
-" Return to previous buffer with Tab
-"==============================================================================
-nnoremap  <special>   <Tab>  <C-^>
-
-"==============================================================================
-" Swap backtic and single quote
-"==============================================================================
-nnoremap ' `
-nnoremap ` '
-
-"==============================================================================
-" remap to-top and to-bottom to be to-left and to-right
-"==============================================================================
-nnoremap H ^
-nnoremap L $
 
 "==============================================================================
 " Resize panes with arrow keys and shift
@@ -519,39 +445,10 @@ tnoremap <Leader><Esc> <C-\><C-n>
 nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
 
 "==============================================================================
-" function to identify repeating lines
-" https://stackoverflow.com/questions/1268032/marking-duplicate-lines
-"==============================================================================
-function! HighlightRepeats() range
-  let lineCounts = {}
-  let lineNum = a:firstline
-  while lineNum <= a:lastline
-    let lineText = getline(lineNum)
-    if lineText != ""
-      let lineCounts[lineText] = (has_key(lineCounts, lineText) ? lineCounts[lineText] : 0) + 1
-    endif
-    let lineNum = lineNum + 1
-  endwhile
-  exe 'syn clear Repeat'
-  for lineText in keys(lineCounts)
-    if lineCounts[lineText] >= 2
-      exe 'syn match Repeat "^' . escape(lineText, '".\^$*[]') . '$"'
-    endif
-  endfor
-endfunction
-
-command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
-
-"==============================================================================
-" Configure YouCompleteMe syntax completion engine
-"==============================================================================
-"YouCompleteMe Configuration
-let g:ycm_min_num_of_chars_for_completion = 3
-
-"==============================================================================
 " Configure Deoplete syntax completion engine
 "==============================================================================
 let g:deoplete#enable_at_startup = 1
+let g:jsx_ext_required = 0
 
 "call deoplete#enable_logging('DEBUG', 'deoplete.log')
 
@@ -599,7 +496,6 @@ endfunction
 " Shortcuts for manipulating tabs
 "==============================================================================
 nmap <Leader>t% :tabedit %<CR>
-nmap <Leader>td :tabclose<CR>
 nmap <Leader>te :tabe<CR>
 
 "==============================================================================
@@ -613,20 +509,6 @@ autocmd VimLeave * call system("tmux setw automatic-rename")
 "==============================================================================
 autocmd BufNewFile,BufRead *.js nnoremap <Leader>tt :!mocha %<CR>
 autocmd BufNewFile,BufRead *.rb nnoremap <Leader>tt :!rspec %<CR>
-
-"==============================================================================
-" Visual find and replace
-"==============================================================================
-function! VisualFindAndReplace()
-  :OverCommandLine%s/
-endfunction
-
-function! VisualFindAndReplaceWithSelection() range
-  :'<,'>OverCommandLine s/
-endfunction
-
-nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
-xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 
 "==============================================================================
 " vim-cd to top-level of git repo
@@ -646,20 +528,7 @@ function! RemoveExtraEmptyLines()
 endfunction
 
 "==============================================================================
-" Switch between color scheme that highlights/hides comments
-"==============================================================================
-function! ToggleCommentColors()
-  if g:colors_name == 'monokai_light_comments'
-    :colorscheme monokai
-  else
-    :colorscheme monokai_light_comments
-  endif
-endfunction
-
-" nmap <Leader>ll :call ToggleCommentColors()<CR>
-
-"==============================================================================
-" copy search matches to register e.g. :CopyMatches a
+" Copy search matches to register e.g. :CopyMatches a
 "==============================================================================
 function! CopyMatches(reg)
   let hits = []
@@ -670,7 +539,7 @@ endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 "==============================================================================
-" Using AG to find things in a project
+" Functions to put ag results in a quickfix list
 "==============================================================================
 
 " Highlight match in results in quickfix
@@ -737,11 +606,10 @@ function! Wagi()
 endfunction
 
 nmap <Leader>ff :call SearchAg('filesystem')<CR>
-nmap <Leader>fc :call SearchAg('filesystem')<CR>
 nmap <Leader>fw :call SearchWordAg('filesystem', g:CASE_SENSITIVE)<CR>
 nmap <Leader>fiw :call SearchWordAg('filesystem', g:CASE_INSENSITIVE)<CR>
-nmap <Leader>fb :call SearchAg('buffer')<CR>
-nmap <Leader>fib :call SearchWordAg('buffer', g:CASE_INSENSITIVE)<CR>
+nmap <Leader>bb :call SearchAg('buffer')<CR>
+nmap <Leader>bib :call SearchWordAg('buffer', g:CASE_INSENSITIVE)<CR>
 
 "==============================================================================
 " Go to next/prev error
@@ -759,16 +627,6 @@ function! Mapped(fn, l)
 endfunction
 
 "==============================================================================
-" VimWiki
-"==============================================================================
-let g:vimwiki_list = [{'path': '~/kb/', 'path_html': '~/kb_html/'}]
-"==============================================================================
-" Vim Tig
-"==============================================================================
-map <Leader>vt :tabedit<CR>:term tig<CR>
-map <Leader>vT :Tig!<CR>
-
-"==============================================================================
 " Vim Fugitive
 "==============================================================================
 map <Leader><Leader>b :Gblame<CR>
@@ -776,15 +634,15 @@ map <Leader><Leader>l :Glog<CR><CR>
 map <Leader><Leader>e :Gedit<CR>
 
 "==============================================================================
-" Session shortcuts
+" Automatic Session Persistence
 "==============================================================================
-augroup auto_save_session
+augroup AutoSaveSession
   au!
   autocmd BufReadPost,FileReadPost,BufNewFile * execute("mksession! " . $VIM_DIR . "/.vimsession.vim")
 augroup END
 
 "==============================================================================
-" Diff shortcuts
+" Diff Shortcuts
 "==============================================================================
 
 " Toggle Vim diff on/off
@@ -808,51 +666,9 @@ function! FindGitRoot()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
-"==============================================================================
-" Transparent editing of gpg encrypted files.
-" By Wouter Hanegraaff
-"==============================================================================
-augroup encrypted
-  au!
-
-  " First make sure nothing is written to ~/.viminfo while editing
-  " an encrypted file.
-  autocmd BufReadPre,FileReadPre *.gpg set viminfo=
-  " We don't want a various options which write unencrypted data to disk
-  autocmd BufReadPre,FileReadPre *.gpg set noswapfile noundofile nobackup
-
-  " Switch to binary mode to read the encrypted file
-  autocmd BufReadPre,FileReadPre *.gpg set bin
-  autocmd BufReadPre,FileReadPre *.gpg let ch_save = &ch|set ch=2
-  " (If you use tcsh, you may need to alter this line.)
-  autocmd BufReadPost,FileReadPost *.gpg '[,']!gpg --decrypt 2> /dev/null
-
-  " Switch to normal mode for editing
-  autocmd BufReadPost,FileReadPost *.gpg set nobin
-  autocmd BufReadPost,FileReadPost *.gpg let &ch = ch_save|unlet ch_save
-  autocmd BufReadPost,FileReadPost *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
-
-  " Convert all text to encrypted text before writing
-  " (If you use tcsh, you may need to alter this line.)
-  autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>/dev/null
-  " Undo the encryption so we are back in the normal text, directly
-  " after the file has been written.
-  autocmd BufWritePost,FileWritePost *.gpg u
-augroup END
-
-let g:current_inversion_path = "~/.config/chunkwm/inversion_enabled"
-let g:current_inversion_state = readfile(glob(fnameescape(g:current_inversion_path)), '', 1)[0]
-
 colorscheme yin
 
-if g:current_inversion_state == 0
-  set background=dark " set background color style
-elseif g:current_inversion_state == 1
-  set background=light " set background color style
-end
-
 "override statusline
-
 hi StatusLine ctermbg=236 ctermfg=254
 hi StatusLineNC ctermbg=236 ctermfg=254
 hi VertSplit ctermbg=236 ctermfg=254
