@@ -607,9 +607,10 @@ endfunction
 
 nmap <Leader>ff :call SearchAg('filesystem')<CR>
 nmap <Leader>fw :call SearchWordAg('filesystem', g:CASE_SENSITIVE)<CR>
-nmap <Leader>fiw :call SearchWordAg('filesystem', g:CASE_INSENSITIVE)<CR>
+nmap <Leader>fi :call SearchWordAg('filesystem', g:CASE_INSENSITIVE)<CR>
 nmap <Leader>bb :call SearchAg('buffer')<CR>
-nmap <Leader>bib :call SearchWordAg('buffer', g:CASE_INSENSITIVE)<CR>
+nmap <Leader>bw :call SearchWordAg('buffer', g:CASE_SENSITIVE)<CR>
+nmap <Leader>bi :call SearchAg('buffer')<CR>
 
 "==============================================================================
 " Go to next/prev error
