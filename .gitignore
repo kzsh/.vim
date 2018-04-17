@@ -14,4 +14,5 @@ tags
 eclim/*
 
 # ignore installed plugins.  These are captured in .vimrc Plugged entries
-plugged/
+lib/
+rpc-plugins
