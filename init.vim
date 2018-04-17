@@ -224,6 +224,7 @@ autocmd Filetype h setlocal ts=4 sts=4 sw=4
 autocmd Filetype wflow setlocal ts=4 sts=4 sw=4
 autocmd Filetype plist setlocal ts=4 sts=4 sw=4
 autocmd Filetype swift setlocal ts=2 sts=2 sw=2
+autocmd Filetype applescript setlocal ts=4 sts=4 sw=4 noexpandtab
 
 augroup WrapLineInFile
     autocmd!
@@ -239,6 +240,7 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.mkd set filetype=markdown
 autocmd BufRead,BufNewFile Podfile* set filetype=ruby
 autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
+autocmd BufRead,BufNewFile *.applescript set filetype=applescript
 
 "==============================================================================
 " Set special char highlighting parames
