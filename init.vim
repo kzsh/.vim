@@ -213,10 +213,10 @@ autocmd BufEnter * let &titlestring = "vim_hook(" . expand("%:t") . ")"
 "==============================================================================
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
-autocmd Filetype css  setlocal ts=2 sts=2 sw=2
-autocmd Filetype tag  setlocal ts=2 sts=2 sw=2
-autocmd Filetype xml  setlocal ts=2 sts=2 sw=2
-autocmd Filetype jsp  setlocal ts=2 sts=2 sw=2
+autocmd Filetype css setlocal ts=2 sts=2 sw=2
+autocmd Filetype tag setlocal ts=2 sts=2 sw=2
+autocmd Filetype xml setlocal ts=2 sts=2 sw=2
+autocmd Filetype jsp setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype m setlocal ts=4 sts=4 sw=4
