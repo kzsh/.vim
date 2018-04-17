@@ -197,6 +197,8 @@ function! AutoSaveIfFile()
 endfunction
 
 augroup Autosave
+  au!
+
   autocmd InsertLeave * silent! call AutoSaveIfFile()
 augroup END
 
