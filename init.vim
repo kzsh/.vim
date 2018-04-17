@@ -332,13 +332,11 @@ if has('nvim')
       \ }
 
   let g:neomake_javascript_checknewline_maker = g:neomake_checknewline_error_format
-  let g:neomake_jsx_checknewline_maker = g:neomake_checknewline_error_format
   let g:neomake_scss_checknewline_maker = g:neomake_checknewline_error_format
   let g:neomake_sass_checknewline_maker = g:neomake_checknewline_error_format
   "let g:neomake_scss_sasslint_maker = ['sass-lint']
 
   let g:neomake_javascript_enabled_makers = ['eslint', 'checknewline']
-  let g:neomake_jsx_enabled_makers = ['eslint', 'checknewline']
   let g:neomake_ruby_enabled_makers = ['rubocop']
   "let g:neomake_scss_enabled_makers = ['sasslint']
   let g:neomake_scss_enabled_makers = ['checknewline']
@@ -471,14 +469,12 @@ nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
 " Configure Deoplete syntax completion engine
 "==============================================================================
 let g:deoplete#enable_at_startup = 1
-let g:jsx_ext_required = 0
 
 "call deoplete#enable_logging('DEBUG', 'deoplete.log')
 
 let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'javascript.jsx'
-                \ ]
+\ 'javascript'
+\ ]
 
 function! DeopleteTernBin()
   if executable('npm')
