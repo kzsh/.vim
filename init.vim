@@ -626,9 +626,9 @@ map <Leader>p :lprev<CR>
 "==============================================================================
 " Vim Fugitive
 "==============================================================================
-map <Leader><Leader>b :Gblame<CR>
-map <Leader><Leader>l :Glog<CR><CR>
-map <Leader><Leader>e :Gedit<CR>
+map <Leader>lb :Gblame<CR>
+map <Leader>ll :Glog<CR><CR>
+map <Leader>le :Gedit<CR>
 
 "==============================================================================
 " Automatic Session Persistence
