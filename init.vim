@@ -321,9 +321,11 @@ if has('nvim')
     let b:neomake_sass_sasslint_exe = l:sasslint
   endfunction
 
-  autocmd FileType scss :call NeomakeSasslintChecker()
-
-  autocmd FileType javascript.jsx :call NeomakeESlintChecker()
+  augroup NeomakeFileSpecificCheckers
+    au!
+    autocmd FileType scss :call NeomakeSasslintChecker()
+    autocmd FileType javascript :call NeomakeESlintChecker()
+  augroup END
 
   let g:neomake_checknewline_error_format = {
       \ 'errorformat': '%f:%l: %m',
