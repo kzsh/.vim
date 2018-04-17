@@ -151,6 +151,7 @@ Plug 'majutsushi/tagbar', { 'on': ['Tagbar',  'TagbarClose',  'TagbarCurrentTag'
 Plug 'mattn/vim-xxdcursor'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
+Plug 'neomake/neomake'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
@@ -169,7 +170,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'zchee/deoplete-jedi'
-Plug 'neomake/neomake'
 call plug#end()
 
 "==============================================================================
