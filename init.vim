@@ -151,7 +151,6 @@ Plug 'majutsushi/tagbar', { 'on': ['Tagbar',  'TagbarClose',  'TagbarCurrentTag'
 Plug 'mattn/vim-xxdcursor'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
-Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
