@@ -81,6 +81,7 @@ if has('vim_starting')
   syntax enable
   set synmaxcol=512 " syntax highlight long lines
   autocmd BufEnter * :syntax sync fromstart
+  set splitright
 
   " Navigation
   " ----------------------------------------------------------------------------
