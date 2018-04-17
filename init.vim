@@ -70,6 +70,14 @@ if has('vim_starting')
     set mouse=""
   endif
 
+  for rpc_plugin in globpath($VIM_DIR . "/rpc-plugins", '*', 0, 1)
+    if (isdirectory(rpc_plugin))
+      for plugin in globpath(rpc_plugin, "*", 0, 1)
+        let &runtimepath.=",".plugin
+      endfor
+    endif
+  endfor
+
   " Syntax
   " ----------------------------------------------------------------------------
   filetype plugin indent on
