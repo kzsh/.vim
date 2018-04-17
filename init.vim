@@ -278,26 +278,27 @@ if has('nvim')
 
   function! NeomakeESlintChecker()
     let l:npm_bin = ''
-    let l:eslint = 'eslint'
-
-    if executable('npm-which')
-      let l:eslint = split(system('npm-which eslint'))[0]
-      return 0
-    endif
+    let l:eslint = ''
 
     if executable('npm')
       let l:npm_bin = split(system('npm bin'), '\n')[0]
     endif
 
-    if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
-      let l:eslint = l:npm_bin . '/eslint'
+    if executable('yarn')
+      let l:npm_bin = split(system('yarn bin'), '\n')[0]
     endif
 
-    let b:neomake_javascript_eslint_exe = l:eslint
+    let l:expected_lint_executable = l:npm_bin . '/eslint'
 
-    " Work-around for bug:
-    " https://github.com/neomake/neomake/issues/492
-    let b:neomake_jsx_eslint_exe = l:eslint
+    if strlen(l:npm_bin) && executable(l:expected_lint_executable)
+      let l:eslint = l:expected_lint_executable
+    endif
+
+    echom l:npm_bin
+    echom l:eslint
+    if strlen(l:eslint)
+      let b:neomake_javascript_eslint_exe = l:eslint
+    endif
   endfunction
 
   function! NeomakeSasslintChecker()
