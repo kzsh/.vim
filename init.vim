@@ -543,6 +543,7 @@ function! Cdg()
 endfunction
 
 command! Cdg :call Cdg()
+cnoreabbrev <expr> cdg ((getcmdtype() is# ':' && getcmdline() is# 'cdg')?('Cdg'):('cdg'))
 
 "==============================================================================
 " Remove consecutive empty lines
