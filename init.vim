@@ -359,12 +359,12 @@ endif
 "==============================================================================
 " FZF
 "==============================================================================
-nnoremap <Leader>oo :Buffers<CR>
-nnoremap <Leader>of :FZF ./<CR>
-nnoremap <Leader>oaf :execute 'Files' FindGitRoot()<CR>
-nnoremap <Leader>occ :BCommits<CR>
-nnoremap <Leader>oca :Commits<CR>
-nnoremap <Leader>ol :Lines<CR>
+nnoremap <Leader>;b :Buffers<CR>
+nnoremap <Leader>;f :FZF ./<CR>
+nnoremap <Leader>;af :execute 'Files' FindGitRoot()<CR>
+nnoremap <Leader>;cc :BCommits<CR>
+nnoremap <Leader>;ca :Commits<CR>
+nnoremap <Leader>;l :Lines<CR>
 
 let g:fzf_commits_log_options = "--color=always --pretty=format:'%C(green)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit"
 let g:fzf_history_dir = g:kzsh#vim_dir . '/.tmp/fzf-history//'
@@ -427,14 +427,13 @@ nnoremap <Leader>cc :CompleteFromMacro<CR>
 "==============================================================================
 " NerdTree
 "==============================================================================
-map <Leader>ov <Esc>:NERDTreeToggle<CR>
+map <Leader>;t <Esc>:NERDTreeToggle<CR>
 
 "==============================================================================
 " TagBar and nerdtree
 "==============================================================================
 let g:tagbar_left = 1
-
-map <Leader>ot <Esc>:TagbarOpenAutoClose<CR>
+map <Leader>;s <Esc>:TagbarOpenAutoClose<CR>
 
 "==============================================================================
 " Execute visual-selection
@@ -667,7 +666,7 @@ endfunction
 
 noremap <Leader>gg :diffget<CR>
 noremap <Leader>gp :diffput<CR>
-nmap <Leader>od :exe ToggleVimDiff()<CR>
+nmap <Leader>;d :exe ToggleVimDiff()<CR>
 
 "==============================================================================
 " Git
