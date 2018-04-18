@@ -158,6 +158,7 @@ Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 "Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'rking/ag.vim'
+Plug 'chazy/dirsettings'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-abolish'
