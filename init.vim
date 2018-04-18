@@ -414,12 +414,14 @@ nnoremap <Leader>cc :CompleteFromMacro<CR>
 "==============================================================================
 " NerdTree
 "==============================================================================
-map <Leader>ot <Esc>:NERDTreeToggle<CR>
+map <Leader>ov <Esc>:NERDTreeToggle<CR>
 
 "==============================================================================
 " TagBar and nerdtree
 "==============================================================================
-map <Leader>os <Esc>:Tagbar<CR>
+let g:tagbar_left = 1
+
+map <Leader>ot <Esc>:TagbarOpenAutoClose<CR>
 
 "==============================================================================
 " Execute visual-selection
