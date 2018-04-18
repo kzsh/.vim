@@ -576,10 +576,6 @@ let g:AG_IGNORE_EXTENSION_LIST=['css']
 
 cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
 
-function! GetAgInput()
-  return = input('Search: ')
-endfunction
-
 function! GenerateIgnoreString(string)
   return '--ignore=*.' . a:string
 endfunction
