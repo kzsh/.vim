@@ -599,13 +599,13 @@ function! Ag(search, target, isSensitive, ignoreTypes)
   execute l:execution . ' "' . a:search . '" ' . ignoreString
 endfunction
 
-function! SearchAgInput()
+function! SearchInput()
   let search = input('Search: ')
   if empty(l:search) | return | endif
-  call SearchAg(l:search)
+  call Search(l:search)
 endfunction
 
-function! SearchAg(target)
+function! Search(target)
   if empty(a:target) | return | endif
   let l:has_caps = matchstr(a:target, '[A-Z]\+')
   if strlen(l:has_caps) > -1
@@ -615,7 +615,7 @@ function! SearchAg(target)
   endif
 endfunction
 
-function! SearchWordAg(target, isSensitive)
+function! SearchWord(target, isSensitive)
   let search = expand("<cword>")
   call Ag(l:search, a:target, a:isSensitive, g:AG_IGNORE_EXTENSION_LIST)
 endfunction
@@ -630,12 +630,14 @@ function! Wagi()
   execute 'Ag' '-i "' . wordUnderCursor . '" --ignore=*.css'
 endfunction
 
-nmap <Leader>ff :call SearchAg('filesystem')<CR>
-nmap <Leader>fw :call SearchWordAg('filesystem', g:CASE_SENSITIVE)<CR>
-nmap <Leader>fi :call SearchWordAg('filesystem', g:CASE_INSENSITIVE)<CR>
-nmap <Leader>bb :call SearchAg('buffer')<CR>
-nmap <Leader>bw :call SearchWordAg('buffer', g:CASE_SENSITIVE)<CR>
-nmap <Leader>bi :call SearchAg('buffer')<CR>
+nmap <Leader>ff :call Search('filesystem')<CR>
+
+command! -register F call Search('filesystem')
+nmap <Leader>fw :call SearchWord('filesystem', g:CASE_SENSITIVE)<CR>
+nmap <Leader>fi :call SearchWord('filesystem', g:CASE_INSENSITIVE)<CR>
+nmap <Leader>bb :call Search('buffer')<CR>
+nmap <Leader>bw :call SearchWord('buffer', g:CASE_SENSITIVE)<CR>
+nmap <Leader>bi :call Search('buffer')<CR>
 
 "==============================================================================
 " Go to next/prev error
