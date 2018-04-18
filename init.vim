@@ -620,16 +620,6 @@ function! SearchWord(target, isSensitive)
   call Ag(l:search, a:target, a:isSensitive, g:AG_IGNORE_EXTENSION_LIST)
 endfunction
 
-function! Wag()
-  let wordUnderCursor = expand("<cword>")
-  execute 'Ag' '"' . wordUnderCursor . '" --ignore=*.css'
-endfunction
-
-function! Wagi()
-  let wordUnderCursor = expand("<cword>")
-  execute 'Ag' '-i "' . wordUnderCursor . '" --ignore=*.css'
-endfunction
-
 nmap <Leader>ff :call SearchInput('filesystem')<CR>
 
 command! -register F call SearchInput('filesystem')
