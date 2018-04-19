@@ -365,7 +365,7 @@ endif
 "==============================================================================
 " FZF
 "==============================================================================
-nnoremap <Leader>;b :Buffers<CR>
+nnoremap <Leader>;; :Buffers<CR>
 nnoremap <Leader>;f :FZF ./<CR>
 nnoremap <Leader>;af :execute 'Files' FindGitRoot()<CR>
 nnoremap <Leader>;cc :BCommits<CR>
