@@ -630,19 +630,6 @@ nmap <Leader>bw :call SearchWord('buffer', g:CASE_SENSITIVE)<CR>
 nmap <Leader>bi :call SearchInput('buffer')<CR>
 
 "==============================================================================
-" Go to next/prev error
-"==============================================================================
-map <Leader>n :lnext<CR>
-map <Leader>p :lprev<CR>
-
-"==============================================================================
-" Vim Fugitive
-"==============================================================================
-map <Leader>lb :Gblame<CR>
-map <Leader>ll :Glog<CR><CR>
-map <Leader>le :Gedit<CR>
-
-"==============================================================================
 " Automatic Session Persistence
 "==============================================================================
 augroup AutoSaveSession
