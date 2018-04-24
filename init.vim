@@ -130,6 +130,7 @@ endif
 "==============================================================================
 call plug#begin('~/.config/nvim/lib')
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'landaire/deoplete-swift', { 'for': 'swift' }
@@ -731,11 +732,13 @@ hi link yardGenericTag rubyInstanceVariable
 "==============================================================================
 " Colorscheme and overrides
 "==============================================================================
-colorscheme yin
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
 
 "override statusline
-hi StatusLine ctermbg=236 ctermfg=254
-hi StatusLineNC ctermbg=236 ctermfg=254
-hi VertSplit ctermbg=236 ctermfg=254
-hi NeomakeErrorMsg ctermfg=161 ctermbg=236
-hi NeomakeWarningMsg ctermfg=230 ctermbg=236
+" hi StatusLine ctermbg=236 ctermfg=254
+" hi StatusLineNC ctermbg=236 ctermfg=254
+" hi VertSplit ctermbg=236 ctermfg=254
+" hi NeomakeErrorMsg ctermfg=161 ctermbg=236
+" hi NeomakeWarningMsg ctermfg=230 ctermbg=236
