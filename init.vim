@@ -34,7 +34,8 @@ if has('vim_starting')
   if &compatible
     set nocompatible
   endif
-  set path=.,**,,FindGitRoot(),
+  let g:path='.,**,,'
+  set path=g:path
 
   set lazyredraw " Prevent UI from drawing during macro execution.
   set laststatus=1
