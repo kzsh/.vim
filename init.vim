@@ -668,8 +668,17 @@ endfunction
 " Utility functions
 "==============================================================================
 function! Mapped(fn, l)
-  let new_list = deepcopy(a:l)
-  call map(new_list, string(a:fn) . '(v:val)')
+  return OperateOnEnumerable(a:fn, a:l, 'map')
+endfunction
+
+function! Filtered(fn, l)
+  return OperateOnEnumerable(a:fn, a:l, 'filter')
+endfunction
+
+function! OperateOnEnumerable(fn, list, operation)
+  let l:new_list = deepcopy(a:list)
+  execute('call ' . a:operation . "(l:new_list,  string(a:fn) . '(v:val)')")
+
   return new_list
 endfunction
 
