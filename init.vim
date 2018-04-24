@@ -641,7 +641,6 @@ augroup END
 "==============================================================================
 " Diff Shortcuts
 "==============================================================================
-
 " Toggle Vim diff on/off
 function! ToggleVimDiff()
   if &diff
@@ -668,6 +667,16 @@ function! FindGitRootForPath(path)
   return expand(system(l:path_change . ' && ' . git_command)[:-2])
 endfunction
 
+"==============================================================================
+" Buffer functions
+"==============================================================================
+function! GitRootsForAllBuffers()
+  return Filtered(function("len"), Mapped(function("FindGitRootForPath"), AllBufferFileNames()))
+endfunction
+
+function! AllBufferFileNames()
+  return map(filter(range(0,bufnr('$')), 'buflisted(v:val)'), 'fnamemodify(bufname(v:val), ":p")')
+endfunction
 
 "==============================================================================
 " Utility functions
