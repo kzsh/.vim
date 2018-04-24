@@ -205,6 +205,14 @@ augroup Autosave
 augroup END
 
 "==============================================================================
+" Update path for current buffer
+"==============================================================================
+augroup DynamicPath
+  au!
+  autocmd BufEnter * let &path=g:path . ',' . join(GitRootsForAllBuffers(), ",") . ','
+augroup END
+
+"==============================================================================
 " Set terminal title (for use with chunkwm -- detecting a vim session
 "==============================================================================
 set title
