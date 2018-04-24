@@ -658,9 +658,14 @@ nmap <Leader>;d :exe ToggleVimDiff()<CR>
 "==============================================================================
 " Git
 "==============================================================================
-
 function! FindGitRoot()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+  return FindGitRootForPath(expand('%'))
+endfunction
+
+function! FindGitRootForPath(path)
+  let l:git_command = 'git rev-parse --show-toplevel 2> /dev/null'
+  let l:path_change = 'cd "$(dirname "' . expand(a:path) . '")"'
+  return expand(system(l:path_change . ' && ' . git_command)[:-2])
 endfunction
 
 
