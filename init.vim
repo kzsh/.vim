@@ -55,8 +55,8 @@ if has('vim_starting')
 
   " set timeout when looking for key combinations
   set notimeout
-  set ttimeout
-  set ttimeoutlen=10
+  set nottimeout
+  set ttimeoutlen=0
 
   " Turn off swap files
   set noswapfile
