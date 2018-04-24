@@ -301,8 +301,6 @@ if has('nvim')
       let l:eslint = l:expected_lint_executable
     endif
 
-    echom l:npm_bin
-    echom l:eslint
     if strlen(l:eslint)
       let b:neomake_javascript_eslint_exe = l:eslint
     endif
