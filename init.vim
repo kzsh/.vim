@@ -63,6 +63,8 @@ if has('vim_starting')
   set nobackup
   set nowritebackup
 
+  set updatetime=10
+
   " Use system clipboard
   set clipboard=unnamed
   set clipboard+=unnamedplus
