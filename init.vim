@@ -125,6 +125,25 @@ if has('vim_starting')
   set undolevels=1000
   set undoreload=10000
   execute 'set undodir=' . g:kzsh#vim_dir . '/.tmp/undo//'
+
+  "==============================================================================
+  " Yardoc customizations
+  "==============================================================================
+  hi link yardGenericTag rubyInstanceVariable
+
+  "==============================================================================
+  " Colorscheme and overrides
+  "==============================================================================
+  set background=dark
+  colorscheme solarized
+  let g:solarized_termcolors=256
+
+  "override statusline
+  " hi StatusLine ctermbg=236 ctermfg=254
+  " hi StatusLineNC ctermbg=236 ctermfg=254
+  " hi VertSplit ctermbg=236 ctermfg=254
+  " hi NeomakeErrorMsg ctermfg=161 ctermbg=236
+  " hi NeomakeWarningMsg ctermfg=230 ctermbg=236
 endif
 
 "==============================================================================
@@ -725,22 +744,3 @@ function! VisualSelection()
     let lines[0] = lines[0][column_start - 1:]
     return join(lines, "\n")
 endfunction
-
-"==============================================================================
-" Yardoc customizations
-"==============================================================================
-hi link yardGenericTag rubyInstanceVariable
-
-"==============================================================================
-" Colorscheme and overrides
-"==============================================================================
-set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
-
-"override statusline
-" hi StatusLine ctermbg=236 ctermfg=254
-" hi StatusLineNC ctermbg=236 ctermfg=254
-" hi VertSplit ctermbg=236 ctermfg=254
-" hi NeomakeErrorMsg ctermfg=161 ctermbg=236
-" hi NeomakeWarningMsg ctermfg=230 ctermbg=236
