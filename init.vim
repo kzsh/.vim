@@ -207,32 +207,6 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd BufNewFile,BufRead *.swift set filetype=swift
 
 "==============================================================================
-" Auto-save on mode change
-"
-" This works best with undos stored between sessions
-"==============================================================================
-
-function! AutoSaveIfFile()
-  if len(@%)
-    execute(":w")
-  endif
-endfunction
-
-augroup Autosave
-  au!
-
-  autocmd InsertLeave * silent! call AutoSaveIfFile()
-augroup END
-
-"==============================================================================
-" Update path for current buffer
-"==============================================================================
-augroup DynamicPath
-  au!
-  autocmd BufEnter * let &path=g:path . ',' . join(GitRootsForAllBuffers(), ",") . ','
-augroup END
-
-"==============================================================================
 " Set terminal title (for use with chunkwm -- detecting a vim session
 "==============================================================================
 set title
