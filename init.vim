@@ -158,7 +158,6 @@ Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
-Plug 'carlitux/deoplete-ternjs'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
@@ -166,7 +165,6 @@ Plug 'duggiefresh/vim-easydir'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug 'junegunn/goyo.vim'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
