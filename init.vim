@@ -635,7 +635,7 @@ nmap <Leader>bi :call SearchInput('buffer')<CR>
 "==============================================================================
 augroup AutoSaveSession
   au!
-  autocmd BufReadPost,FileReadPost,BufNewFile * execute("mksession! " . $VIM_DIR . "/.vimsession.vim")
+  autocmd BufReadPost,BufNewFile * execute("mksession! " . $VIM_DIR . "/.vimsession.vim")
 augroup END
 
 "==============================================================================
