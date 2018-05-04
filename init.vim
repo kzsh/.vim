@@ -298,12 +298,12 @@ if has('nvim')
     let l:npm_bin = ''
     let l:eslint = ''
 
-    if executable('npm')
-      let l:npm_bin = split(system('npm bin'), '\n')[0]
-    endif
-
     if executable('yarn')
       let l:npm_bin = split(system('yarn bin'), '\n')[0]
+    endif
+
+    if executable('npm')
+      let l:npm_bin = split(system('npm bin'), '\n')[0]
     endif
 
     let l:expected_lint_executable = l:npm_bin . '/eslint'
