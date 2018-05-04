@@ -73,6 +73,8 @@ if has('vim_starting')
     set mouse=""
   endif
 
+  " Allow shell commands to use globbing like **/*.foo
+  set shell+=\ -O\ globstar
   for rpc_plugin in globpath($VIM_DIR . "/rpc-plugins", '*', 0, 1)
     if (isdirectory(rpc_plugin))
       for plugin in globpath(rpc_plugin, "*", 0, 1)
