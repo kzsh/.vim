@@ -310,6 +310,8 @@ if has('nvim')
 
     if strlen(l:npm_bin) && executable(l:expected_lint_executable)
       let l:eslint = l:expected_lint_executable
+    elseif executable('eslint')
+      let l:eslint = 'eslint'
     endif
 
     if strlen(l:eslint)
