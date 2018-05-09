@@ -279,7 +279,9 @@ command! -register INIT tabedit $MYVIMRC
 "==============================================================================
 " vim-commentary settings
 "==============================================================================
-autocmd FileType handlebars setlocal commentstring={{!%s}}
+augroup VimCommentaryAdditionalSyntaxes
+  autocmd FileType handlebars setlocal commentstring={{!%s}}
+augroup END
 
 "==============================================================================
 " NeoMake Configuration
