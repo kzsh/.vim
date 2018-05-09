@@ -9,7 +9,7 @@ if has('vim_starting')
   " ----------------------------------------------------------------------------
   " Python 3
   let s:pyenv_python3 = glob(expand('$PYENV_ROOT/versions/neovim3/bin/python'))
-  if !empty(s:pyenv_python3)
+  if executable(s:pyenv_python3)
     let g:python3_host_prog = s:pyenv_python3
   else
     let g:loaded_python3_provider = 1
@@ -17,7 +17,7 @@ if has('vim_starting')
 
   " Python 2
   let s:pyenv_python2 = glob(expand('$PYENV_ROOT/versions/neovim2/bin/python'))
-  if !empty(s:pyenv_python2)
+  if executable(s:pyenv_python2) && !g:python3_host_prog
     let g:python_host_prog  = s:pyenv_python2
   else
     let g:loaded_python_provider = 1
