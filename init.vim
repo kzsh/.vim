@@ -385,6 +385,14 @@ nnoremap <Leader>;cc :BCommits<CR>
 nnoremap <Leader>;ca :Commits<CR>
 nnoremap <Leader>;l :Lines<CR>
 
+nnoremap <Leader>te :call fzf#run({'sink': 'tabedit'})<CR>
+nnoremap <Leader>t;; :tab new \| Buffers<CR>
+nnoremap <Leader>t;f :tab new \| FZF ./<CR>
+nnoremap <Leader>t;af :tab new \| execute 'Files' FindGitRoot()<CR>
+nnoremap <Leader>t;cc :BCommits<CR>
+nnoremap <Leader>t;ca :Commits<CR>
+nnoremap <Leader>t;l :Lines<CR>
+
 let g:fzf_commits_log_options = "--color=always --pretty=format:'%C(green)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit"
 let g:fzf_history_dir = g:kzsh#vim_dir . '/.tmp/fzf-history//'
 
