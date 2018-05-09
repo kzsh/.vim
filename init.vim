@@ -322,11 +322,10 @@ if has('nvim')
 
   function! NeomakeSasslintChecker()
     let l:npm_bin = ''
-    let l:sasslint = 'sass-lint'
+    let l:sasslint = ''
 
-    if executable('npm-which')
-      let l:sasslint = split(system('npm-which sass-lint'))[0]
-      return 0
+    if executable('yarn')
+      let l:npm_bin = split(system('yarn bin'), '\n')[0]
     endif
 
     if executable('npm')
@@ -335,9 +334,12 @@ if has('nvim')
 
     if strlen(l:npm_bin) && executable(l:npm_bin . '/sass-lint')
       let l:sasslint = l:npm_bin . '/sass-lint'
+    elseif executable('sass-lint')
+      let l:sasslint = 'sass-lint'
     endif
 
     let b:neomake_sass_sasslint_exe = l:sasslint
+    let b:neomake_scss_sasslint_exe = l:sasslint
   endfunction
 
   augroup NeomakeFileSpecificCheckers
@@ -352,13 +354,11 @@ if has('nvim')
 
   let g:neomake_javascript_checknewline_maker = g:neomake_checknewline_error_format
   let g:neomake_scss_checknewline_maker = g:neomake_checknewline_error_format
-  let g:neomake_sass_checknewline_maker = g:neomake_checknewline_error_format
-  "let g:neomake_scss_sasslint_maker = ['sass-lint']
+  "let g:neomake_scss_sasslint_maker = ['sasslint']
 
   let g:neomake_javascript_enabled_makers = ['eslint', 'checknewline']
   let g:neomake_ruby_enabled_makers = ['rubocop']
-  "let g:neomake_scss_enabled_makers = ['sasslint']
-  let g:neomake_scss_enabled_makers = ['checknewline']
+  let g:neomake_scss_enabled_makers = ['sasslint', 'checknewline']
 
 endif
 
