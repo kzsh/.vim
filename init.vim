@@ -538,12 +538,6 @@ function! FixQuotes()
 endfunction
 
 "==============================================================================
-" Shortcuts for manipulating tabs
-"==============================================================================
-nmap <Leader>t% :tabedit %<CR>
-nmap <Leader>te :tabe<CR>
-
-"==============================================================================
 " Rename tmux window when vim changes buffers
 "==============================================================================
 autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " .   expand("%:t"))
