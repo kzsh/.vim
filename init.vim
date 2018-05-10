@@ -2,7 +2,10 @@
 " Startup-only commands
 "==============================================================================
 if has('vim_starting')
-  let g:kzsh#vim_dir = '~/.config/nvim'
+  let g:kzsh#vim_dir = '$VIM_DIR'
+  let g:kzsh#vim_tmp_dir = g:kzsh#vim_dir . '/.tmp'
+  let g:kzsh#vim_log_dir = '/tmp/neovim'
+  call mkdir(g:kzsh#vim_log_dir, "p")
 
   " ----------------------------------------------------------------------------
   " Python Venv
@@ -132,7 +135,7 @@ if has('vim_starting')
   set undofile
   set undolevels=1000
   set undoreload=10000
-  execute 'set undodir=' . g:kzsh#vim_dir . '/.tmp/undo//'
+  execute 'set undodir=' . g:kzsh#vim_tmp_dir . '/undo//'
 
   "==============================================================================
   " Yardoc customizations
@@ -289,7 +292,7 @@ augroup END
 if has('nvim')
   autocmd! BufReadPost,BufWritePost * Neomake
 
-  let g:neomake_logfile = '/tmp/neomake_error.log'
+  let g:neomake_logfile = g:kzsh#vim_log_dir .'/neomake_error.log'
 
   let g:neomake_error_sign={'text': '!', 'texthl': 'NeomakeErrorMsg'}
   let g:neomake_warning_sign={'text': '?', 'texthl': 'NeomakeWarningMsg'}
@@ -394,7 +397,7 @@ nnoremap <Leader>t;ca :Commits<CR>
 nnoremap <Leader>t;l :Lines<CR>
 
 let g:fzf_commits_log_options = "--color=always --pretty=format:'%C(green)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit"
-let g:fzf_history_dir = g:kzsh#vim_dir . '/.tmp/fzf-history//'
+let g:fzf_history_dir = g:kzsh#vim_tmp_dir . '/fzf-history//'
 
 " let g:fzf_action = {
 "   \ 'ctrl-alt-j': 'down',
@@ -496,7 +499,7 @@ nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
 "==============================================================================
 let g:deoplete#enable_at_startup = 1
 
-"call deoplete#enable_logging('DEBUG', 'deoplete.log')
+"call deoplete#enable_logging('DEBUG', kzsh#vim_log_dir . '/deoplete.log')
 
 let g:deoplete#sources#ternjs#filetypes = [
 \ 'javascript'
