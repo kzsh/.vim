@@ -586,70 +586,11 @@ endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 "==============================================================================
-" Functions to put ag results in a quickfix list
+" Put ripgrep results in quickfix window
 "==============================================================================
 
-" Highlight match in results in quickfix
-let g:ag_highlight=1
-
-let g:CASE_SENSITIVE=1
-let g:CASE_INSENSITIVE=0
-let g:AG_IGNORE_EXTENSION_LIST=['css']
-
-cnoreabbrev <expr> ag ((getcmdtype() is# ':' && getcmdline() is# 'ag')?('Ag'):('ag'))
-
-function! GenerateIgnoreString(string)
-  return '--ignore=*.' . a:string
-endfunction
-
-function! Ag(search, target, isSensitive, ignoreTypes)
-  if a:target == 'buffer'
-    let executable = 'AgBuffer!'
-  else
-    let executable = 'Ag!'
-  endif
-
-  if a:isSensitive
-    let l:execution = l:executable . ' -i'
-  else
-    let l:execution = l:executable
-  endif
-
-  let ignoreList = Mapped(function("GenerateIgnoreString"), a:ignoreTypes)
-  let ignoreString = join(ignoreList, ' ')
-
-  execute l:execution . ' "' . a:search . '" ' . ignoreString
-endfunction
-
-function! SearchInput(target)
-  let search = input('Search: ')
-  if empty(l:search) | return | endif
-  call Search(l:search, a:target)
-endfunction
-
-function! Search(search, target)
-  if empty(a:target) | return | endif
-  let l:has_caps = matchstr(a:search, '[A-Z]\+')
-  if strlen(l:has_caps) > -1
-    call Ag(a:search, a:target, g:CASE_INSENSITIVE, g:AG_IGNORE_EXTENSION_LIST)
-  else
-    call Ag(a:search, a:target, g:CASE_SENSITIVE, g:AG_IGNORE_EXTENSION_LIST)
-  endif
-endfunction
-
-function! SearchWord(target, isSensitive)
-  let search = expand("<cword>")
-  call Ag(l:search, a:target, a:isSensitive, g:AG_IGNORE_EXTENSION_LIST)
-endfunction
-
-nmap <Leader>ff :call SearchInput('filesystem')<CR>
-
-command! -register F call SearchInput('filesystem')
-nmap <Leader>fw :call SearchWord('filesystem', g:CASE_SENSITIVE)<CR>
-nmap <Leader>fi :call SearchWord('filesystem', g:CASE_INSENSITIVE)<CR>
-nmap <Leader>bb :call SearchInput('buffer')<CR>
-nmap <Leader>bw :call SearchWord('buffer', g:CASE_SENSITIVE)<CR>
-nmap <Leader>bi :call SearchInput('buffer')<CR>
+nnoremap <Leader>ff :copen \| silent grep!<Space>
+nnoremap <Leader>tff :tab new \| copen \| silent grep!<Space>
 
 "==============================================================================
 " Automatic Session Persistence
