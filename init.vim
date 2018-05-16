@@ -2,6 +2,9 @@
 " Startup-only commands
 "==============================================================================
 if has('vim_starting')
+  set encoding=utf-8
+  scriptencoding=utf-8
+
   let g:kzsh#vim_dir = '$VIM_DIR'
   let g:kzsh#vim_tmp_dir = g:kzsh#vim_dir . '/.tmp'
   let g:kzsh#vim_log_dir = '/tmp/neovim'
