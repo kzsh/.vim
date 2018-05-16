@@ -505,24 +505,6 @@ let g:deoplete#enable_at_startup = 1
 
 "call deoplete#enable_logging('DEBUG', kzsh#vim_log_dir . '/deoplete.log')
 
-let g:deoplete#sources#ternjs#filetypes = [
-\ 'javascript'
-\ ]
-
-function! DeopleteTernBin()
-  if executable('npm')
-    let l:npm_bin = split(system('npm bin'), '\n')[0]
-  endif
-
-  if strlen(l:npm_bin) && executable(l:npm_bin . '/tern')
-    let l:tern = l:npm_bin . '/tern'
-    let g:deoplete#sources#ternjs#tern_bin = l:tern
-  endif
-
-endfunction
-
-autocmd FileType javascript.jsx :call DeopleteTernBin()
-
 "==============================================================================
 " Remove trailing whitespaces
 "==============================================================================
