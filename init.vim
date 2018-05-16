@@ -258,6 +258,7 @@ autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.mkd set filetype=markdown
 autocmd BufRead,BufNewFile Podfile* set filetype=ruby
+autocmd BufRead,BufNewFile Vagrantfile* set filetype=ruby
 autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
 autocmd BufRead,BufNewFile *.applescript set filetype=applescript
 
