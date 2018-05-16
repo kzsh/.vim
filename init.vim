@@ -5,8 +5,9 @@ if has('vim_starting')
   set encoding=utf-8
   scriptencoding=utf-8
 
-  let g:kzsh#vim_dir = '$VIM_DIR'
+  let g:kzsh#vim_dir = expand('$VIM_DIR')
   let g:kzsh#vim_tmp_dir = g:kzsh#vim_dir . '/.tmp'
+  let g:kzsh#vim_undo_dir = g:kzsh#vim_tmp_dir . '/undo//'
   let g:kzsh#vim_log_dir = '/tmp/neovim'
   call mkdir(g:kzsh#vim_log_dir, "p")
 
@@ -142,7 +143,8 @@ if has('vim_starting')
   set undofile
   set undolevels=1000
   set undoreload=10000
-  execute 'set undodir=' . g:kzsh#vim_tmp_dir . '/undo//'
+
+  let &undodir=g:kzsh#vim_undo_dir
 
   "==============================================================================
   " Yardoc customizations
