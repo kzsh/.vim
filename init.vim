@@ -110,7 +110,9 @@ if has('vim_starting')
   set showbreak=↪\
   syntax enable
   set synmaxcol=512 " syntax highlight long lines
-  autocmd BufEnter * :syntax sync fromstart
+  augroup SyncSyntaxFromStart
+    autocmd BufEnter * :syntax sync fromstart
+  augroup END
   set splitright
 
   " Navigation
@@ -218,19 +220,23 @@ call plug#end()
 "==============================================================================
 " configure omnicomplete settings
 "==============================================================================
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=tern#Complete
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd BufNewFile,BufRead *.swift set filetype=swift
+augroup CustomFileCompletionSettings
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  "autocmd FileType javascript setlocal omnifunc=tern#Complete
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType c set omnifunc=ccomplete#Complete
+  autocmd BufNewFile,BufRead *.swift set filetype=swift
+augroup END
 
 "==============================================================================
 " Set terminal title (for use with chunkwm -- detecting a vim session
 "==============================================================================
 set title
-autocmd BufEnter * let &titlestring = 'vim_hook(' . expand('%:t') . ')'
+augroup VimSystemHook
+  autocmd BufEnter * let &titlestring = 'vim_hook(' . expand('%:t') . ')'
+augroup END
 
 "==============================================================================
 " FileType-specific formatting
@@ -250,22 +256,19 @@ autocmd Filetype plist setlocal ts=4 sts=4 sw=4
 autocmd Filetype swift setlocal ts=2 sts=2 sw=2
 autocmd Filetype applescript setlocal ts=4 sts=4 sw=4 noexpandtab
 
+autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+autocmd BufNewFile,BufRead *.mkd setlocal filetype=markdown
+autocmd BufRead,BufNewFile Podfile* setlocal filetype=ruby
+autocmd BufRead,BufNewFile Vagrantfile* setlocal filetype=ruby
+autocmd BufRead,BufNewFile *.jbuilder setlocal filetype=ruby
+autocmd BufRead,BufNewFile *.applescript setlocal filetype=applescript
+
 augroup WrapLineInFile
-    autocmd!
-    autocmd FileType markdown setlocal linebreak
-    autocmd FileType markdown setlocal formatoptions+=t
-    autocmd FileType markdown setlocal textwidth=80
+  autocmd!
+  autocmd FileType markdown setlocal linebreak
+  autocmd FileType markdown setlocal formatoptions+=t
+  autocmd FileType markdown setlocal textwidth=80
 augroup END
-
-autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
-autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
-
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-autocmd BufNewFile,BufRead *.mkd set filetype=markdown
-autocmd BufRead,BufNewFile Podfile* set filetype=ruby
-autocmd BufRead,BufNewFile Vagrantfile* set filetype=ruby
-autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
-autocmd BufRead,BufNewFile *.applescript set filetype=applescript
 
 "==============================================================================
 " Set special char highlighting parames
@@ -522,7 +525,9 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 
 "when saving, remove all trailing spaces from the file.
-autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+augroup StripWhitespaceOnSave
+  autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+augroup END
 
 "==============================================================================
 " Function to replace right and left quotes with un-justified quotes
@@ -535,8 +540,10 @@ endfunction
 "==============================================================================
 " Rename tmux window when vim changes buffers
 "==============================================================================
-autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " .   expand("%:t"))
-autocmd VimLeave * call system("tmux setw automatic-rename")
+augroup TmuxIntegration
+  autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " .   expand("%:t"))
+  autocmd VimLeave * call system("tmux setw automatic-rename")
+augroup END
 
 "==============================================================================
 " Map keys to running tests on the current buffer
