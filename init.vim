@@ -9,7 +9,7 @@ if has('vim_starting')
   let g:kzsh#vim_tmp_dir = g:kzsh#vim_dir . '/.tmp'
   let g:kzsh#vim_undo_dir = g:kzsh#vim_tmp_dir . '/undo//'
   let g:kzsh#vim_log_dir = '/tmp/neovim'
-  call mkdir(g:kzsh#vim_log_dir, "p")
+  call mkdir(g:kzsh#vim_log_dir, 'p')
 
   " ----------------------------------------------------------------------------
   " Python Venv
@@ -34,7 +34,7 @@ if has('vim_starting')
   " ----------------------------------------------------------------------------
   let g:mapleader = "\<Space>"
 
-  if executable("rg")
+  if executable('rg')
     set grepprg=rg\ --vimgrep\ --no-heading
     set grepformat=%f:%l:%c:%m,%f:%l:%m
   endif
@@ -87,7 +87,7 @@ if has('vim_starting')
   set shell+=\ -O\ globstar
 
   " Use RG for :grep
-  if executable("rg")
+  if executable('rg')
     set grepprg=rg\ --vimgrep\ --no-heading
     set grepformat=%f:%l:%c:%m,%f:%l:%m
   endif
@@ -230,7 +230,7 @@ autocmd BufNewFile,BufRead *.swift set filetype=swift
 " Set terminal title (for use with chunkwm -- detecting a vim session
 "==============================================================================
 set title
-autocmd BufEnter * let &titlestring = "vim_hook(" . expand("%:t") . ")"
+autocmd BufEnter * let &titlestring = 'vim_hook(' . expand('%:t') . ')'
 
 "==============================================================================
 " FileType-specific formatting
@@ -382,7 +382,7 @@ endif
 let s:uname = system("echo -n \"$(uname)\"")
 
 "set the location of the clang lib
-if !v:shell_error && s:uname == "Linux" && !has('nvim')
+if !v:shell_error && s:uname == 'Linux' && !has('nvim')
   let g:clang_library_path = '/usr/lib'
 else
   let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
@@ -422,22 +422,22 @@ let g:macro_completions = {
 
 sign define DetectedMacroCompletion text=M
 let g:detected_macro_completion_id = 999999
-execute "sign unplace" g:detected_macro_completion_id
+execute 'sign unplace' g:detected_macro_completion_id
 
 function! DetectMacroCompletion()
-    let l:macro_name = expand("<cword>")
-    let l:macro = get(g:macro_completions, l:macro_name, "")
+    let l:macro_name = expand('<cword>')
+    let l:macro = get(g:macro_completions, l:macro_name, '')
 
 
-    execute "sign unplace" g:detected_macro_completion_id
+    execute 'sign unplace' g:detected_macro_completion_id
 
     if !empty(l:macro)
       let bufnr = bufnr('%')
-      let line_number = line(".")
-      let name = "DetectedMacroCompletion"
-      execute "sign place" g:detected_macro_completion_id "line=" . line_number "name=" . name "buffer=" . bufnr
+      let line_number = line('.')
+      let name = 'DetectedMacroCompletion'
+      execute 'sign place' g:detected_macro_completion_id 'line=' . line_number 'name=' . name 'buffer=' . bufnr
     else
-      execute "sign unplace" g:detected_macro_completion_id
+      execute 'sign unplace' g:detected_macro_completion_id
     endif
 endfunction
 
@@ -449,13 +449,13 @@ endfunction
 " command! -register DetectMacroCompletion call DetectMacroCompletion()
 
 function! CompleteFromMacro()
-    let l:macro_name = expand("<cword>")
-    let l:macro = get(g:macro_completions, l:macro_name, "")
+    let l:macro_name = expand('<cword>')
+    let l:macro = get(g:macro_completions, l:macro_name, '')
     if !empty(l:macro)
       silent! normal ciw
-      execute("normal! " . l:macro) | startinsert!
+      execute('normal! ' . l:macro) | startinsert!
     else
-      echo "No macro found for key: " . l:macro_name
+      echo 'No macro found for key: ' . l:macro_name
     endif
 endfunction
 
@@ -515,8 +515,8 @@ let g:deoplete#enable_at_startup = 1
 " Remove trailing whitespaces
 "==============================================================================
 fun! <SID>StripTrailingWhitespaces()
-  let l = line(".")
-  let c = col(".")
+  let l = line('.')
+  let c = col('.')
   %s/\s\+$//e
   call cursor(l, c)
 endfun
@@ -626,7 +626,7 @@ endfunction
 " Buffer functions
 "==============================================================================
 function! GitRootsForAllBuffers()
-  return Filtered(function("len"), Mapped(function("FindGitRootForPath"), AllBufferFileNames()))
+  return Filtered(function('len'), Mapped(function('FindGitRootForPath'), AllBufferFileNames()))
 endfunction
 
 function! AllBufferFileNames()
@@ -652,9 +652,9 @@ function! OperateOnEnumerable(fn, list, operation)
 endfunction
 
 function! VisualSelection()
-    if mode()=="v"
-        let [line_start, column_start] = getpos("v")[1:2]
-        let [line_end, column_end] = getpos(".")[1:2]
+    if mode() ==? 'v'
+        let [line_start, column_start] = getpos('v')[1:2]
+        let [line_end, column_end] = getpos('.')[1:2]
     else
         let [line_start, column_start] = getpos("'<")[1:2]
         let [line_end, column_end] = getpos("'>")[1:2]
