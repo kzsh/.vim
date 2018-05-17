@@ -422,10 +422,10 @@ function! DetectMacroCompletion()
     execute 'sign unplace' g:detected_macro_completion_id
 
     if !empty(l:macro)
-      let bufnr = bufnr('%')
-      let line_number = line('.')
-      let name = 'DetectedMacroCompletion'
-      execute 'sign place' g:detected_macro_completion_id 'line=' . line_number 'name=' . name 'buffer=' . bufnr
+      let l:bufnr = bufnr('%')
+      let l:line_number = line('.')
+      let l:name = 'DetectedMacroCompletion'
+      execute 'sign place' g:detected_macro_completion_id 'line=' . l:line_number 'name=' . l:name 'buffer=' . l:bufnr
     else
       execute 'sign unplace' g:detected_macro_completion_id
     endif
@@ -505,10 +505,10 @@ let g:deoplete#enable_at_startup = 1
 " Remove trailing whitespaces
 "==============================================================================
 fun! <SID>StripTrailingWhitespaces()
-  let l = line('.')
-  let c = col('.')
+  let l:l = line('.')
+  let l:c = col('.')
   %s/\s\+$//e
-  call cursor(l, c)
+  call cursor(l:l, l:c)
 endfun
 
 "when saving, remove all trailing spaces from the file.
@@ -542,8 +542,8 @@ autocmd BufNewFile,BufRead *.rb nnoremap <Leader>tt :!rspec %<CR>
 " vim-cd to top-level of git repo
 "==============================================================================
 function! Cdg()
-  let root = FindGitRoot()
-  cd `=root`
+  let l:root = FindGitRoot()
+  cd `=l:root`
 endfunction
 
 command! Cdg :call Cdg()
@@ -560,17 +560,16 @@ endfunction
 " Copy search matches to register e.g. :CopyMatches a
 "==============================================================================
 function! CopyMatches(reg)
-  let hits = []
+  let l:hits = []
   %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
-  let reg = empty(a:reg) ? '+' : a:reg
-  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+  let a:reg = empty(a:reg) ? '+' : a:reg
+  execute 'let @' . a:reg . ' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 "==============================================================================
 " Put ripgrep results in quickfix window
 "==============================================================================
-
 nnoremap <Leader>ff :copen \| silent grep!<Space>
 nnoremap <Leader>tff :tab new \| copen \| silent grep!<Space>
 
@@ -613,7 +612,7 @@ endfunction
 function! FindGitRootForPath(path)
   let l:git_command = 'git rev-parse --show-toplevel 2> /dev/null'
   let l:path_change = 'cd "$(dirname "' . expand(a:path) . '")"'
-  return expand(system(l:path_change . ' && ' . git_command)[:-2])
+  return expand(system(l:path_change . ' && ' . l:git_command)[:-2])
 endfunction
 
 "==============================================================================
@@ -642,26 +641,26 @@ function! OperateOnEnumerable(fn, list, operation)
   let l:new_list = deepcopy(a:list)
   execute('call ' . a:operation . "(l:new_list,  string(a:fn) . '(v:val)')")
 
-  return new_list
+  return l:new_list
 endfunction
 
 function! VisualSelection()
     if mode() ==? 'v'
-        let [line_start, column_start] = getpos('v')[1:2]
-        let [line_end, column_end] = getpos('.')[1:2]
+        let [l:line_start, l:column_start] = getpos('v')[1:2]
+        let [l:line_end, l:column_end] = getpos('.')[1:2]
     else
-        let [line_start, column_start] = getpos("'<")[1:2]
-        let [line_end, column_end] = getpos("'>")[1:2]
+        let [l:line_start, l:column_start] = getpos("'<")[1:2]
+        let [l:line_end, l:column_end] = getpos("'>")[1:2]
     end
-    if (line2byte(line_start)+column_start) > (line2byte(line_end)+column_end)
-        let [line_start, column_start, line_end, column_end] =
-        \   [line_end, column_end, line_start, column_start]
+    if (line2byte(l:line_start) + l:column_start) > (line2byte(l:line_end) + l:column_end)
+        let [l:line_start, l:column_start, l:line_end, l:column_end] =
+        \   [l:line_end, l:column_end, l:line_start, l:column_start]
     end
-    let lines = getline(line_start, line_end)
-    if len(lines) == 0
+    let l:lines = getline(l:line_start, l:line_end)
+    if len(l:lines) == 0
             return ''
     endif
-    let lines[-1] = lines[-1][: column_end - 1]
-    let lines[0] = lines[0][column_start - 1:]
-    return join(lines, "\n")
+    let l:lines[-1] = l:lines[-1][: l:column_end - 1]
+    let l:lines[0] = l:lines[0][l:column_start - 1:]
+    return join(l:lines, "\n")
 endfunction
