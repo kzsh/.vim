@@ -41,9 +41,6 @@ if has('vim_starting')
 
   " Runtime Behavior
   " ----------------------------------------------------------------------------
-  if &compatible
-    set nocompatible
-  endif
   let g:path='.,**,,'
   set path=g:path
 
@@ -53,7 +50,7 @@ if has('vim_starting')
   set noshowmode
   set noerrorbells
   set shortmess+=rsI
-  set re=1 " set regex engine
+  set regexpengine=1 " set regex engine
   set autoread
   set hidden " only hide buffers, to preserve undo history when returning to other buffers
   set scrolloff=8
@@ -92,10 +89,10 @@ if has('vim_starting')
     set grepformat=%f:%l:%c:%m,%f:%l:%m
   endif
 
-  for rpc_plugin in globpath($VIM_DIR . "/rpc-plugins", '*', 0, 1)
-    if (isdirectory(rpc_plugin))
-      for plugin in globpath(rpc_plugin, "*", 0, 1)
-        let &runtimepath.=",".plugin
+  for s:rpc_plugin in globpath($VIM_DIR . '/rpc-plugins', '*', 0, 1)
+    if (isdirectory(s:rpc_plugin))
+      for s:plugin in globpath(s:rpc_plugin, '*', 0, 1)
+        let &runtimepath.=','.s:plugin
       endfor
     endif
   endfor
@@ -442,7 +439,7 @@ function! CompleteFromMacro()
     let l:macro_name = expand('<cword>')
     let l:macro = get(g:macro_completions, l:macro_name, '')
     if !empty(l:macro)
-      silent! normal ciw
+      silent! normal! ciw
       execute('normal! ' . l:macro) | startinsert!
     else
       echo 'No macro found for key: ' . l:macro_name
