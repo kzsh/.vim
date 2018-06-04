@@ -89,7 +89,7 @@ if has('vim_starting')
     set grepformat=%f:%l:%c:%m,%f:%l:%m
   endif
 
-  for s:rpc_plugin in globpath($VIM_DIR . '/rpc-plugins', '*', 0, 1)
+  for s:rpc_plugin in globpath(g:kzsh#vim_dir . '/rpc-plugins', '*', 0, 1)
     if (isdirectory(s:rpc_plugin))
       for s:plugin in globpath(s:rpc_plugin, '*', 0, 1)
         let &runtimepath.=','.s:plugin
@@ -575,7 +575,7 @@ nnoremap <Leader>tff :tab new \| copen \| silent grep!<Space>
 "==============================================================================
 augroup AutoSaveSession
   au!
-  autocmd BufReadPost,FileReadPost * execute("mksession! " . $VIM_DIR . "/.vimsession.vim")
+  autocmd BufReadPost,FileReadPost * execute("mksession! " . g:kzsh#vim_dir . "/.vimsession.vim")
 augroup END
 
 "==============================================================================
