@@ -403,7 +403,8 @@ let g:fzf_history_dir = g:kzsh#vim_tmp_dir . '/fzf-history//'
 " Custom Completion using macros.  Similar to Emmet.
 "==============================================================================
 let g:macro_completions = {
-  \ 'f' : "ifunction() {\<cr>\<cr>}\<ESC>k^i\<space>\<space>"
+  \ 'f' : "ifunction() {\<cr>\<cr>}\<ESC>k^i\<space>\<space>",
+  \ 'html5' : 'i<!DOCTYPE html>\n<html>\n  <head>\n    <title></title>\n    <meta charset="utf-8">\n  </head>\n  <body>\n  </body>\n</html>'
 \}
 
 sign define DetectedMacroCompletion text=M
