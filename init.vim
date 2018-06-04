@@ -200,7 +200,6 @@ Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'rking/ag.vim'
 Plug 'chazy/dirsettings'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 Plug 'tpope/vim-commentary'
@@ -452,12 +451,7 @@ inoremap <C-e> <Esc>:CompleteFromMacro<CR>
 nnoremap <Leader>cc :CompleteFromMacro<CR>
 
 "==============================================================================
-" NerdTree
-"==============================================================================
-map <Leader>;t <Esc>:NERDTreeToggle<CR>
-
-"==============================================================================
-" TagBar and nerdtree
+" TagBar
 "==============================================================================
 let g:tagbar_left = 1
 map <Leader>;s <Esc>:TagbarOpenAutoClose<CR>
