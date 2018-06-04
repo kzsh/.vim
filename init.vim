@@ -615,7 +615,7 @@ function! GitRootsForAllBuffers()
 endfunction
 
 function! AllBufferFileNames()
-  return map(filter(range(0,bufnr('$')), 'buflisted(v:val)'), 'fnamemodify(bufname(v:val), ":p")')
+  return map(filter(range(0,bufnr('$')), 'buflisted(v:val)'), "fnamemodify(bufname(v:val), ':p')")
 endfunction
 
 "==============================================================================
