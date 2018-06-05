@@ -586,7 +586,7 @@ endfunction
 
 noremap <Leader>gg :diffget<CR>
 noremap <Leader>gp :diffput<CR>
-nmap <Leader>;d :exe ToggleVimDiff()<CR>
+nmap <Leader>;d call ToggleVimDiff()<CR>
 
 "==============================================================================
 " Git
