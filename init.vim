@@ -589,6 +589,31 @@ noremap <Leader>gp :diffput<CR>
 nmap <Leader>;d call ToggleVimDiff()<CR>
 
 "==============================================================================
+"==========================================================
+" Fugitive
+"==========================================================
+vnoremap <Leader>ll :'<,'>Glog<CR>
+nnoremap <Leader>ll :silent! call ToggleFugitive()<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+" nnoremap <Leader>df
+
+" command! -range FugitiveRange <line1>,<line2>call ToggleFugitive()
+
+function! ToggleFugitive()
+  if expand('%') =~# 'fugitive'
+    execute('Gedit')
+  else
+    execute(line('.') . 'Glog')
+  end
+endfunction
+
+"==========================================================
+" Tig
+"==========================================================
+nnoremap <Leader>tig :tabe \| execute('term tig') \| startinsert!<CR>
+nnoremap <Leader>tif :tabe \| execute('term cd ' . FindGitRootForPath(expand('%')) . ' && tig ' . expand('%')) \| startinsert!<CR>
+
+"==========================================================
 " Git
 "==============================================================================
 function! FindGitRoot()
