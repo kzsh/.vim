@@ -556,8 +556,10 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 "==========================================================
 " Put ripgrep results in quickfix window
 "==========================================================
-nnoremap <Leader>ff :copen \| silent grep!<Space>
-nnoremap <Leader>tff :tab new \| copen \| silent grep!<Space>
+nnoremap <Leader>fa :copen \| silent grep!<Space>
+nnoremap <Leader>tfa :tab new \| copen \| silent grep!<Space>
+nnoremap <Leader>ff :copen \| silent grep!  %:p:h<left><left><left><left><left><left>
+nnoremap <Leader>tff :tab new \| silent grep!  %:p:h<left><left><left><left><left><left>
 
 "==========================================================
 " Automatic Session Persistence
