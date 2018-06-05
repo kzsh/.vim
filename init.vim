@@ -525,12 +525,6 @@ augroup TmuxIntegration
 augroup END
 
 "==============================================================================
-" Map keys to running tests on the current buffer
-"==============================================================================
-autocmd BufNewFile,BufRead *.js nnoremap <Leader>tt :!mocha %<CR>
-autocmd BufNewFile,BufRead *.rb nnoremap <Leader>tt :!rspec %<CR>
-
-"==============================================================================
 " vim-cd to top-level of git repo
 "==============================================================================
 function! Cdg()
