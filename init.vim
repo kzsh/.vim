@@ -286,7 +286,7 @@ nnoremap ` '
 "==============================================================================
 " Add shortcut to edit init.vim/vimrc
 "==============================================================================
-command! -register INIT tabedit $MYVIMRC
+command! INIT tabedit $MYVIMRC
 
 "==============================================================================
 " vim-commentary settings
@@ -433,7 +433,7 @@ endfunction
 "   autocmd CursorMoved * call DetectMacroCompletion()
 " augroup END
 
-" command! -register DetectMacroCompletion call DetectMacroCompletion()
+" command! DetectMacroCompletion call DetectMacroCompletion()
 
 function! CompleteFromMacro()
     let l:macro_name = expand('<cword>')
