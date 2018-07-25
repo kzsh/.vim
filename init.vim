@@ -183,6 +183,7 @@ Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'duggiefresh/vim-easydir'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
+Plug 'w0rp/ale',
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
@@ -556,6 +557,7 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 "==========================================================
 " Put ripgrep results in quickfix window
 "==========================================================
+nnoremap <Leader>qf :copen<CR>
 nnoremap <Leader>fa :copen \| silent grep!<Space>
 nnoremap <Leader>tfa :tab new \| copen \| silent grep!<Space>
 nnoremap <Leader>ff :copen \| silent grep!  %:p:h<left><left><left><left><left><left>
