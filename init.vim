@@ -260,6 +260,7 @@ autocmd BufRead,BufNewFile Podfile* setlocal filetype=ruby
 autocmd BufRead,BufNewFile Vagrantfile* setlocal filetype=ruby
 autocmd BufRead,BufNewFile *.jbuilder setlocal filetype=ruby
 autocmd BufRead,BufNewFile *.applescript setlocal filetype=applescript
+autocmd BufRead,BufNewFile .eslintrc setlocal filetype=json
 
 augroup WrapLineInFile
   autocmd!
