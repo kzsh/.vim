@@ -206,6 +206,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 Plug 'mattn/emmet-vim'
+Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh'
+    \ }
 Plug 'junegunn/goyo.vim'
 
 call plug#end()
@@ -330,6 +335,27 @@ let g:fzf_history_dir = g:kzsh#vim_tmp_dir . '/fzf-history//'
 " let g:fzf_action = {
 "   \ 'ctrl-alt-j': 'down',
 "   \ 'ctrl-alt-k': 'up' }
+
+"==========================================================
+" Language Server configuration
+"==========================================================
+
+nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<CR>
+nnoremap <silent> gr :call LanguageClient_textDocument_rename()<CR>
+
+augroup ReasonMLAutoFormat
+  au!
+  autocmd BufWritePre *.re call LanguageClient_textDocument_formatting() | sleep 100m | noautocmd w
+augroup END
+
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ }
 
 "==========================================================
 " Custom Completion using macros.  Similar to Emmet.
