@@ -212,6 +212,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
+Plug 'mattn/emmet-vim'
+
 call plug#end()
 
 "==========================================================
@@ -305,10 +307,13 @@ augroup VimCommentaryAdditionalSyntaxes
 augroup END
 
 "==========================================================
+" Emmet Config
 "==========================================================
+let g:user_emmet_leader_key='<C-E>'
+let g:user_emmet_mode='a'
 
 "==========================================================
-" FZF
+" FZF Config
 "==========================================================
 nnoremap <Leader>;; :Buffers<CR>
 nnoremap <Leader>;f :FZF ./<CR>
