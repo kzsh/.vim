@@ -150,13 +150,6 @@ if has('vim_starting')
   "==========================================================
   hi link yardGenericTag rubyInstanceVariable
 
-  "==========================================================
-  " Colorscheme and overrides
-  "==========================================================
-  set background=dark
-  colorscheme solarized
-  let g:solarized_termcolors=256
-
   "override statusline
   " hi StatusLine ctermbg=236 ctermfg=254
   " hi StatusLineNC ctermbg=236 ctermfg=254
@@ -213,6 +206,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 Plug 'mattn/emmet-vim'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
@@ -615,3 +609,21 @@ function! VisualSelection()
   let l:lines[0] = l:lines[0][l:column_start - 1:]
   return join(l:lines, "\n")
 endfunction
+
+"==========================================================
+" Goyo Config
+"==========================================================
+
+function! s:goyo_leave()
+  set background=dark
+  colorscheme solarized
+endfunction
+
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+"==========================================================
+" Colorscheme and overrides
+"==========================================================
+set background=dark
+colorscheme solarized
+
