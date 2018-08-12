@@ -229,7 +229,7 @@ augroup CustomFileCompletionSettings
 augroup END
 
 "==========================================================
-" Set terminal title (for use with chunkwm -- detecting a vim session
+" Set terminal title (for use with chunkwm -- detecting a vim session)
 "==========================================================
 set title
 augroup VimSystemHook
@@ -550,7 +550,7 @@ endfunction
 
 noremap <Leader>gg :diffget<CR>
 noremap <Leader>gp :diffput<CR>
-nmap <Leader>;d call ToggleVimDiff()<CR>
+noremap <Leader>;d call ToggleVimDiff()<CR>
 
 "==========================================================
 " Fugitive
