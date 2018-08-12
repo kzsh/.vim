@@ -169,6 +169,7 @@ endif
 " Load Plugins
 "==========================================================
 call plug#begin('~/.config/nvim/lib')
+
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -192,7 +193,6 @@ Plug 'majutsushi/tagbar', { 'on': ['Tagbar',  'TagbarClose',  'TagbarCurrentTag'
 Plug 'mattn/vim-xxdcursor'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
-Plug 'neomake/neomake'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
@@ -290,90 +290,22 @@ nnoremap ` '
 command! INIT tabedit $MYVIMRC
 
 "==========================================================
-" vim-commentary settings
+" Ale config
+"==========================================================
+let g:ale_fix_on_save = 1
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+
+"==========================================================
+" vim-commentary Config
 "==========================================================
 augroup VimCommentaryAdditionalSyntaxes
   autocmd FileType handlebars setlocal commentstring={{!%s}}
 augroup END
 
 "==========================================================
-" NeoMake Configuration
 "==========================================================
-if has('nvim')
-  autocmd! BufReadPost,BufWritePost * Neomake
-
-  let g:neomake_logfile = g:kzsh#vim_log_dir .'/neomake_error.log'
-
-  let g:neomake_error_sign={'text': '!', 'texthl': 'NeomakeErrorMsg'}
-  let g:neomake_warning_sign={'text': '?', 'texthl': 'NeomakeWarningMsg'}
-  let g:neomake_info_sign={'text': 'i'}
-
-  function! NeomakeESlintChecker()
-    let l:npm_bin = ''
-    let l:eslint = ''
-
-    if executable('yarn')
-      let l:npm_bin = split(system('yarn bin'), '\n')[0]
-    endif
-
-    if executable('npm')
-      let l:npm_bin = split(system('npm bin'), '\n')[0]
-    endif
-
-    let l:expected_lint_executable = l:npm_bin . '/eslint'
-
-    if strlen(l:npm_bin) && executable(l:expected_lint_executable)
-      let l:eslint = l:expected_lint_executable
-    elseif executable('eslint')
-      let l:eslint = 'eslint'
-    endif
-
-    if strlen(l:eslint)
-      let b:neomake_javascript_eslint_exe = l:eslint
-    endif
-  endfunction
-
-  function! NeomakeSasslintChecker()
-    let l:npm_bin = ''
-    let l:sasslint = ''
-
-    if executable('yarn')
-      let l:npm_bin = split(system('yarn bin'), '\n')[0]
-    endif
-
-    if executable('npm')
-      let l:npm_bin = split(system('npm bin'), '\n')[0]
-    endif
-
-    if strlen(l:npm_bin) && executable(l:npm_bin . '/sass-lint')
-      let l:sasslint = l:npm_bin . '/sass-lint'
-    elseif executable('sass-lint')
-      let l:sasslint = 'sass-lint'
-    endif
-
-    let b:neomake_sass_sasslint_exe = l:sasslint
-    let b:neomake_scss_sasslint_exe = l:sasslint
-  endfunction
-
-  augroup NeomakeFileSpecificCheckers
-    au!
-    autocmd FileType scss :call NeomakeSasslintChecker()
-    autocmd FileType javascript :call NeomakeESlintChecker()
-  augroup END
-
-  let g:neomake_checknewline_error_format = {
-      \ 'errorformat': '%f:%l: %m',
-      \ }
-
-  let g:neomake_javascript_checknewline_maker = g:neomake_checknewline_error_format
-  let g:neomake_scss_checknewline_maker = g:neomake_checknewline_error_format
-  "let g:neomake_scss_sasslint_maker = ['sasslint']
-
-  let g:neomake_javascript_enabled_makers = ['eslint', 'checknewline']
-  let g:neomake_ruby_enabled_makers = ['rubocop']
-  let g:neomake_scss_enabled_makers = ['sasslint', 'checknewline']
-
-endif
 
 "==========================================================
 " FZF
