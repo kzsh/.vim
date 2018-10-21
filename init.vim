@@ -260,6 +260,13 @@ autocmd BufRead,BufNewFile *.jbuilder setlocal filetype=ruby
 autocmd BufRead,BufNewFile *.applescript setlocal filetype=applescript
 autocmd BufRead,BufNewFile .eslintrc setlocal filetype=json
 
+augroup ReturnToLastCursorPosition
+  au BufReadPost *
+  \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+  \ |   exe "normal! g`\""
+  \ | endif
+augroup END
+
 augroup WrapLineInFile
   autocmd!
   autocmd FileType markdown setlocal linebreak
