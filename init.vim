@@ -363,6 +363,8 @@ augroup END
 let g:LanguageClient_serverCommands = {
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ 'typescript': ['node ~/src/local/javascript/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'typescript-react': ['node ~/src/local/javascript/javascript-typescript-langserver/lib/language-server-stdio.js'],
     \ }
 
 "==========================================================
