@@ -167,9 +167,11 @@ call plug#begin('~/.config/nvim/lib')
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Shougo/echodoc.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
@@ -189,7 +191,10 @@ Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-"Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'leafgarland/typescript-vim'
+Plug 'elixir-editors/vim-elixir'
+Plug 'udalov/kotlin-vim'
+Plug 'mhinz/vim-mix-format'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'rking/ag.vim'
 Plug 'chazy/dirsettings'
@@ -212,6 +217,12 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh'
     \ }
 Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-cucumber'
+Plug 'godlygeek/tabular'
+Plug 'google/ijaas', {'for': [ 'java', 'kotlin' ] }
+Plug 'darfink/vim-plist'
+Plug 'dln/avro-vim'
+Plug 'zxqfl/tabnine-vim'
 
 call plug#end()
 
@@ -225,6 +236,7 @@ augroup CustomFileCompletionSettings
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   autocmd FileType c set omnifunc=ccomplete#Complete
   autocmd BufNewFile,BufRead *.swift set filetype=swift
+  autocmd BufNewFile,BufRead *.kt set filetype=kotlin
 augroup END
 
 "==========================================================
@@ -238,6 +250,16 @@ augroup END
 "==========================================================
 " FileType-specific formatting
 "==========================================================
+autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.mkd setlocal filetype=markdown
+autocmd BufRead,BufNewFile Podfile* setlocal filetype=ruby
+autocmd BufRead,BufNewFile Vagrantfile* setlocal filetype=ruby
+autocmd BufRead,BufNewFile *.jbuilder setlocal filetype=ruby
+autocmd BufRead,BufNewFile *.applescript setlocal filetype=applescript
+autocmd BufRead,BufNewFile .eslintrc setlocal filetype=json
+autocmd BufRead,BufNewFile .babelrc setlocal filetype=json
+autocmd BufRead,BufNewFile Jenkinsfile* setlocal filetype=groovy
+
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype css setlocal ts=2 sts=2 sw=2
@@ -252,14 +274,8 @@ autocmd Filetype wflow setlocal ts=4 sts=4 sw=4
 autocmd Filetype plist setlocal ts=4 sts=4 sw=4
 autocmd Filetype swift setlocal ts=2 sts=2 sw=2
 autocmd Filetype applescript setlocal ts=4 sts=4 sw=4 noexpandtab
-
-autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-autocmd BufNewFile,BufRead *.mkd setlocal filetype=markdown
-autocmd BufRead,BufNewFile Podfile* setlocal filetype=ruby
-autocmd BufRead,BufNewFile Vagrantfile* setlocal filetype=ruby
-autocmd BufRead,BufNewFile *.jbuilder setlocal filetype=ruby
-autocmd BufRead,BufNewFile *.applescript setlocal filetype=applescript
-autocmd BufRead,BufNewFile .eslintrc setlocal filetype=json
+autocmd Filetype groovy setlocal ts=4 sts=4 sw=4
+autocmd Filetype kotlin setlocal ts=4 sts=4 sw=4
 
 augroup ReturnToLastCursorPosition
   au BufReadPost *
@@ -304,6 +320,9 @@ let g:ale_fix_on_save = 1
 
 let g:ale_fixers = {
 \  'javascript':  ['prettier', 'eslint'],
+\  'typescript':  ['prettier', 'eslint'],
+\  'css':  ['stylelint'],
+\  'typescriptreact':  ['prettier', 'eslint'],
 \  'json':  ['prettier']
 \}
 
@@ -324,11 +343,12 @@ let g:user_emmet_mode='a'
 " FZF Config
 "==========================================================
 nnoremap <Leader>;; :Buffers<CR>
-nnoremap <Leader>;f :FZF ./<CR>
+nnoremap <Leader>;f :FZF<CR>
 nnoremap <Leader>;af :execute 'Files' FindGitRoot()<CR>
 nnoremap <Leader>;cc :BCommits<CR>
 nnoremap <Leader>;ca :Commits<CR>
 nnoremap <Leader>;l :Lines<CR>
+nnoremap <C-P> :execute 'Files' FindGitRoot()<CR>
 
 nnoremap <Leader>te :call fzf#run({'sink': 'tabedit'})<CR>
 nnoremap <Leader>t;; :tab new \| Buffers<CR>
@@ -355,24 +375,43 @@ nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<CR>
 nnoremap <silent> gr :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> ge :ALEDetail<CR>
 
+ let g:LanguageClient_serverCommands = {
+     \ 'reason': ['ocaml-language-server', '--stdio'],
+     \ 'ocaml': ['ocaml-language-server', '--stdio'],
+     \ 'elixir': ['/Users/ahunt/src/github/tools/language-servers/elixir-ls/'],
+     \ 'typescript': ['/Users/ahunt/src/github/tools/language-servers/javascript-typescript-langserver/lib/language-server-stdio.js', '--strict'],
+     \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server']
+     \ }
+
+
+"==========================================================
+" ReasonML Language Configurations
+"==========================================================
 augroup ReasonMLAutoFormat
   au!
   autocmd BufWritePre *.re call LanguageClient_textDocument_formatting() | sleep 100m | noautocmd w
 augroup END
 
-let g:LanguageClient_serverCommands = {
-    \ 'reason': ['ocaml-language-server', '--stdio'],
-    \ 'ocaml': ['ocaml-language-server', '--stdio'],
-    \ 'typescript': ['node ~/src/local/javascript/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ 'typescript-react': ['node ~/src/local/javascript/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ }
+"==========================================================
+" Run Autocommit on TODO.md
+"==========================================================
+let g:todo_path = expand('~/TODO')
+augroup autoCommitChangesToTODO
+  au!
+  " TODO: don't execute todo commit for any TODO.md file anywhere.
+  autocmd BufWritePre TODO.md silent! execute('!' . g:todo_path . '/autocommit.sh')
+augroup END
+
+
 
 "==========================================================
 " Custom Completion using macros.  Similar to Emmet.
 "==========================================================
 let g:macro_completions = {
   \ 'f' : "ifunction() {\<cr>\<cr>}\<ESC>k^i\<space>\<space>",
+  \ 'cns' : "i\<space>className={styles.}",
   \ 'html5' : 'i<!DOCTYPE html>\n<html>\n  <head>\n    <title></title>\n    <meta charset="utf-8">\n  </head>\n  <body>\n  </body>\n</html>'
 \}
 
@@ -417,7 +456,7 @@ endfunction
 
 command! -register CompleteFromMacro call CompleteFromMacro()
 
-inoremap <C-e> <Esc>:CompleteFromMacro<CR>
+" inoremap <C-e> <Esc>:CompleteFromMacro<CR>
 nnoremap <Leader>cc :CompleteFromMacro<CR>
 
 "==========================================================
@@ -558,7 +597,7 @@ endfunction
 
 noremap <Leader>gg :diffget<CR>
 noremap <Leader>gp :diffput<CR>
-noremap <Leader>;d call ToggleVimDiff()<CR>
+nmap <Leader>;d :exe ToggleVimDiff()<CR>
 
 "==========================================================
 " Fugitive
@@ -596,6 +635,48 @@ function! FindGitRootForPath(path)
   let l:path_change = 'cd "$(dirname "' . expand(a:path) . '")"'
   return expand(system(l:path_change . ' && ' . l:git_command)[:-2])
 endfunction
+
+function! OpenGitHubUrlForCurrentLine()
+  call system("hub browse -- blob/$(git rev-parse HEAD)/" . expand('%') . "/#L" . line('.'))
+endfunction
+
+function! CopyGitHubUrlForCurrentLine()
+  call system("hub browse -c -- blob/$(git rev-parse HEAD)/" . expand('%') . "/#L" . line('.'))
+endfunction
+
+nnoremap <silent> <Leader>gho :call OpenGitHubUrlForCurrentLine()<CR>
+nnoremap <silent> <Leader>ghc :call CopyGitHubUrlForCurrentLine()<CR>
+
+
+"==========================================================
+" Cucumber Acceptance Test Config
+"==========================================================
+function! <SID>FormatCucumberTables()
+  let current_line = line('.')
+  g/^\s*\|/exe ":Tabularize /|/"
+  exe(':' .current_line)
+endfunction
+
+augroup TabularizeCucumberTestTables
+  autocmd BufWritePre *.feature call <SID>FormatCucumberTables()
+augroup END
+
+
+"==========================================================
+" Elixir Config
+"==========================================================
+let g:mix_format_on_save = 1
+
+"==========================================================
+" Goyo Config
+"==========================================================
+
+function! s:goyo_leave()
+  set background=dark
+  colorscheme solarized
+endfunction
+
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "==========================================================
 " Buffer functions
@@ -646,17 +727,6 @@ function! VisualSelection()
   let l:lines[0] = l:lines[0][l:column_start - 1:]
   return join(l:lines, "\n")
 endfunction
-
-"==========================================================
-" Goyo Config
-"==========================================================
-
-function! s:goyo_leave()
-  set background=dark
-  colorscheme solarized
-endfunction
-
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "==========================================================
 " Colorscheme and overrides
