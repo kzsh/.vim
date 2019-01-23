@@ -477,7 +477,7 @@ let g:markdown_fenced_languages = ['html', 'ruby', 'javascript', 'python', 'bash
 " Execute visual-selection
 "==========================================================
 noremap <Leader>rr :'<,'>!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
-noremap <Leader>rn :'<,'>!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
+noremap <Leader>rn :'<,'> !cat \| uglifyjs \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
 
 "==========================================================
 " Resize panes with arrow keys and shift
