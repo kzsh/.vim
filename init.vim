@@ -199,6 +199,7 @@ Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'rking/ag.vim'
 Plug 'chazy/dirsettings'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 Plug 'tpope/vim-commentary'
@@ -223,6 +224,7 @@ Plug 'google/ijaas', {'for': [ 'java', 'kotlin' ] }
 Plug 'darfink/vim-plist'
 Plug 'dln/avro-vim'
 Plug 'zxqfl/tabnine-vim'
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 
 call plug#end()
 
@@ -464,6 +466,12 @@ nnoremap <Leader>cc :CompleteFromMacro<CR>
 "==========================================================
 let g:tagbar_left = 1
 map <Leader>;s <Esc>:TagbarOpenAutoClose<CR>
+
+
+"==========================================================
+" vim Markdown
+"==========================================================
+let g:markdown_fenced_languages = ['html', 'ruby', 'javascript', 'python', 'bash=sh']
 
 "==========================================================
 " Execute visual-selection
