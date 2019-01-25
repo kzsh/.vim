@@ -35,7 +35,8 @@ if has('vim_starting')
   let g:mapleader = "\<Space>"
 
   if executable('rg')
-    set grepprg=rg\ --vimgrep\ --no-heading
+    " set grepprg=rg\ --vimgrep\ --no-heading
+    set grepprg="rg --column --colors path:fg:blue --line-number --no-heading --color=always --smart-case"
     set grepformat=%f:%l:%c:%m,%f:%l:%m
   endif
 
@@ -164,45 +165,56 @@ endif
 "==========================================================
 call plug#begin('~/.config/nvim/lib')
 
+" Plug 'Shougo/echodoc.vim'
+" Plug 'duggiefresh/vim-easydir'
+" Plug 'elixir-editors/vim-elixir'
+" Plug 'majutsushi/tagbar', { 'on': ['Tagbar',  'TagbarClose',  'TagbarCurrentTag',  'TagbarDebug',  'TagbarDebugEnd',  'TagbarGetTypeConfig',  'TagbarOpenAutoClose',  'Tags'] }
+" Plug 'mhinz/vim-mix-format'
+" Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
+" Plug 'powerman/vim-plugin-AnsiEsc'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'altercation/vim-colors-solarized'
+Plug 'Galooshi/vim-import-js'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Shougo/echodoc.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+Plug 'chazy/dirsettings'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
-Plug 'digitaltoad/vim-jade', { 'for': 'jade'}
+Plug 'darfink/vim-plist', { 'for': 'plst' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
-Plug 'duggiefresh/vim-easydir'
+Plug 'dln/avro-vim', {'for': 'avdl' }
 Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'godlygeek/tabular', {'for': ['cucumber'] }
+Plug 'google/ijaas', {'for': [ 'java', 'kotlin' ] }
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
-Plug 'w0rp/ale',
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'jparise/vim-graphql'
+Plug 'junegunn/goyo.vim'
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
-Plug 'majutsushi/tagbar', { 'on': ['Tagbar',  'TagbarClose',  'TagbarCurrentTag',  'TagbarDebug',  'TagbarDebugEnd',  'TagbarGetTypeConfig',  'TagbarOpenAutoClose',  'Tags'] }
-Plug 'mattn/vim-xxdcursor'
-Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
-Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
-Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim'
-Plug 'elixir-editors/vim-elixir'
-Plug 'udalov/kotlin-vim'
-Plug 'mhinz/vim-mix-format'
-Plug 'powerman/vim-plugin-AnsiEsc'
+Plug 'mattn/vim-xxdcursor'
+Plug 'mcchrish/nnn.vim'
+Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
+Plug 'mxw/vim-jsx'
+Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
 Plug 'rking/ag.vim'
-Plug 'chazy/dirsettings'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
@@ -210,21 +222,9 @@ Plug 'tpope/vim-git', { 'for': ['gitconfig', 'gituser', 'gitignore_global'] }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'zchee/deoplete-jedi', { 'for': 'python'}
-Plug 'mattn/emmet-vim'
-Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh'
-    \ }
-Plug 'junegunn/goyo.vim'
-Plug 'tpope/vim-cucumber'
-Plug 'godlygeek/tabular'
-Plug 'google/ijaas', {'for': [ 'java', 'kotlin' ] }
-Plug 'darfink/vim-plist'
-Plug 'dln/avro-vim'
-Plug 'zxqfl/tabnine-vim'
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+Plug 'udalov/kotlin-vim'
+Plug 'w0rp/ale',
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 call plug#end()
 
@@ -316,13 +316,20 @@ nnoremap ` '
 command! INIT tabedit $MYVIMRC
 
 "==========================================================
+" Typescript-Vim config
+"==========================================================
+let g:typescript_compiler_binary = ''
+
+"==========================================================
 " Ale config
 "==========================================================
 let g:ale_fix_on_save = 1
+let g:ale_linters_ignore = {'typescript': ['eslint', 'tslint', 'tsserver']}
 
 let g:ale_fixers = {
 \  'javascript':  ['prettier', 'eslint'],
 \  'typescript':  ['prettier', 'eslint'],
+\  'javascript.jsx':  ['prettier', 'eslint'],
 \  'css':  ['stylelint'],
 \  'typescriptreact':  ['prettier', 'eslint'],
 \  'json':  ['prettier']
@@ -344,21 +351,34 @@ let g:user_emmet_mode='a'
 "==========================================================
 " FZF Config
 "==========================================================
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --column --colors path:fg:blue --line-number --no-heading --color=always --smart-case ' . expand(<q-args>), 1,
+"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"   \   <bang>0)
+
 nnoremap <Leader>;; :Buffers<CR>
 nnoremap <Leader>;f :FZF<CR>
 nnoremap <Leader>;af :execute 'Files' FindGitRoot()<CR>
 nnoremap <Leader>;cc :BCommits<CR>
 nnoremap <Leader>;ca :Commits<CR>
 nnoremap <Leader>;l :Lines<CR>
+nnoremap <Leader>ff :Rg<CR>
+nnoremap <Leader>fa :execute 'Rg' FindGitRoot()<CR>
+nnoremap <Leader>fw :execute 'Rg "\\b' . expand('<cword>') . '\\b" ' . FindGitRoot()<CR>
 nnoremap <C-P> :execute 'Files' FindGitRoot()<CR>
 
+command! -bang -nargs=* TestQArgs echo <q-args>
+
+
 nnoremap <Leader>te :call fzf#run({'sink': 'tabedit'})<CR>
-nnoremap <Leader>t;; :tab new \| Buffers<CR>
-nnoremap <Leader>t;f :tab new \| FZF ./<CR>
-nnoremap <Leader>t;af :tab new \| execute 'Files' FindGitRoot()<CR>
-nnoremap <Leader>t;cc :BCommits<CR>
-nnoremap <Leader>t;ca :Commits<CR>
-nnoremap <Leader>t;l :Lines<CR>
+" nnoremap <Leader>t;; :tab new \| Buffers<CR>
+" nnoremap <Leader>t;f :tab new \| FZF ./<CR>
+" nnoremap <Leader>t;af :tab new \| execute 'Files' FindGitRoot()<CR>
+" nnoremap <Leader>t;cc :BCommits<CR>
+" nnoremap <Leader>t;ca :Commits<CR>
+" nnoremap <Leader>t;l :Lines<CR>
 
 let g:fzf_commits_log_options = "--color=always --pretty=format:'%C(green)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit"
 let g:fzf_history_dir = g:kzsh#vim_tmp_dir . '/fzf-history//'
@@ -368,9 +388,18 @@ let g:fzf_history_dir = g:kzsh#vim_tmp_dir . '/fzf-history//'
 "   \ 'ctrl-alt-k': 'up' }
 
 "==========================================================
+" nnn file picker config
+"==========================================================
+let g:nnn#set_default_mappings = 0
+nnoremap <leader>oo :NnnPicker<CR>
+nnoremap <leader>oc :NnnPicker '%:p:h'<CR>
+
+"==========================================================
 " Language Server configuration
 "==========================================================
 
+let g:LanguageClient_rootMarkers = ['.git']
+let g:LanguageClient_autoStop = 1
 nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
@@ -382,11 +411,12 @@ nnoremap <silent> ge :ALEDetail<CR>
  let g:LanguageClient_serverCommands = {
      \ 'reason': ['ocaml-language-server', '--stdio'],
      \ 'ocaml': ['ocaml-language-server', '--stdio'],
-     \ 'elixir': ['/Users/ahunt/src/github/tools/language-servers/elixir-ls/'],
-     \ 'typescript': ['/Users/ahunt/src/github/tools/language-servers/javascript-typescript-langserver/lib/language-server-stdio.js', '--strict'],
-     \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server']
+     \ 'typescript': ['tcp://127.0.0.1:2089'],
+     \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080']
      \ }
 
+     " \ 'typescript': ['/Users/ahunt/src/github/tools/language-servers/javascript-typescript-langserver/lib/language-server-stdio.js', '--strict'],
+     " \ 'typescript': ['typescript-language-server', '--stdio'],
 
 "==========================================================
 " ReasonML Language Configurations
@@ -477,7 +507,7 @@ let g:markdown_fenced_languages = ['html', 'ruby', 'javascript', 'python', 'bash
 " Execute visual-selection
 "==========================================================
 noremap <Leader>rr :'<,'>!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
-noremap <Leader>rn :'<,'> !cat \| uglifyjs \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
+noremap <Leader>rn :'<,'>!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
 
 "==========================================================
 " Resize panes with arrow keys and shift
@@ -563,20 +593,17 @@ endfunction
 "==========================================================
 function! CopyMatches(reg)
   let l:hits = []
+  let l:reg = ""
   %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
-  let a:reg = empty(a:reg) ? '+' : a:reg
-  execute 'let @' . a:reg . ' = join(hits, "\n") . "\n"'
+  let l:reg = empty(l:reg) ? '+' : l:reg
+  execute 'let @' . l:reg . ' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 "==========================================================
 " Put ripgrep results in quickfix window
 "==========================================================
-nnoremap <Leader>qf :copen<CR>
-nnoremap <Leader>fa :copen \| silent grep!<Space>
-nnoremap <Leader>tfa :tab new \| copen \| silent grep!<Space>
-nnoremap <Leader>ff :copen \| silent grep!  %:p:h<left><left><left><left><left><left>
-nnoremap <Leader>tff :tab new \| silent grep!  %:p:h<left><left><left><left><left><left>
+nnoremap <Leader>fq :copen \| silent grep!<Space>
 
 "==========================================================
 " Automatic Session Persistence
@@ -591,6 +618,11 @@ augroup END
 "==========================================================
 nnoremap <Leader>bd :bd<CR>
 
+"==========================================================
+" Tab Shortcuts
+"==========================================================
+nmap <S-L> gt
+nmap <S-H> g<S-t>
 "==========================================================
 " Diff Shortcuts
 "==========================================================
@@ -649,7 +681,7 @@ function! OpenGitHubUrlForCurrentLine()
 endfunction
 
 function! CopyGitHubUrlForCurrentLine()
-  call system("hub browse -c -- blob/$(git rev-parse HEAD)/" . expand('%') . "/#L" . line('.'))
+  call system("cd " . expand('%:p:h') . "&& hub browse -c -- blob/$(git rev-parse HEAD)/" . expand('%') . "/#L" . line('.'))
 endfunction
 
 nnoremap <silent> <Leader>gho :call OpenGitHubUrlForCurrentLine()<CR>
@@ -669,6 +701,10 @@ augroup TabularizeCucumberTestTables
   autocmd BufWritePre *.feature call <SID>FormatCucumberTables()
 augroup END
 
+function! RunCucumberAtLine()
+  let current_line = line('.')
+  tabe | term('cd $(git rev-parse --show-toplevel)/acceptance && bundle exec rake features["' . expand('%') .':' . current_line . '"]')
+endfunction
 
 "==========================================================
 " Elixir Config
@@ -737,8 +773,17 @@ function! VisualSelection()
 endfunction
 
 "==========================================================
+" vim-jsx config
+"==========================================================
+let g:jsx_ext_required = 0
+
+"==========================================================
+" Spelling ignores
+"==========================================================
+syn match UrlNoSpell '^((?:https?:\/\/)?[^./]+(?:\.[^./]+)+(?:\/.*)?)$' contains=@NoSpell
+
+"==========================================================
 " Colorscheme and overrides
 "==========================================================
 set background=dark
 colorscheme solarized
-
