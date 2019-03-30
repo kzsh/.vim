@@ -199,23 +199,23 @@ Plug 'junegunn/goyo.vim'
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'landaire/deoplete-swift', { 'for': 'swift' }
-Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mattn/vim-xxdcursor'
 Plug 'mcchrish/nnn.vim'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
@@ -223,9 +223,11 @@ Plug 'tpope/vim-git', { 'for': ['gitconfig', 'gituser', 'gitignore_global'] }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'udalov/kotlin-vim'
+Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 Plug 'w0rp/ale',
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+Plug 'morhetz/gruvbox'
+Plug 'lifepillar/vim-solarized8'
 
 call plug#end()
 
