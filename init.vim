@@ -407,10 +407,12 @@ let g:LanguageClient_autoStop = 1
 nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<CR>
-nnoremap <silent> gr :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> ge :ALEDetail<CR>
+nnoremap <silent> <Leader>gi :call LanguageClient#textDocument_implementation()<CR>
+nnoremap <silent> <Leader>gt :call LanguageClient#textDocument_typeDefinition()<CR>
+nnoremap <silent> <Leader>gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <Leader>gf :call LanguageClient_textDocument_formatting()<CR>
+nnoremap <silent> <Leader>gr :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <Leader>ge :ALEDetail<CR>
 
  let g:LanguageClient_serverCommands = {
      \ 'reason': ['ocaml-language-server', '--stdio'],
