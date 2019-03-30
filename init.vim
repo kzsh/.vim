@@ -174,6 +174,7 @@ call plug#begin('~/.config/nvim/lib')
 " Plug 'powerman/vim-plugin-AnsiEsc'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 " Plug 'Galooshi/vim-import-js'
+Plug 'morhetz/gruvbox'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -786,4 +787,6 @@ syn match UrlNoSpell '^((?:https?:\/\/)?[^./]+(?:\.[^./]+)+(?:\/.*)?)$' contains
 " Colorscheme and overrides
 "==========================================================
 set background=dark
-colorscheme solarized
+" let g:solarized_contrast="none"
+" colorscheme solarized
+colorscheme gruvbox
