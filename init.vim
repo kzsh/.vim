@@ -296,7 +296,7 @@ augroup WrapLineInFile
   autocmd!
   autocmd FileType markdown setlocal linebreak
   autocmd FileType markdown setlocal formatoptions+=t
-  autocmd FileType markdown setlocal textwidth=80
+  autocmd FileType markdown setlocal textwidth=120
 augroup END
 
 "==========================================================
