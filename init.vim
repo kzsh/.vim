@@ -719,9 +719,20 @@ let g:mix_format_on_save = 1
 function! s:goyo_leave()
   set background=dark
   colorscheme solarized
+  nmap <S-L> gt
+  nmap <S-H> g<S-t>
 endfunction
 
+function! s:goyo_enter()
+  nmap <S-L> :bn<CR>
+  nmap <S-H> :bp<CR>
+
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+nnoremap <Leader>go :Goyo<CR>
 
 "==========================================================
 " Buffer functions
