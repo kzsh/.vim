@@ -173,7 +173,7 @@ call plug#begin('~/.config/nvim/lib')
 " Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 " Plug 'powerman/vim-plugin-AnsiEsc'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'Galooshi/vim-import-js'
+" Plug 'Galooshi/vim-import-js'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
