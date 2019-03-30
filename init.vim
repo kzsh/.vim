@@ -325,14 +325,17 @@ let g:typescript_compiler_binary = ''
 " Ale config
 "==========================================================
 let g:ale_fix_on_save = 1
-let g:ale_linters_ignore = {'typescript': ['eslint', 'tslint', 'tsserver']}
+let g:ale_linters_ignore = {
+      \ 'typescript': ['eslint', 'tslint', 'tsserver'],
+      \ 'typescript.tsx': ['eslint', 'tslint', 'tsserver']
+      \}
 
 let g:ale_fixers = {
 \  'javascript':  ['prettier', 'eslint'],
 \  'typescript':  ['prettier', 'eslint'],
 \  'javascript.jsx':  ['prettier', 'eslint'],
 \  'css':  ['stylelint'],
-\  'typescriptreact':  ['prettier', 'eslint'],
+\  'typescript.tsx':  ['prettier', 'eslint'],
 \  'json':  ['prettier']
 \}
 
@@ -412,12 +415,12 @@ nnoremap <silent> ge :ALEDetail<CR>
  let g:LanguageClient_serverCommands = {
      \ 'reason': ['ocaml-language-server', '--stdio'],
      \ 'ocaml': ['ocaml-language-server', '--stdio'],
-     \ 'typescript': ['tcp://127.0.0.1:2089'],
-     \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080']
-     \ }
+     \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
+     \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
+     \ 'typescript': ['typescript-language-server', '--stdio']
+     \}
 
-     " \ 'typescript': ['/Users/ahunt/src/github/tools/language-servers/javascript-typescript-langserver/lib/language-server-stdio.js', '--strict'],
-     " \ 'typescript': ['typescript-language-server', '--stdio'],
+     " \ 'typescript': ['tcp://127.0.0.1:2089'],
 
 "==========================================================
 " ReasonML Language Configurations
