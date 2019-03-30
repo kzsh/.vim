@@ -408,6 +408,11 @@ if g:solarized_contrast == "low"
     let s:back        = s:base02
     let s:ou          = ",underline"
 endif
+
+if g:solarized_contrast == "none"
+    let s:back        = "NONE"
+    let s:ou          = ",underline"
+endif
 "}}}
 " Overrides dependent on user specified values and environment "{{{
 " ---------------------------------------------------------------------
