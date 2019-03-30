@@ -255,8 +255,11 @@ augroup END
 "==========================================================
 " FileType-specific formatting
 "==========================================================
+autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript
+autocmd BufRead,BufNewFile *.tsx setlocal filetype=typescript.tsx
 autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
 autocmd BufRead,BufNewFile *.mkd setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.markdown setlocal filetype=markdown
 autocmd BufRead,BufNewFile Podfile* setlocal filetype=ruby
 autocmd BufRead,BufNewFile Vagrantfile* setlocal filetype=ruby
 autocmd BufRead,BufNewFile *.jbuilder setlocal filetype=ruby
