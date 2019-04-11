@@ -229,6 +229,9 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
 
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+
 call plug#end()
 
 "==========================================================
@@ -395,6 +398,20 @@ let g:fzf_history_dir = g:kzsh#vim_tmp_dir . '/fzf-history//'
 " let g:fzf_action = {
 "   \ 'ctrl-alt-j': 'down',
 "   \ 'ctrl-alt-k': 'up' }
+
+"==========================================================
+" neovim-snippet
+"==========================================================
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-e>     <Plug>(neosnippet_expand_or_jump)
+smap <C-e>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-e>     <Plug>(neosnippet_expand_target)
+
+let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 "==========================================================
 " nnn file picker config
