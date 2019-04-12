@@ -168,7 +168,6 @@ endif
 call plug#begin('~/.config/nvim/lib')
 
 " Plug 'Shougo/echodoc.vim'
-" Plug 'duggiefresh/vim-easydir'
 " Plug 'elixir-editors/vim-elixir'
 " Plug 'majutsushi/tagbar', { 'on': ['Tagbar',  'TagbarClose',  'TagbarCurrentTag',  'TagbarDebug',  'TagbarDebugEnd',  'TagbarGetTypeConfig',  'TagbarOpenAutoClose',  'Tags'] }
 " Plug 'mhinz/vim-mix-format'
@@ -191,6 +190,7 @@ Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'darfink/vim-plist', { 'for': 'plst' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'dln/avro-vim', {'for': 'avdl' }
+Plug 'duggiefresh/vim-easydir'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular', {'for': ['cucumber'] }
 Plug 'google/ijaas', {'for': [ 'java', 'kotlin' ] }
