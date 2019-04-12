@@ -406,6 +406,7 @@ let g:user_emmet_mode='a'
 
 nnoremap <Leader>;; :Buffers<CR>
 nnoremap <Leader>;f :FZF<CR>
+nnoremap <Leader>;F :execute 'Files ' . expand('%:p:h')<CR>
 nnoremap <Leader>;af :execute 'Files' FindGitRoot()<CR>
 nnoremap <Leader>;cc :BCommits<CR>
 nnoremap <Leader>;ca :Commits<CR>
