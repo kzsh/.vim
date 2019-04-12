@@ -679,7 +679,7 @@ endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 "==========================================================
-" Put ripgrep results in quickfix window
+" Open quickfix window
 "==========================================================
 nnoremap <Leader>fq :copen \| silent grep!<Space>
 
