@@ -465,7 +465,7 @@ let g:LanguageClient_rootMarkers = {
          \ }
 
 let g:LanguageClient_autoStop = 1
-nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
+nnoremap <Leader><Leader> :call LookUpDocs()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> <Leader>gi :call LanguageClient#textDocument_implementation()<CR>
@@ -474,6 +474,14 @@ nnoremap <silent> <Leader>gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <Leader>gf :call LanguageClient_textDocument_formatting()<CR>
 nnoremap <silent> <Leader>gr :call LanguageClient_textDocument_rename()<CR>
 nnoremap <silent> <Leader>ge :ALEDetail<CR>
+
+function! LookUpDocs()
+  try
+    LanguageClient_contextMenu()
+  catch /.*/
+    :Man
+  endtry
+endfunction
 
  let g:LanguageClient_serverCommands = {
      \ 'reason': ['ocaml-language-server', '--stdio'],
