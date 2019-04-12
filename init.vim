@@ -92,12 +92,6 @@ if has('vim_starting')
   " Allow shell commands to use globbing like **/*.foo
   set shell+=\ -O\ globstar
 
-  " Use RG for :grep
-  if executable('rg')
-    set grepprg=rg\ --vimgrep\ --no-heading
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
-  endif
-
   for s:rpc_plugin in globpath(g:kzsh#vim_dir . '/rpc-plugins', '*', 0, 1)
     if (isdirectory(s:rpc_plugin))
       for s:plugin in globpath(s:rpc_plugin, '*', 0, 1)
