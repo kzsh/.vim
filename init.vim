@@ -337,8 +337,8 @@ let g:typescript_compiler_binary = ''
 "==========================================================
 let g:ale_fix_on_save = 1
 let g:ale_linters_ignore = {
-      \ 'typescript': ['eslint', 'tslint', 'tsserver'],
-      \ 'typescript.tsx': ['eslint', 'tslint', 'tsserver']
+      \ 'typescript': ['tslint', 'tsserver'],
+      \ 'typescript.tsx': ['tslint', 'tsserver']
       \}
 
 let g:ale_fixers = {
