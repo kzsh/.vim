@@ -30,6 +30,14 @@ if has('vim_starting')
     let g:loaded_python_provider = 1
   endif
 
+  " Ruby
+  let s:ruby_host_prog = glob(expand('$HOME/.rbenv/versions/2.4.5/bin/neovim-ruby-host'))
+  if executable(s:ruby_host_prog)
+    let g:ruby_host_prog  = s:ruby_host_prog
+  else
+    let g:loaded_ruby_provider = 1
+  endif
+
   " Core Configuration
   " ----------------------------------------------------------------------------
   let g:mapleader = "\<Space>"
