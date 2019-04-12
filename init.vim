@@ -684,14 +684,6 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 nnoremap <Leader>fq :copen \| silent grep!<Space>
 
 "==========================================================
-" Automatic Session Persistence
-"==========================================================
-augroup AutoSaveSession
-  au!
-  autocmd BufReadPost,FileReadPost * execute("mksession! " . g:kzsh#vim_dir . "/.vimsession.vim")
-augroup END
-
-"==========================================================
 " Buffer Shortcuts
 "==========================================================
 nnoremap <Leader>bd :bd<CR>
