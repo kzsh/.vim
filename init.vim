@@ -230,6 +230,7 @@ Plug 'w0rp/ale',
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
+Plug 'nikvdp/ejs-syntax', { 'for': 'ejs'}
 
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
