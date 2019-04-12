@@ -458,8 +458,12 @@ nnoremap <leader>oc :NnnPicker '%:p:h'<CR>
 "==========================================================
 " Language Server configuration
 "==========================================================
+" let g:LanguageClient_rootMarkers = ['.git']
+let g:LanguageClient_rootMarkers = {
+         \ 'typescript': ['tsconfig.json'],
+         \ 'typescript.tsx': ['tsconfig.json'],
+         \ }
 
-let g:LanguageClient_rootMarkers = ['.git']
 let g:LanguageClient_autoStop = 1
 nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
