@@ -290,6 +290,7 @@ autocmd Filetype swift setlocal ts=2 sts=2 sw=2
 autocmd Filetype applescript setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd Filetype groovy setlocal ts=4 sts=4 sw=4
 autocmd Filetype kotlin setlocal ts=4 sts=4 sw=4
+autocmd Filetype json setlocal conceallevel=0
 
 augroup ReturnToLastCursorPosition
   au BufReadPost *
