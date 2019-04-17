@@ -443,6 +443,11 @@ smap <C-e>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-e>     <Plug>(neosnippet_expand_target)
 
 let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+
+augroup NeoSnippetClearMarkers
+  autocmd InsertLeave * NeoSnippetClearMarkers
+augroup END
+
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
