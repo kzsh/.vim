@@ -232,8 +232,10 @@ Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
 Plug 'nikvdp/ejs-syntax', { 'for': 'ejs'}
 
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'Shougo/neosnippet-snippets'
+Plug 'sirver/ultisnips'
+Plug 'lervag/vimtex'
 
 call plug#end()
 
@@ -439,20 +441,30 @@ let g:fzf_history_dir = g:kzsh#vim_tmp_dir . '/fzf-history//'
 " neovim-snippet
 "==========================================================
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-e>     <Plug>(neosnippet_expand_or_jump)
-smap <C-e>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-e>     <Plug>(neosnippet_expand_target)
+" imap <C-e>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-e>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-e>     <Plug>(neosnippet_expand_target)
 
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+" let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 
-augroup NeoSnippetClearMarkers
-  autocmd InsertLeave * NeoSnippetClearMarkers
-augroup END
+" augroup NeoSnippetClearMarkers
+"   autocmd InsertLeave * NeoSnippetClearMarkers
+" augroup END
 
 " For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+" if has('conceal')
+"   set conceallevel=2 concealcursor=niv
+" endif
+
+
+"==========================================================
+" ultisnips
+"==========================================================
+let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "ulti-snippets"]
 
 "==========================================================
 " nnn file picker config
@@ -586,6 +598,18 @@ map <Leader>;s <Esc>:TagbarOpenAutoClose<CR>
 " vim Markdown
 "==========================================================
 let g:markdown_fenced_languages = ['html', 'ruby', 'javascript', 'python', 'bash=sh']
+
+"==========================================================
+" vimtex
+"==========================================================
+let g:tex_flavor='latex'
+let g:vimtex_view_method='skim'
+" let g:vimtex_view_method='zathura'
+" let g:vimtex_view_general_viewer = 'zathura'
+" let g:vimtex_view_general_viewer = '/Applications/Skim.app/open -a Skim'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
 "==========================================================
 " Execute visual-selection
