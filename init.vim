@@ -329,17 +329,20 @@ let g:typescript_compiler_binary = ''
 " Ale config
 "==========================================================
 let g:ale_fix_on_save = 1
-let g:ale_linters_ignore = {
-      \ 'typescript': ['tslint', 'tsserver'],
-      \ 'typescript.tsx': ['tslint', 'tsserver']
-      \}
+let g:ale_fixers_explicit = 1
+let g:ale_linters_explicit = 1
+
+" let g:ale_linters_ignore = {
+"       \ 'typescript': ['tslint', 'tsserver'],
+"       \ 'typescript.tsx': ['tslint', 'tsserver']
+"       \}
 
 let g:ale_fixers = {
-\  'javascript':  ['prettier', 'eslint'],
-\  'typescript':  ['prettier', 'eslint'],
-\  'javascript.jsx':  ['prettier', 'eslint'],
+\  'javascript':  ['prettier'],
+\  'typescript':  ['prettier'],
+\  'javascript.jsx':  ['prettier'],
 \  'css':  ['stylelint'],
-\  'typescript.tsx':  ['prettier', 'eslint'],
+\  'typescript.tsx':  ['prettier'],
 \  'json':  ['prettier']
 \}
 
