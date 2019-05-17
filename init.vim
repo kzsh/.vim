@@ -167,24 +167,21 @@ endif
 "==========================================================
 call plug#begin('~/.config/nvim/lib')
 
+" Plug 'Galooshi/vim-import-js'
 " Plug 'Shougo/echodoc.vim'
+" Plug 'dhleong/intellivim', { 'for': 'kotlin' }
 " Plug 'elixir-editors/vim-elixir'
-" Plug 'majutsushi/tagbar', { 'on': ['Tagbar',  'TagbarClose',  'TagbarCurrentTag',  'TagbarDebug',  'TagbarDebugEnd',  'TagbarGetTypeConfig',  'TagbarOpenAutoClose',  'Tags'] }
 " Plug 'mhinz/vim-mix-format'
-" Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
+" Plug 'mxw/vim-jsx'
 " Plug 'powerman/vim-plugin-AnsiEsc'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-" Plug 'Galooshi/vim-import-js'
-Plug 'morhetz/gruvbox'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'chazy/dirsettings'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'darfink/vim-plist', { 'for': 'plst' }
@@ -193,7 +190,6 @@ Plug 'dln/avro-vim', {'for': 'avdl' }
 Plug 'duggiefresh/vim-easydir'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular', {'for': ['cucumber'] }
-Plug 'google/ijaas', {'for': [ 'java', 'kotlin' ] }
 Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'jparise/vim-graphql'
@@ -201,17 +197,15 @@ Plug 'junegunn/goyo.vim'
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'landaire/deoplete-swift', { 'for': 'swift' }
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mattn/vim-xxdcursor'
 Plug 'mcchrish/nnn.vim'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
-" Plug 'mxw/vim-jsx'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
-" Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'tpope/vim-abolish'
@@ -228,15 +222,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 Plug 'w0rp/ale',
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-Plug 'morhetz/gruvbox'
-Plug 'lifepillar/vim-solarized8'
-Plug 'nikvdp/ejs-syntax', { 'for': 'ejs'}
 
-" Plug 'Shougo/neosnippet.vim'
-" Plug 'Shougo/neosnippet-snippets'
-Plug 'sirver/ultisnips'
-Plug 'cquery-project/cquery'
-Plug 'lervag/vimtex'
 
 call plug#end()
 
