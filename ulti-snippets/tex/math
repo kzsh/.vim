@@ -13,6 +13,12 @@ $1
 .\] $0
 endsnippet
 
+snippet '([pbBvV])([*])?matrix' "auto" wrA
+\begin{`!p snip.rv = match.group(1)`matrix`!p snip.rv = match.group(2) if match.group(2) else ""`}
+ $1
+\end{`!p snip.rv = match.group(1)`matrix`!p snip.rv = match.group(2) if match.group(2) else ""`} $0
+endsnippet
+
 snippet '([A-Za-z])(\d)' "auto subscript" wrA
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
