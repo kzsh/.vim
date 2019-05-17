@@ -495,18 +495,15 @@ function! LookUpDocs()
 endfunction
 
  let g:LanguageClient_serverCommands = {
-     \ 'reason': ['ocaml-language-server', '--stdio'],
      \ 'ocaml': ['ocaml-language-server', '--stdio'],
-     \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
+     \ 'reason': ['ocaml-language-server', '--stdio'],
      \ 'tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
-     \ 'typescript.tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
      \ 'typescript': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+     \ 'typescript.tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
      \}
 
-     "\ 'javascript.jsx': ['flow', 'lsp'],
-     "\ 'javascript': ['flow', 'lsp']
-     " \ 'typescript': ['tcp://127.0.0.1:2089'],
+     " \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
 
 "==========================================================
 " ReasonML Language Configurations
