@@ -235,6 +235,7 @@ Plug 'nikvdp/ejs-syntax', { 'for': 'ejs'}
 " Plug 'Shougo/neosnippet.vim'
 " Plug 'Shougo/neosnippet-snippets'
 Plug 'sirver/ultisnips'
+Plug 'cquery-project/cquery'
 Plug 'lervag/vimtex'
 
 call plug#end()
