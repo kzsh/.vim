@@ -634,8 +634,45 @@ nnoremap <S-Down> :resize +10<CR>
 "==========================================================
 " Alternate escape sequences terminal emulator (terminal-emulator-input)
 "==========================================================
-tnoremap <Leader><Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
+" tnoremap <Leader>x :close< CR>
 
+
+"==========================================================
+" Make escape fancy ( :/ )
+"==========================================================
+nnoremap <C-\><C-n> <Esc>
+nnoremap <silent><Esc> :call ConditionalEscape()<CR>
+
+let g:kzsh#term_prime_delete = 0
+function! ConditionalEscape()
+  if bufname('%') ==? '[Command Line]'
+    if mode()==? 'n'
+      close
+    endif
+  elseif bufname('%') =~# '^term:\/\/'
+    try
+      close
+    catch /.*/
+      if g:kzsh#term_prime_delete == 1
+        echo g:kzsh#term_prime_delete
+        let g:kzsh#term_prime_delete = 0
+        bd!
+      else
+        echo g:kzsh#term_prime_delete
+        let g:kzsh#term_prime_delete = 1
+      endif
+    endtry
+  else
+    normal! <C-\><C-n>
+  endif
+endfunction
+
+" nnoremap : q:6<C-w>-i
+nnoremap : q:i
+nnoremap q: :
+
+inoremap <C-r><C-g> <Esc>:echo bufname(bufnr(''))<CR>i
 "==========================================================
 " Use Enter to follow tags
 "==========================================================
