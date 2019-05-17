@@ -509,6 +509,7 @@ endfunction
      \ 'tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
      \ 'typescript.tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
      \ 'typescript': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
+     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
      \}
 
      "\ 'javascript.jsx': ['flow', 'lsp'],
@@ -522,6 +523,16 @@ augroup ReasonMLAutoFormat
   au!
   autocmd BufWritePre *.re call LanguageClient_textDocument_formatting() | sleep 100m | noautocmd w
 augroup END
+
+
+"==========================================================
+" Rust Language Configurations
+"==========================================================
+augroup RustAutoFormat
+  au!
+  autocmd BufWritePre *.rs RustFmt
+augroup END
+
 
 "==========================================================
 " Run Autocommit on TODO.md
