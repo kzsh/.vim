@@ -179,6 +179,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'adolenc/cl-neovim'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
@@ -207,6 +208,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'sirver/ultisnips'
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
