@@ -198,9 +198,12 @@ Plug 'junegunn/goyo.vim'
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'landaire/deoplete-swift', { 'for': 'swift' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
+Plug 'lifepillar/vim-solarized8'
 Plug 'mattn/vim-xxdcursor'
 Plug 'mcchrish/nnn.vim'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
+Plug 'morhetz/gruvbox'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
@@ -673,6 +676,7 @@ nnoremap : q:i
 nnoremap q: :
 
 inoremap <C-r><C-g> <Esc>:echo bufname(bufnr(''))<CR>i
+
 "==========================================================
 " Use Enter to follow tags
 "==========================================================
