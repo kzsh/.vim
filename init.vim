@@ -506,7 +506,7 @@ endfunction
      \ 'typescript.tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
      \}
 
-     " \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
+     " \ 'kotlin': ['~/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
 
 "==========================================================
 " ReasonML Language Configurations
