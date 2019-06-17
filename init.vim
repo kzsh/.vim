@@ -53,6 +53,8 @@ if has('vim_starting')
   let g:path='.,**,,'
   set path=g:path
 
+  set nomodeline
+
   set lazyredraw " Prevent UI from drawing during macro execution.
   set laststatus=1
   set showcmd
@@ -166,6 +168,7 @@ endif
 " Load Plugins
 "==========================================================
 call plug#begin('~/.config/nvim/lib')
+
 
 " Plug 'Galooshi/vim-import-js'
 " Plug 'Shougo/echodoc.vim'
