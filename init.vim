@@ -769,6 +769,7 @@ nnoremap <Leader>fq :copen \| silent grep!<Space>
 " Buffer Shortcuts
 "==========================================================
 nnoremap <Leader>bd :bd<CR>
+nnoremap <Leader>e :execute('e ' . expand('%'))<CR>
 
 "==========================================================
 " Tab Shortcuts
