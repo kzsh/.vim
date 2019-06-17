@@ -185,7 +185,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'adolenc/cl-neovim'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash make release' }
 Plug 'chazy/dirsettings'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'darfink/vim-plist', { 'for': 'plst' }
