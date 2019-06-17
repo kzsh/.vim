@@ -697,16 +697,21 @@ let g:deoplete#enable_at_startup = 1
 "==========================================================
 " Remove trailing whitespaces
 "==========================================================
+let g:skip_whitespace = ['md']
+
 fun! <SID>StripTrailingWhitespaces()
-  let l:l = line('.')
-  let l:c = col('.')
-  %s/\s\+$//e
-  call cursor(l:l, l:c)
+  if index(blacklist, &ft) < 0
+    let l:l = line('.')
+    let l:c = col('.')
+    %s/\s\+$//e
+    call cursor(l:l, l:c)
+  endif
+
 endfun
 
 "when saving, remove all trailing spaces from the file.
 augroup StripWhitespaceOnSave
-  autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+  autocmd FileType  autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 augroup END
 
 "==========================================================
