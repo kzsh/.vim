@@ -678,7 +678,7 @@ endfunction
 
 " nnoremap : q:6<C-w>-i
 nnoremap : q:i
-nnoremap q: :
+nnoremap <Leader>: :
 
 inoremap <C-r><C-g> <Esc>:echo bufname(bufnr(''))<CR>i
 
