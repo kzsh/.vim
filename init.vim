@@ -269,6 +269,7 @@ autocmd BufRead,BufNewFile *.jbuilder setlocal filetype=ruby
 autocmd BufRead,BufNewFile *.applescript setlocal filetype=applescript
 autocmd BufRead,BufNewFile .eslintrc setlocal filetype=json
 autocmd BufRead,BufNewFile .babelrc setlocal filetype=json
+autocmd BufRead,BufNewFile .stylelintrc setlocal filetype=json
 autocmd BufRead,BufNewFile Jenkinsfile* setlocal filetype=groovy
 
 " set Tabs per file-type.  (current unused, see above)
