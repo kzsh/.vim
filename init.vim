@@ -185,7 +185,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'adolenc/cl-neovim'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash make release' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash -c \"cd $HOME/.config/nvim/lib/LanguageClient-neovim && make\"' }
 Plug 'chazy/dirsettings'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'darfink/vim-plist', { 'for': 'plst' }
@@ -251,9 +251,26 @@ augroup END
 " Set terminal title (for use with chunkwm -- detecting a vim session)
 "==========================================================
 set title
-augroup VimSystemHook
-  autocmd BufEnter * let &titlestring = 'vim_hook(' . expand('%:t') . ')'
-augroup END
+
+" augroup VimSystemHook
+"   autocmd BufEnter * call SetTerminalTitle()
+" augroup END
+
+" function! SetTerminalTitle()
+"     let titleString = expand('%:t')
+"     if len(titleString) > 0
+"         let &titlestring = expand('%:t')
+"         " this is the format iTerm2 expects when setting the window title
+"         let args = "\033];vim_hook(".&titlestring.")\007"
+"         " let cmd = 'silent !echo -e "'.args.'"'
+"         execute cmd
+"         redraw!
+"     endif
+" endfunction
+
+" augroup VimSystemHook
+"   autocmd BufEnter * let &titlestring = 'vim_hook(' . expand('%:t') . ')'
+" augroup END
 
 "==========================================================
 " FileType-specific formatting
@@ -271,6 +288,7 @@ autocmd BufRead,BufNewFile .eslintrc setlocal filetype=json
 autocmd BufRead,BufNewFile .babelrc setlocal filetype=json
 autocmd BufRead,BufNewFile .stylelintrc setlocal filetype=json
 autocmd BufRead,BufNewFile Jenkinsfile* setlocal filetype=groovy
+autocmd BufRead,BufNewFile *.kt setlocal filetype=kotlin
 
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
@@ -288,6 +306,7 @@ autocmd Filetype swift setlocal ts=2 sts=2 sw=2
 autocmd Filetype applescript setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd Filetype groovy setlocal ts=4 sts=4 sw=4
 autocmd Filetype kotlin setlocal ts=4 sts=4 sw=4
+autocmd Filetype markdown setlocal conceallevel=2
 autocmd Filetype json setlocal conceallevel=0
 autocmd Filetype gitconfig setlocal ts=2 sts=2 sw=2 noexpandtab
 
@@ -343,6 +362,14 @@ let g:ale_linters_explicit = 1
 "       \ 'typescript': ['tslint', 'tsserver'],
 "       \ 'typescript.tsx': ['tslint', 'tsserver']
 "       \}
+" let g:ale_kotlin_languageserver_executable = '~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server'
+let g:ale_disable_lsp = 1
+
+let g:ale_linters = {
+  \ 'sh':  ['shellcheck'],
+  \ 'typescript': ['eslint'],
+  \ 'kotlin': ['ktlint']
+\}
 
 let g:ale_fixers = {
 \  'javascript':  ['prettier'],
@@ -350,7 +377,14 @@ let g:ale_fixers = {
 \  'javascript.jsx':  ['prettier'],
 \  'css':  ['stylelint'],
 \  'typescript.tsx':  ['prettier'],
-\  'json':  ['prettier']
+\  'json':  ['prettier'],
+\  'kotlin': ['ktlint']
+\}
+
+let g:ale_pattern_options = {
+\   'styles\.ts$': {
+\       'ale_linters': ['stylelint'],
+\   },
 \}
 
 let g:LanguageClient_diagnosticsDisplay = {
@@ -414,7 +448,8 @@ nnoremap <Leader>;af :execute 'Files' FindGitRoot()<CR>
 nnoremap <Leader>;cc :BCommits<CR>
 nnoremap <Leader>;ca :Commits<CR>
 nnoremap <Leader>;l :Lines<CR>
-nnoremap <Leader>ff :execute 'Rg .* ' . expand('%:p:h') <CR>
+nnoremap <Leader>ff :execute 'Find' . expand('%:p:h') <CR>
+nnoremap <Leader>FF :execute 'Find!' . expand('%:p:h') <CR>
 nnoremap <Leader>fa :execute 'Rg' FindGitRoot()<CR>
 nnoremap <Leader>fw :execute 'Rg "\\b' . expand('<cword>') . '\\b" ' . FindGitRoot()<CR>
 nnoremap <C-P> :execute 'Files' FindGitRoot()<CR>
@@ -482,7 +517,6 @@ let g:LanguageClient_rootMarkers = {
          \ 'typescript.tsx': ['tsconfig.json'],
          \ }
 
-let g:LanguageClient_autoStop = 1
 nnoremap <Leader><Leader> :call LookUpDocs()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
@@ -502,9 +536,12 @@ function! LookUpDocs()
   endtry
 endfunction
 
+nnoremap <Leader><Leader>r :LanguageClientStop<CR> :LanguageClientStart<CR>
+
  let g:LanguageClient_serverCommands = {
      \ 'ocaml': ['ocaml-language-server', '--stdio'],
      \ 'reason': ['ocaml-language-server', '--stdio'],
+     \ 'kotlin': ["~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"],
      \ 'tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
      \ 'typescript': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
@@ -617,14 +654,20 @@ let g:vimtex_view_method='skim'
 " let g:vimtex_view_general_viewer = 'zathura'
 " let g:vimtex_view_general_viewer = '/Applications/Skim.app/open -a Skim'
 let g:vimtex_quickfix_mode=0
-set conceallevel=1
+set conceallevel=0
 let g:tex_conceal='abdmg'
 
 "==========================================================
 " Execute visual-selection
 "==========================================================
-noremap <Leader>rr :'<,'>!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
-noremap <Leader>rn :'<,'>!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
+let g:kzsh_sql_out_file = '/tmp/neovim-sql-out.sql'
+let g:kzsh_sql_in_file = '/tmp/neovim-sql-in.sql'
+
+augroup ExecuteSelectedTextByFileType
+  autocmd FileType ruby       vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
+  autocmd FileType javascript vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
+  autocmd FileType typescript vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
+augroup END
 
 "==========================================================
 " Resize panes with arrow keys and shift
@@ -700,7 +743,7 @@ let g:deoplete#enable_at_startup = 1
 let g:skip_whitespace = ['md']
 
 fun! <SID>StripTrailingWhitespaces()
-  if index(blacklist, &ft) < 0
+  if index(skip_whitespace, &ft) < 0
     let l:l = line('.')
     let l:c = col('.')
     %s/\s\+$//e
