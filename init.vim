@@ -737,26 +737,6 @@ let g:deoplete#enable_at_startup = 1
 "call deoplete#enable_logging('DEBUG', kzsh#vim_log_dir . '/deoplete.log')
 
 "==========================================================
-" Remove trailing whitespaces
-"==========================================================
-let g:skip_whitespace = ['md']
-
-fun! <SID>StripTrailingWhitespaces()
-  if index(skip_whitespace, &ft) < 0
-    let l:l = line('.')
-    let l:c = col('.')
-    %s/\s\+$//e
-    call cursor(l:l, l:c)
-  endif
-
-endfun
-
-"when saving, remove all trailing spaces from the file.
-augroup StripWhitespaceOnSave
-  autocmd FileType  autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-augroup END
-
-"==========================================================
 " Function to replace right and left quotes with un-justified quotes
 "==========================================================
 function! FixQuotes()
@@ -782,6 +762,26 @@ endfunction
 
 command! Cdg :call Cdg()
 cnoreabbrev <expr> cdg ((getcmdtype() is# ':' && getcmdline() is# 'cdg')?('Cdg'):('cdg'))
+
+"==========================================================
+" Remove trailing whitespaces
+"==========================================================
+let g:skip_whitespace = ['md']
+
+fun! <SID>StripTrailingWhitespaces()
+  if index(skip_whitespace, &ft) < 0
+    let l:l = line('.')
+    let l:c = col('.')
+    %s/\s\+$//e
+    call cursor(l:l, l:c)
+  endif
+
+endfun
+
+"when saving, remove all trailing spaces from the file.
+augroup StripWhitespaceOnSave
+  autocmd FileType  autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+augroup END
 
 "==========================================================
 " Remove consecutive empty lines
