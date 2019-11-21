@@ -718,6 +718,9 @@ function! ConditionalEscape()
   endif
 endfunction
 
+"==========================================================
+" Use buffer ex view by default
+"==========================================================
 nnoremap : q:i
 nnoremap <Leader>: :
 
