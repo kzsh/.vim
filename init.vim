@@ -357,13 +357,15 @@ let g:typescript_compiler_binary = ''
 let g:ale_fix_on_save = 1
 let g:ale_fixers_explicit = 1
 let g:ale_linters_explicit = 1
+let g:ale_set_quickfix = 0
+let g:ale_lint_delay = 600
+let g:ale_disable_lsp = 1
 
 " let g:ale_linters_ignore = {
 "       \ 'typescript': ['tslint', 'tsserver'],
 "       \ 'typescript.tsx': ['tslint', 'tsserver']
 "       \}
 " let g:ale_kotlin_languageserver_executable = '~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server'
-let g:ale_disable_lsp = 1
 
 let g:ale_linters = {
   \ 'sh':  ['shellcheck'],
