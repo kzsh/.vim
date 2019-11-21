@@ -189,6 +189,7 @@ Plug 'jparise/vim-graphql', { 'for': 'graphql'}
 Plug 'junegunn/goyo.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
+Plug 'kshenoy/vim-signature'
 Plug 'kzsh/vim-chunkwm-navigator'
 " Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
