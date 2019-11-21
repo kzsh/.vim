@@ -705,11 +705,9 @@ function! ConditionalEscape()
       close
     catch /.*/
       if g:kzsh#term_prime_delete == 1
-        echo g:kzsh#term_prime_delete
         let g:kzsh#term_prime_delete = 0
         bd!
       else
-        echo g:kzsh#term_prime_delete
         let g:kzsh#term_prime_delete = 1
       endif
     endtry
