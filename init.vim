@@ -188,7 +188,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash -c \"cd $HOME/.config/nvim/lib/LanguageClient-neovim && make\"' }
 Plug 'chazy/dirsettings'
 Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
-Plug 'darfink/vim-plist', { 'for': 'plst' }
+Plug 'darfink/vim-plist', { 'for': 'plist' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'dln/avro-vim', {'for': 'avdl' }
 Plug 'duggiefresh/vim-easydir'
