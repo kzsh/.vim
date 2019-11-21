@@ -52,6 +52,41 @@ if has('vim_starting')
   " ----------------------------------------------------------------------------
   let g:path='.,**,,'
   set path=g:path
+  set suffixesadd=.js,.jsx,.ts,.tsx
+
+
+  " let g:source_cache = expand("/tmp/github/")
+  let g:source_cache = expand("$HOME/src/github/")
+  function! LoadMainNodeModule(fname)
+      let nodeModules = FindGitRoot() . "/node_modules/"
+      let sourceModules = g:source_cache
+
+      let packageJsonPath = l:nodeModules . a:fname . "/package.json"
+      let sourcePackageJsonPath = l:sourceModules . a:fname . "/package.json"
+
+      if filereadable(sourcePackageJsonPath)
+          " execute("lcd" . l:sourceModules)
+          return sourcePackageJsonPath
+      elseif filereadable(packageJsonPath)
+          let github_url = json_decode(join(readfile(packageJsonPath))).repository.url
+          let normalized_url = substitute(l:github_url, "git+", "", "")
+          " system('screen -dm "' . . '"')
+          "
+          execute('!git clone ' . l:normalized_url. ' ' . g:source_cache . a:fname)
+          execute('tabe')
+          " execute("lcd" . l:nodeModules)
+          return packageJsonPath
+          " nodeModules . a:fname . "/package.json" . json_decode(join(readfile(packageJsonPath))).main
+      else
+          " execute("lcd" . l:nodeModules)
+          return nodeModules . a:fname
+      endif
+  endfunction
+
+  autocmd BufEnter *.ts setlocal includeexpr=LoadMainNodeModule(v:fname)
+  autocmd BufEnter *.js setlocal includeexpr=LoadMainNodeModule(v:fname)
+  autocmd BufEnter *.tsx setlocal includeexpr=LoadMainNodeModule(v:fname)
+  autocmd BufEnter *.jsx setlocal includeexpr=LoadMainNodeModule(v:fname)
 
   set nomodeline
 
@@ -831,8 +866,8 @@ endfunction
 
 nnoremap <silent> <Leader>gx :call OpenGitHubUrlForCurrentLine()<CR>
 nnoremap <silent> <Leader>ghc :call CopyGitHubUrlForCurrentLine()<CR>
-
-
+nnoremap <silent> <Leader>gs :execute("tabe " . LoadMainNodeModule(expand('<cfile>'))) \| execute("lcd " . expand('%:p:h'))<CR>
+ 
 "==========================================================
 " Cucumber Acceptance Test Config
 "==========================================================
