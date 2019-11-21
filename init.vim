@@ -577,61 +577,6 @@ augroup autoCommitChangesToTODO
   autocmd BufWritePre TODO.md silent! execute('!' . g:todo_path . '/autocommit.sh')
 augroup END
 
-
-
-"==========================================================
-" Custom Completion using macros.  Similar to Emmet.
-"==========================================================
-let g:macro_completions = {
-  \ 'f' : "ifunction() {\<cr>\<cr>}\<ESC>k^i\<space>\<space>",
-  \ 'cns' : "i\<space>className={styles.}",
-  \ 'html5' : 'i<!DOCTYPE html>\n<html>\n  <head>\n    <title></title>\n    <meta charset="utf-8">\n  </head>\n  <body>\n  </body>\n</html>'
-\}
-
-sign define DetectedMacroCompletion text=M
-let g:detected_macro_completion_id = 999999
-execute 'sign unplace' g:detected_macro_completion_id
-
-function! DetectMacroCompletion()
-    let l:macro_name = expand('<cword>')
-    let l:macro = get(g:macro_completions, l:macro_name, '')
-
-
-    execute 'sign unplace' g:detected_macro_completion_id
-
-    if !empty(l:macro)
-      let l:bufnr = bufnr('%')
-      let l:line_number = line('.')
-      let l:name = 'DetectedMacroCompletion'
-      execute 'sign place' g:detected_macro_completion_id 'line=' . l:line_number 'name=' . l:name 'buffer=' . l:bufnr
-    else
-      execute 'sign unplace' g:detected_macro_completion_id
-    endif
-endfunction
-
-" augroup cursor_highlight
-"   au!
-"   autocmd CursorMoved * call DetectMacroCompletion()
-" augroup END
-
-" command! DetectMacroCompletion call DetectMacroCompletion()
-
-function! CompleteFromMacro()
-    let l:macro_name = expand('<cword>')
-    let l:macro = get(g:macro_completions, l:macro_name, '')
-    if !empty(l:macro)
-      silent! normal! ciw
-      execute('normal! ' . l:macro) | startinsert!
-    else
-      echo 'No macro found for key: ' . l:macro_name
-    endif
-endfunction
-
-command! -register CompleteFromMacro call CompleteFromMacro()
-
-" inoremap <C-e> <Esc>:CompleteFromMacro<CR>
-nnoremap <Leader>cc :CompleteFromMacro<CR>
-
 "==========================================================
 " vim Markdown
 "==========================================================
