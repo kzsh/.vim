@@ -657,7 +657,7 @@ set conceallevel=0
 let g:tex_conceal='abdmg'
 
 "==========================================================
-" Execute visual-selection
+" SQL Execute visual-selection
 "==========================================================
 let g:kzsh_sql_out_file = '/tmp/neovim-sql-out.sql'
 let g:kzsh_sql_in_file = '/tmp/neovim-sql-in.sql'
