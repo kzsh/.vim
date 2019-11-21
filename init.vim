@@ -531,7 +531,26 @@ function! LookUpDocs()
   try
     LanguageClient_contextMenu()
   catch /.*/
-    :Man
+    try
+      :Man
+    catch /.*/
+      normal! gd
+    endtry
+  endtry
+endfunction
+
+function! LookUpDefinition()
+  try
+    LanguageClient#textDocument_definition()
+  catch /.*/
+    try
+    normal! gd
+    try
+      LanguageClient#textDocument_definition()
+    catch /.*/
+    endtry
+    LanguageClient#textDocument_typeDefinition()<CR>
+  endtry
   endtry
 endfunction
 
