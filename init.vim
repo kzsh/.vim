@@ -170,13 +170,6 @@ endif
 call plug#begin('~/.config/nvim/lib')
 
 
-" Plug 'Galooshi/vim-import-js'
-" Plug 'Shougo/echodoc.vim'
-" Plug 'dhleong/intellivim', { 'for': 'kotlin' }
-" Plug 'elixir-editors/vim-elixir'
-" Plug 'mhinz/vim-mix-format'
-" Plug 'mxw/vim-jsx'
-" Plug 'powerman/vim-plugin-AnsiEsc'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
