@@ -183,18 +183,18 @@ Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'dln/avro-vim', {'for': 'avdl' }
 Plug 'duggiefresh/vim-easydir'
 Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'godlygeek/tabular', {'for': ['cucumber'] }
+Plug 'godlygeek/tabular', {'for': 'cucumber' }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug 'jparise/vim-graphql'
+Plug 'jparise/vim-graphql', { 'for': 'graphql'}
 Plug 'junegunn/goyo.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
 " Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'lifepillar/vim-solarized8'
+" Plug 'lifepillar/vim-solarized8'
 Plug 'mattn/vim-xxdcursor'
-Plug 'mcchrish/nnn.vim'
+" Plug 'mcchrish/nnn.vim'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
 Plug 'morhetz/gruvbox'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
