@@ -535,7 +535,7 @@ function! LookUpDocs()
   endtry
 endfunction
 
-nnoremap <Leader><Leader>r :LanguageClientStop<CR> :LanguageClientStart<CR>
+nnoremap <Leader><Leader>r :LanguageClientStop<CR> :sleep 1<CR> :LanguageClientStart<CR>
 
  let g:LanguageClient_serverCommands = {
      \ 'ocaml': ['ocaml-language-server', '--stdio'],
