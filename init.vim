@@ -184,7 +184,6 @@ Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'adolenc/cl-neovim'
 Plug 'airblade/vim-gitgutter'
-Plug 'altercation/vim-colors-solarized'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash -c \"cd $HOME/.config/nvim/lib/LanguageClient-neovim && make\"' }
 Plug 'chazy/dirsettings'
 Plug 'darfink/vim-plist', { 'for': 'plist' }
@@ -918,7 +917,7 @@ let g:vim_markdown_follow_anchor = 1
 
 function! s:goyo_leave()
   set background=dark
-  colorscheme solarized
+  colorscheme gruvbox
   nmap <S-L> gt
   nmap <S-H> g<S-t>
 endfunction
