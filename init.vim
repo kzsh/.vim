@@ -195,6 +195,7 @@ Plug 'godlygeek/tabular', {'for': ['cucumber'] }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/goyo.vim'
+Plug 'jremmen/vim-ripgrep'
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'landaire/deoplete-swift', { 'for': 'swift' }
@@ -433,12 +434,16 @@ let g:user_emmet_mode='a'
 "==========================================================
 " FZF Config
 "==========================================================
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --colors path:fg:blue --line-number --no-heading --color=always --smart-case ' . expand(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+
+" Currently replaced by a ripgrep plugin
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --column --colors path:fg:blue --line-number --no-heading --color=always --smart-case --files ' . expand(<q-args>), {'options': '--delimiter : --nth 4..'},
+"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"   \   <bang>0)
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 nnoremap <Leader>;; :Buffers<CR>
 nnoremap <Leader>;f :FZF<CR>
@@ -447,11 +452,10 @@ nnoremap <Leader>;af :execute 'Files' FindGitRoot()<CR>
 nnoremap <Leader>;cc :BCommits<CR>
 nnoremap <Leader>;ca :Commits<CR>
 nnoremap <Leader>;l :Lines<CR>
-nnoremap <Leader>ff :execute 'Find' . expand('%:p:h') <CR>
+nnoremap <Leader>ff :Rg ''<Left>
 nnoremap <Leader>FF :execute 'Find!' . expand('%:p:h') <CR>
 nnoremap <Leader>fa :execute 'Rg' FindGitRoot()<CR>
-nnoremap <Leader>fw :execute 'Rg "\\b' . expand('<cword>') . '\\b" ' . FindGitRoot()<CR>
-nnoremap <C-P> :execute 'Files' FindGitRoot()<CR>
+nnoremap <Leader>fw :execute "Rg '\\b" . expand('<cword>') . "\\b' " . FindGitRoot()<CR>
 
 command! -bang -nargs=* TestQArgs echo <q-args>
 
