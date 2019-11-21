@@ -187,14 +187,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash -c \"cd $HOME/.config/nvim/lib/LanguageClient-neovim && make\"' }
 Plug 'chazy/dirsettings'
-Plug 'csscomb/vim-csscomb', { 'for': ['css', 'scss'] }
 Plug 'darfink/vim-plist', { 'for': 'plist' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'dln/avro-vim', {'for': 'avdl' }
 Plug 'duggiefresh/vim-easydir'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular', {'for': ['cucumber'] }
-Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'scss'] }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/goyo.vim'
@@ -211,6 +209,7 @@ Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -984,6 +983,11 @@ function! VisualSelection()
   let l:lines[0] = l:lines[0][l:column_start - 1:]
   return join(l:lines, "\n")
 endfunction
+
+"==========================================================
+" colorizer setup
+"==========================================================
+" lua require 'colorizer'.setup { 'css'; 'javascript'; 'html' }
 
 "==========================================================
 " vim-jsx config
