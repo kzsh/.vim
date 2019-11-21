@@ -879,7 +879,7 @@ function! CopyGitHubUrlForCurrentLine()
   call system("cd " . expand('%:p:h') . "&& hub browse -c -- blob/$(git rev-parse HEAD)/" . expand('%') . "/#L" . line('.'))
 endfunction
 
-nnoremap <silent> <Leader>gho :call OpenGitHubUrlForCurrentLine()<CR>
+nnoremap <silent> <Leader>gx :call OpenGitHubUrlForCurrentLine()<CR>
 nnoremap <silent> <Leader>ghc :call CopyGitHubUrlForCurrentLine()<CR>
 
 
