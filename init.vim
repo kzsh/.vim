@@ -642,7 +642,7 @@ map <Leader>;s <Esc>:TagbarOpenAutoClose<CR>
 "==========================================================
 " vim Markdown
 "==========================================================
-let g:markdown_fenced_languages = ['html', 'ruby', 'javascript', 'python', 'bash=sh']
+let g:markdown_fenced_languages = ['html', 'ruby', 'javascript', 'python', 'bash=sh', 'graphql']
 
 "==========================================================
 " vimtex
