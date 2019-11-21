@@ -718,7 +718,6 @@ function! ConditionalEscape()
   endif
 endfunction
 
-" nnoremap : q:6<C-w>-i
 nnoremap : q:i
 nnoremap <Leader>: :
 
