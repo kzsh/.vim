@@ -180,7 +180,7 @@ call plug#begin('~/.config/nvim/lib')
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-syntax'
+" Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'adolenc/cl-neovim'
 Plug 'airblade/vim-gitgutter'
@@ -198,7 +198,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kzsh/vim-chunkwm-navigator'
-Plug 'landaire/deoplete-swift', { 'for': 'swift' }
+" Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'lifepillar/vim-solarized8'
 Plug 'mattn/vim-xxdcursor'
@@ -227,9 +227,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
-Plug 'w0rp/ale',
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-
+Plug 'dense-analysis/ale'
+" Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 call plug#end()
 
@@ -243,6 +242,7 @@ call plug#end()
 "   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "   autocmd FileType c set omnifunc=ccomplete#Complete
 " augroup END
+set omnifunc=ale#completion#OmniFunc
 
 "==========================================================
 " Set terminal title (for use with chunkwm -- detecting a vim session)
