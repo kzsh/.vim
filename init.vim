@@ -512,8 +512,9 @@ nnoremap <leader>oc :NnnPicker '%:p:h'<CR>
 "==========================================================
 " let g:LanguageClient_rootMarkers = ['.git']
 let g:LanguageClient_rootMarkers = {
-         \ 'typescript': ['tsconfig.json'],
-         \ 'typescript.tsx': ['tsconfig.json'],
+         \ 'tsx': ['.git'],
+         \ 'typescript': ['.git'],
+         \ 'typescript.tsx': ['.git']
          \ }
 
 nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
