@@ -633,13 +633,6 @@ command! -register CompleteFromMacro call CompleteFromMacro()
 nnoremap <Leader>cc :CompleteFromMacro<CR>
 
 "==========================================================
-" TagBar
-"==========================================================
-let g:tagbar_left = 1
-map <Leader>;s <Esc>:TagbarOpenAutoClose<CR>
-
-
-"==========================================================
 " vim Markdown
 "==========================================================
 let g:markdown_fenced_languages = ['html', 'ruby', 'javascript', 'python', 'bash=sh', 'graphql']
