@@ -368,7 +368,9 @@ let g:ale_disable_lsp = 1
 let g:ale_linters = {
   \ 'sh':  ['shellcheck'],
   \ 'typescript': ['eslint'],
-  \ 'kotlin': ['ktlint']
+  \ 'javascript': ['eslint'],
+  \ 'kotlin': ['ktlint'],
+  \ 'java': ['ktlint']
 \}
 
 let g:ale_fixers = {
