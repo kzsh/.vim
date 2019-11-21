@@ -237,15 +237,13 @@ call plug#end()
 "==========================================================
 " configure omnicomplete settings
 "==========================================================
-augroup CustomFileCompletionSettings
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType c set omnifunc=ccomplete#Complete
-  autocmd BufNewFile,BufRead *.swift set filetype=swift
-  autocmd BufNewFile,BufRead *.kt set filetype=kotlin
-augroup END
+" augroup CustomFileCompletionSettings
+"   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"   autocmd FileType c set omnifunc=ccomplete#Complete
+" augroup END
 
 "==========================================================
 " Set terminal title (for use with chunkwm -- detecting a vim session)
@@ -288,6 +286,9 @@ autocmd BufRead,BufNewFile .eslintrc setlocal filetype=json
 autocmd BufRead,BufNewFile .babelrc setlocal filetype=json
 autocmd BufRead,BufNewFile .stylelintrc setlocal filetype=json
 autocmd BufRead,BufNewFile Jenkinsfile* setlocal filetype=groovy
+autocmd BufRead,BufNewFile *.kt setlocal filetype=kotlin
+autocmd BufRead,BufNewFile *.avdl setlocal filetype=avdl
+autocmd BufRead,BufNewFile *.swift setlocal filetype=swift
 autocmd BufRead,BufNewFile *.kt setlocal filetype=kotlin
 
 " set Tabs per file-type.  (current unused, see above)
