@@ -837,9 +837,10 @@ nmap <Leader>;d :exe ToggleVimDiff()<CR>
 "==========================================================
 " Fugitive
 "==========================================================
-vnoremap <Leader>ll :'<,'>Glog<CR>
+vnoremap <Leader>ll :'<,'>0Gclog<CR>
 nnoremap <Leader>ll :silent! call ToggleFugitive()<CR>
-nnoremap <Leader>gs :Gstatus<CR>
+
+" nnoremap <Leader>gs :Gstatus<CR>
 " nnoremap <Leader>df
 
 " command! -range FugitiveRange <line1>,<line2>call ToggleFugitive()
@@ -848,7 +849,7 @@ function! ToggleFugitive()
   if expand('%') =~# 'fugitive'
     execute('Gedit')
   else
-    execute(line('.') . 'Glog')
+    execute(line('.') . 'Gclog')
   end
 endfunction
 
