@@ -725,11 +725,6 @@ nnoremap <Leader>: :
 inoremap <C-r><C-g> <Esc>:echo bufname(bufnr(''))<CR>i
 
 "==========================================================
-" Use Enter to follow tags
-"==========================================================
-nnoremap <Leader><Enter> :exe "tag ". expand("<cword>")<CR>
-
-"==========================================================
 " Configure Deoplete syntax completion engine
 "==========================================================
 let g:deoplete#enable_at_startup = 1
