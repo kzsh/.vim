@@ -211,7 +211,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'adolenc/cl-neovim'
 Plug 'airblade/vim-gitgutter'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash -c \"cd $HOME/.config/nvim/lib/LanguageClient-neovim && make\"' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'master' }
 Plug 'chazy/dirsettings'
 Plug 'darfink/vim-plist', { 'for': 'plist' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
