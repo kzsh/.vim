@@ -236,6 +236,7 @@ Plug 'morhetz/gruvbox'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'jxnblk/vim-mdx-js', { 'for': 'markdown.mdx' }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'sirver/ultisnips'
