@@ -228,6 +228,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'kzsh/vim-chunkwm-navigator'
 " Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
+Plug 'lifepillar/pgsql.vim', { 'for': 'sql' }
 " Plug 'lifepillar/vim-solarized8'
 Plug 'mattn/vim-xxdcursor'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
@@ -375,6 +376,11 @@ command! INIT tabedit $MYVIMRC
 " Typescript-Vim config
 "==========================================================
 let g:typescript_compiler_binary = ''
+
+"==========================================================
+" PGSql config
+"==========================================================
+let g:sql_type_default = 'pgsql'
 
 "==========================================================
 " Ale config
