@@ -58,29 +58,30 @@ if has('vim_starting')
   " let g:source_cache = expand("/tmp/github/")
   let g:source_cache = expand("$HOME/src/github/")
   function! LoadMainNodeModule(fname)
-      let nodeModules = FindGitRoot() . "/node_modules/"
-      let sourceModules = g:source_cache
+    let sourcePackageJsonPath = g:source_cache . a:fname . "/package.json"
 
-      let packageJsonPath = l:nodeModules . a:fname . "/package.json"
-      let sourcePackageJsonPath = l:sourceModules . a:fname . "/package.json"
+    if filereadable(l:sourcePackageJsonPath)
+      return l:sourcePackageJsonPath
+    endif
 
-      if filereadable(sourcePackageJsonPath)
-          " execute("lcd" . l:sourceModules)
-          return sourcePackageJsonPath
-      elseif filereadable(packageJsonPath)
-          let github_url = json_decode(join(readfile(packageJsonPath))).repository.url
-          let normalized_url = substitute(l:github_url, "git+", "", "")
-          " system('screen -dm "' . . '"')
-          "
-          execute('!git clone ' . l:normalized_url. ' ' . g:source_cache . a:fname)
-          execute('tabe')
-          " execute("lcd" . l:nodeModules)
-          return packageJsonPath
-          " nodeModules . a:fname . "/package.json" . json_decode(join(readfile(packageJsonPath))).main
+    let nodeModules = FindGitRoot() . "/./node_modules/"
+    let packageJsonPath = l:nodeModules . a:fname . "/package.json"
+
+    echo l:packageJsonPath
+    if filereadable(packageJsonPath)
+      let github_url = json_decode(join(readfile(packageJsonPath))).repository.url
+      let normalized_url = substitute(l:github_url, "git+", "", "")
+
+      execute('!git clone ' . l:normalized_url. ' ' . g:source_cache . a:fname)
+
+      if filereadable(l:sourcePackageJsonPath)
+        return l:sourcePackageJsonPath
       else
-          " execute("lcd" . l:nodeModules)
-          return nodeModules . a:fname
+        return packageJsonPath
       endif
+    endif
+
+    return nodeModules . a:fname
   endfunction
 
   autocmd BufEnter *.ts setlocal includeexpr=LoadMainNodeModule(v:fname)
