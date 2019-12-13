@@ -235,7 +235,7 @@ Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
 Plug 'morhetz/gruvbox'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
 Plug 'jxnblk/vim-mdx-js', { 'for': 'markdown.mdx' }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -422,37 +422,6 @@ let g:ale_pattern_options = {
 \   },
 \}
 
-let g:LanguageClient_diagnosticsDisplay = {
-    \     1: {
-    \         "name": "Error",
-    \         "texthl": "ALEError",
-    \         "signText": "✖",
-    \         "signTexthl": "ALEeErrorSign",
-    \         "virtualTexthl": "Error",
-    \     },
-    \     2: {
-    \         "name": "Warning",
-    \         "texthl": "ALEWarning",
-    \         "signText": "⚠",
-    \         "signTexthl": "ALEWarningSign",
-    \         "virtualTexthl": "Warning"
-    \     },
-    \     3: {
-    \         "name": "Information",
-    \         "texthl": "ALEInfo",
-    \         "signText": "ℹ",
-    \         "signTexthl": "ALEInfoSign",
-    \         "virtualTexthl": "Comment"
-    \     },
-    \     4: {
-    \         "name": "Hint",
-    \         "texthl": "ALEInfo",
-    \         "signText": "➤",
-    \         "signTexthl": "ALEInfoSign",
-    \         "virtualTexthl": "Comment"
-    \     },
-    \ }
-
 "==========================================================
 " vim-commentary Config
 "==========================================================
@@ -542,6 +511,40 @@ let g:UltiSnipsSnippetDirectories=["ulti-snippets"]
 "==========================================================
 " Language Server configuration
 "==========================================================
+
+let g:LanguageClient_selectionUI = "location-list"
+let g:LanguageClient_diagnosticsEnable = 1
+let g:LanguageClient_diagnosticsDisplay = {
+    \     1: {
+    \         "name": "Error",
+    \         "texthl": "ALEError",
+    \         "signText": "✖",
+    \         "signTexthl": "ALEeErrorSign",
+    \         "virtualTexthl": "Error",
+    \     },
+    \     2: {
+    \         "name": "Warning",
+    \         "texthl": "ALEWarning",
+    \         "signText": "⚠",
+    \         "signTexthl": "ALEWarningSign",
+    \         "virtualTexthl": "Warning"
+    \     },
+    \     3: {
+    \         "name": "Information",
+    \         "texthl": "ALEInfo",
+    \         "signText": "ℹ",
+    \         "signTexthl": "ALEInfoSign",
+    \         "virtualTexthl": "Comment"
+    \     },
+    \     4: {
+    \         "name": "Hint",
+    \         "texthl": "ALEInfo",
+    \         "signText": "➤",
+    \         "signTexthl": "ALEInfoSign",
+    \         "virtualTexthl": "Comment"
+    \     },
+    \ }
+
 " let g:LanguageClient_rootMarkers = ['.git']
 let g:LanguageClient_rootMarkers = {
          \ 'tsx': ['.git'],
