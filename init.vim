@@ -230,7 +230,6 @@ Plug 'kzsh/vim-chunkwm-navigator'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 " Plug 'lifepillar/vim-solarized8'
 Plug 'mattn/vim-xxdcursor'
-" Plug 'mcchrish/nnn.vim'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
 Plug 'morhetz/gruvbox'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
@@ -535,13 +534,6 @@ let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 let g:UltiSnipsSnippetDirectories=["ulti-snippets"]
 
 "==========================================================
-" nnn file picker config
-"==========================================================
-let g:nnn#set_default_mappings = 0
-nnoremap <leader>oo :NnnPicker<CR>
-nnoremap <leader>oc :NnnPicker '%:p:h'<CR>
-
-"==========================================================
 " Language Server configuration
 "==========================================================
 " let g:LanguageClient_rootMarkers = ['.git']
@@ -637,7 +629,7 @@ augroup END
 "==========================================================
 " vim Markdown
 "==========================================================
-let g:markdown_fenced_languages = ['html', 'ruby', 'javascript', 'python', 'bash=sh', 'graphql']
+let g:markdown_fenced_languages = ['html', 'ruby', 'js=javascript', 'python', 'bash=sh', 'graphql', 'ts=typescript']
 
 "==========================================================
 " vimtex
