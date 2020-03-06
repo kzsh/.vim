@@ -207,30 +207,27 @@ call plug#begin('~/.config/nvim/lib')
 
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'rhysd/reply.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-syntax', { 'for': ['javascript', 'javascript.jsx' ] }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'adolenc/cl-neovim'
 Plug 'airblade/vim-gitgutter'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'master' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next' }
 Plug 'chazy/dirsettings'
 Plug 'darfink/vim-plist', { 'for': 'plist' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
 Plug 'dln/avro-vim', {'for': 'avdl' }
 Plug 'duggiefresh/vim-easydir'
-Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular', {'for': 'cucumber' }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'jparise/vim-graphql', { 'for': 'graphql'}
-Plug 'junegunn/goyo.vim'
 Plug 'jremmen/vim-ripgrep'
+Plug 'junegunn/goyo.vim',
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kshenoy/vim-signature'
 Plug 'kzsh/vim-chunkwm-navigator'
-" Plug 'landaire/deoplete-swift', { 'for': 'swift' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'lifepillar/pgsql.vim', { 'for': 'sql' }
-" Plug 'lifepillar/vim-solarized8'
 Plug 'mattn/vim-xxdcursor'
 Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
 Plug 'morhetz/gruvbox'
@@ -846,7 +843,16 @@ endfunction
 " Tig
 "==========================================================
 nnoremap <Leader>tig :tabe \| execute('term tig') \| startinsert!<CR>
-nnoremap <Leader>tif :tabe \| execute('term cd ' . FindGitRootForPath(expand('%')) . ' && tig ' . expand('%')) \| startinsert!<CR>
+" nnoremap <Leader>tif :tabe \| execute('term cd ' . FindGitRootForPath(expand('%')) . ' && tig -- ' . expand('%')) \| startinsert!<CR>
+"
+nnoremap <Leader>tif :silent! call OpenFileHistoryInTig()<CR>
+
+function! OpenFileHistoryInTig() 
+  let filename = expand('%')
+  tabe
+  execute('term cd ' . FindGitRootForPath(l:filename) . ' && /usr/local/bin/tig -- ' . l:filename)
+  startinsert!
+endfunction
 
 "==========================================================
 " Git
