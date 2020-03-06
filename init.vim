@@ -240,6 +240,7 @@ Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
 Plug 'jxnblk/vim-mdx-js', { 'for': 'markdown.mdx' }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'sirver/ultisnips'
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'tpope/vim-abolish'
