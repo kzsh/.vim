@@ -213,6 +213,7 @@ endif
 call plug#begin('~/.config/nvim/lib')
 
 
+Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'rhysd/reply.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -322,6 +323,7 @@ autocmd BufRead,BufNewFile .envrc        setlocal filetype=sh
 autocmd BufRead,BufNewFile *.swift       setlocal filetype=swift
 autocmd BufRead,BufNewFile *.ts          setlocal filetype=typescript
 autocmd BufRead,BufNewFile *.tsx         setlocal filetype=typescript.tsx
+autocmd BufRead,BufNewFile *.tf          setlocal filetype=terraform
 
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
