@@ -38,6 +38,13 @@ if has('vim_starting')
     let g:loaded_ruby_provider = 1
   endif
 
+  let s:node_host_prog = glob(expand('$HOME/.nvm/versions/node/v12.4.0/bin/neovim-node-host'))
+  if executable(s:node_host_prog)
+    let g:node_host_prog  = s:node_host_prog
+  else
+    let g:loaded_node_provider = 1
+  endif
+
   " Core Configuration
   " ----------------------------------------------------------------------------
   let g:mapleader = "\<Space>"
