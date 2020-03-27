@@ -212,7 +212,6 @@ endif
 "==========================================================
 call plug#begin('~/.config/nvim/lib')
 
-
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'rhysd/reply.vim'
