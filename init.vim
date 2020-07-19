@@ -495,6 +495,22 @@ let g:ale_pattern_options = {
 \}
 
 "==========================================================
+" Prettier js util support
+"==========================================================
+
+function! FormatSection()
+  write! /tmp/fizzbuzz 
+  system('prettier --write /tmp/fizzbuzz')
+  " read /tmp/fizzbuzz
+endfunction
+
+augroup PrettierAugments
+  autocmd FileType javascript vnoremap <buffer> <Leader>f :call FormatSection()<CR>
+  autocmd FileType typescript vnoremap <buffer> <Leader>f :call FormatSection()<CR>
+augroup END
+
+
+"==========================================================
 " vim-commentary Config
 "==========================================================
 augroup VimCommentaryAdditionalSyntaxes
