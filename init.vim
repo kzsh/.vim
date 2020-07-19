@@ -527,7 +527,6 @@ let g:UltiSnipsSnippetDirectories=["ulti-snippets"]
 " Language Server configuration
 "==========================================================
 
-let g:LanguageClient_selectionUI = "location-list"
 let g:LanguageClient_diagnosticsEnable = 1
 let g:LanguageClient_diagnosticsDisplay = {
     \     1: {
@@ -610,17 +609,18 @@ endfunction
 
 nnoremap <Leader><Leader>r :LanguageClientStop<CR> :sleep 1<CR> :LanguageClientStart<CR>
 
- let g:LanguageClient_serverCommands = {
-     \ 'ocaml': ['ocaml-language-server', '--stdio'],
-     \ 'reason': ['ocaml-language-server', '--stdio'],
-     \ 'kotlin': ["~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"],
-     \ 'tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
-     \ 'typescript': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
-     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-     \ 'typescript.tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
-     \}
 
-     " \ 'kotlin': ['~/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
+let g:typescript_ls_path = "~/src/github/typescript-language-server/server/lib/cli.js --stdio"
+let g:LanguageClient_serverCommands = {
+      \ 'ocaml': ['ocaml-language-server', '--stdio'],
+      \ 'reason': ['ocaml-language-server', '--stdio'],
+      \ 'kotlin': ["~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server", "tcp://127.0.0.1:8080"],
+      \ 'typescript': [ expand('$HOME/src/github/typescript-language-server/node_modules/.bin/typescript-language-server'), '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
+      \ 'typescript.tsx': [expand('$HOME/src/github/typescript-language-server/node_modules/.bin/typescript-language-server'), '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
+      \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
+      \}
+     " \ 'tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
+     " \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
 
 "==========================================================
 " ReasonML Language Configurations
