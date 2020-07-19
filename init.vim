@@ -307,25 +307,24 @@ set title
 "==========================================================
 " FileType-specific formatting
 "==========================================================
-autocmd BufRead,BufNewFile *.applescript setlocal filetype=applescript
-autocmd BufRead,BufNewFile *.avdl        setlocal filetype=avdl
-autocmd BufRead,BufNewFile Jenkinsfile*  setlocal filetype=groovy
-autocmd BufRead,BufNewFile .babelrc      setlocal filetype=json
-autocmd BufRead,BufNewFile .eslintrc     setlocal filetype=json
-autocmd BufRead,BufNewFile .stylelintrc  setlocal filetype=json
-autocmd BufRead,BufNewFile *.kt          setlocal filetype=kotlin
-autocmd BufRead,BufNewFile *.kt          setlocal filetype=kotlin
-autocmd BufRead,BufNewFile *.markdown    setlocal filetype=markdown
-autocmd BufRead,BufNewFile *.md          setlocal filetype=markdown
-autocmd BufRead,BufNewFile *.mkd         setlocal filetype=markdown
-autocmd BufRead,BufNewFile *.jbuilder    setlocal filetype=ruby
-autocmd BufRead,BufNewFile Podfile*      setlocal filetype=ruby
-autocmd BufRead,BufNewFile Vagrantfile*  setlocal filetype=ruby
-autocmd BufRead,BufNewFile .envrc        setlocal filetype=sh
-autocmd BufRead,BufNewFile *.swift       setlocal filetype=swift
-autocmd BufRead,BufNewFile *.ts          setlocal filetype=typescript
-autocmd BufRead,BufNewFile *.tsx         setlocal filetype=typescript.tsx
-autocmd BufRead,BufNewFile *.tf          setlocal filetype=terraform
+autocmd BufRead,BufNewFile *.applescript  setlocal filetype=applescript
+autocmd BufRead,BufNewFile *.avdl         setlocal filetype=avdl
+autocmd BufRead,BufNewFile *.jbuilder     setlocal filetype=ruby
+autocmd BufRead,BufNewFile *.kt           setlocal filetype=kotlin
+autocmd BufRead,BufNewFile *.markdown     setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.md           setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.mkd          setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.swift        setlocal filetype=swift
+autocmd BufRead,BufNewFile *.tf           setlocal filetype=terraform
+autocmd BufRead,BufNewFile *.ts           setlocal filetype=typescript
+autocmd BufRead,BufNewFile *.tsx          setlocal filetype=typescript.tsx
+autocmd BufRead,BufNewFile .babelrc       setlocal filetype=json
+autocmd BufRead,BufNewFile .envrc         setlocal filetype=sh
+autocmd BufRead,BufNewFile .eslintrc      setlocal filetype=json
+autocmd BufRead,BufNewFile .stylelintrc   setlocal filetype=json
+autocmd BufRead,BufNewFile Jenkinsfile*   setlocal filetype=groovy
+autocmd BufRead,BufNewFile Podfile*       setlocal filetype=ruby
+autocmd BufRead,BufNewFile Vagrantfile*   setlocal filetype=ruby
 
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
