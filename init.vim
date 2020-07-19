@@ -220,9 +220,13 @@ endif
 call plug#begin('~/.config/nvim/lib')
 
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
+Plug 'jimmyhchan/dustjs.vim', { 'for': ['dustjs', 'dust'] }
+" Plug 'dhruvasagar/vim-table-mode', {'for': ['markdown'] }
+Plug 'JamshedVesuna/vim-markdown-preview', { 'for': ['markdown'] }
+Plug 'chmp/mdnav', { 'for': ['markdown'] }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'rhysd/reply.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'rhysd/reply.vim', { 'on': ['Repl', 'ReplAuto', 'ReplSend'] }
 Plug 'Shougo/neco-syntax', { 'for': ['javascript', 'javascript.jsx' ] }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
@@ -249,6 +253,8 @@ Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
 Plug 'jxnblk/vim-mdx-js', { 'for': 'markdown.mdx' }
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
@@ -267,6 +273,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 Plug 'dense-analysis/ale'
+Plug 'tpope/vim-dadbod'
 " Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 call plug#end()
@@ -311,24 +318,28 @@ set title
 "==========================================================
 " FileType-specific formatting
 "==========================================================
-autocmd BufRead,BufNewFile *.applescript  setlocal filetype=applescript
-autocmd BufRead,BufNewFile *.avdl         setlocal filetype=avdl
-autocmd BufRead,BufNewFile *.jbuilder     setlocal filetype=ruby
-autocmd BufRead,BufNewFile *.kt           setlocal filetype=kotlin
-autocmd BufRead,BufNewFile *.markdown     setlocal filetype=markdown
-autocmd BufRead,BufNewFile *.md           setlocal filetype=markdown
-autocmd BufRead,BufNewFile *.mkd          setlocal filetype=markdown
-autocmd BufRead,BufNewFile *.swift        setlocal filetype=swift
-autocmd BufRead,BufNewFile *.tf           setlocal filetype=terraform
-autocmd BufRead,BufNewFile *.ts           setlocal filetype=typescript
-autocmd BufRead,BufNewFile *.tsx          setlocal filetype=typescript.tsx
-autocmd BufRead,BufNewFile .babelrc       setlocal filetype=json
-autocmd BufRead,BufNewFile .envrc         setlocal filetype=sh
-autocmd BufRead,BufNewFile .eslintrc      setlocal filetype=json
-autocmd BufRead,BufNewFile .stylelintrc   setlocal filetype=json
-autocmd BufRead,BufNewFile Jenkinsfile*   setlocal filetype=groovy
-autocmd BufRead,BufNewFile Podfile*       setlocal filetype=ruby
-autocmd BufRead,BufNewFile Vagrantfile*   setlocal filetype=ruby
+autocmd BufRead,BufNewFile *.applescript setlocal filetype=applescript
+autocmd BufRead,BufNewFile *.avdl        setlocal filetype=avdl
+autocmd BufRead,BufNewFile *.dockerfile  setlocal filetype=dockerfile
+autocmd BufRead,BufNewFile *.dust        setlocal filetype=dust
+autocmd BufRead,BufNewFile *.jbuilder    setlocal filetype=ruby
+autocmd BufRead,BufNewFile *.kt          setlocal filetype=kotlin
+autocmd BufRead,BufNewFile *.kt          setlocal filetype=kotlin
+autocmd BufRead,BufNewFile *.markdown    setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.md          setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.mkd         setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.mongo.js    setlocal filetype=mongodb.javascript
+autocmd BufRead,BufNewFile *.swift       setlocal filetype=swift
+autocmd BufRead,BufNewFile *.ts          setlocal filetype=typescript
+autocmd BufRead,BufNewFile *.tsx         setlocal filetype=typescript.tsx
+autocmd BufRead,BufNewFile .babelrc      setlocal filetype=json
+autocmd BufRead,BufNewFile .envrc        setlocal filetype=sh
+autocmd BufRead,BufNewFile .eslintrc     setlocal filetype=json
+autocmd BufRead,BufNewFile .stylelintrc  setlocal filetype=json
+autocmd BufRead,BufNewFile Dockerfile*   setlocal filetype=dockerfile
+autocmd BufRead,BufNewFile Jenkinsfile*  setlocal filetype=groovy
+autocmd BufRead,BufNewFile Podfile*      setlocal filetype=ruby
+autocmd BufRead,BufNewFile Vagrantfile*  setlocal filetype=ruby
 
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
@@ -338,6 +349,7 @@ autocmd Filetype xml setlocal ts=2 sts=2 sw=2
 autocmd Filetype jsp setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
 autocmd Filetype m setlocal ts=4 sts=4 sw=4
 autocmd Filetype h setlocal ts=4 sts=4 sw=4
 autocmd Filetype wflow setlocal ts=4 sts=4 sw=4
@@ -346,9 +358,15 @@ autocmd Filetype swift setlocal ts=2 sts=2 sw=2
 autocmd Filetype applescript setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd Filetype groovy setlocal ts=4 sts=4 sw=4
 autocmd Filetype kotlin setlocal ts=4 sts=4 sw=4
-autocmd Filetype markdown setlocal conceallevel=2
+autocmd Filetype markdown setlocal conceallevel=2 spell
 autocmd Filetype json setlocal conceallevel=0
 autocmd Filetype gitconfig setlocal ts=2 sts=2 sw=2 noexpandtab
+autocmd Filetype gitcommit setlocal spell
+
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+autocmd Filetype javascript setlocal makeprg=pretty-quick\ --pattern\ %
+autocmd Filetype typescript setlocal makeprg=pretty-quick\ --pattern\ %
 
 augroup ReturnToLastCursorPosition
   au BufReadPost *
@@ -416,6 +434,25 @@ let g:ale_linters_explicit = 1
 let g:ale_set_quickfix = 0
 let g:ale_lint_delay = 600
 let g:ale_disable_lsp = 1
+" let g:ale_completion_tsserver_autoimport = 1
+
+" nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
+" " Or map each action separately
+" nnoremap <silent> <leader>k :call LanguageClient#explainErrorAtPoint()<CR>
+" nnoremap <silent> <leader>K :call LanguageClient#explainErrorAtPoint()<CR>
+" nnoremap <silent> <Leader>gi :call LanguageClient#textDocument_implementation()<CR>
+" nnoremap <silent> <Leader>gt :call LanguageClient#textDocument_typeDefinition()<CR>
+
+nnoremap <silent> K :ALEHover<CR>
+nnoremap <silent> <Leader>gs :ALESymbolSearch<CR>
+nnoremap <silent> <Leader>gd :ALEGoToDefinition<CR>
+nnoremap <silent> <Leader>gr :ALEFindReferences<CR>
+
+" nnoremap <silent> <Leader>gf :call LanguageClient#textDocument_formatting()<CR>
+" " nnoremap <silent> <Leader>gr :call LanguageClient#textDocument_rename()<CR>
+" nnoremap <silent> <Leader>gr :call LanguageClient#textDocument_references()<CR>
+
+nnoremap <silent> <Leader>ge :ALEDetail<CR>
 
 " let g:ale_linters_ignore = {
 "       \ 'typescript': ['tslint', 'tsserver'],
@@ -423,20 +460,30 @@ let g:ale_disable_lsp = 1
 "       \}
 " let g:ale_kotlin_languageserver_executable = '~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server'
 
+" function TSLSPRoot()
+
+" endfunction
+" let g:ale_lsp_root = {
+"   'typescript': 
+" }
 let g:ale_linters = {
   \ 'sh':  ['shellcheck'],
-  \ 'typescript': ['eslint'],
-  \ 'javascript': ['eslint'],
+  \ 'typescript': ['eslint', 'tsserver'],
+  \ 'typescript.tsx': ['eslint', 'tsserver'],
+  \ 'javascript': ['eslint', 'tsserver'],
+  \ 'javascriptreact': ['eslint', 'tsserver'],
   \ 'kotlin': ['ktlint'],
   \ 'java': ['ktlint']
 \}
+let s:ts_js_fixer = ['eslint', 'remove_trailing_lines', 'trim_whitespace']
 
 let g:ale_fixers = {
-\  'javascript':  ['prettier'],
-\  'typescript':  ['prettier'],
-\  'javascript.jsx':  ['prettier'],
+\  'javascript':  s:ts_js_fixer,
+\  'javascript.jsx':  s:ts_js_fixer,
+\  'javascriptreact':  s:ts_js_fixer,
+\  'typescript':  s:ts_js_fixer,
+\  'typescript.tsx':  s:ts_js_fixer,
 \  'css':  ['stylelint'],
-\  'typescript.tsx':  ['prettier'],
 \  'json':  ['prettier'],
 \  'kotlin': ['ktlint']
 \}
