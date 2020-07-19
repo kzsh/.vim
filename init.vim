@@ -532,7 +532,7 @@ augroup END
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 nnoremap <Leader>;; :Buffers<CR>
-nnoremap <Leader>;f :FZF<CR>
+nnoremap <Leader>;f :execute 'Files'<CR>
 nnoremap <Leader>;F :execute 'Files ' . expand('%:p:h')<CR>
 nnoremap <Leader>;af :execute 'Files' FindGitRoot()<CR>
 nnoremap <Leader>;cc :BCommits<CR>
@@ -542,6 +542,8 @@ nnoremap <Leader>ff :Rg ''<Left>
 nnoremap <Leader>FF :execute 'Find!' . expand('%:p:h') <CR>
 nnoremap <Leader>fa :execute 'Rg' FindGitRoot()<CR>
 nnoremap <Leader>fw :execute "Rg '\\b" . expand('<cword>') . "\\b' " . FindGitRoot()<CR>
+
+nnoremap <Leader>;t :call fzf#vim#files("./", {'options': ['--layout=reverse', '--info=inline', "--preview=bat --color=always --style=header,grid {}", '--preview-window=right:80%']}, 1)<CR>
 
 command! -bang -nargs=* TestQArgs echo <q-args>
 
@@ -586,14 +588,21 @@ let g:fzf_history_dir = g:kzsh#vim_tmp_dir . '/fzf-history//'
 "==========================================================
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+" let g:UltiSnipsJumpForwardTrigger = '<tab>'
+" let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+"
+" shortcut to go to next position
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+
+" shortcut to go to previous position
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 let g:UltiSnipsSnippetDirectories=["ulti-snippets"]
 
 "==========================================================
 " Language Server configuration
 "==========================================================
 
+let g:LanguageClient_selectionUI = "location-list"
 let g:LanguageClient_diagnosticsEnable = 1
 let g:LanguageClient_diagnosticsDisplay = {
     \     1: {
@@ -629,6 +638,9 @@ let g:LanguageClient_diagnosticsDisplay = {
 " let g:LanguageClient_rootMarkers = ['.git']
 let g:LanguageClient_rootMarkers = {
          \ 'tsx': ['.git'],
+         \ 'javascript': ['.git'],
+         \ 'javascript.jsx': ['.git'],
+         \ 'javascriptreact': ['.git'],
          \ 'typescript': ['.git'],
          \ 'typescript.tsx': ['.git']
          \ }
@@ -675,19 +687,24 @@ function! LookUpDefinition()
 endfunction
 
 nnoremap <Leader><Leader>r :LanguageClientStop<CR> :sleep 1<CR> :LanguageClientStart<CR>
+let s:ts_langserver_command =  ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')]
 
+ let g:LanguageClient_serverCommands = {
+     \ 'ocaml': ['ocaml-language-server', '--stdio'],
+     \ 'reason': ['ocaml-language-server', '--stdio'],
+     \ 'kotlin': ["~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"],
+     \ 'tsx': s:ts_langserver_command,
+     \ 'typescript': s:ts_langserver_command,
+     \ 'typescript.tsx': s:ts_langserver_command,
+     \ 'javascript': s:ts_langserver_command,
+     \ 'javascriptreact': s:ts_langserver_command,
+     \ 'javascript.jsx': s:ts_langserver_command,
+     \ 'yaml': ['yaml-language-server', '--stdio'],
+     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+     \ 'python': ['tcp://127.0.0.1:2087'],
+     \}
 
-let g:typescript_ls_path = "~/src/github/typescript-language-server/server/lib/cli.js --stdio"
-let g:LanguageClient_serverCommands = {
-      \ 'ocaml': ['ocaml-language-server', '--stdio'],
-      \ 'reason': ['ocaml-language-server', '--stdio'],
-      \ 'kotlin': ["~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server", "tcp://127.0.0.1:8080"],
-      \ 'typescript': [ expand('$HOME/src/github/typescript-language-server/node_modules/.bin/typescript-language-server'), '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
-      \ 'typescript.tsx': [expand('$HOME/src/github/typescript-language-server/node_modules/.bin/typescript-language-server'), '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
-      \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
-      \}
-     " \ 'tsx': ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')],
-     " \ 'kotlin': ['/Users/ahunt/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
+     " \ 'kotlin': ['~/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
 
 "==========================================================
 " ReasonML Language Configurations
@@ -723,6 +740,12 @@ augroup END
 let g:markdown_fenced_languages = ['html', 'ruby', 'js=javascript', 'python', 'bash=sh', 'graphql', 'ts=typescript']
 
 "==========================================================
+" vim-markdown-preview
+"==========================================================
+let vim_markdown_preview_github=1 
+let vim_markdown_preview_hotkey='<leader><leader>p'
+
+"==========================================================
 " vimtex
 "==========================================================
 let g:tex_flavor='latex'
@@ -740,14 +763,19 @@ let g:tex_conceal='abdmg'
 let g:kzsh_sql_out_file = '/tmp/neovim-sql-out.sql'
 let g:kzsh_sql_in_file = '/tmp/neovim-sql-in.sql'
 
+let g:kzsh_mongo_out_file = '/tmp/neovim-mongo-out.mongo'
+let g:kzsh_mongo_in_file = '/tmp/neovim-mongo-in.js'
+
 augroup ExecuteSelectedTextByFileType
   autocmd FileType ruby       vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
   autocmd FileType javascript vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
   autocmd FileType typescript vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
-  " autocmd FileType sql        nnoremap <buffer> <Leader>rr :.w! /tmp/neovim-sql-out.sql<CR>:!docker exec --env "PGOPTIONS=--search_path=[schemas here]" -t postgres psql -U postgres [db here] -P 'null=Ø' -P 'pager=off' -Ac "$(cat /tmp/neovim-sql-out.sql)" \| column -t -s'\|' > /tmp/neovim-sql-in.sql<CR><CR>
-  " autocmd FileType sql        vnoremap <buffer> <Leader>rr :w! /tmp/neovim-sql-out.sql<CR>:!docker exec --env "PGOPTIONS=--search_path=[schemas here]" -t postgres psql -U postgres [db here] -P 'null=Ø' -P 'pager=off' -Ac "$(cat /tmp/neovim-sql-out.sql)" \| column -t -s'\|' > /tmp/neovim-sql-in.sql<CR><CR>
-  "
-  " autocmd FileType sql        nnoremap <buffer> <Leader>rr :w! /tmp/neovim-sql-out.sql<CR>:!\$NEOVIM_SQL_COMMAND > /tmp/neovim-sql-in.sql<CR><CR>
+  autocmd FileType python     vnoremap <buffer> <Leader>rr :ReplSend<CR>
+  autocmd FileType python     nnoremap <buffer> <Leader>ra :0,$ReplSend<CR>
+
+  autocmd FileType mongodb.* vnoremap <buffer> <Leader>rr :w! /tmp/neovim-mongo-in.js \| silent! !mongo 'mongodb://root:[password]@127.0.0.1' /tmp/neovim-mongo-in.js \| tail -n +5 > /tmp/neovim-mongo-out.mongo<CR><CR>
+  autocmd FileType mongodb.* nnoremap <buffer> <Leader>rr :%w! /tmp/neovim-mongo-in.js \| silent! !mongo 'mongodb://root:[password]@127.0.0.1' /tmp/neovim-mongo-in.js \| tail -n +5> /tmp/neovim-mongo-out.mongo<CR><CR>
+
 augroup END
 
 "==========================================================
@@ -961,11 +989,15 @@ function! FindGitRootForPath(path)
 endfunction
 
 function! OpenGitHubUrlForCurrentLine()
-  call system("hub browse -- blob/$(git rev-parse HEAD)/" . expand('%') . "/#L" . line('.'))
+  call system("/usr/local/bin/hub browse -- blob/$(git rev-parse HEAD)/" . expand('%') . "/#L" . line('.'))
 endfunction
 
 function! CopyGitHubUrlForCurrentLine()
-  call system("cd " . expand('%:p:h') . "&& hub browse -c -- blob/$(git rev-parse HEAD)/" . expand('%') . "/#L" . line('.'))
+  let l:base = FindGitRootForPath(expand('%:p:h'))
+  let l:current = expand('%:p')
+  let l:relative = system("realpath --relative-to=" . l:base . " " . l:current)[:-2]
+  echom l:relative
+  call system("/usr/local/bin/hub browse -c -- blob/$(git rev-parse HEAD)/" . l:relative . "/#L" . line('.'))
 endfunction
 
 nnoremap <silent> <Leader>gx :call OpenGitHubUrlForCurrentLine()<CR>
