@@ -103,8 +103,11 @@ if has('vim_starting')
   set showcmd
   set noshowmode
   set noerrorbells
-  set shortmess+=rsI
-  set regexpengine=1 " set regex engine
+  set shortmess+=sI
+
+  " This was set for performance reasons with a ruby plugin that is no longer
+  " used
+  " set regexpengine=1 " set regex engine
   set autoread
   set hidden " only hide buffers, to preserve undo history when returning to other buffers
   set scrolloff=8
