@@ -41,6 +41,10 @@ if has('vim_starting')
   let s:node_host_prog = glob(expand('$HOME/.nvm/versions/node/v12.4.0/bin/neovim-node-host'))
   if executable(s:node_host_prog)
     let g:node_host_prog  = s:node_host_prog
+  " Node
+  let s:nvm_node_host = glob(expand('$HOME/.nvm/versions/node/v12.16.3/bin/neovim-node-host'))
+  if executable(s:nvm_node_host)
+    let g:node_host_prog  = s:nvm_node_host
   else
     let g:loaded_node_provider = 1
   endif
