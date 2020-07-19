@@ -1,0 +1,4 @@
+# snippet '([add project key]-\d+)' wrA
+# [`!p snip.rv = match.group(1)`]([base url here]`!p snip.rv = match.group(1)`)$0
+# endsnippet
+
