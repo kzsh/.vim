@@ -757,6 +757,11 @@ function! FixQuotes()
 endfunction
 
 "==========================================================
+" Open current file and line in IntelliJ
+"==========================================================
+command! Idea silent execute('!idea ' . expand('%') . ':' . line('.'))
+
+"==========================================================
 " Rename tmux window when vim changes buffers
 "==========================================================
 augroup TmuxIntegration
