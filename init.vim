@@ -677,6 +677,10 @@ augroup ExecuteSelectedTextByFileType
   autocmd FileType ruby       vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
   autocmd FileType javascript vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
   autocmd FileType typescript vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
+  " autocmd FileType sql        nnoremap <buffer> <Leader>rr :.w! /tmp/neovim-sql-out.sql<CR>:!docker exec --env "PGOPTIONS=--search_path=[schemas here]" -t postgres psql -U postgres [db here] -P 'null=Ø' -P 'pager=off' -Ac "$(cat /tmp/neovim-sql-out.sql)" \| column -t -s'\|' > /tmp/neovim-sql-in.sql<CR><CR>
+  " autocmd FileType sql        vnoremap <buffer> <Leader>rr :w! /tmp/neovim-sql-out.sql<CR>:!docker exec --env "PGOPTIONS=--search_path=[schemas here]" -t postgres psql -U postgres [db here] -P 'null=Ø' -P 'pager=off' -Ac "$(cat /tmp/neovim-sql-out.sql)" \| column -t -s'\|' > /tmp/neovim-sql-in.sql<CR><CR>
+  "
+  " autocmd FileType sql        nnoremap <buffer> <Leader>rr :w! /tmp/neovim-sql-out.sql<CR>:!\$NEOVIM_SQL_COMMAND > /tmp/neovim-sql-in.sql<CR><CR>
 augroup END
 
 "==========================================================
