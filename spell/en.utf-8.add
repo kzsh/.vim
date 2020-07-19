@@ -33,3 +33,8 @@ repo
 repos
 ui
 cli
+versioned
+workflow
+linting
+s3
+SonarQube
