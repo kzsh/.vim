@@ -7,8 +7,11 @@ if has('vim_starting')
 
   let g:kzsh#vim_dir = expand('$VIM_DIR')
   let g:kzsh#vim_tmp_dir = g:kzsh#vim_dir . '/.tmp'
+  let g:kzsh#vim_tmp_dir = g:kzsh#vim_dir . '/.tmp'
   let g:kzsh#vim_undo_dir = g:kzsh#vim_tmp_dir . '/undo//'
-  let g:kzsh#vim_log_dir = '/tmp/neovim'
+  let g:kzsh#system_tmp_dir = '/tmp/neovim'
+  let g:kzsh#query_result_dir = '~/.neovim-queries'
+  let g:kzsh#vim_log_dir = g:kzsh#system_tmp_dir
   call mkdir(g:kzsh#vim_log_dir, 'p')
 
   " ----------------------------------------------------------------------------
@@ -23,26 +26,23 @@ if has('vim_starting')
   endif
 
   " Python 2
-  " let s:pyenv_python2 = glob(expand('/not/a/real/place'))
-  " if executable(s:pyenv_python2)
-  "   let g:python_host_prog  = s:pyenv_python2
-  " else
-    let g:loaded_python_provider = 1
-  " endif
-
-  " Ruby
-  let s:ruby_host_prog = glob(expand('$HOME/.rbenv/versions/2.4.5/bin/neovim-ruby-host'))
-  if executable(s:ruby_host_prog)
-    let g:ruby_host_prog  = s:ruby_host_prog
+  let s:pyenv_python2 = glob(expand('$PYENV_ROOT/versions/neovim2/bin/python'))
+  if executable(s:pyenv_python2)
+    let g:python_host_prog  = s:pyenv_python2
   else
-    let g:loaded_ruby_provider = 1
+    let g:loaded_python_provider = 1
   endif
 
-  let s:node_host_prog = glob(expand('$HOME/.nvm/versions/node/v12.4.0/bin/neovim-node-host'))
-  if executable(s:node_host_prog)
-    let g:node_host_prog  = s:node_host_prog
+  " Ruby
+  " let s:ruby_host_prog = glob(expand('$HOME/.rbenv/versions/2.4.5/bin/neovim-ruby-host'))
+  " if executable(s:ruby_host_prog)
+  "   let g:ruby_host_prog  = s:ruby_host_prog
+  " else
+  "   let g:loaded_ruby_provider = 1
+  " endif
+  
   " Node
-  let s:nvm_node_host = glob(expand('$HOME/.nvm/versions/node/v12.16.3/bin/neovim-node-host'))
+  let s:nvm_node_host = glob(expand('$HOME/.nvm/versions/node/v15.6.0/bin/neovim-node-host'))
   if executable(s:nvm_node_host)
     let g:node_host_prog  = s:nvm_node_host
   else
@@ -107,11 +107,8 @@ if has('vim_starting')
   set showcmd
   set noshowmode
   set noerrorbells
-  set shortmess+=sI
-
-  " This was set for performance reasons with a ruby plugin that is no longer
-  " used
-  " set regexpengine=1 " set regex engine
+  set shortmess+=rsI
+  set regexpengine=1 " set regex engine
   set autoread
   set hidden " only hide buffers, to preserve undo history when returning to other buffers
   set scrolloff=8
@@ -218,7 +215,6 @@ endif
 " Load Plugins
 "==========================================================
 call plug#begin('~/.config/nvim/lib')
-
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 Plug 'jimmyhchan/dustjs.vim', { 'for': ['dustjs', 'dust'] }
 " Plug 'dhruvasagar/vim-table-mode', {'for': ['markdown'] }
@@ -318,28 +314,30 @@ set title
 "==========================================================
 " FileType-specific formatting
 "==========================================================
-autocmd BufRead,BufNewFile *.applescript setlocal filetype=applescript
-autocmd BufRead,BufNewFile *.avdl        setlocal filetype=avdl
-autocmd BufRead,BufNewFile *.dockerfile  setlocal filetype=dockerfile
-autocmd BufRead,BufNewFile *.dust        setlocal filetype=dust
-autocmd BufRead,BufNewFile *.jbuilder    setlocal filetype=ruby
-autocmd BufRead,BufNewFile *.kt          setlocal filetype=kotlin
-autocmd BufRead,BufNewFile *.kt          setlocal filetype=kotlin
-autocmd BufRead,BufNewFile *.markdown    setlocal filetype=markdown
-autocmd BufRead,BufNewFile *.md          setlocal filetype=markdown
-autocmd BufRead,BufNewFile *.mkd         setlocal filetype=markdown
-autocmd BufRead,BufNewFile *.mongo.js    setlocal filetype=mongodb.javascript
-autocmd BufRead,BufNewFile *.swift       setlocal filetype=swift
-autocmd BufRead,BufNewFile *.ts          setlocal filetype=typescript
-autocmd BufRead,BufNewFile *.tsx         setlocal filetype=typescript.tsx
-autocmd BufRead,BufNewFile .babelrc      setlocal filetype=json
-autocmd BufRead,BufNewFile .envrc        setlocal filetype=sh
-autocmd BufRead,BufNewFile .eslintrc     setlocal filetype=json
-autocmd BufRead,BufNewFile .stylelintrc  setlocal filetype=json
-autocmd BufRead,BufNewFile Dockerfile*   setlocal filetype=dockerfile
-autocmd BufRead,BufNewFile Jenkinsfile*  setlocal filetype=groovy
-autocmd BufRead,BufNewFile Podfile*      setlocal filetype=ruby
-autocmd BufRead,BufNewFile Vagrantfile*  setlocal filetype=ruby
+autocmd BufRead,BufNewFile *.applescript      setlocal filetype=applescript
+autocmd BufRead,BufNewFile *.avdl             setlocal filetype=avdl
+autocmd BufRead,BufNewFile Jenkinsfile*       setlocal filetype=groovy
+autocmd BufRead,BufNewFile .babelrc           setlocal filetype=json
+autocmd BufRead,BufNewFile .eslintrc          setlocal filetype=json
+autocmd BufRead,BufNewFile .stylelintrc       setlocal filetype=json
+autocmd BufRead,BufNewFile *.kt               setlocal filetype=kotlin
+autocmd BufRead,BufNewFile *.kt               setlocal filetype=kotlin
+autocmd BufRead,BufNewFile *.markdown         setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.md               setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.mkd              setlocal filetype=markdown
+autocmd BufRead,BufNewFile *.jbuilder         setlocal filetype=ruby
+autocmd BufRead,BufNewFile Podfile*           setlocal filetype=ruby
+autocmd BufRead,BufNewFile Vagrantfile*       setlocal filetype=ruby
+autocmd BufRead,BufNewFile Dockerfile*        setlocal filetype=dockerfile
+autocmd BufRead,BufNewFile *.dockerfile       setlocal filetype=dockerfile
+autocmd BufRead,BufNewFile .envrc             setlocal filetype=sh
+autocmd BufRead,BufNewFile *.swift            setlocal filetype=swift
+autocmd BufRead,BufNewFile *.ts               setlocal filetype=typescript
+autocmd BufRead,BufNewFile *.tsx              setlocal filetype=typescript.tsx
+autocmd BufRead,BufNewFile *.dust             setlocal filetype=dust
+autocmd BufRead,BufNewFile *.mongo.js         setlocal filetype=mongodb.javascript
+autocmd BufRead,BufNewFile *.handlebars       setlocal filetype=mustache
+autocmd BufRead,BufNewFile requirements.txt   setlocal filetype=python
 
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
@@ -356,7 +354,7 @@ autocmd Filetype wflow setlocal ts=4 sts=4 sw=4
 autocmd Filetype plist setlocal ts=4 sts=4 sw=4
 autocmd Filetype swift setlocal ts=2 sts=2 sw=2
 autocmd Filetype applescript setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd Filetype groovy setlocal ts=4 sts=4 sw=4
+autocmd Filetype groovy setlocal ts=2 sts=2 sw=2
 autocmd Filetype kotlin setlocal ts=4 sts=4 sw=4
 autocmd Filetype markdown setlocal conceallevel=2 spell
 autocmd Filetype json setlocal conceallevel=0
@@ -436,21 +434,11 @@ let g:ale_lint_delay = 600
 let g:ale_disable_lsp = 1
 " let g:ale_completion_tsserver_autoimport = 1
 
-" nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
-" " Or map each action separately
-" nnoremap <silent> <leader>k :call LanguageClient#explainErrorAtPoint()<CR>
-" nnoremap <silent> <leader>K :call LanguageClient#explainErrorAtPoint()<CR>
-" nnoremap <silent> <Leader>gi :call LanguageClient#textDocument_implementation()<CR>
-" nnoremap <silent> <Leader>gt :call LanguageClient#textDocument_typeDefinition()<CR>
 
 nnoremap <silent> K :ALEHover<CR>
 nnoremap <silent> <Leader>gs :ALESymbolSearch<CR>
 nnoremap <silent> <Leader>gd :ALEGoToDefinition<CR>
 nnoremap <silent> <Leader>gr :ALEFindReferences<CR>
-
-" nnoremap <silent> <Leader>gf :call LanguageClient#textDocument_formatting()<CR>
-" " nnoremap <silent> <Leader>gr :call LanguageClient#textDocument_rename()<CR>
-" nnoremap <silent> <Leader>gr :call LanguageClient#textDocument_references()<CR>
 
 nnoremap <silent> <Leader>ge :ALEDetail<CR>
 
@@ -468,12 +456,13 @@ nnoremap <silent> <Leader>ge :ALEDetail<CR>
 " }
 let g:ale_linters = {
   \ 'sh':  ['shellcheck'],
-  \ 'typescript': ['eslint', 'tsserver'],
-  \ 'typescript.tsx': ['eslint', 'tsserver'],
-  \ 'javascript': ['eslint', 'tsserver'],
-  \ 'javascriptreact': ['eslint', 'tsserver'],
+  \ 'typescript': ['eslint'],
+  \ 'typescript.tsx': ['eslint'],
+  \ 'javascript': ['eslint'],
+  \ 'javascriptreact': ['eslint'],
   \ 'kotlin': ['ktlint'],
-  \ 'java': ['ktlint']
+  \ 'java': ['ktlint'],
+  \ 'python': ['flake8']
 \}
 let s:ts_js_fixer = ['eslint', 'remove_trailing_lines', 'trim_whitespace']
 
@@ -485,7 +474,8 @@ let g:ale_fixers = {
 \  'typescript.tsx':  s:ts_js_fixer,
 \  'css':  ['stylelint'],
 \  'json':  ['prettier'],
-\  'kotlin': ['ktlint']
+\  'kotlin': ['ktlint'],
+\  'python': ['black']
 \}
 
 let g:ale_pattern_options = {
@@ -497,16 +487,22 @@ let g:ale_pattern_options = {
 "==========================================================
 " Prettier js util support
 "==========================================================
-
+  let g:kzsh#format_cache = g:kzsh#system_tmp_dir . '/fizzbuzz'
 function! FormatSection()
-  write! /tmp/fizzbuzz 
-  system('prettier --write /tmp/fizzbuzz')
-  " read /tmp/fizzbuzz
+  write! g:kzsh#format_cache
+  system('prettier --write ' . g:kzsh#format_cache)
 endfunction
 
 augroup PrettierAugments
   autocmd FileType javascript vnoremap <buffer> <Leader>f :call FormatSection()<CR>
   autocmd FileType typescript vnoremap <buffer> <Leader>f :call FormatSection()<CR>
+augroup END
+
+"==========================================================
+" Ale config
+"==========================================================
+augroup TableFormatting
+  au FileType markdown vmap <Leader><Bar> :EasyAlign*<Bar><Enter>
 augroup END
 
 
@@ -531,8 +527,15 @@ augroup END
 
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
+
+command! -bang -nargs=* FileDiff call fzf#vim#grep('git diff --name-only ' . shellescape(<q-args>), 0, <bang>0)
+
 nnoremap <Leader>;; :Buffers<CR>
-nnoremap <Leader>;f :execute 'Files'<CR>
+nnoremap <Leader>;f :Files<CR>
+" nnoremap <Leader>;c :execute 'FileDiff! origin/master'<CR>
+nnoremap <Leader>;r :History<CR>
+
+
 nnoremap <Leader>;F :execute 'Files ' . expand('%:p:h')<CR>
 nnoremap <Leader>;af :execute 'Files' FindGitRoot()<CR>
 nnoremap <Leader>;cc :BCommits<CR>
@@ -543,7 +546,9 @@ nnoremap <Leader>FF :execute 'Find!' . expand('%:p:h') <CR>
 nnoremap <Leader>fa :execute 'Rg' FindGitRoot()<CR>
 nnoremap <Leader>fw :execute "Rg '\\b" . expand('<cword>') . "\\b' " . FindGitRoot()<CR>
 
-nnoremap <Leader>;t :call fzf#vim#files("./", {'options': ['--layout=reverse', '--info=inline', "--preview=bat --color=always --style=header,grid {}", '--preview-window=right:80%']}, 1)<CR>
+nnoremap <Leader>;t :OpenPreview<CR>
+
+command! OpenPreview call fzf#vim#files("./", {'options': ['--layout=reverse', '--info=inline', "--preview=bat --color=always --style=header,grid {}", '--preview-window=right:80%']}, 1)
 
 command! -bang -nargs=* TestQArgs echo <q-args>
 
@@ -701,10 +706,47 @@ let s:ts_langserver_command =  ['typescript-language-server', '--stdio', '--tsse
      \ 'javascript.jsx': s:ts_langserver_command,
      \ 'yaml': ['yaml-language-server', '--stdio'],
      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-     \ 'python': ['tcp://127.0.0.1:2087'],
+     \ 'python': ['~/.pyenv/versions/neovim3/bin/pyls'],
+     \ 'swift': ['xcrun sourcekit-lsp'],
      \}
 
      " \ 'kotlin': ['~/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
+
+
+"==========================================================
+" CoC config
+"==========================================================
+" let g:coc_node_path=expand("$HOME/.nvm/versions/node/v12.16.3/bin/node")
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+nnoremap <silent> <Leader>gd :call CocActionAsync('jumpDefinition')<CR>
+
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
 "==========================================================
 " ReasonML Language Configurations
@@ -727,11 +769,11 @@ augroup END
 "==========================================================
 " Run Autocommit on TODO.md
 "==========================================================
-let g:todo_path = expand('~/TODO')
+let g:todo_path = expand('~/NOTES')
 augroup autoCommitChangesToTODO
   au!
   " TODO: don't execute todo commit for any TODO.md file anywhere.
-  autocmd BufWritePre TODO.md silent! execute('!' . g:todo_path . '/autocommit.sh')
+  autocmd BufWritePre ~/NOTES/** silent! execute('!' . g:todo_path . '/autocommit.sh')
 augroup END
 
 "==========================================================
@@ -760,11 +802,26 @@ let g:tex_conceal='abdmg'
 "==========================================================
 " SQL Execute visual-selection
 "==========================================================
-let g:kzsh_sql_out_file = '/tmp/neovim-sql-out.sql'
-let g:kzsh_sql_in_file = '/tmp/neovim-sql-in.sql'
 
-let g:kzsh_mongo_out_file = '/tmp/neovim-mongo-out.mongo'
-let g:kzsh_mongo_in_file = '/tmp/neovim-mongo-in.js'
+let g:kzsh_sql_out_file = g:kzsh#system_tmp_dir . '/psql-out.sql'
+let g:kzsh_sql_in_file = g:kzsh#system_tmp_dir . '/psql-in.sql'
+
+" let g:kzsh_mongo_out_file = 'mongo-out.mongo'
+" let g:kzsh_mongo_in_file = 'mongo-in.js'
+
+function! MongodbQuery()
+  let l:in_file_path = g:kzsh#query_result_dir . '/in/' . expand('%:t:r') . '.js'
+  let l:out_file_path = g:kzsh#query_result_dir . '/out/' . expand('%:t:r')
+  execute('%w! ' . l:in_file_path . ' | !mongo "$MONGO_URL" ' . l:in_file_path . ' | tail -n +5 > ' . l:out_file_path)
+endfunction
+
+function! MongodbViewQuery()
+  let l:out_file_path = g:kzsh#query_result_dir . '/out/' . expand('%:t:r')
+  execute('silent! vsplit ' . l:out_file_path)
+endfunction
+
+command! MongodbQuery call s:MongodbQuery()
+command! MongodbViewQuery call s:MongodbViewQuery()
 
 augroup ExecuteSelectedTextByFileType
   autocmd FileType ruby       vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
@@ -773,8 +830,12 @@ augroup ExecuteSelectedTextByFileType
   autocmd FileType python     vnoremap <buffer> <Leader>rr :ReplSend<CR>
   autocmd FileType python     nnoremap <buffer> <Leader>ra :0,$ReplSend<CR>
 
-  autocmd FileType mongodb.* vnoremap <buffer> <Leader>rr :w! /tmp/neovim-mongo-in.js \| silent! !mongo 'mongodb://root:[password]@127.0.0.1' /tmp/neovim-mongo-in.js \| tail -n +5 > /tmp/neovim-mongo-out.mongo<CR><CR>
-  autocmd FileType mongodb.* nnoremap <buffer> <Leader>rr :%w! /tmp/neovim-mongo-in.js \| silent! !mongo 'mongodb://root:[password]@127.0.0.1' /tmp/neovim-mongo-in.js \| tail -n +5> /tmp/neovim-mongo-out.mongo<CR><CR>
+  autocmd FileType mongodb.* nnoremap <buffer> <Leader>ro :call MongodbViewQuery()<CR>
+  ":execute('silent! vsplit ' . g:kzsh_mongo_out_file)<CR>
+
+  " autocmd FileType mongodb.* vnoremap <buffer> <Leader>rr :execute('w! ' . g:kzsh_mongo_in_file . ' \| silent! !mongo "$MONGO_URL" ' . g:kzsh_mongo_in_file . ' \| tail -n +5 > ' . g:kzsh_mongo_out_file)<CR>
+  autocmd FileType mongodb.* nnoremap <buffer> <Leader>rr :call MongodbQuery()<CR>
+  " autocmd FileType mongodb.* nnoremap <buffer> <Leader>rr :execute('%w! ' . g:kzsh_mongo_in_file . ' \| silent! !mongo "$MONGO_URL" ' . g:kzsh_mongo_in_file . ' \| tail -n +5 > ' . g:kzsh_mongo_out_file)<CR>
 
 augroup END
 
@@ -815,11 +876,9 @@ function! ConditionalEscape()
       close
     catch /.*/
       if g:kzsh#term_prime_delete == 1
-        " echo g:kzsh#term_prime_delete
         let g:kzsh#term_prime_delete = 0
         bd!
       else
-        " echo g:kzsh#term_prime_delete
         let g:kzsh#term_prime_delete = 1
       endif
     endtry
@@ -850,11 +909,6 @@ function! FixQuotes()
   %s/[“”]/"/g
   %s/[‘’]/'/g
 endfunction
-
-"==========================================================
-" Open current file and line in IntelliJ
-"==========================================================
-command! Idea silent execute('!idea ' . expand('%') . ':' . line('.'))
 
 "==========================================================
 " Rename tmux window when vim changes buffers
@@ -988,6 +1042,11 @@ function! FindGitRootForPath(path)
   return expand(system(l:path_change . ' && ' . l:git_command)[:-2])
 endfunction
 
+function! DiffUpstreamForChangedFiles(upstream)
+  let l:git_command = 'git diff --name-only' . a:upstream
+  return expand(system(l:git_command))
+endfunction
+
 function! OpenGitHubUrlForCurrentLine()
   call system("/usr/local/bin/hub browse -- blob/$(git rev-parse HEAD)/" . expand('%') . "/#L" . line('.'))
 endfunction
@@ -996,12 +1055,27 @@ function! CopyGitHubUrlForCurrentLine()
   let l:base = FindGitRootForPath(expand('%:p:h'))
   let l:current = expand('%:p')
   let l:relative = system("realpath --relative-to=" . l:base . " " . l:current)[:-2]
-  echom l:relative
   call system("/usr/local/bin/hub browse -c -- blob/$(git rev-parse HEAD)/" . l:relative . "/#L" . line('.'))
+endfunction
+
+function! CopyGitHubMasterUrlForCurrentLine()
+  call CopyGitHubUrlForCurrentLine()
+  " 40 is the length of the full git hash
+  let @+ = substitute(@+, "[a-z0-9]\\{40\\}", "master", "g")
+endfunction
+
+function! CopyGitHubBranchUrlForCurrentLine()
+  call CopyGitHubUrlForCurrentLine()
+  " 40 is the length of the full git hash
+  let l:branch = system("git rev-parse --abbrev-ref HEAD")
+  let @+ = substitute(@+, "[a-z0-9]\\{40\\}", branch, "g")
 endfunction
 
 nnoremap <silent> <Leader>gx :call OpenGitHubUrlForCurrentLine()<CR>
 nnoremap <silent> <Leader>ghc :call CopyGitHubUrlForCurrentLine()<CR>
+nnoremap <silent> <Leader>ghm :call CopyGitHubMasterUrlForCurrentLine()<CR>
+nnoremap <silent> <Leader>ghb :call CopyGitHubBranchUrlForCurrentLine()<CR>
+
 nnoremap <silent> <Leader>gs :execute("tabe " . LoadMainNodeModule(expand('<cfile>'))) \| execute("lcd " . expand('%:p:h'))<CR>
  
 "==========================================================
@@ -1102,6 +1176,24 @@ function! VisualSelection()
   let l:lines[-1] = l:lines[-1][: l:column_end - 1]
   let l:lines[0] = l:lines[0][l:column_start - 1:]
   return join(l:lines, "\n")
+endfunction
+
+"==========================================================
+" Buffer control functions
+"==========================================================
+command! CloseHiddenBuffers call s:CloseHiddenBuffers()
+function! s:CloseHiddenBuffers()
+  let open_buffers = []
+
+  for i in range(tabpagenr('$'))
+    call extend(open_buffers, tabpagebuflist(i + 1))
+  endfor
+
+  for num in range(1, bufnr("$") + 1)
+    if buflisted(num) && index(open_buffers, num) == -1
+      exec "bdelete ".num
+    endif
+  endfor
 endfunction
 
 "==========================================================
