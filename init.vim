@@ -101,7 +101,6 @@ if has('vim_starting')
   autocmd BufEnter *.jsx setlocal includeexpr=LoadMainNodeModule(v:fname)
 
   set nomodeline
-
   set lazyredraw " Prevent UI from drawing during macro execution.
   set laststatus=1
   set showcmd
@@ -215,14 +214,18 @@ endif
 " Load Plugins
 "==========================================================
 call plug#begin('~/.config/nvim/lib')
-Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
+
+" Plug 'vim-scripts/DrawIt'
 Plug 'jimmyhchan/dustjs.vim', { 'for': ['dustjs', 'dust'] }
-" Plug 'dhruvasagar/vim-table-mode', {'for': ['markdown'] }
-Plug 'JamshedVesuna/vim-markdown-preview', { 'for': ['markdown'] }
+Plug 'dhruvasagar/vim-table-mode', {'for': ['markdown'] }
+" Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'javascriptreact']}
 Plug 'chmp/mdnav', { 'for': ['markdown'] }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'rhysd/reply.vim', { 'on': ['Repl', 'ReplAuto', 'ReplSend'] }
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/goyo.vim',
+Plug 'mustache/vim-mustache-handlebars', { 'for': ['handlebars'] }
+" Plug 'rhysd/reply.vim', { 'on': ['Repl', 'ReplAuto', 'ReplSend'] }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax', { 'for': ['javascript', 'javascript.jsx' ] }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
@@ -236,7 +239,6 @@ Plug 'godlygeek/tabular', {'for': 'cucumber' }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'jparise/vim-graphql', { 'for': 'graphql'}
 Plug 'jremmen/vim-ripgrep'
-Plug 'junegunn/goyo.vim',
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'kshenoy/vim-signature'
 Plug 'kzsh/vim-chunkwm-navigator'
@@ -247,7 +249,7 @@ Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
 Plug 'morhetz/gruvbox'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
+" Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
 Plug 'jxnblk/vim-mdx-js', { 'for': 'markdown.mdx' }
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -255,7 +257,7 @@ Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'sirver/ultisnips'
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+" Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 Plug 'tpope/vim-commentary'
@@ -317,6 +319,7 @@ set title
 autocmd BufRead,BufNewFile *.applescript      setlocal filetype=applescript
 autocmd BufRead,BufNewFile *.avdl             setlocal filetype=avdl
 autocmd BufRead,BufNewFile Jenkinsfile*       setlocal filetype=groovy
+autocmd BufRead,BufNewFile *.Jenkinsfile      setlocal filetype=groovy
 autocmd BufRead,BufNewFile .babelrc           setlocal filetype=json
 autocmd BufRead,BufNewFile .eslintrc          setlocal filetype=json
 autocmd BufRead,BufNewFile .stylelintrc       setlocal filetype=json
@@ -434,7 +437,6 @@ let g:ale_lint_delay = 600
 let g:ale_disable_lsp = 1
 " let g:ale_completion_tsserver_autoimport = 1
 
-
 nnoremap <silent> K :ALEHover<CR>
 nnoremap <silent> <Leader>gs :ALESymbolSearch<CR>
 nnoremap <silent> <Leader>gd :ALEGoToDefinition<CR>
@@ -525,6 +527,10 @@ augroup END
 "   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
 "   \   <bang>0)
 
+" Pass an empty option dictionary if the screen is narrow
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, &columns > 200 ? fzf#vim#with_preview() : {}, <bang>0)
+
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 
@@ -607,7 +613,6 @@ let g:UltiSnipsSnippetDirectories=["ulti-snippets"]
 " Language Server configuration
 "==========================================================
 
-let g:LanguageClient_selectionUI = "location-list"
 let g:LanguageClient_diagnosticsEnable = 1
 let g:LanguageClient_diagnosticsDisplay = {
     \     1: {
@@ -649,6 +654,10 @@ let g:LanguageClient_rootMarkers = {
          \ 'typescript': ['.git'],
          \ 'typescript.tsx': ['.git']
          \ }
+
+" call LanguageClient#setDiagnosticsList('Disabled')
+" do stuff with quickfix/location list
+" call LanguageClient#setDiagnosticsList('Quickfix')
 
 nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
@@ -692,61 +701,57 @@ function! LookUpDefinition()
 endfunction
 
 nnoremap <Leader><Leader>r :LanguageClientStop<CR> :sleep 1<CR> :LanguageClientStart<CR>
-let s:ts_langserver_command =  ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')]
+let s:ts_langserver_command = ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')]
 
- let g:LanguageClient_serverCommands = {
-     \ 'ocaml': ['ocaml-language-server', '--stdio'],
-     \ 'reason': ['ocaml-language-server', '--stdio'],
-     \ 'kotlin': ["~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"],
-     \ 'tsx': s:ts_langserver_command,
-     \ 'typescript': s:ts_langserver_command,
-     \ 'typescript.tsx': s:ts_langserver_command,
-     \ 'javascript': s:ts_langserver_command,
-     \ 'javascriptreact': s:ts_langserver_command,
-     \ 'javascript.jsx': s:ts_langserver_command,
-     \ 'yaml': ['yaml-language-server', '--stdio'],
-     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-     \ 'python': ['~/.pyenv/versions/neovim3/bin/pyls'],
-     \ 'swift': ['xcrun sourcekit-lsp'],
-     \}
-
-     " \ 'kotlin': ['~/src/github/tools/language-servers/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server', 'tcp://127.0.0.1:8080'],
-
+let g:LanguageClient_serverCommands = {
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'kotlin': ["~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"],
+    \ 'tsx': s:ts_langserver_command,
+    \ 'typescript': s:ts_langserver_command,
+    \ 'typescript.tsx': s:ts_langserver_command,
+    \ 'javascript': s:ts_langserver_command,
+    \ 'javascriptreact': s:ts_langserver_command,
+    \ 'javascript.jsx': s:ts_langserver_command,
+    \ 'yaml': ['yaml-language-server', '--stdio'],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'python': ['~/.pyenv/versions/neovim3/bin/pyls'],
+    \}
 
 "==========================================================
 " CoC config
 "==========================================================
 " let g:coc_node_path=expand("$HOME/.nvm/versions/node/v12.16.3/bin/node")
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
-nnoremap <silent> <Leader>gd :call CocActionAsync('jumpDefinition')<CR>
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nmap <silent> <leader>gd <Plug>(coc-definition)
+" nmap <silent> <leader>gy <Plug>(coc-type-definition)
+" nmap <silent> <leader>gi <Plug>(coc-implementation)
+" nmap <silent> <leader>gr <Plug>(coc-references)
+" nnoremap <silent> <Leader>gd :call CocActionAsync('jumpDefinition')<CR>
 
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+" augroup mygroup
+"   autocmd!
+"   " Setup formatexpr specified filetype(s).
+"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"   " Update signature help on jump placeholder.
+"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+" augroup end
 
 "==========================================================
 " ReasonML Language Configurations
