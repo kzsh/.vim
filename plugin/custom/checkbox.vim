@@ -47,7 +47,7 @@ endf
 command! ToggleCB call checkbox#ToggleCB()
 command! ToggleCBSkip call checkbox#ToggleCBSkip()
 
-nmap <silent> <leader>tt :ToggleCB<cr>
-nmap <silent> <leader>ts :ToggleCBSkip<cr>
+nmap <silent> <leader>xx :ToggleCB<cr>
+nmap <silent> <leader>xs :ToggleCBSkip<cr>
 
 let g:loaded_checkbox = 1
