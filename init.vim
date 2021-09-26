@@ -101,6 +101,7 @@ if has('vim_starting')
   autocmd BufEnter *.jsx setlocal includeexpr=LoadMainNodeModule(v:fname)
 
   set nomodeline
+  set nowrap
   set lazyredraw " Prevent UI from drawing during macro execution.
   set laststatus=1
   set showcmd
@@ -216,15 +217,18 @@ endif
 call plug#begin('~/.config/nvim/lib')
 
 " Plug 'vim-scripts/DrawIt'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'towolf/vim-helm', {'for': ['helm', 'yaml']}
+Plug 'cespare/vim-toml', { 'for': ['toml'] }
 Plug 'jimmyhchan/dustjs.vim', { 'for': ['dustjs', 'dust'] }
 Plug 'dhruvasagar/vim-table-mode', {'for': ['markdown'] }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'chmp/mdnav', { 'for': ['markdown'] }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim',
 Plug 'mustache/vim-mustache-handlebars', { 'for': ['handlebars'] }
-" Plug 'rhysd/reply.vim', { 'on': ['Repl', 'ReplAuto', 'ReplSend'] }
+Plug 'rhysd/reply.vim', { 'on': ['Repl', 'ReplAuto', 'ReplSend'] }
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax', { 'for': ['javascript', 'javascript.jsx' ] }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -272,6 +276,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-dadbod'
+Plug 'vim-python/python-syntax', { 'for': 'python' }
 " Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 call plug#end()
@@ -341,6 +346,7 @@ autocmd BufRead,BufNewFile *.dust             setlocal filetype=dust
 autocmd BufRead,BufNewFile *.mongo.js         setlocal filetype=mongodb.javascript
 autocmd BufRead,BufNewFile *.handlebars       setlocal filetype=mustache
 autocmd BufRead,BufNewFile requirements.txt   setlocal filetype=python
+autocmd BufRead,BufNewFile *.ipynb            setlocal filetype=python
 
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
