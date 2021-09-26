@@ -433,6 +433,32 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 let g:sql_type_default = 'pgsql'
 
 "==========================================================
+" python-syntax
+"==========================================================
+let g:python_highlight_all = 1
+" Variable                                        "| Description                                                    | Default |
+" let g:python_version_2                          "| Python 2 mode                                                  | 0       |
+" let b:python_version_2                          "| Python 2 mode (buffer local)                                   | 0       |
+" let g:python_highlight_builtins                 "| Highlight builtin objects, types, and functions                | 0       |
+" let g:python_highlight_builtin_objs             "| Highlight builtin objects only                                 | 0       |
+" let g:python_highlight_builtin_types            "| Highlight builtin types only                                   | 0       |
+" let g:python_highlight_builtin_funcs            "| Highlight builtin functions only                               | 0       |
+" let g:python_highlight_builtin_funcs_kwarg      "| Highlight builtin functions when used as kwarg                 | 1       |
+" let g:python_highlight_exceptions               "| Highlight standard exceptions                                  | 0       |
+" let g:python_highlight_string_formatting        "| Highlight % string formatting                                  | 0       |
+" let g:python_highlight_string_format            "| Highlight syntax of str.format syntax                          | 0       |
+" let g:python_highlight_string_templates         "| Highlight syntax of string.Template                            | 0       |
+" let g:python_highlight_indent_errors            "| Highlight indentation errors                                   | 0       |
+" let g:python_highlight_space_errors             "| Highlight trailing spaces                                      | 0       |
+" let g:python_highlight_doctests                 "| Highlight doc-tests                                            | 0       |
+" let g:python_highlight_func_calls               "| Highlight functions calls                                      | 0       |
+" let g:python_highlight_class_vars               "| Highlight class variables self, cls, and mcs                   | 0       |
+" let g:python_highlight_operators                "| Highlight all operators                                        | 0       |
+" let g:python_highlight_all                      "| Enable all highlight options above, except for previously set. | 0       |
+" let g:python_highlight_file_headers_as_comments "| Highlight shebang and coding headers as comments               | 0       |
+" let g:python_slow_sync                          "| Disable for slow machines                                      | 1       |
+
+"==========================================================
 " Ale config
 "==========================================================
 let g:ale_fix_on_save = 1
@@ -441,9 +467,10 @@ let g:ale_linters_explicit = 1
 let g:ale_set_quickfix = 0
 let g:ale_lint_delay = 600
 let g:ale_disable_lsp = 1
+let g:ale_python_auto_pipenv = 1
 " let g:ale_completion_tsserver_autoimport = 1
 
-nnoremap <silent> K :ALEHover<CR>
+nnoremap <silent> <leader>K  :ALEHover<CR>
 nnoremap <silent> <Leader>gs :ALESymbolSearch<CR>
 nnoremap <silent> <Leader>gd :ALEGoToDefinition<CR>
 nnoremap <silent> <Leader>gr :ALEFindReferences<CR>
@@ -470,7 +497,8 @@ let g:ale_linters = {
   \ 'javascriptreact': ['eslint'],
   \ 'kotlin': ['ktlint'],
   \ 'java': ['ktlint'],
-  \ 'python': ['flake8']
+  \ 'python': ['flake8', 'black'],
+  \ 'dockerfile': ['hadolint']
 \}
 let s:ts_js_fixer = ['eslint', 'remove_trailing_lines', 'trim_whitespace']
 
@@ -483,7 +511,7 @@ let g:ale_fixers = {
 \  'css':  ['stylelint'],
 \  'json':  ['prettier'],
 \  'kotlin': ['ktlint'],
-\  'python': ['black']
+\  'python': ['black', 'isort']
 \}
 
 let g:ale_pattern_options = {
@@ -520,6 +548,12 @@ augroup END
 augroup VimCommentaryAdditionalSyntaxes
   autocmd FileType handlebars setlocal commentstring={{!%s}}
 augroup END
+
+"==========================================================
+" Emmet Config
+"==========================================================
+let g:user_emmet_leader_key='<C-E>'
+let g:user_emmet_mode='a'
 
 "==========================================================
 " FZF Config
@@ -661,9 +695,9 @@ let g:UltiSnipsSnippetDirectories=["ulti-snippets"]
 "          \ 'typescript.tsx': ['.git']
 "          \ }
 
-" call LanguageClient#setDiagnosticsList('Disabled')
-" do stuff with quickfix/location list
-" call LanguageClient#setDiagnosticsList('Quickfix')
+" " call LanguageClient#setDiagnosticsList('Disabled')
+" " do stuff with quickfix/location list
+" " call LanguageClient#setDiagnosticsList('Quickfix')
 
 " nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
 " " Or map each action separately
@@ -738,7 +772,7 @@ function! s:show_documentation()
 endfunction
 
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
@@ -751,13 +785,15 @@ nmap <silent> <leader>gr <Plug>(coc-references)
 nnoremap <silent> <Leader>gd :call CocActionAsync('jumpDefinition')<CR>
 
 
-augroup mygroup
+augroup CoCExpander
   autocmd!
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+nnoremap <Leader><Leader>r :CocRestart<CR> 
 
 "==========================================================
 " ReasonML Language Configurations
@@ -823,7 +859,9 @@ let g:kzsh_sql_in_file = g:kzsh#system_tmp_dir . '/psql-in.sql'
 function! MongodbQuery()
   let l:in_file_path = g:kzsh#query_result_dir . '/in/' . expand('%:t:r') . '.js'
   let l:out_file_path = g:kzsh#query_result_dir . '/out/' . expand('%:t:r')
+
   execute('%w! ' . l:in_file_path . ' | !mongo "$MONGO_URL" ' . l:in_file_path . ' | tail -n +5 > ' . l:out_file_path)
+
 endfunction
 
 function! MongodbViewQuery()
@@ -839,6 +877,7 @@ augroup ExecuteSelectedTextByFileType
   autocmd FileType javascript vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
   autocmd FileType typescript vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
   autocmd FileType python     vnoremap <buffer> <Leader>rr :ReplSend<CR>
+  autocmd FileType python     nnoremap <buffer> <Leader>ro :ReplAuto<CR>
   autocmd FileType python     nnoremap <buffer> <Leader>ra :0,$ReplSend<CR>
 
   autocmd FileType mongodb.* nnoremap <buffer> <Leader>ro :call MongodbViewQuery()<CR>
@@ -1064,6 +1103,11 @@ endfunction
 
 function! CopyGitHubUrlForCurrentLine()
   let l:base = FindGitRootForPath(expand('%:p:h'))
+
+  if l:base == ""
+    let l:base = "."
+  endif
+
   let l:current = expand('%:p')
   let l:relative = system("realpath --relative-to=" . l:base . " " . l:current)[:-2]
   call system("/usr/local/bin/hub browse -c -- blob/$(git rev-parse HEAD)/" . l:relative . "/#L" . line('.'))
