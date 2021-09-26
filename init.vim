@@ -218,7 +218,7 @@ call plug#begin('~/.config/nvim/lib')
 " Plug 'vim-scripts/DrawIt'
 Plug 'jimmyhchan/dustjs.vim', { 'for': ['dustjs', 'dust'] }
 Plug 'dhruvasagar/vim-table-mode', {'for': ['markdown'] }
-" Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'javascriptreact']}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chmp/mdnav', { 'for': ['markdown'] }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -229,7 +229,7 @@ Plug 'mustache/vim-mustache-handlebars', { 'for': ['handlebars'] }
 Plug 'Shougo/neco-syntax', { 'for': ['javascript', 'javascript.jsx' ] }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'airblade/vim-gitgutter'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next' }
+" Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next' }
 Plug 'chazy/dirsettings'
 Plug 'darfink/vim-plist', { 'for': 'plist' }
 Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
@@ -613,145 +613,145 @@ let g:UltiSnipsSnippetDirectories=["ulti-snippets"]
 " Language Server configuration
 "==========================================================
 
-let g:LanguageClient_diagnosticsEnable = 1
-let g:LanguageClient_diagnosticsDisplay = {
-    \     1: {
-    \         "name": "Error",
-    \         "texthl": "ALEError",
-    \         "signText": "✖",
-    \         "signTexthl": "ALEeErrorSign",
-    \         "virtualTexthl": "Error",
-    \     },
-    \     2: {
-    \         "name": "Warning",
-    \         "texthl": "ALEWarning",
-    \         "signText": "⚠",
-    \         "signTexthl": "ALEWarningSign",
-    \         "virtualTexthl": "Warning"
-    \     },
-    \     3: {
-    \         "name": "Information",
-    \         "texthl": "ALEInfo",
-    \         "signText": "ℹ",
-    \         "signTexthl": "ALEInfoSign",
-    \         "virtualTexthl": "Comment"
-    \     },
-    \     4: {
-    \         "name": "Hint",
-    \         "texthl": "ALEInfo",
-    \         "signText": "➤",
-    \         "signTexthl": "ALEInfoSign",
-    \         "virtualTexthl": "Comment"
-    \     },
-    \ }
+" let g:LanguageClient_diagnosticsEnable = 1
+" let g:LanguageClient_diagnosticsDisplay = {
+"     \     1: {
+"     \         "name": "Error",
+"     \         "texthl": "ALEError",
+"     \         "signText": "✖",
+"     \         "signTexthl": "ALEeErrorSign",
+"     \         "virtualTexthl": "Error",
+"     \     },
+"     \     2: {
+"     \         "name": "Warning",
+"     \         "texthl": "ALEWarning",
+"     \         "signText": "⚠",
+"     \         "signTexthl": "ALEWarningSign",
+"     \         "virtualTexthl": "Warning"
+"     \     },
+"     \     3: {
+"     \         "name": "Information",
+"     \         "texthl": "ALEInfo",
+"     \         "signText": "ℹ",
+"     \         "signTexthl": "ALEInfoSign",
+"     \         "virtualTexthl": "Comment"
+"     \     },
+"     \     4: {
+"     \         "name": "Hint",
+"     \         "texthl": "ALEInfo",
+"     \         "signText": "➤",
+"     \         "signTexthl": "ALEInfoSign",
+"     \         "virtualTexthl": "Comment"
+"     \     },
+"     \ }
 
-" let g:LanguageClient_rootMarkers = ['.git']
-let g:LanguageClient_rootMarkers = {
-         \ 'tsx': ['.git'],
-         \ 'javascript': ['.git'],
-         \ 'javascript.jsx': ['.git'],
-         \ 'javascriptreact': ['.git'],
-         \ 'typescript': ['.git'],
-         \ 'typescript.tsx': ['.git']
-         \ }
+" " let g:LanguageClient_rootMarkers = ['.git']
+" let g:LanguageClient_rootMarkers = {
+"          \ 'tsx': ['.git'],
+"          \ 'javascript': ['.git'],
+"          \ 'javascript.jsx': ['.git'],
+"          \ 'javascriptreact': ['.git'],
+"          \ 'typescript': ['.git'],
+"          \ 'typescript.tsx': ['.git']
+"          \ }
 
 " call LanguageClient#setDiagnosticsList('Disabled')
 " do stuff with quickfix/location list
 " call LanguageClient#setDiagnosticsList('Quickfix')
 
-nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> <leader>k :call LanguageClient#explainErrorAtPoint()<CR>
-nnoremap <silent> <leader>K :call LanguageClient#explainErrorAtPoint()<CR>
-nnoremap <silent> <Leader>gi :call LanguageClient#textDocument_implementation()<CR>
-nnoremap <silent> <Leader>gt :call LanguageClient#textDocument_typeDefinition()<CR>
-nnoremap <silent> <Leader>gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <Leader>gf :call LanguageClient#textDocument_formatting()<CR>
-" nnoremap <silent> <Leader>gr :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <Leader>gr :call LanguageClient#textDocument_references()<CR>
+" nnoremap <Leader><Leader> :call LanguageClient_contextMenu()<CR>
+" " Or map each action separately
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> <leader>k :call LanguageClient#explainErrorAtPoint()<CR>
+" nnoremap <silent> <leader>K :call LanguageClient#explainErrorAtPoint()<CR>
+" nnoremap <silent> <Leader>gi :call LanguageClient#textDocument_implementation()<CR>
+" nnoremap <silent> <Leader>gt :call LanguageClient#textDocument_typeDefinition()<CR>
+" nnoremap <silent> <Leader>gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> <Leader>gf :call LanguageClient#textDocument_formatting()<CR>
+" " nnoremap <silent> <Leader>gr :call LanguageClient#textDocument_rename()<CR>
+" nnoremap <silent> <Leader>gr :call LanguageClient#textDocument_references()<CR>
 
-nnoremap <silent> <Leader>ge :ALEDetail<CR>
+" nnoremap <silent> <Leader>ge :ALEDetail<CR>
 
-function! LookUpDocs()
-  try
-    LanguageClient_contextMenu()
-  catch /.*/
-    try
-      :Man
-    catch /.*/
-      normal! gd
-    endtry
-  endtry
-endfunction
+" function! LookUpDocs()
+"   try
+"     LanguageClient_contextMenu()
+"   catch /.*/
+"     try
+"       :Man
+"     catch /.*/
+"       normal! gd
+"     endtry
+"   endtry
+" endfunction
 
-function! LookUpDefinition()
-  try
-    LanguageClient#textDocument_definition()
-  catch /.*/
-    try
-    normal! gd
-    try
-      LanguageClient#textDocument_definition()
-    catch /.*/
-    endtry
-    LanguageClient#textDocument_typeDefinition()<CR>
-  endtry
-  endtry
-endfunction
+" function! LookUpDefinition()
+"   try
+"     LanguageClient#textDocument_definition()
+"   catch /.*/
+"     try
+"     normal! gd
+"     try
+"       LanguageClient#textDocument_definition()
+"     catch /.*/
+"     endtry
+"     LanguageClient#textDocument_typeDefinition()<CR>
+"   endtry
+"   endtry
+" endfunction
 
-nnoremap <Leader><Leader>r :LanguageClientStop<CR> :sleep 1<CR> :LanguageClientStart<CR>
-let s:ts_langserver_command = ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')]
+" nnoremap <Leader><Leader>r :LanguageClientStop<CR> :sleep 1<CR> :LanguageClientStart<CR>
+" let s:ts_langserver_command = ['typescript-language-server', '--stdio', '--tsserver-path', expand('node_modules/.bin/tsserver')]
 
-let g:LanguageClient_serverCommands = {
-    \ 'ocaml': ['ocaml-language-server', '--stdio'],
-    \ 'reason': ['ocaml-language-server', '--stdio'],
-    \ 'kotlin': ["~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"],
-    \ 'tsx': s:ts_langserver_command,
-    \ 'typescript': s:ts_langserver_command,
-    \ 'typescript.tsx': s:ts_langserver_command,
-    \ 'javascript': s:ts_langserver_command,
-    \ 'javascriptreact': s:ts_langserver_command,
-    \ 'javascript.jsx': s:ts_langserver_command,
-    \ 'yaml': ['yaml-language-server', '--stdio'],
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'python': ['~/.pyenv/versions/neovim3/bin/pyls'],
-    \}
+" let g:LanguageClient_serverCommands = {
+"     \ 'ocaml': ['ocaml-language-server', '--stdio'],
+"     \ 'reason': ['ocaml-language-server', '--stdio'],
+"     \ 'kotlin': ["~/src/github/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"],
+"     \ 'tsx': s:ts_langserver_command,
+"     \ 'typescript': s:ts_langserver_command,
+"     \ 'typescript.tsx': s:ts_langserver_command,
+"     \ 'javascript': s:ts_langserver_command,
+"     \ 'javascriptreact': s:ts_langserver_command,
+"     \ 'javascript.jsx': s:ts_langserver_command,
+"     \ 'yaml': ['yaml-language-server', '--stdio'],
+"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"     \ 'python': ['~/.pyenv/versions/neovim3/bin/pyls'],
+"     \}
 
 "==========================================================
 " CoC config
 "==========================================================
-" let g:coc_node_path=expand("$HOME/.nvm/versions/node/v12.16.3/bin/node")
+let g:coc_node_path=expand("$HOME/.nvm/versions/node/v15.6.0/bin/node")
 
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
-
-
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-" nmap <silent> <leader>gd <Plug>(coc-definition)
-" nmap <silent> <leader>gy <Plug>(coc-type-definition)
-" nmap <silent> <leader>gi <Plug>(coc-implementation)
-" nmap <silent> <leader>gr <Plug>(coc-references)
-" nnoremap <silent> <Leader>gd :call CocActionAsync('jumpDefinition')<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 
-" augroup mygroup
-"   autocmd!
-"   " Setup formatexpr specified filetype(s).
-"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"   " Update signature help on jump placeholder.
-"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-" augroup end
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+nnoremap <silent> <Leader>gd :call CocActionAsync('jumpDefinition')<CR>
+
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
 "==========================================================
 " ReasonML Language Configurations
