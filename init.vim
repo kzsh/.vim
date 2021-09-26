@@ -26,12 +26,12 @@ if has('vim_starting')
   endif
 
   " Python 2
-  let s:pyenv_python2 = glob(expand('$PYENV_ROOT/versions/neovim2/bin/python'))
-  if executable(s:pyenv_python2)
-    let g:python_host_prog  = s:pyenv_python2
-  else
+  " let s:pyenv_python2 = glob(expand('$PYENV_ROOT/versions/neovim2/bin/python'))
+  " if executable(s:pyenv_python2)
+  "   let g:python_host_prog  = s:pyenv_python2
+  " else
     let g:loaded_python_provider = 1
-  endif
+  " endif
 
   " Ruby
   " let s:ruby_host_prog = glob(expand('$HOME/.rbenv/versions/2.4.5/bin/neovim-ruby-host'))
