@@ -5,7 +5,7 @@ if has('vim_starting')
   set encoding=utf-8
   scriptencoding=utf-8
 
-  let g:kzsh#vim_dir = expand('$VIM_DIR')
+  let g:kzsh#vim_dir = expand("$VIM_DIR")
   let g:kzsh#vim_tmp_dir = g:kzsh#vim_dir . '/.tmp'
   let g:kzsh#vim_tmp_dir = g:kzsh#vim_dir . '/.tmp'
   let g:kzsh#vim_undo_dir = g:kzsh#vim_tmp_dir . '/undo//'
