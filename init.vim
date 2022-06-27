@@ -25,22 +25,20 @@ if has('vim_starting')
     let g:loaded_python3_provider = 1
   endif
 
-
+  " ----------------------------------------------------------------------------
   " Ruby
+  " ----------------------------------------------------------------------------
   " let s:ruby_host_prog = glob(expand('$HOME/.rbenv/versions/2.4.5/bin/neovim-ruby-host'))
   " if executable(s:ruby_host_prog)
   "   let g:ruby_host_prog  = s:ruby_host_prog
   " else
   "   let g:loaded_ruby_provider = 1
   " endif
-  
+
+  " ----------------------------------------------------------------------------
   " Node
-  " let s:nvm_node_host = glob(expand('$HOME/.nvm/versions/node/v15.6.0/bin/neovim-node-host'))
-  " if executable(s:nvm_node_host)
-  "   let g:node_host_prog  = s:nvm_node_host
-  " else
-  "   let g:loaded_node_provider = 1
-  " endif
+  " ----------------------------------------------------------------------------
+  let $PATH = $PATH . ':' . expand('$HOME/.nvm/versions/node/v18.2.0/bin')
 
   " Core Configuration
   " ----------------------------------------------------------------------------
