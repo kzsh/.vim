@@ -156,7 +156,7 @@ if has('vim_starting')
     autocmd BufEnter * :syntax sync fromstart
   augroup END
   set splitright
-  set signcolumn=yes
+  set signcolumn=auto
 
   " Navigation
   " ----------------------------------------------------------------------------
