@@ -91,6 +91,8 @@ if has('vim_starting')
   autocmd BufEnter *.tsx setlocal includeexpr=LoadMainNodeModule(v:fname)
   autocmd BufEnter *.jsx setlocal includeexpr=LoadMainNodeModule(v:fname)
 
+  set scrollback=100000
+
   set nomodeline
   set nowrap
   set lazyredraw " Prevent UI from drawing during macro execution.
