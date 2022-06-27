@@ -150,7 +150,7 @@ if has('vim_starting')
   " ----------------------------------------------------------------------------
   set number " display line numbers
   set showbreak=↪\
-  syntax enable
+  syntax manual
   set synmaxcol=512 " syntax highlight long lines
   augroup SyncSyntaxFromStart
     autocmd BufEnter * :syntax sync fromstart
@@ -209,68 +209,126 @@ endif
 "==========================================================
 call plug#begin('~/.config/nvim/lib')
 
-" Plug 'vim-scripts/DrawIt'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'towolf/vim-helm', {'for': ['helm', 'yaml']}
-Plug 'cespare/vim-toml', { 'for': ['toml'] }
-Plug 'jimmyhchan/dustjs.vim', { 'for': ['dustjs', 'dust'] }
-Plug 'dhruvasagar/vim-table-mode', {'for': ['markdown'] }
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'chmp/mdnav', { 'for': ['markdown'] }
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/goyo.vim',
-Plug 'mustache/vim-mustache-handlebars', { 'for': ['handlebars'] }
-Plug 'rhysd/reply.vim', { 'on': ['Repl', 'ReplAuto', 'ReplSend'] }
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-syntax', { 'for': ['javascript', 'javascript.jsx' ] }
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Show +/-/~ in the gutter
 Plug 'airblade/vim-gitgutter'
-" Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next' }
+
+" Add :ConvertColorTo to convert css colors
+Plug 'amadeus/vim-convert-color-to'
+
+"Per directory vim-config
 Plug 'chazy/dirsettings'
-Plug 'darfink/vim-plist', { 'for': 'plist' }
-Plug 'dkarter/bullets.vim', { 'for': 'markdown' }
-Plug 'dln/avro-vim', {'for': 'avdl' }
+
+" General purpose linter
+Plug 'dense-analysis/ale'
+
+" Create missing directories when editing file paths that don't exist
 Plug 'duggiefresh/vim-easydir'
-Plug 'godlygeek/tabular', {'for': 'cucumber' }
-Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug 'jparise/vim-graphql', { 'for': 'graphql'}
+
+Plug 'editorconfig/editorconfig-vim'
+
+" Experimental in-line images in vim (not used)
+" Plug 'edluffy/hologram.nvim'
+
+" Syntax highlighting - replaced by treesitter syntax highlighting
+" Plug 'ianks/vim-tsx'
+
+" Execute ripgrep in vim (supports, custom <Leader>ff)
 Plug 'jremmen/vim-ripgrep'
-Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
+
+" Support many traversal behaviors
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+" Distraction-free vim config -- often used in presentation
+Plug 'junegunn/goyo.vim',
+
+" Generalized text aligner
+Plug 'junegunn/vim-easy-align'
+
+" Display marks in gutter (does more, but I don't use that)
 Plug 'kshenoy/vim-signature'
-Plug 'kzsh/vim-chunkwm-navigator'
-Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'lifepillar/pgsql.vim', { 'for': 'sql' }
+
+" Custom integration to make switching vim panes and chunkwm/yabai panes
+" seamless
+" Plug 'kzsh/vim-chunkwm-navigator'
+
+" Display binary in a hexdump format
 Plug 'mattn/vim-xxdcursor'
-Plug 'mitsuse/autocomplete-swift', { 'for': 'swift' }
+
+"Color theme
 Plug 'morhetz/gruvbox'
-Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
-Plug 'norcalli/nvim-colorizer.lua'
-" Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
-Plug 'jxnblk/vim-mdx-js', { 'for': 'markdown.mdx' }
-Plug 'yuezk/vim-js'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason'}
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+
+" Plug 'norcalli/nvim-colorizer.lua'
+
+" define and store snippets
 Plug 'sirver/ultisnips'
-" Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+
+" The TPope corner
 Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
+Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git', { 'for': ['gitconfig', 'gituser', 'gitignore_global'] }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
-Plug 'dense-analysis/ale'
-Plug 'tpope/vim-dadbod'
-Plug 'vim-python/python-syntax', { 'for': 'python' }
-" Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+Plug 'cespare/vim-toml', { 'branch': 'main', 'for': 'toml' }
+
+" Language Server client implementation in Rust
+" Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next' }
+
+" Bridge to many VSCode (and other) language servers
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
+" AI autocomplete
+" Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+"High quality syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+
+
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Support for avro syntax
+Plug 'dln/avro-vim', {'for': 'avdl' }
+
+"Clojure
+Plug 'guns/vim-clojure-static', { 'for': ['clojure'] }
+Plug 'kien/rainbow_parentheses.vim', { 'for': ['clojure'] }
+
+Plug 'tpope/vim-classpath', { 'for': ['clojure'] }
+Plug 'tpope/vim-fireplace', { 'for': ['clojure'] }
+" Plug 'ap/vim-css-color', { 'for': ['css'] }
+Plug 'tpope/vim-cucumber', { 'for': ['cucumber'] }
+Plug 'godlygeek/tabular', {'for': ['cucumber'] }
+Plug 'neo4j-contrib/cypher-vim-syntax', { 'for': ['cypher'] }
+Plug 'jimmyhchan/dustjs.vim', { 'for': ['dustjs', 'dust'] }
+Plug 'tpope/vim-git', { 'for': ['gitconfig', 'gituser', 'gitignore_global'] }
+Plug 'jparise/vim-graphql', { 'for': ['graphql'] }
+Plug 'mustache/vim-mustache-handlebars', { 'for': ['handlebars'] }
+Plug 'towolf/vim-helm', {'for': ['helm', 'yaml']}
+" Plug 'Shougo/neco-syntax', { 'for': ['javascript', 'javascript.jsx' ] }
+" Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript.jsx']}
+Plug 'udalov/kotlin-vim', { 'for': ['kotlin'] }
+Plug 'dkarter/bullets.vim', { 'for': ['markdown'] }
+Plug 'chmp/mdnav', { 'for': ['markdown'] }
+Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
+" Plug 'dhruvasagar/vim-table-mode', {'for': ['markdown'] }
+" Plug 'jxnblk/vim-mdx-js', { 'for': ['markdown.mdx'] }
+Plug 'darfink/vim-plist', { 'for': ['plist'] }
+" Plug 'vim-python/python-syntax', { 'for': ['python'] }
+" Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
+Plug 'noprompt/vim-yardoc', { 'for': ['ruby'] }
+Plug 'racer-rust/vim-racer', { 'for': ['rust'] }
+Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
+Plug 'lifepillar/pgsql.vim', { 'for': ['sql'] }
+Plug 'mitsuse/autocomplete-swift', { 'for': ['swift'] }
+Plug 'lervag/vimtex', { 'for': ['tex'] }
+Plug 'cespare/vim-toml', { 'for': ['toml'] }
+Plug 'rhysd/reply.vim', { 'on': ['Repl', 'ReplAuto', 'ReplSend'] }
 
 call plug#end()
 
@@ -331,6 +389,8 @@ autocmd BufRead,BufNewFile Podfile*           setlocal filetype=ruby
 autocmd BufRead,BufNewFile Vagrantfile*       setlocal filetype=ruby
 autocmd BufRead,BufNewFile Dockerfile*        setlocal filetype=dockerfile
 autocmd BufRead,BufNewFile *.dockerfile       setlocal filetype=dockerfile
+autocmd BufRead,BufNewFile *-Dockerfile       setlocal filetype=dockerfile
+autocmd BufRead,BufNewFile *-dockerfile       setlocal filetype=dockerfile
 autocmd BufRead,BufNewFile .envrc             setlocal filetype=sh
 autocmd BufRead,BufNewFile *.swift            setlocal filetype=swift
 autocmd BufRead,BufNewFile *.ts               setlocal filetype=typescript
@@ -340,28 +400,44 @@ autocmd BufRead,BufNewFile *.mongo.js         setlocal filetype=mongodb.javascri
 autocmd BufRead,BufNewFile *.handlebars       setlocal filetype=mustache
 autocmd BufRead,BufNewFile requirements.txt   setlocal filetype=python
 autocmd BufRead,BufNewFile *.ipynb            setlocal filetype=python
+autocmd BufRead,BufNewFile .gitignore*        setlocal filetype=conf
+autocmd BufRead,BufNewFile *sxhkdrc           setlocal filetype=sxhkdrc
+autocmd BufRead,BufNewFile *.cypher           setlocal filetype=cypher
+autocmd BufRead,BufNewFile rules              setlocal filetype=make
 
 " set Tabs per file-type.  (current unused, see above)
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype css setlocal ts=2 sts=2 sw=2
-autocmd Filetype tag setlocal ts=2 sts=2 sw=2
-autocmd Filetype xml setlocal ts=2 sts=2 sw=2
+autocmd Filetype tag setlocal ts=2 sts=2 sw=2 syntax=ON
+autocmd Filetype xml setlocal ts=2 sts=2 sw=2 syntax=ON
 autocmd Filetype jsp setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
 autocmd Filetype m setlocal ts=4 sts=4 sw=4
 autocmd Filetype h setlocal ts=4 sts=4 sw=4
-autocmd Filetype wflow setlocal ts=4 sts=4 sw=4
-autocmd Filetype plist setlocal ts=4 sts=4 sw=4
+autocmd Filetype wflow setlocal ts=4 sts=4 sw=4 syntax=ON
+autocmd Filetype plist setlocal ts=4 sts=4 sw=4 syntax=ON
 autocmd Filetype swift setlocal ts=2 sts=2 sw=2
-autocmd Filetype applescript setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd Filetype groovy setlocal ts=2 sts=2 sw=2
+autocmd Filetype applescript setlocal ts=4 sts=4 sw=4 noexpandtab syntax=ON
+autocmd Filetype groovy setlocal ts=2 sts=2 sw=2 syntax=ON
 autocmd Filetype kotlin setlocal ts=4 sts=4 sw=4
 autocmd Filetype markdown setlocal conceallevel=2 spell
 autocmd Filetype json setlocal conceallevel=0
-autocmd Filetype gitconfig setlocal ts=2 sts=2 sw=2 noexpandtab
-autocmd Filetype gitcommit setlocal spell
+autocmd Filetype gitconfig setlocal ts=2 sts=2 sw=2 noexpandtab syntax=ON
+autocmd Filetype fugitiveblame setlocal syntax=ON
+autocmd Filetype git* setlocal spell syntax=ON
+autocmd Filetype sxhkdrc setlocal ts=2 sts=2 sw=2 noexpandtab syntax=ON syntax=conf
+autocmd Filetype vim setlocal syntax=ON
+autocmd Filetype make setlocal syntax=ON
+autocmd Filetype toml setlocal syntax=ON
+autocmd Filetype dockerfile setlocal syntax=ON
+autocmd Filetype yaml setlocal syntax=ON
+autocmd Filetype xf86conf setlocal syntax=ON
+autocmd Filetype c setlocal syntax=ON
+autocmd Filetype cpp setlocal syntax=ON
+autocmd Filetype lua setlocal syntax=ON
+
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -480,8 +556,10 @@ nnoremap <silent> <Leader>ge :ALEDetail<CR>
 
 " endfunction
 " let g:ale_lsp_root = {
-"   'typescript': 
+"   'typescript':
 " }
+
+let g:ale_sh_shellcheck_options = '-x -P SCRIPTDIR -P INCLUDES'
 let g:ale_linters = {
   \ 'sh':  ['shellcheck'],
   \ 'typescript': ['eslint'],
@@ -491,9 +569,12 @@ let g:ale_linters = {
   \ 'kotlin': ['ktlint'],
   \ 'java': ['ktlint'],
   \ 'python': ['flake8', 'black'],
-  \ 'dockerfile': ['hadolint']
+  \ 'dockerfile': ['hadolint'],
+  \ 'css': ['stylelint'],
+  \ 'scss': ['stylelint']
 \}
-let s:ts_js_fixer = ['eslint', 'remove_trailing_lines', 'trim_whitespace']
+
+let s:ts_js_fixer = ['eslint']
 
 let g:ale_fixers = {
 \  'javascript':  s:ts_js_fixer,
@@ -502,9 +583,11 @@ let g:ale_fixers = {
 \  'typescript':  s:ts_js_fixer,
 \  'typescript.tsx':  s:ts_js_fixer,
 \  'css':  ['stylelint'],
+\  'scss':  ['stylelint'],
 \  'json':  ['prettier'],
 \  'kotlin': ['ktlint'],
-\  'python': ['black', 'isort']
+\  'python': ['black', 'isort'],
+\  'rust': ['rustfmt']
 \}
 
 let g:ale_pattern_options = {
@@ -523,8 +606,8 @@ function! FormatSection()
 endfunction
 
 augroup PrettierAugments
-  autocmd FileType javascript vnoremap <buffer> <Leader>f :call FormatSection()<CR>
-  autocmd FileType typescript vnoremap <buffer> <Leader>f :call FormatSection()<CR>
+  " autocmd FileType javascript vnoremap <buffer> <Leader>f :call FormatSection()<CR>
+  " autocmd FileType typescript vnoremap <buffer> <Leader>f :call FormatSection()<CR>
 augroup END
 
 "==========================================================
@@ -583,7 +666,7 @@ nnoremap <Leader>;l :Lines<CR>
 nnoremap <Leader>ff :Rg ''<Left>
 nnoremap <Leader>FF :execute 'Find!' . expand('%:p:h') <CR>
 nnoremap <Leader>fa :execute 'Rg' FindGitRoot()<CR>
-nnoremap <Leader>fw :execute "Rg '\\b" . expand('<cword>') . "\\b' " . FindGitRoot()<CR>
+nnoremap <Leader>fw :execute "Rg -- '\\b" . expand('<cword>') . "\\b' " . FindGitRoot()<CR>
 
 nnoremap <Leader>;t :OpenPreview<CR>
 
@@ -754,7 +837,7 @@ let g:UltiSnipsSnippetDirectories=["ulti-snippets"]
 "==========================================================
 " CoC config
 "==========================================================
-let g:coc_node_path=expand("$HOME/.nvm/versions/node/v15.6.0/bin/node")
+let g:coc_node_path=expand("$HOME/.nvm/versions/node/v18.4.0/bin/node")
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -765,14 +848,17 @@ function! s:show_documentation()
 endfunction
 
 
+
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+nnoremap <C-]>  <Plug>(coc-diagnostic-next)
+nnoremap <C-[>  <Plug>(coc-diagnostic-prev)
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
 nnoremap <silent> <Leader>gd :call CocActionAsync('jumpDefinition')<CR>
@@ -786,7 +872,7 @@ augroup CoCExpander
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-nnoremap <Leader><Leader>r :CocRestart<CR> 
+nnoremap <Leader><Leader>r :CocRestart<CR>
 
 "==========================================================
 " ReasonML Language Configurations
@@ -809,11 +895,11 @@ augroup END
 "==========================================================
 " Run Autocommit on TODO.md
 "==========================================================
-let g:todo_path = expand('~/NOTES')
-augroup autoCommitChangesToTODO
+let g:notes_path = expand("$NOTES_DIR")
+augroup autoCommitChangesToNotes
   au!
   " TODO: don't execute todo commit for any TODO.md file anywhere.
-  autocmd BufWritePre ~/NOTES/** silent! execute('!' . g:todo_path . '/autocommit.sh')
+  autocmd BufWritePre ~/notes/** silent! execute('!' . g:notes_path . '/autocommit.sh')
 augroup END
 
 "==========================================================
@@ -824,7 +910,7 @@ let g:markdown_fenced_languages = ['html', 'ruby', 'js=javascript', 'python', 'b
 "==========================================================
 " vim-markdown-preview
 "==========================================================
-let vim_markdown_preview_github=1 
+let vim_markdown_preview_github=1
 let vim_markdown_preview_hotkey='<leader><leader>p'
 
 "==========================================================
@@ -846,6 +932,10 @@ let g:tex_conceal='abdmg'
 let g:kzsh_sql_out_file = g:kzsh#system_tmp_dir . '/psql-out.sql'
 let g:kzsh_sql_in_file = g:kzsh#system_tmp_dir . '/psql-in.sql'
 
+"==========================================================
+" Mongo Execute visual-selection
+"==========================================================
+
 " let g:kzsh_mongo_out_file = 'mongo-out.mongo'
 " let g:kzsh_mongo_in_file = 'mongo-in.js'
 
@@ -853,7 +943,7 @@ function! MongodbQuery()
   let l:in_file_path = g:kzsh#query_result_dir . '/in/' . expand('%:t:r') . '.js'
   let l:out_file_path = g:kzsh#query_result_dir . '/out/' . expand('%:t:r')
 
-  execute('%w! ' . l:in_file_path . ' | !mongo "$MONGO_URL" ' . l:in_file_path . ' | tail -n +5 > ' . l:out_file_path)
+  execute('%w! ' . l:in_file_path . ' | !mongosh --quiet --file ' . l:in_file_path . ' "$MONGO_URL" > ' . l:out_file_path)
 
 endfunction
 
@@ -865,6 +955,29 @@ endfunction
 command! MongodbQuery call s:MongodbQuery()
 command! MongodbViewQuery call s:MongodbViewQuery()
 
+"==========================================================
+" Neo4j Execute visual-selection
+"==========================================================
+function! Neo4jQuery(is_inline)
+  if(a:is_inline != 0)
+    let l:out_file_path = g:kzsh#query_result_dir . '/out/' . expand('%:t:r')
+    execute('!~/bin/neo "' . GetVisualSelection("a") . '" | jq > ' . l:out_file_path)
+  else
+    let l:in_file_path = g:kzsh#query_result_dir . '/in/' . expand('%:t:r') . '.cypher'
+    let l:out_file_path = g:kzsh#query_result_dir . '/out/' . expand('%:t:r')
+    execute('%w! ' . l:in_file_path . ' | !~/bin/neo -f ' . l:in_file_path . ' | jq > ' . l:out_file_path)
+  endif
+endfunction
+
+function! Neo4jViewQuery()
+  let l:out_file_path = g:kzsh#query_result_dir . '/out/' . expand('%:t:r')
+  execute('silent! vsplit ' . l:out_file_path)
+endfunction
+
+command! Neo4jdbQuery call s:Neo4jQuery()
+command! Neo4jdbViewQuery call s:Neo4jViewQuery()
+
+
 augroup ExecuteSelectedTextByFileType
   autocmd FileType ruby       vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "puts "$0 }' \| ruby<CR>
   autocmd FileType javascript vnoremap <buffer> <Leader>rr :!cat \| awk '{ print "process.stdout.write(String("$0"))" }' \| node<CR>
@@ -874,11 +987,11 @@ augroup ExecuteSelectedTextByFileType
   autocmd FileType python     nnoremap <buffer> <Leader>ra :0,$ReplSend<CR>
 
   autocmd FileType mongodb.* nnoremap <buffer> <Leader>ro :call MongodbViewQuery()<CR>
-  ":execute('silent! vsplit ' . g:kzsh_mongo_out_file)<CR>
-
-  " autocmd FileType mongodb.* vnoremap <buffer> <Leader>rr :execute('w! ' . g:kzsh_mongo_in_file . ' \| silent! !mongo "$MONGO_URL" ' . g:kzsh_mongo_in_file . ' \| tail -n +5 > ' . g:kzsh_mongo_out_file)<CR>
   autocmd FileType mongodb.* nnoremap <buffer> <Leader>rr :call MongodbQuery()<CR>
-  " autocmd FileType mongodb.* nnoremap <buffer> <Leader>rr :execute('%w! ' . g:kzsh_mongo_in_file . ' \| silent! !mongo "$MONGO_URL" ' . g:kzsh_mongo_in_file . ' \| tail -n +5 > ' . g:kzsh_mongo_out_file)<CR>
+
+  autocmd FileType cypher nnoremap <buffer> <Leader>ro :call Neo4jViewQuery()<CR>
+  autocmd FileType cypher nnoremap <buffer> <Leader>rr :call Neo4jQuery(0)<CR>
+  autocmd FileType cypher vnoremap <buffer> <Leader>rr :call Neo4jQuery(1)<CR>
 
 augroup END
 
@@ -898,7 +1011,9 @@ nnoremap <S-Down> :resize +10<CR>
 "==========================================================
 " Alternate escape sequences terminal emulator (terminal-emulator-input)
 "==========================================================
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc><Esc> <C-\><C-n>
+" tnoremap <C-c> <C-\><C-n>
+tnoremap ก <C-\><C-n>
 " tnoremap <Leader>x :close< CR>
 
 
@@ -909,28 +1024,43 @@ nnoremap <C-\><C-n> <Esc>
 nnoremap <silent><Esc> :call ConditionalEscape()<CR>
 
 let g:kzsh#term_prime_delete = 0
+
+function! ConditionalCtrlC()
+  if bufname('%') =~# '^term:\/\/'
+    normal! <C-\><C-n>
+  endif
+endfunction
+
 function! ConditionalEscape()
   if bufname('%') ==? '[Command Line]'
     if mode()==? 'n'
       close
     endif
-  elseif bufname('%') =~# '^term:\/\/'
-    try
-      close
-    catch /.*/
-      if g:kzsh#term_prime_delete == 1
-        let g:kzsh#term_prime_delete = 0
-        bd!
-      else
-        let g:kzsh#term_prime_delete = 1
-      endif
-    endtry
+  " elseif bufname('%') =~# '^term:\/\/'
+  "   try
+  "     close
+  "   catch /.*/
+  "     if g:kzsh#term_prime_delete == 1
+  "       let g:kzsh#term_prime_delete = 0
+  "       bd!
+  "     else
+  "       let g:kzsh#term_prime_delete = 1
+  "     endif
+  "   endtry
   else
     normal! <C-\><C-n>
   endif
 endfunction
 
 "==========================================================
+" Start terminal in insert mode
+"==========================================================
+autocmd TermOpen * startinsert
+autocmd TermLeave * setlocal number
+autocmd TermEnter * setlocal nonumber
+
+let g:terminal_scrollback_buffer_size = 100000
+"=========================================================m
 " Use buffer ex view by default
 "==========================================================
 nnoremap : q:i
@@ -962,6 +1092,14 @@ augroup TmuxIntegration
 augroup END
 
 "==========================================================
+" shortcuts for pane navigation
+"==========================================================
+nnoremap <silent><C-h> <C-w><C-h>
+nnoremap <silent><C-l> <C-w><C-l>
+nnoremap <silent><C-j> <C-w><C-j>
+nnoremap <silent><C-k> <C-w><C-k>
+
+"==========================================================
 " vim-cd to top-level of git repo
 "==========================================================
 function! Cdg()
@@ -975,21 +1113,21 @@ cnoreabbrev <expr> cdg ((getcmdtype() is# ':' && getcmdline() is# 'cdg')?('Cdg')
 "==========================================================
 " Remove trailing whitespaces
 "==========================================================
-let g:skip_whitespace = ['md']
+let g:skip_whitespace = ['markdown']
 
-fun! <SID>StripTrailingWhitespaces()
-  if index(skip_whitespace, &ft) < 0
+function! <SID>StripTrailingWhitespaces()
+  if index(g:skip_whitespace, &ft) < 0
     let l:l = line('.')
     let l:c = col('.')
     %s/\s\+$//e
     call cursor(l:l, l:c)
   endif
 
-endfun
+endfunction
 
 "when saving, remove all trailing spaces from the file.
 augroup StripWhitespaceOnSave
-  autocmd FileType  autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+  autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 augroup END
 
 "==========================================================
@@ -1065,7 +1203,7 @@ nnoremap <Leader>tig :tabe \| execute('term tig') \| startinsert!<CR>
 "
 nnoremap <Leader>tif :silent! call OpenFileHistoryInTig()<CR>
 
-function! OpenFileHistoryInTig() 
+function! OpenFileHistoryInTig()
   let filename = expand('%')
   tabe
   execute('term cd ' . FindGitRootForPath(l:filename) . ' && /usr/local/bin/tig -- ' . l:filename)
@@ -1103,29 +1241,39 @@ function! CopyGitHubUrlForCurrentLine()
 
   let l:current = expand('%:p')
   let l:relative = system("realpath --relative-to=" . l:base . " " . l:current)[:-2]
-  call system("/usr/local/bin/hub browse -c -- blob/$(git rev-parse HEAD)/" . l:relative . "/#L" . line('.'))
+  " echom l:relative
+  let l:base_url = system("gh repo view -b master --json url -q '.url'")[:-2] "Trim odd ^@ symbol from url
+  " echom l:base_url
+
+  " Trim newlines from the end of the command
+  let l:commit_hash = system('git rev-parse HEAD')[:-2]
+  let l:full_url = join([l:base_url, "blob", l:commit_hash, l:relative], '/')
+  let l:full_link = l:full_url . "#L" . line('.')
+  " echom l:full_link
+  let @+ = l:full_link
+  " system('echo ' . l:full_link . ' | xclip -selection clipboard')
 endfunction
 
-function! CopyGitHubMasterUrlForCurrentLine()
+function! CopyGitHubBranchUrlForCurrentLine(branch)
   call CopyGitHubUrlForCurrentLine()
   " 40 is the length of the full git hash
-  let @+ = substitute(@+, "[a-z0-9]\\{40\\}", "master", "g")
+  let @+ = substitute(@+, "[a-z0-9]\\{40\\}", a:branch, "g")
 endfunction
 
-function! CopyGitHubBranchUrlForCurrentLine()
-  call CopyGitHubUrlForCurrentLine()
-  " 40 is the length of the full git hash
+function! CopyGitHubCurrentBranchUrlForCurrentLine()
   let l:branch = system("git rev-parse --abbrev-ref HEAD")
-  let @+ = substitute(@+, "[a-z0-9]\\{40\\}", branch, "g")
+  echo l:branch
+  call CopyGitHubBranchUrlForCurrentLine(l:branch)
 endfunction
 
 nnoremap <silent> <Leader>gx :call OpenGitHubUrlForCurrentLine()<CR>
 nnoremap <silent> <Leader>ghc :call CopyGitHubUrlForCurrentLine()<CR>
-nnoremap <silent> <Leader>ghm :call CopyGitHubMasterUrlForCurrentLine()<CR>
-nnoremap <silent> <Leader>ghb :call CopyGitHubBranchUrlForCurrentLine()<CR>
+nnoremap <silent> <Leader>ghi :call CopyGitHubBranchUrlForCurrentLine("integration")<CR>
+nnoremap <silent> <Leader>ghm :call CopyGitHubBranchUrlForCurrentLine("main")<CR>
+nnoremap <silent> <Leader>ghb :call CopyGitHubCurrentBranchUrlForCurrentLine()<CR>
 
 nnoremap <silent> <Leader>gs :execute("tabe " . LoadMainNodeModule(expand('<cfile>'))) \| execute("lcd " . expand('%:p:h'))<CR>
- 
+
 "==========================================================
 " Cucumber Acceptance Test Config
 "==========================================================
@@ -1161,6 +1309,7 @@ let g:vim_markdown_follow_anchor = 1
 function! s:goyo_leave()
   set background=dark
   colorscheme gruvbox
+
   nmap <S-L> gt
   nmap <S-H> g<S-t>
 endfunction
@@ -1259,10 +1408,54 @@ let g:jsx_ext_required = 0
 "==========================================================
 syn match UrlNoSpell '^((?:https?:\/\/)?[^./]+(?:\.[^./]+)+(?:\/.*)?)$' contains=@NoSpell
 
+function! GetVisualSelection(separator)
+    let l:sep = "\n"
+    if (a:separator)
+      let l:sep = a:separator
+    endif
+
+    " Why is this not a built-in Vim script function?!
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, ' ')
+endfunction
+
 "==========================================================
 " Colorscheme and overrides
 "==========================================================
 set background=dark
 " let g:solarized_contrast="none"
 " colorscheme solarized
+let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
+
+
+func! s:my_colors_setup() abort
+endfunc
+
+syntax manual
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+    highlight = {
+        enable = true,
+    },
+
+    incremental_selection = {
+        enable = false,
+    },
+
+    additional_vim_regex_highlighting = {'vimscript', 'gitcommit', 'gitrebase'}
+}
+EOF
+
+" ensure_installed = {'javascript', 'typescript'},
+" augroup colorscheme_coc_setup | au!
+"     au ColorScheme * call s:my_colors_setup()
+" augroup END
