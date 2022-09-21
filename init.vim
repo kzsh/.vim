@@ -594,6 +594,9 @@ let g:ale_pattern_options = {
 \   'styles\.ts$': {
 \       'ale_linters': ['stylelint'],
 \   },
+\   'styled\.ts$': {
+\       'ale_linters': ['stylelint'],
+\   }
 \}
 
 "==========================================================
